@@ -51,65 +51,51 @@
 
    -->
   <dependencies>
-  
-    <!-- http://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-webmvc</artifactId>
-    <version>4.2.6.RELEASE</version>
-</dependency>
-
-
-<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.7.4</version>
-</dependency>
-
-<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.7.4</version>
-</dependency>
-
-
-
-
-<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
-<dependency>
-    <groupId>org.apache.tiles</groupId>
-    <artifactId>tiles-core</artifactId>
-    <version>3.0.5</version>
-</dependency>
-
-
-
-<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
-<dependency>
-    <groupId>org.apache.tiles</groupId>
-    <artifactId>tiles-jsp</artifactId>
-    <version>3.0.5</version>
-</dependency>
-
-<!-- http://mvnrepository.com/artifact/jstl/jstl -->
-<dependency>
-    <groupId>jstl</groupId>
-    <artifactId>jstl</artifactId>
-    <version>1.2</version>
-</dependency>
-  
-  
-  <!-- http://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
-<!-- 
-	File upload 처리를 위한 API
-	CommonMutipartResolver가 파일 업로드 처리를 위해 사용하는 api  -->
-<dependency>
-    <groupId>commons-fileupload</groupId>
-    <artifactId>commons-fileupload</artifactId>
-    <version>1.3.2</version>
-</dependency>
+		    <!-- http://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>4.2.6.RELEASE</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.7.4</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.7.4</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-core</artifactId>
+		    <version>3.0.5</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
+		<dependency>
+		    <groupId>org.apache.tiles</groupId>
+		    <artifactId>tiles-jsp</artifactId>
+		    <version>3.0.5</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/jstl/jstl -->
+		<dependency>
+		    <groupId>jstl</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+		</dependency>
+		  <!-- http://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<!-- 
+			File upload 처리를 위한 API
+			CommonMutipartResolver가 파일 업로드 처리를 위해 사용하는 api  -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
 
 
   
