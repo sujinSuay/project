@@ -10,6 +10,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<mvc:view-controller path="main.do" view-name="/WEB-INF/common/main.jsp"/>
+	<mvc:view-controller path="board_main.do" view-name="/WEB-INF/board/board_main.jsp"/>
+	<mvc:view-controller path="board_list.do" view-name="/WEB-INF/board/board_list.jsp"/>
+	<mvc:view-controller path="board_detail.do" view-name="/WEB-INF/board/board_detail.jsp"/>
+	<mvc:view-controller path="board_register.do" view-name="/WEB-INF/board/board_register.jsp"/>
 	<mvc:annotation-driven/>
 	
 	
