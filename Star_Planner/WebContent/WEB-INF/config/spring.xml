@@ -9,20 +9,37 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-	<mvc:view-controller path="main.do" view-name="/WEB-INF/common/main.jsp"/>
-	<mvc:view-controller path="board_main.do" view-name="/WEB-INF/board/board_main.jsp"/>
-	<mvc:view-controller path="board_list.do" view-name="/WEB-INF/board/board_list.jsp"/>
-	<mvc:view-controller path="board_detail.do" view-name="/WEB-INF/board/board_detail.jsp"/>
-	<mvc:view-controller path="board_register.do" view-name="/WEB-INF/board/board_register.jsp"/>
 	<mvc:annotation-driven/>
-	
-	
+
+<!--  menu_bar 에 해당하는 부분 -->	
+<mvc:view-controller path="main.do" view-name="common/main.tiles"/>
+<mvc:view-controller path="schedule_main.do" view-name="schedule/schedule_main.tiles"/>
+<mvc:view-controller path="board_main.do" view-name="board/board_main.tiles"/>
+<mvc:view-controller path="mypage.do" view-name="member/member_mypage.tiles"/>
+
+
+<!-- baord에 해당하는 부분 -->
+<mvc:view-controller path="board_main.do" view-name="board/board_main.tiles"/>
+<mvc:view-controller path="board_list.do" view-name="board/board_list.tiles"/>
+<mvc:view-controller path="board_detail.do" view-name="board/board_detail.tiles"/>
+<mvc:view-controller path="board_register.do" view-name="board/board_register.tiles"/>
+
+<!--  member에 해당하는 부분 -->
+<mvc:view-controller path="member_join.do" view-name="member/member_join.tiles"/>
+
+<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> <!--  tiles3로 선택 -->
+		<property name="definitions" >
+			<list>
+				<value>/WEB-INF/config/tiles-defs.xml</value>
+			</list>
+		
+		</property>
+</bean>	
 
 
 
 	<bean name="vr1" class = "org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
-	<!-- 타일 설정 파일 후 실행 해야함.. -->
-	<!-- <bean name="vr2" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order ="2" /> -->
+	<bean name="vr2" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order ="2" /> 
 	<bean name="vr3" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order ="3" />
 
 

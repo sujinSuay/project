@@ -1,11 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>menu</title>
-</head>
-<body>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 
-</body>
-</html>
+<a href="main.do">main</a>  &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="schedule_main.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="board_main.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="mypage.do">mypage</a> &nbsp; &nbsp; &nbsp; &nbsp;
+
