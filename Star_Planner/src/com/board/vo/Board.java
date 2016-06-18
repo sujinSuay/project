@@ -1,4 +1,4 @@
-package com.baord.vo;
+package com.board.vo;
 
 import java.util.Date;
 
