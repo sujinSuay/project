@@ -1,5 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
-
+	<sql id="select-basic">
+		SELECT 	m_id, social_no, password, group_id, gender,
+				name, email, address, phone
+		FROM 	member
+	</sql>
+	
+	<resultMap id="member-resultmap" type="member">
+		<id column="m_id" property="m_id"/>
+		<result column="social_no" property="social_no"/>
+		<result column="password" property="password"/>
+		<result column="group_id" property="group_id"/>
+		<result column="gender" property="gender"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="address" property="address"/>
+		<result column="phone" property="phone"/>
+		
+	</resultMap>
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO book values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone})
+	</insert>
+	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
+		<include refid="select-basic"/>
+		WHERE 	m_id=#{value}
+	</select>
+	<!-- 
+	<resultMap id="book-publisher-resultmap" type="book" extends="book-resultmap">
+		<association property="publisher" javaType="bookstore.vo.Publisher" resultMap="publisher.publisher-resultmap"/>
+	</resultMap>
+	-->
+	
+	<!-- 
+	<delete id="deleteBookByIsbn" parameterType="string">
+		DELETE FROM book WHERE isbn = #{isbn}
+	</delete>
+	<update id="updateBookByIsbn" parameterType="book">
+		UPDATE book
+		SET title = #{title},
+			author = #{author},
+			page = #{page},
+			price = #{price},
+			publish_date = #{publishDate},
+			publisher_no = #{publisherNo}
+		WHERE isbn = #{isbn}
+	</update>
+	-->
+	
+	
+	<!-- 
+	<select id="selectBookByPublishDate" parameterType="map" resultMap="book-resultmap">
+		<include refid="select-basic"/>
+		WHERE publish_date BETWEEN #{beginDate} AND #{endDate}
+	</select>
+	<select id="selectAllBook" resultMap="book-resultmap">
+		<include refid="select-basic"/>
+	</select>
+	<select id="selectBookByIsbn" parameterType="string" resultMap="book-publisher-resultmap">
+		SELECT 	b.isbn, b.title, b.author, b.page, b.price,
+				b.publish_date, b.publisher_no, p.publisher_no, p.publisher_name, 
+				p.publisher_address, p.publisher_tel 
+		FROM 	book b, publisher p
+		WHERE 	b.isbn = #{value}
+		AND 	b.publisher_no = p.publisher_no
+	</select> -->
 </mapper>
