@@ -1,78 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:c="http://www.springframework.org/schema/c"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
-
-	<mvc:annotation-driven/>
-
-
-<context:component-scan base-package="com"></context:component-scan>
-
-<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
-	 	   p:driverClassName="oracle.jdbc.driver.OracleDriver"
-	 	   p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
-	 	   p:username="scott"  
-	 	   p:password="tiger"
-	 	   p:maxTotal="100"/>
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:mvc="http://www.springframework.org/schema/mvc"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:c="http://www.springframework.org/schema/c"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 
-<bean name="sqlSessionFactory" 
-		  class="org.mybatis.spring.SqlSessionFactoryBean"
-		  p:dataSource-ref="dataSource"
-		  p:configLocation="classpath:com/common/config/mybatis/mybatis-config.xml"/>
-		  
-		  
-		  
-<bean name="sqlSessionTemplate"
-		  class="org.mybatis.spring.SqlSessionTemplate" 
-		  c:sqlSessionFactory-ref="sqlSessionFactory"/>		  
-		  
- <bean name="txmanager"
-		 				class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
-		 				p:dataSource-ref="dataSource"/>		  
-
-<tx:annotation-driven transaction-manager="txmanager"/>	
-
-<!--  menu_bar 에 해당하는 부분 -->	
-<mvc:view-controller path="main.do" view-name="common/main.tiles"/>
-<mvc:view-controller path="schedule_main.do" view-name="schedule/schedule_main.tiles"/>
-<mvc:view-controller path="board_main.do" view-name="board/board_main.tiles"/>
-<mvc:view-controller path="mypage.do" view-name="member/member_mypage.tiles"/>
 
 
-<!-- baord에 해당하는 부분 -->
-<mvc:view-controller path="board_main.do" view-name="board/board_main.tiles"/>
-<mvc:view-controller path="board_list.do" view-name="board/board_list.tiles"/>
-<mvc:view-controller path="board_detail.do" view-name="board/board_detail.tiles"/>
-<mvc:view-controller path="board_register.do" view-name="board/board_register.tiles"/>
-<mvc:view-controller path="comment.do" view-name="board/comment.tiles"/>
+	<context:component-scan base-package="com"></context:component-scan>
 
-<!--  member에 해당하는 부분 -->
-<mvc:view-controller path="member_join.do" view-name="member/member_join.tiles"/>
+	<bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+		p:username="scott" p:password="tiger" p:maxTotal="100" />
 
-<bean name="tilesConfig" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> <!--  tiles3로 선택 -->
-		<property name="definitions" >
+
+	<bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:configLocation="classpath:com/common/config/mybatis/mybatis-config.xml" />
+
+
+
+	<bean name="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
+		c:sqlSessionFactory-ref="sqlSessionFactory" />
+
+	<bean name="txmanager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource" />
+
+	<tx:annotation-driven transaction-manager="txmanager" />
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter"
+				c:defaultCharset="UTF-8" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<!-- baord에 해당하는 부분 -->
+	<mvc:view-controller path="board_main.do"
+		view-name="board/board_main.tiles" />
+	<mvc:view-controller path="board_list.do"
+		view-name="board/board_list.tiles" />
+	<mvc:view-controller path="board_detail.do"
+		view-name="board/board_detail.tiles" />
+	<mvc:view-controller path="board_register.do"
+		view-name="board/board_register.tiles" />
+	<mvc:view-controller path="comment.do" view-name="board/comment.tiles" />
+
+	<!-- member에 해당하는 부분 -->
+	<mvc:view-controller path="member_join.do"
+		view-name="member/member_join.tiles" />
+
+	
+	<!-- menu_bar 에 해당하는 부분 -->
+	<mvc:view-controller path="main.do" view-name="common/main.tiles" />
+	<mvc:view-controller path="schedule_main.do"
+		view-name="schedule/schedule_main.tiles" />
+	<mvc:view-controller path="board_main.do"
+		view-name="board/board_main.tiles" />
+	<mvc:view-controller path="mypage.do"
+		view-name="member/member_mypage.tiles" />
+
+
+	<!-- baord에 해당하는 부분 -->
+	<mvc:view-controller path="board_main.do"
+		view-name="board/board_main.tiles" />
+	<mvc:view-controller path="board_list.do"
+		view-name="board/board_list.tiles" />
+	<mvc:view-controller path="board_detail.do"
+		view-name="board/board_detail.tiles" />
+	<mvc:view-controller path="board_register.do"
+		view-name="board/board_register.tiles" />
+
+	<!-- member에 해당하는 부분 -->
+	<mvc:view-controller path="member_join.do"
+		view-name="member/member_join.tiles" />
+
+	<bean name="tilesConfig"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> <!-- tiles3로 선택 -->
+		<property name="definitions">
 			<list>
 				<value>/WEB-INF/config/tiles-defs.xml</value>
 			</list>
-		
+
 		</property>
-</bean>	
+	</bean>
 
 
-
-	<bean name="vr1" class = "org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>
-	<bean name="vr2" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver" p:order ="2" /> 
-	<bean name="vr3" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:order ="3" />
-
+	<bean name="vr1"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="1" />
+	<bean name="vr2"
+		class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"
+		p:order="2" />
+	<bean name="vr3"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:order="3" />
 
 
 </beans>

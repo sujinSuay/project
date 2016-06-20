@@ -8,15 +8,18 @@
 	
 <typeAliases>
 		<package name="com.board.vo"/>
+		<package name="com.member.vo"/>
 </typeAliases>
 
-	
+
 	<mappers>
 		<mapper resource="com/common/mapper/config/boardMapper.xml" />
 		<mapper resource="com/common/mapper/config/memberMapper.xml" />
 		<mapper resource="com/common/mapper/config/scheduleMapper.xml" />
+		
 	</mappers>
 
 
 
 </configuration>
+
