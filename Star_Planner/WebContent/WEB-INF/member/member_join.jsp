@@ -16,6 +16,7 @@
 				"data" : $("#form").serialize(),
 				"dataType" : "text",
 				"success" : function(txt) {
+					$("#form").val(txt);
 					$("#form").submit();
 				},
 				"error" : function(xhr, status, errorMsg) {
@@ -129,7 +130,7 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form id="form" method="post" action="/Star_Planner/main.do">
+	<form id="form" method="post" action="">
 		<table>
 			<tr>
 				<td colspan="2">

@@ -19,4 +19,7 @@ public class MemberServiceImpl implements MemberService{
 		Member member = memberDao.selectMemberById(m_id);
 		return null;
 	}
+	public int insertMember(Member member) throws IOException{
+		return memberDao.insertMember(member);
+	}
 }
