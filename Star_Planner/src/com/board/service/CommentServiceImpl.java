@@ -1,6 +1,7 @@
 package com.board.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,30 @@ public class CommentServiceImpl {
 	
 	
 	
-	public List<Comment> selectComment(){
+	public List<Comment> selectComment(int board_no){
 		
-		List<Comment> list =  dao.selectComment();
+		List<Comment> list =  dao.selectComment(board_no);
 		System.out.println("CommentServiceImpl " + list);
 		return list;	
+	}
+	
+
+	public void insertComment(Comment comment){
+		
+		System.out.println("CommentServiceImpl InsertCommnet 실행");
+		dao.insertComment(comment);
+	
+	}
+	
+	public void deleteComment(int comment_id){
+	
+		System.out.println("CommentServiceImpl deleteComment 실행");
+		dao.deleteComment(comment_id);
+	}
+	
+	public void modifyComment(HashMap<String, Object> map){
+		System.out.println("CommentServiceImpl modifyComment 실행");
+		dao.modifyComment(map);
 	}
 	
 	

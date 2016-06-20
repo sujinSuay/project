@@ -14,14 +14,14 @@ drop table type_list;
 drop table groups;
 
 CREATE TABLE member (
-	m_id VARCHAR2(50) PRIMARY KEY, /* id */
-	social_no VARCHAR(13) UNIQUE NOT NULL, /* 주민번호 */
-	password VARCHAR2(20) NOT NULL, /* 비밀번호 */
+	m_id VARCHAR2(200) PRIMARY KEY, /* id */
+	social_no VARCHAR(50) UNIQUE NOT NULL, /* 주민번호 */
+	password VARCHAR2(200) NOT NULL, /* 비밀번호 */
 	group_id NUMBER(3) NOT NULL, /* 소속 */
 	gender VARCHAR2(10) NOT NULL, /* 성별 */
-	name VARCHAR2(30) NOT NULL, /* 이름 */
-	email VARCHAR2(20) NOT NULL, /* 이메일 */
-	address VARCHAR2(50), /* 주소 */
+	name VARCHAR2(200) NOT NULL, /* 이름 */
+	email VARCHAR2(500) NOT NULL, /* 이메일 */
+	address VARCHAR2(500), /* 주소 */
 	phone VARCHAR2(15), /* 전화번호 */
 	favorite VARCHAR2(1000) /* 선호그룹 */
 );
@@ -29,18 +29,18 @@ CREATE TABLE member (
 /* groups */
 CREATE TABLE groups (
 	group_id NUMBER(3) PRIMARY KEY, /* 소속 */
-	group_name VARCHAR2(50) NOT NULL, /* 이름 */
-	group_address VARCHAR2(100) NOT NULL, /* 주소 */
-	group_phone VARCHAR2(20) NOT NULL, /* 전화번호 */
-	group_link VARCHAR2(200) /* 링크 */
+	group_name VARCHAR2(300) NOT NULL, /* 이름 */
+	group_address VARCHAR2(500) NOT NULL, /* 주소 */
+	group_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
+	group_link VARCHAR2(500) /* 링크 */
 );
 /* singer */
 CREATE TABLE singer (
 	singer_id NUMBER(4) PRIMARY KEY, /* 가수 */
-	singer_name VARCHAR2(20) NOT NULL, /* 가수이름 */
+	singer_name VARCHAR2(500) NOT NULL, /* 가수이름 */
 	group_id NUMBER(3) NOT NULL, /* 소속 */
-	type_name VARCHAR2(200) NOT NULL, /* 가수타입 */
-	singer_link VARCHAR2(200), /* 정보링크 */
+	type_name VARCHAR2(500) NOT NULL, /* 가수타입 */
+	singer_link VARCHAR2(500), /* 정보링크 */
 	singer_favorite NUMBER(10) NOT NULL, /* 선호도 */
 	singer_tag VARCHAR2(500) NOT NULL /* 검색태그 */
 );
@@ -52,7 +52,7 @@ CREATE TABLE board (
 	board_no NUMBER PRIMARY KEY, /* 게시글번호 */
 	board_title VARCHAR2(500) NOT NULL, /* 제목 */
 	board_date DATE NOT NULL, /* 날짜 */
-	m_id VARCHAR2(50) NOT NULL, /* id */
+	m_id VARCHAR2(200) NOT NULL, /* id */
 	board_hits NUMBER(7) NOT NULL, /* 조회수 */
 	board_content CLOB NOT NULL, /* 내용 */
 	board_likes NUMBER(10) NOT NULL, /* 추천 */
@@ -80,7 +80,7 @@ CREATE TABLE comments (
 	board_no NUMBER(10) NOT NULL, /* 게시글번호 */
 	comment_id NUMBER(10) NOT NULL, /* 댓글ID */
 	comment_content VARCHAR2(300) NOT NULL, /* 내용 */
-	m_id VARCHAR2(50) NOT NULL, /* id */
+	m_id VARCHAR2(200) NOT NULL, /* id */
 	comment_date DATE NOT NULL /* 일시 */
 );
 
@@ -104,6 +104,9 @@ CREATE TABLE link_list(
 	file_name 		VARCHAR2(500),
 	link_id 		NUMBER(10)
 );
+
+
+
 alter table comments add constraint fk_comments foreign key(board_no) references board(board_no);
 alter table member add constraint fk_member foreign key(group_id) references groups(group_id);
 alter table singer add constraint fk_singer foreign key(group_id) references groups(group_id);
