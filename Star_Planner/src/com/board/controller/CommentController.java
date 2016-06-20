@@ -3,6 +3,7 @@ package com.board.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,21 @@ public class CommentController {
 		return null;
 	}
 	
-	
+	@RequestMapping("/modifyComment.do")
+	@ResponseBody
+	public HashMap<String, Object> modifyComment(int comment_id,String comment_content){
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("comment_id",comment_id );
+		map.put("comment_content", comment_content);
+		
+		
+		System.out.println("modifyComment 전송받은 값 :" + map.toString());
+		service.modifyComment(map);
+		
+		return map;
+	}
 	
 	
 	

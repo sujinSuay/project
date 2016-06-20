@@ -29,5 +29,12 @@ WHERE board_no=#{board_no}
 delete from comments where comment_id=#{comment_id}
 </delete>
 
+<update id="modifyComment" parameterType="hashmap">
+UPDATE comments
+SET comment_content = #{comment_content}
+WHERE comment_id = #{comment_id}
+
+</update>
+
 
 </mapper>

@@ -102,30 +102,45 @@
 			//#reply_line 의 자식 중에서 class가 'modify_comment'인것에 적용 '.'은 상위 노드를 의미
 			$('#reply_line').on("click", '.modify_comment',function(){  
 				
-				alert('수정');
+				//alert('수정');
 				var parent=this;
 				
 				var txt = 	$(this).closest('tr').text();
+				
 				var txt2 = txt.split(',');
 				alert(txt2[0]);  //comment_id 값 
 				var comment_id = txt2[0];
 				
-				var context_area = $(this).parent().parent().find('.content');
-				context_area.html("<textarea id='modify'>"+ context_area.text()+"</textarea>");
+				var context_area = $(parent).parent().parent().find('.content');
+				var add_text = "<textarea class='modify'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
+				context_area.html(add_text);
 		
+			}); //end of delete
+			
+			$("#reply_line").on("click", '.modify_register', function(){
 				
-					
-
+				
+				var parent=this;
+				var txt = 	$(this).closest('tr').text();
+				var txt2 = txt.split(','); //comment_id 값 
+				alert(txt2[0]);  
+				var comment_id = txt2[0]; 
+				
+				var context_area = $(parent).parent().parent().find('.modify');
+				var new_context = context_area.val(); //textarea에 입력한 값을 가져와서 저장 
+				alert('입력받은 내용  '+new_context);  
+		
 				$.ajax({
 					
 					type: "post",
 					url : "/Star_Planner/comment/modifyComment.do",
-					data : {"comment_id" : comment_id},
+					data : {"comment_id" : comment_id,
+								"comment_content" : new_context},
 					
 						"success" : function(){
+					
+						$(parent).parent().find('.context').html('<span>'+new_context+'</span>');
 						alert('성공');
-						$(aaa).closest("tr").remove();
-										
 						
 					}, "error" : function(xhr, status, errorMsg){
             			alert("오류발생  " + status + errorMsg);
@@ -134,9 +149,9 @@
             		
             		}
 				
-			}) //end of ajax
-			}); //end of delete
-			
+			}) //end of ajax 
+				
+			}); //end of modify_register button
 			
 			
 		}); //end of document
