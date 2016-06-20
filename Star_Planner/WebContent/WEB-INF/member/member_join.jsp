@@ -16,38 +16,58 @@
 				"data" : $("#form").serialize(),
 				"dataType" : "text",
 				"success" : function(txt) {
-					alert(txt);
+					$("#form").submit();
 				},
 				"error" : function(xhr, status, errorMsg) {
 					alert("오류발생" + status + ", " + errorMsg);
 				},
 				"beforeSend" : function() {
-					alert($("#gender").val().equal("undefinded"));
+					
 					var flag=true;
-					if (!$("#id").val()) {
+					if (!$("#m_id").val()) {
 						$("#id_er").text("이름을 입력해주세요");
-						$("#id").focus();
+						$("#m_id").focus();
 						flag=false;
-					}
+					}else{$("#id_er").text("");}
 					if (!$("#name").val()){
 						$("#name_er").text("이름을 입력해주세요");
 						$("#name").focus();
 						flag=false;
-					}
+					}else{$("#name_er").text("");}
 					if (!$("#password").val()){
 						$("#password_er").text("Password를 입력해주세요");
 						$("#password").focus();
 						flag=false;
-					}
+					}else{$("#password_er").text("");}
 					if($("#password").val()!=$("#passwordCK").val()){
 						$("#passwordCK_er").text("패스워드가 서로 다릅니다");
 						$("#password").focus();
 						flag=false;
-					}
-					if(!$("#gender").val()=="undefinded"){
+					}else{$("#passwordCK_er").text("");}
+					alert($("#gender1").checked + " / " + $("#gender2").checked);
+					if(!$(":input:radio[name=gender]:checked").val()){
 						$("#gender_er").text("성별을 선택해 주세요");
+					}else{
+						$("#gender_er").text("");
 					}
+					if(!$("#address2").val()){
+						$("#address_er").text("주소를 입력해 주세요");
+						$("#address").focus();
+					}else{$("#address_er").text("");}
+					if(!$("#social_no").val()){
+						$("#social_no_er").text("주민번호를 입력해주세요");
+						$("#social_no").focus();
+					}else{$("#social_no_er").text("");}
+					if(!$("#phone").val()){
+						$("#phone_er").text("전화번호를 입력해주세요");
+						$("#phone").focus();
+					}else{$("#phone").text("");}
+					if(!$("#email").val()){
+						$("#email_er").text("이메일을 입력해주세요");
+						$("#email").focus();
+					}else{$("#email").text("");}
 					if(!flag){
+						
 						return false;
 					}
 				}
@@ -109,7 +129,7 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form id="form" method="post">
+	<form id="form" method="post" action="/Star_Planner/main.do">
 		<table>
 			<tr>
 				<td colspan="2">
@@ -120,7 +140,7 @@
 			</tr>
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" id="id" name="id" value="${requestScope.id }"></td>
+				<td><input type="text" id="m_id" name="m_id" value="${requestScope.id }"></td>
 				<td><span id="id_er"></span><td>
 			</tr>
 			<tr>
@@ -139,14 +159,24 @@
 				<td><span id="passwordCK_er"></span><td>
 			</tr>
 			<tr>
+				<td>이메일</td>
+				<td><input type="email" name="email" id="email"></td>
+				<td><span id="email_er"></span><td>
+			</tr>
+			<tr>
+				<td>연락번호</td>
+				<td><input type="text" name="phone" id="phone"></td>
+				<td><span id="phone_er"></span><td>
+			</tr>
+			<tr>
 				<td>성별</td>
-				<td><input type="radio" name="gender" value='male'>남자 <input
-					type="radio" name="gender" value="female">여자</td>
+				<td><input type="radio" id="gender1" name="gender" value='male'>남자 <input
+					type="radio" id="gender2" name="gender" value="female">여자</td>
 				<td><span id="gender_er"></span><td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="text" name="postcode" id="postcode" placeholder="우편번호"> 
+					<input type="text" name="address" id="postcode" placeholder="우편번호"> 
 					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
 				</td>
 				<td></td>
@@ -154,8 +184,8 @@
 			<tr>
 				<td colspan="2">
 					<input type="text" id="address" name="address"	placeholder="주소"> 
-					<input type="text" id="address2" name="address2" placeholder="상세주소"></td>
-				<td></td>
+					<input type="text" id="address2" name="address" placeholder="상세주소"></td>
+				<td><span id="address_er"></span></td>
 			</tr>
 			<tr>
 				<td>주민번호</td>
@@ -167,7 +197,8 @@
 			<table>
 				<tr>
 					<td>선호가수</td>
-					<td name="favorite">sdfasdfasd</td>
+					<td>sdfasdfasd</td>
+					<td></td>
 				</tr>
 			</table>
 		</div>

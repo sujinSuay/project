@@ -16,8 +16,6 @@ public class Member {
 	private String favorite;  /**회원이 선호하는 그룹의 이름. 선호그릅은 다중 선택 가능. ','로 구분 **/
 	
 	
-	
-	
 	public Member(){
 		
 	}

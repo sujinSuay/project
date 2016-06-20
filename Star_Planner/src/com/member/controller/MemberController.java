@@ -21,8 +21,8 @@ public class MemberController {
 	
 	@RequestMapping("/join")
 	@ResponseBody
-	public String joinMember(String id){
-		System.out.println(id);
+	public String joinMember(@ModelAttribute Member member){
+		System.out.println(member);
 		return "sucuess";
 	}
 }
