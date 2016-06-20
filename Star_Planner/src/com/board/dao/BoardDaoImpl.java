@@ -1,5 +1,96 @@
 package com.board.dao;
 
+import java.sql.SQLException;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.board.vo.Board;
+
+@Repository
 public class BoardDaoImpl implements BoardDao {
+	
+	private String namespace="board.";
+	
+	@Autowired
+	private SqlSessionTemplate session;
+	
+	/**
+	 * 글번호로 하나의 공지사항 글을 조회하는 메소드.
+	 * @param conn
+	 * @param no
+	 * @return 조회한 공지사항. 글이 없을 경우 null
+	 * @throws SQLException
+	 */
+	@Override
+	public Board selectByNo(int no) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectByNo", no);
+	}
+
+	@Override
+	public List<Board> selectList(int page) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+"selectList", page);
+	}
+
+	/**
+	 * 총 게시물 수를 조회하는 메소드.
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public int selectCountContents() {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectCountContents");
+	}
+
+	/**
+	 * 공지사항 글을 insert하는 메소드.
+	 * 글제목은 notice_board_seq 시퀀스를 이용해 넣는다. 조회수는 0으로 설정. 
+	 * @param notice
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public int insertBoard(Board board) {
+		// TODO Auto-generated method stub
+		return session.insert(namespace+"insert", board);
+	}
+
+	/**
+	 * no로 view_count(조회수) update 처리.
+	 * @param conn
+	 * @param no
+	 * @return
+	 * @throws SQLException 
+	 */
+	@Override
+	public int updateViewCount(int no) {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"updateViewCount", no);
+	}
+
+	/**
+	 * 공지사항 글번호로 하나 update
+	 * @param conn
+	 * @param notice
+	 * @return
+	 * @throws SQLException
+	 */
+	@Override
+	public int updateBoard(Board board) {
+		// TODO Auto-generated method stub
+		return session.update(namespace+"update", board);
+	}
+
+	@Override
+	public int deleteByNo(int no) {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+"deleteByNo", no);
+	}
+	
 
 }

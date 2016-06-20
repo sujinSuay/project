@@ -19,11 +19,25 @@ public class CommentServiceImpl {
 	
 	
 	
-	public List<Comment> selectComment(){
+	public List<Comment> selectComment(int board_no){
 		
-		List<Comment> list =  dao.selectComment();
+		List<Comment> list =  dao.selectComment(board_no);
 		System.out.println("CommentServiceImpl " + list);
 		return list;	
+	}
+	
+
+	public void insertComment(Comment comment){
+		
+		System.out.println("CommentServiceImpl InsertCommnet 실행");
+		dao.insertComment(comment);
+	
+	}
+	
+	public void deleteComment(int comment_id){
+	
+		System.out.println("CommentServiceImpl deleteComment 실행");
+		dao.deleteComment(comment_id);
 	}
 	
 	

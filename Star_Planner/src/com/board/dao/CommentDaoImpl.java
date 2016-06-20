@@ -30,9 +30,16 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	
-	public List<Comment> selectComment() {
+	public List<Comment> selectComment(int board_no) {
 		System.out.println("selectComment() : 댓글 전체 조회");
-		return session.selectList(namespace + "selectComment");
+		return session.selectList(namespace + "selectComment", board_no);
+	}
+
+	@Override
+	public int deleteComment(int id) {
+		
+		System.out.println("CommentDaoImpl deleteComment실행");
+		return session.delete(namespace+"deleteComment", id);
 	}
 
 }
