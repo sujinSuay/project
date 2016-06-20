@@ -64,8 +64,8 @@
 				$("#email").focus();
 				flag=false;
 			}else{$("#email").text("");}
-			alert(flag + " / " + window.ckflag);
-			if(!flag || !window.ckflag){
+			alert(!flag + " / " + window.ckflag);
+			if(!flag || !checkId()){
 				return false;
 			}
 		});
