@@ -19,16 +19,9 @@ public class BoardController {
 	@RequestMapping("/NoticeWriterForm")
 	public String NoticeWriterForm(){
 		System.out.println("noticeWriter");
-		service.writeNotice(new Board(0, "test", new Date(System.currentTimeMillis()), "testId", 0, "test content", 0, 5, "공연"));
+		service.writeBoard(new Board(0, "test", new Date(System.currentTimeMillis()), "testId", 0, "test content", 0, 5, "공연"));
 
 		return "/WEB-INF/board/board_detail.jsp";
-		/*NoticeBoardService service = NoticeBoardService.getInstance();
-		try {
-			return new AttributeAndView("/WEB-INF/view/notice_board/write_form.jsp", false, "codeList", service.getWriteFormPrefix());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", e.getMessage());
-		}*/
 	}
 	
 	//noticeList
