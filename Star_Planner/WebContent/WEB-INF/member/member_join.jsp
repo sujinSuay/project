@@ -8,71 +8,66 @@
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+	var ckflag=false;
 	$(document).ready(function() {
-		$("#checkForm").on("click", function() {
-			$.ajax({
-				"url" : "/Star_Planner/member/join.do",
-				"type" : "POST",
-				"data" : $("#form").serialize(),
-				"dataType" : "text",
-				"success" : function(txt) {
-					$("#form").val(txt);
-					$("#form").submit();
-				},
-				"error" : function(xhr, status, errorMsg) {
-					alert("오류발생" + status + ", " + errorMsg);
-				},
-				"beforeSend" : function() {
-					
-					var flag=true;
-					if (!$("#m_id").val()) {
-						$("#id_er").text("이름을 입력해주세요");
-						$("#m_id").focus();
-						flag=false;
-					}else{$("#id_er").text("");}
-					if (!$("#name").val()){
-						$("#name_er").text("이름을 입력해주세요");
-						$("#name").focus();
-						flag=false;
-					}else{$("#name_er").text("");}
-					if (!$("#password").val()){
-						$("#password_er").text("Password를 입력해주세요");
-						$("#password").focus();
-						flag=false;
-					}else{$("#password_er").text("");}
-					if($("#password").val()!=$("#passwordCK").val()){
-						$("#passwordCK_er").text("패스워드가 서로 다릅니다");
-						$("#password").focus();
-						flag=false;
-					}else{$("#passwordCK_er").text("");}
-					alert($("#gender1").checked + " / " + $("#gender2").checked);
-					if(!$(":input:radio[name=gender]:checked").val()){
-						$("#gender_er").text("성별을 선택해 주세요");
-					}else{
-						$("#gender_er").text("");
-					}
-					if(!$("#address2").val()){
-						$("#address_er").text("주소를 입력해 주세요");
-						$("#address").focus();
-					}else{$("#address_er").text("");}
-					if(!$("#social_no").val()){
-						$("#social_no_er").text("주민번호를 입력해주세요");
-						$("#social_no").focus();
-					}else{$("#social_no_er").text("");}
-					if(!$("#phone").val()){
-						$("#phone_er").text("전화번호를 입력해주세요");
-						$("#phone").focus();
-					}else{$("#phone").text("");}
-					if(!$("#email").val()){
-						$("#email_er").text("이메일을 입력해주세요");
-						$("#email").focus();
-					}else{$("#email").text("");}
-					if(!flag){
-						
-						return false;
-					}
-				}
-			})
+		$("#m_id").on("keyup",function(){
+			if($("#m_id").val().length>5){
+				window.ckflag=checkId();
+			}
+		});
+		$("#form").on("submit",function(){
+			var flag=true;
+			if (!$("#m_id").val()) {
+				$("#id_er").text("이름을 입력해주세요");
+				$("#m_id").focus();
+				flag=false;
+			}else{$("#id_er").text("");}
+			if (!$("#name").val()){
+				$("#name_er").text("이름을 입력해주세요");
+				$("#name").focus();
+				flag=false;
+			}else{$("#name_er").text("");}
+			if (!$("#password").val()){
+				$("#password_er").text("Password를 입력해주세요");
+				$("#password").focus();
+				flag=false;
+			}else{$("#password_er").text("");}
+			if($("#password").val()!=$("#passwordCK").val()){
+				$("#passwordCK_er").text("패스워드가 서로 다릅니다");
+				$("#password").focus();
+				flag=false;
+			}else{$("#passwordCK_er").text("");}
+			if(!$(":input:radio[name=gender]:checked").val()){
+				$("#gender_er").text("성별을 선택해 주세요");
+				flag=false;
+			}else{
+				$("#gender_er").text("");
+			}
+			if(!$("#address2").val()){
+				$("#address_er").text("주소를 입력해 주세요");
+				$("#address").focus();
+				flag=false;
+			}else{$("#address_er").text("");}
+			if(!$("#social_no").val()){
+				alert($("#social_no").val());
+				$("#social_no_er").text("주민번호를 입력해주세요");
+				$("#social_no").focus();
+				flag=false;
+			}else{$("#social_no_er").text("");}
+			if(!$("#phone").val()){
+				$("#phone_er").text("전화번호를 입력해주세요");
+				$("#phone").focus();
+				flag=false;
+			}else{$("#phone").text("");}
+			if(!$("#email").val()){
+				$("#email_er").text("이메일을 입력해주세요");
+				$("#email").focus();
+				flag=false;
+			}else{$("#email").text("");}
+			alert(flag + " / " + window.ckflag);
+			if(!flag || !window.ckflag){
+				return false;
+			}
 		});
 		/* $("#group_id2").on("click",function(){
 			document.$("#favorite_tr").show("fast");
@@ -82,6 +77,36 @@
 		}); */
 
 	});
+	function checkId(){
+		$.ajax({
+			"url":"/Star_Planner/member/checkId.do",
+			"type":"POST",
+			"data":"m_id="+$("#m_id").val(),
+			"dataType":"text", 
+			"success":function(txt){
+				alert(txt);
+				if(txt=='false'){
+					$("#id_er").text("중복된 아이디입니다.");
+					$("#m_id").focus();
+					return false;
+				}else{
+					$("#id_er").text("사용가능한 아이디입니다.");
+					return true;
+				}
+				
+			},
+			"error":function(xhr,status,errorMsg){
+				alert("오류발생" + status+ ", " + errorMsg);
+			},
+			"beforeSend":function(){
+				if($("#m_id").val().length<5){
+					$("#id_er").text("6글자 이상 입력해 주세요");
+					$("#m_id").focus();
+					return false;
+				}
+			}
+		});
+	}
 	function execDaumPostcode() {
 		new daum.Postcode(
 				{
@@ -130,7 +155,7 @@
 </head>
 <body>
 	<h2>회원가입</h2>
-	<form id="form" method="post" action="">
+	<form id="form" method="post" action="/Star_Planner/member/join.do">
 		<table>
 			<tr>
 				<td colspan="2">
@@ -190,7 +215,7 @@
 			</tr>
 			<tr>
 				<td>주민번호</td>
-				<td><input type="text" name="social_no"></td>
+				<td><input type="text" id="social_no" name="social_no"></td>
 				<td><span id="social_no_er"></span><td>
 			</tr>
 		</table>
@@ -206,7 +231,7 @@
 		<table>
 			<tr>
 				<td colspan="2"><input type="reset" name="초기화"><input
-					type="button" id="checkForm" value="가입"></td>
+					type="submit" id="checkForm" value="가입"></td>
 			</tr>
 		</table>
 	</form>

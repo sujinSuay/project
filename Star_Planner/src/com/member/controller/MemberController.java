@@ -22,10 +22,18 @@ public class MemberController {
 	MemberServiceImpl memberService;
 	
 	@RequestMapping("/join")
-	@ResponseBody
 	public String joinMember(@ModelAttribute Member member) throws IOException{
 		System.out.println(member);
 		memberService.insertMember(member);
-		return "/Star_Planner/main.do";
+		return "/main.do";
+	}
+	@RequestMapping("/checkId")
+	@ResponseBody
+	public String checkId(String m_id) throws IOException{
+		System.out.println(m_id);
+		Member mem = memberService.getMemberById(m_id);
+		System.out.println(mem);
+		if(mem==null) return "true"; else return "false"; 
+		
 	}
 }

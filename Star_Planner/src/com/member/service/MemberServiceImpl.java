@@ -15,9 +15,8 @@ public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDaoImpl memberDao;
 	
-	public String getMemberById(String m_id) throws IOException{
-		Member member = memberDao.selectMemberById(m_id);
-		return null;
+	public Member getMemberById(String m_id) throws IOException{
+		return memberDao.selectMemberById(m_id);
 	}
 	public int insertMember(Member member) throws IOException{
 		return memberDao.insertMember(member);

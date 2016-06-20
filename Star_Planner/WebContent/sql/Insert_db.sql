@@ -13,7 +13,7 @@ INSERT INTO member VALUES ('eeeee', '933333333333', 'eee',  2, '여', 'eee', 'dd
 INSERT INTO member VALUES ('ffff', '933333333333', 'fff',  @, '여', 'ffff', 'eee@kosta', '주소f', '전화번호', '선호그룹' );
 INSERT INTO member VALUES ('JYPMManager', '933333333333', 'jyp',  #, 'JYP메니져', 'jyp@jyp.jyp', 'jyp@kosta', 'JYP즈소', '전화번호', '선호그룹' );
 
-
+select * from member
 
 
 
