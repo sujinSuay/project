@@ -36,9 +36,28 @@
 	</build>
 
 
-	<!-- 의존성 추가 -spring-webmvc -ajax : +com.fasterxml.jackson.core - jackson-core 
-		+com.fasterxml.jackson.core - jackson-databind -File upload : + commons-fileupload 
-		+ jstl -Tiles API : +tiles-core +tiles-jsp +jstl (위에서 선언함) -->
+
+	  <!--  의존성 추가
+ 
+ -spring-webmvc
+ -ajax :  
+ +com.fasterxml.jackson.core - jackson-core
+ +com.fasterxml.jackson.core - jackson-databind
+ -File upload : 
+ + commons-fileupload
+ + jstl
+-Tiles API :  
++tiles-core
++tiles-jsp
++jstl (위에서 선언함)
+-DB설정
++spring-jdbc
++spring-context
++commons-dbcp2
++mybatis
+
+-->
+
 	<dependencies>
 	<!-- http://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
@@ -123,4 +142,5 @@
 	</dependencies>
 
 
+  
 </project>

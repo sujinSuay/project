@@ -7,6 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+<<<<<<< HEAD
+		<config>WebContent/WEB-INF/config/spring.xml</config>
+=======
+>>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 	</configs>
 	<autoconfigs>
 		<config>WebContent/WEB-INF/config/spring.xml</config>
