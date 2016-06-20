@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
-
+	<typeAliases>
+		<package name="com.member.vo"/>
+	</typeAliases>
+	<mappers>
+		<!-- 
+			<mapper> mapper설정파일 하나를 등록하는 태그.
+			mapper 설정파일 위치 : classpath 상. 파일명은 상관없다.
+			package 내에 있을경우 패키ㅣ 구분자로 . 이 아니라 / 로 구분	
+			<mapper resource="mybatis/config/mapper/departmentMapper.xml"/>
+		 -->
+		<mapper resource="com/common/config/mybatis/memberMapper.xml"/>
+	</mappers>
 </configuration>

@@ -3,37 +3,23 @@ package com.member.dao;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Repository;
 
 import com.member.vo.Member;
 
+@Repository
 public class MemberDaoImpl implements MemberDao {
-	private static MemberDaoImpl instance;
-	private SqlSessionFactory factory;
-	
-/*	public static MemberDaoImpl getInstance() throws IOException{
-		if(instance == null)
-			instance = new MemberDaoImpl();
-		return instance;
-	}*/
+	private SqlSessionTemplate session;
+	public MemberDaoImpl(SqlSessionTemplate session){
+		this.session = session;
+	}
 	public int insertMember(Member member){
-		SqlSession session = factory.openSession();
-		try {
-			int cnt = session.insert("member.insertMember", member);
-			session.commit();
-			return cnt;
-		} finally {
-			session.close();
-		}
+		return session.insert("member.insertMember", member);
 	}
 	public Member selectMemberById(String m_id){
-		SqlSession session = factory.openSession();
-		try {
-			Member member = session.selectOne("member.selectMemberById", m_id);
-			return member;
-		} finally {
-			session.close();
-		}
-		
-		
+		return session.selectOne("member.selectMemberById", m_id);
 	}
 }
