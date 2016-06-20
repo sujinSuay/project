@@ -1,5 +1,6 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -40,6 +41,12 @@ public class CommentDaoImpl implements CommentDao {
 		
 		System.out.println("CommentDaoImpl deleteComment실행");
 		return session.delete(namespace+"deleteComment", id);
+	}
+
+	@Override
+	public int modifyComment(HashMap<String, Object> map) {
+		System.out.println("CommentDaoImpl modifyComment실행");
+		return session.update(namespace + "modifyComment", map );
 	}
 
 }
