@@ -8,14 +8,18 @@
 <title>board_list</title>
 </head>
 <body>
-<h2>게시판</h2>
+<h2>선택된 가수의 게시판</h2>
+<form action="/Star_Planner/board/NoticeWriterForm.do" method="post">왜안되 시발<input type="submit" value="test"></form>
+<a href="board_detail.do">insert</a>
 <table>
 	<thead>
 		<tr>
 			<th>번호</th>
-			<th>제목</th>
-			<th>공지일</th>
-			<th>조회수</th>
+			<th width="300">제목</th>
+			<th>글쓴이</th>
+			<th>날짜</th>
+			<th>조회</th>
+			<th>추천</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -23,12 +27,17 @@
 			<tr>
 				<td>${notice.no }</td>
 				<td>
-					<a href="${initParam.rootPath }/controller?command=noticeView&no=${notice.no}&page=${paging.page}">
+					<%-- <a href="${initParam.rootPath }/controller?command=noticeView&no=${notice.no}&page=${paging.page}">
 						${notice.wholeTitle }
+					</a> --%>
+					<a href="board_detail.do?no=${notice.no}&page=${paging.page}">
+						${notice.Title }
 					</a>
 				</td>
+				<td>${notice.writer }</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.writeDate }"/></td>
-				<td>${notice.viewCount }</td>
+				<td>${notice.hit }</td>
+				<td>${notice.like }</td>
 			</tr>	
 		</c:forEach>
 	</tbody>

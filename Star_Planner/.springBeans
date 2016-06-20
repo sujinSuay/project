@@ -8,6 +8,9 @@
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 		<config>WebContent/WEB-INF/config/spring.xml</config>
 =======
 >>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
