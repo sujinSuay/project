@@ -6,7 +6,10 @@
 <title>member_join</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    function sample6_execDaumPostcode() {
+$(document).ready(function(){
+	
+});
+    function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -39,11 +42,11 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample6_address').value = fullAddr;
+                document.getElementById('postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('sample6_address2').focus();
+                document.getElementById('address2').focus();
             }
         }).open();
     }
@@ -80,14 +83,14 @@
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="text" id="sample6_postcode" placeholder="우편번호">
-			<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+			<input type="text" id="postcode" placeholder="우편번호">
+			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
 		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="text" id="sample6_address" placeholder="주소">
-			<input type="text" id="sample6_address2" placeholder="상세주소">
+			<input type="text" id="address" placeholder="주소">
+			<input type="text" id="address2" placeholder="상세주소">
 		</td>
 	</tr>
 	<tr>

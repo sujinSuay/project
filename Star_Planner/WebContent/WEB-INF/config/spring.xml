@@ -71,7 +71,6 @@
 				<list>
 					<value>/WEB-INF/config/tiles-defs.xml</value>
 				</list>
-			
 			</property>
 	</bean>	
 
