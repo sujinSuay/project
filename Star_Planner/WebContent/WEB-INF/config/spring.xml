@@ -5,12 +5,28 @@
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
 	<mvc:annotation-driven/>
+	<bean name="BasicDataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+		p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
+		p:username="scott" p:password="tiger" p:maxTotal="100"/>
+	
+	<bean name="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="BasicDataSource" p:configLocation="classpath:com/common/config/mybatis/mybatis-config.xml"/>
+	
+	<bean name="SqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" c:sqlSessionFactory-ref="sqlSessionFactoryBean"/>
+	
 
+	<context:component-scan base-package="com"/>
+	
+	<bean name="txmanager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="BasicDataSource"/>
+	<tx:annotation-driven transaction-manager="txmanager"/>
+	
 <!--  menu_bar 에 해당하는 부분 -->	
 <mvc:view-controller path="main.do" view-name="common/main.tiles"/>
 <mvc:view-controller path="schedule_main.do" view-name="schedule/schedule_main.tiles"/>
@@ -19,7 +35,6 @@
 
 
 <!-- baord에 해당하는 부분 -->
-<mvc:view-controller path="board_main.do" view-name="board/board_main.tiles"/>
 <mvc:view-controller path="board_list.do" view-name="board/board_list.tiles"/>
 <mvc:view-controller path="board_detail.do" view-name="board/board_detail.tiles"/>
 <mvc:view-controller path="board_register.do" view-name="board/board_register.tiles"/>

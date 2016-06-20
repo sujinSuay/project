@@ -1,8 +1,9 @@
-package com.baord.vo;
+package com.board.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Board {
+public class Board implements Serializable{
 	
 	
 	private int board_no; /** 게시글 번호  **/
