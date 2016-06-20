@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.Member;
 
-@Service
+@Service("memberService")
 public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
