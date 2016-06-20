@@ -1,5 +1,7 @@
 package com.board.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,8 +25,14 @@ public class CommentDaoImpl implements CommentDao {
 
 	@Override
 	public int updateComment(Comment comment) {
-		// TODO Auto-generated method stub
+		
 		return 0;
+	}
+
+	
+	public List<Comment> selectComment() {
+		System.out.println("selectComment() : 댓글 전체 조회");
+		return session.selectList(namespace + "selectComment");
 	}
 
 }
