@@ -30,7 +30,7 @@
 	<bean name="sqlSessionFactory" 
 		  class="org.mybatis.spring.SqlSessionFactoryBean"
 		  p:dataSource-ref="dataSource"
-		  p:configLocation="classpath:com/common/mapper/config/mybatis-config.xml"/>
+		  p:configLocation="classpath:com/common/config/mybatis/mybatis-config.xml"/>
 	<!-- 
 		- SqlSessionTemplate 
 			- SqlSession 기능을 제공하는 클래스

@@ -11,6 +11,6 @@
 			package 내에 있을경우 패키ㅣ 구분자로 . 이 아니라 / 로 구분	
 			<mapper resource="mybatis/config/mapper/departmentMapper.xml"/>
 		 -->
-		<mapper resource="com/common/config/mybatis/memberMapper.xml"/>
+		<mapper resource="com/common/mapper/config/memberMapper.xml"/>
 	</mappers>
 </configuration>
