@@ -7,7 +7,7 @@ public class Member {
 	private String m_id;  /**회원 아이디 **/
 	private String social_no; /** 회원 주민번호  **/
 	private String password; /**회원 비밀번호 **/
-	private int group; /** 회원이 속한 그룹. 1번:admin, 2번: 일반회원, 3번: 소속사 매니저 **/
+	private int group_id; /** 회원이 속한 그룹. 1번:admin, 2번: 일반회원, 3번: 소속사 매니저 **/
 	private String gender; /**회원 성별 **/
 	private String name; /**회원 이름 **/
 	private String email; /**회원의 이메일 **/
@@ -22,13 +22,13 @@ public class Member {
 		
 	}
 	
-	public Member(String m_id, String social_no, String password, int group, String gender, String name, String email,
+	public Member(String m_id, String social_no, String password, int group_id, String gender, String name, String email,
 			String address, String phone, String favorite) {
 		super();
 		this.m_id = m_id;
 		this.social_no = social_no;
 		this.password = password;
-		this.group = group;
+		this.group_id = group_id;
 		this.gender = gender;
 		this.name = name;
 		this.email = email;
@@ -56,11 +56,11 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getGroup() {
-		return group;
+	public int getGroup_id() {
+		return group_id;
 	}
-	public void setGroup(int group) {
-		this.group = group;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 	public String getGender() {
 		return gender;
@@ -102,7 +102,7 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "Member [m_id=" + m_id + ", social_no=" + social_no + ", password=" + password + ", group=" + group
+		return "Member [m_id=" + m_id + ", social_no=" + social_no + ", password=" + password + ", group_id=" + group_id
 				+ ", gender=" + gender + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
 				+ phone + ", favorite=" + favorite + "]";
 	}
@@ -116,7 +116,7 @@ public class Member {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((favorite == null) ? 0 : favorite.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-		result = prime * result + group;
+		result = prime * result + group_id;
 		result = prime * result + ((m_id == null) ? 0 : m_id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -155,7 +155,7 @@ public class Member {
 				return false;
 		} else if (!gender.equals(other.gender))
 			return false;
-		if (group != other.group)
+		if (group_id != other.group_id)
 			return false;
 		if (m_id == null) {
 			if (other.m_id != null)
