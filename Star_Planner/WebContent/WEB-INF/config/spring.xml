@@ -47,7 +47,7 @@
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter" c:defaultCharset="UTF-8"/>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
- 
+  
 
 
 	<!--  menu_bar 에 해당하는 부분 -->	
