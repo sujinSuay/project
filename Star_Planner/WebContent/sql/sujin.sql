@@ -95,6 +95,16 @@ CREATE TABLE comments (
 	comment_date DATE NOT NULL /* 일시 */
 );
 
+insert into COMMENTS values(0, 1, '댓글1내용', 'id-1', sysdate);
+insert into COMMENTS values(0, 2, '댓글2내용', 'id-1', sysdate);
+insert into COMMENTS values(0, 3, '댓글3내용', 'id-1', sysdate);
+insert into COMMENTS values(1, 1, '댓글1내용', 'id-1', sysdate);
+insert into COMMENTS values(1, 2, '댓글2내용', 'id-1', sysdate);
+insert into COMMENTS values(1, 1, '댓글1내용', 'id-1', sysdate);
+insert into COMMENTS values(2, 2, '댓글2내용', 'id-1', sysdate);
+insert into COMMENTS values(2, 3, '댓글3내용', 'id-1', sysdate);
+commit
+select * from comments
 
 /* search_data */
 CREATE TABLE search_data (

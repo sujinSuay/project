@@ -11,7 +11,7 @@ import com.board.vo.Comment;
 @Repository
 public class CommentDaoImpl implements CommentDao {
 
-	private String namespace="board.";
+	private String namespace="comment.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -19,7 +19,7 @@ public class CommentDaoImpl implements CommentDao {
 	
 	@Override
 	public int insertComment(Comment comment) {
-		System.out.println("dd");
+
 		return session.insert(namespace+"insertComment", comment);
 	}
 
@@ -30,9 +30,16 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	
-	public List<Comment> selectComment() {
+	public List<Comment> selectComment(int board_no) {
 		System.out.println("selectComment() : 댓글 전체 조회");
-		return session.selectList(namespace + "selectComment");
+		return session.selectList(namespace + "selectComment", board_no);
+	}
+
+	@Override
+	public int deleteComment(int id) {
+		
+		System.out.println("CommentDaoImpl deleteComment실행");
+		return session.delete(namespace+"deleteComment", id);
 	}
 
 }

@@ -17,6 +17,7 @@
 		<mapper resource="com/common/mapper/config/boardMapper.xml" />
 		<mapper resource="com/common/mapper/config/memberMapper.xml" />
 		<mapper resource="com/common/mapper/config/scheduleMapper.xml" />
+		<mapper resource="com/common/mapper/config/commentMapper.xml" />
 		
 	</mappers>
 
