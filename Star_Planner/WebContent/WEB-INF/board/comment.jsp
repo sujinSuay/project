@@ -8,7 +8,7 @@
 		$(document).ready(function(){
 
 			$.ajax({
-					"url" :  "/Star_Planner/board/selectComment.do", 
+					"url" :  "/Star_Planner/comment/selectComment.do", 
 					"type" : "post",
 					"dataType" : "json",
 					"success" : function(list){

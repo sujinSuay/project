@@ -12,7 +12,7 @@ import com.board.service.CommentServiceImpl;
 import com.board.vo.Comment;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/comment")
 public class CommentController {
 	
 	@Autowired

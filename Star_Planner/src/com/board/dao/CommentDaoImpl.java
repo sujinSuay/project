@@ -11,7 +11,7 @@ import com.board.vo.Comment;
 @Repository
 public class CommentDaoImpl implements CommentDao {
 
-	private String namespace="board.";
+	private String namespace="comment.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -19,7 +19,7 @@ public class CommentDaoImpl implements CommentDao {
 	
 	@Override
 	public int insertComment(Comment comment) {
-		System.out.println("dd");
+
 		return session.insert(namespace+"insertComment", comment);
 	}
 
