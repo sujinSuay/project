@@ -54,4 +54,15 @@ public class MemberController {
 		session.invalidate();
 		return new ModelAndView("/main.do");
 	}
+	
+	@RequestMapping("/mypage")
+	public ModelAndView mypage(HttpSession session) throws IOException{
+		if(session.getAttribute("loginId")==null){
+			return new ModelAndView("/main.do","errors","로그인을 해주세요.");
+		} 
+		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
+		System.out.println(mem);
+		return new ModelAndView("member/member_mypage.tiles","member",mem);
+		
+	}
 }

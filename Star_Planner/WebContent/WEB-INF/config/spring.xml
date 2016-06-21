@@ -73,6 +73,8 @@
 		view-name="member/member_login.tiles" />
 	<mvc:view-controller path="member_logout.do"
 	view-name="member/logout.do" />
+	<mvc:view-controller path="member_modify.do"
+	view-name="member/member_modify.tiles" />
 	
 	<!-- menu_bar 에 해당하는 부분 -->
 	<mvc:view-controller path="main.do" view-name="common/main.tiles" />
@@ -80,8 +82,6 @@
 		view-name="schedule/schedule_main.tiles" />
 	<mvc:view-controller path="board_main.do"
 		view-name="board/board_main.tiles" />
-	<mvc:view-controller path="mypage.do"
-		view-name="member/member_mypage.tiles" />
 
 
 	<!-- baord에 해당하는 부분 -->
