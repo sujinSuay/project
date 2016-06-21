@@ -5,5 +5,6 @@
 <a href="schedule_main.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="board_main.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="mypage.do">mypage</a> &nbsp; &nbsp; &nbsp; &nbsp;
-<a href="member_join.do">join</a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="member_login.do">login</a> &nbsp; &nbsp; &nbsp; &nbsp;
+
 

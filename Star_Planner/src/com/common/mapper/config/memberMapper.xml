@@ -30,6 +30,10 @@
 		<include refid="select-basic"/>
 		WHERE 	m_id=#{value}
 	</select>
+	<select id="selectMemberByIdAndPassword" parameterType="map" resultMap="member-resultmap">
+		<include refid="select-basic"/>
+		WHERE m_id=#{m_id} and password=#{password}
+	</select>
 	<!-- 
 	<resultMap id="book-publisher-resultmap" type="book" extends="book-resultmap">
 		<association property="publisher" javaType="bookstore.vo.Publisher" resultMap="publisher.publisher-resultmap"/>

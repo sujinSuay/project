@@ -69,7 +69,8 @@
 	<!-- member에 해당하는 부분 -->
 	<mvc:view-controller path="member_join.do"
 		view-name="member/member_join.tiles" />
-
+	<mvc:view-controller path="member_login.do"
+		view-name="member/member_login.tiles" />
 	
 	<!-- menu_bar 에 해당하는 부분 -->
 	<mvc:view-controller path="main.do" view-name="common/main.tiles" />

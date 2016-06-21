@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 
@@ -22,10 +22,10 @@ public class MemberController {
 	MemberServiceImpl memberService;
 	
 	@RequestMapping("/join")
-	public String joinMember(@ModelAttribute Member member) throws IOException{
+	public ModelAndView joinMember(@ModelAttribute Member member) throws IOException{
 		System.out.println(member);
 		memberService.insertMember(member);
-		return "/main.do";
+		return new ModelAndView("/main.do");
 	}
 	@RequestMapping("/checkId")
 	@ResponseBody
@@ -34,6 +34,12 @@ public class MemberController {
 		Member mem = memberService.getMemberById(m_id);
 		System.out.println(mem);
 		if(mem==null) return "true"; else return "false"; 
-		
+	}
+	@RequestMapping("/login")
+	@ResponseBody
+	public ModelAndView login(String m_id, String password) throws IOException{
+		Member mem = memberService.loginMember(m_id, password);
+		if(mem==null) return new ModelAndView("/login.do","m_id",m_id);
+		return new ModelAndView("/main.do","longinId",m_id);
 	}
 }
