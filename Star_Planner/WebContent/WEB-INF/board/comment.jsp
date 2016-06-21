@@ -139,7 +139,8 @@
 					
 						"success" : function(){
 					
-						$(parent).parent().find('.context').html('<span>'+new_context+'</span>');
+						//this=button= var parent 가 td에속해있으므로 parent인 td의 내용을 변경하도록 한다.
+						$(parent).parent().html('<span>'+new_context+'</span>'); 
 						alert('성공');
 						
 					}, "error" : function(xhr, status, errorMsg){
