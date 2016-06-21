@@ -6,48 +6,60 @@
 <head>
 <meta charset="UTF-8">
 <title>board_list</title>
+<style type="text/css">
+/* table 스타일 처리  */
+table, td, th {    
+    border: 1px solid gray;
+}
+table {
+    border-collapse: collapse;
+    min-width: 800px;
+}
+th, td {
+    padding: 5px;
+}
+</style>
 </head>
 <body>
-<h2>선택된 가수의 게시판</h2>
-<form action="/Star_Planner/board/NoticeWriterForm.do" method="post">왜안되 시발<input type="submit" value="test"></form>
-<a href="board_detail.do">insert</a>
+<h2>${param.id } 갤러리</h2>
 <table>
 	<thead>
 		<tr>
 			<th>번호</th>
 			<th width="300">제목</th>
-			<th>글쓴이</th>
-			<th>날짜</th>
+			<th width="150">글쓴이</th>
+			<th width="200">날짜</th>
 			<th>조회</th>
 			<th>추천</th>
 		</tr>
 	</thead>
-	<tbody>
-		<c:forEach items="${requestScope.list }" var="notice">
+	<tbody align="center">
+		<c:forEach items="${requestScope.list }" var="board">
 			<tr>
-				<td>${notice.no }</td>
-				<td>
-					<%-- <a href="${initParam.rootPath }/controller?command=noticeView&no=${notice.no}&page=${paging.page}">
-						${notice.wholeTitle }
-					</a> --%>
-					<a href="board_detail.do?no=${notice.no}&page=${paging.page}">
-						${notice.Title }
+				<td>${board.board_no }</td>
+				<td align="left">
+					<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+						${board.board_title }
 					</a>
 				</td>
-				<td>${notice.writer }</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${notice.writeDate }"/></td>
-				<td>${notice.hit }</td>
-				<td>${notice.like }</td>
+				<td>${board.m_id }</td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
+				<td>${board.board_hits }</td>
+				<td>${board.board_likes }</td>
 			</tr>	
 		</c:forEach>
 	</tbody>
 </table>
+<p>
+<!-- 글쓰기 -->
+<a href="/Star_Planner/board/boardWriterForm.do">글쓰기</a>
+
 <%--페이징 처리 --%>
 <p>
 <%--◀이전 페이지 그룹 처리 --%>
 <c:choose>
 	<c:when test="${requestScope.paging.previousPageGroup }">
-		<a href="${initParam.rootPath }/controller?command=noticeList&page=${requestScope.paging.beginPage - 1}">
+		<a href="/Star_Planner/board/boardList.do?id=twice&page=${requestScope.paging.beginPage - 1}">
 		◀
 		</a>
 	</c:when>
@@ -60,7 +72,7 @@
 		 [${page }]
 		</c:when>
 		<c:otherwise>
-			<a href="${initParam.rootPath }/controller?command=noticeList&page=${page }">
+			<a href="/Star_Planner/board/boardList.do?id=twice&page=${page }">
 				${page }
 			</a>
 		</c:otherwise>
@@ -70,7 +82,7 @@
 <%--다음 페이지 그룹 처리 ▶--%>
 <c:choose>
 	<c:when test="${requestScope.paging.nextPageGroup }">
-		<a href="${initParam.rootPath }/controller?command=noticeList&page=${requestScope.paging.endPage + 1}">
+		<a href="/Star_Planner/board/boardList.do?id=twice&page=${requestScope.paging.endPage + 1}">
 		▶
 		</a>
 	</c:when>

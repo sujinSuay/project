@@ -22,7 +22,7 @@
 	</tr>
 	<tr>
 		<td colspan="4">
-			XX님 선호가수 리스트:
+			XX님 선호 가수 리스트:
 			<c:forEach items="${requestScope.favoriteList }" var="favorite">
 				<a href="board_list.do">${favorite.Name }</a>
 			</c:forEach>
@@ -30,7 +30,7 @@
 	</tr>
 	<tr>
 		<td colspan="4">
-			검색된 가수: <a href="board_list.do?id='twice'">#twice 이동Test</a>
+			검색된 가수: <a href="board/boardList.do?id=twice&page=1">#twice 이동Test</a>
 			<p>
 		</td>
 	</tr>

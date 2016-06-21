@@ -1,13 +1,14 @@
 package com.common.vo;
 
+import java.io.Serializable;
 
 /** 카테고리 테이블  **/
-public class TypeList {
+public class TypeList implements Serializable{
 	
 	private String type_name; /** 타입 이름 **/
 	private String word_type; /** 타입 종류 **/
 	
-	private TypeList(){
+	public TypeList(){
 		
 	}
 	
