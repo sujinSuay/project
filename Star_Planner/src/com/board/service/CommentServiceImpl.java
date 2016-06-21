@@ -1,6 +1,7 @@
 package com.board.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class CommentServiceImpl {
 	
 		System.out.println("CommentServiceImpl deleteComment 실행");
 		dao.deleteComment(comment_id);
+	}
+	
+	public void modifyComment(HashMap<String, Object> map){
+		System.out.println("CommentServiceImpl modifyComment 실행");
+		dao.modifyComment(map);
 	}
 	
 	
