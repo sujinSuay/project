@@ -18,7 +18,7 @@
 	 <!-- DataSource -->
 	 <bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 	 	   p:driverClassName="oracle.jdbc.driver.OracleDriver"
-	 	   p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+	 	   p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
 	 	   p:username="scott"  
 	 	   p:password="tiger"
 	 	   p:maxTotal="100"/>
@@ -65,11 +65,6 @@
 	<mvc:view-controller path="board_register.do"
 		view-name="board/board_register.tiles" />
 	<mvc:view-controller path="comment.do" view-name="board/comment.tiles" />
-
-	<!-- member에 해당하는 부분 -->
-	<mvc:view-controller path="member_join.do"
-		view-name="member/member_join.tiles" />
-
 	
 	<!-- menu_bar 에 해당하는 부분 -->
 	<mvc:view-controller path="main.do" view-name="common/main.tiles" />
