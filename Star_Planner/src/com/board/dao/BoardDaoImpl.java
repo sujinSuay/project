@@ -1,6 +1,7 @@
 package com.board.dao;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -31,9 +32,12 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<Board> selectList(int page) {
+	public List<Board> selectList(int singer_id, int page) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+"selectList", page);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("singer_id", singer_id);
+		map.put("page", page);
+		return session.selectList(namespace+"selectList", map);
 	}
 
 	/**

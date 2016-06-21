@@ -1,10 +1,12 @@
 package com.board.controller;
 
 import java.util.Date;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.BoardService;
 import com.board.vo.Board;
@@ -15,35 +17,25 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	//NoticeWriterForm
-	@RequestMapping("/NoticeWriterForm")
-	public String NoticeWriterForm(){
-		System.out.println("noticeWriter");
-		service.writeBoard(new Board(0, "test", new Date(System.currentTimeMillis()), "testId", 0, "test content", 0, 5, "공연"));
-
-		return "/WEB-INF/board/board_detail.jsp";
-	}
-	
 	//noticeList
-	/*@RequestMapping("/noticeList")
-	@ResponseBody
-	public ModelAndView noticeList(int page){
+	@RequestMapping("/boardList")
+	public ModelAndView boardList(String singer, int page){
 		if(page==0){
 			System.out.println("page=0 자동세팅->1");
 			page = 1;
 		}
-		Map<String, Object> attributes = service.list(page);
-		return new ModelAndView("/WEB-INF/board/board_list.jsp", "result", attributes);
+		int singer_id = 5;
+		Map<String, Object> list = service.list(singer_id, page);
+//		return new ModelAndView("/WEB-INF/board/board_list.jsp", list);
+		return new ModelAndView("/board_list.do", list);
 		//return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", "공지사항 목록 조회 도중 오류가 발생 : "+e.getMessage());
 		
-	}*/
+	}
 	
 	//NoticeModify
 	/*@RequestMapping("/NoticeModify")
 	@ResponseBody
 	public String NoticeModify(){
-		
-		NoticeBoardService service = NoticeBoardService.getInstance();
 		
 		int no = 0; 
 		String prefix = request.getParameter("prefix");
@@ -70,7 +62,7 @@ public class BoardController {
 			
 //			사용자가 입력한 글 유지 하기 위한 처리.
 			
-			ArrayList<Code> prefixList = service.getWriteFormPrefix();
+			ArrayList<TypeList> prefixList = service.getWriteFormPrefix();
 			HashMap<String, Object> map = new HashMap();
 			map.put("codeList", prefixList);
 			map.put("errorList", errorList);
@@ -87,64 +79,41 @@ public class BoardController {
 			e.printStackTrace();
 			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", "등록 도중 오류가 발생 : "+e.getMessage());
 		}
+	}*/
+	
+	/*//boardModifyForm
+	@RequestMapping("/boardModifyForm")
+	public String boardModifyForm(int no){
+		Map<String, Object> map= service.getModifyBoard(no);
+		return null;
+	}*/
+	
+	//boardRemove
+	@RequestMapping("/boardRemove")
+	public ModelAndView boardRemove(String id, int no, int page){
+		service.removeByNo(no);
+		return boardList(id, page);
 	}
 	
-	//NoticeModiftForm
-	@RequestMapping("/NoticeModiftForm")
-	@ResponseBody
-	public String NoticeModiftForm(){
-		try{
-			int no = Integer.parseInt(request.getParameter("no"));
-			
-			NoticeBoardService service = NoticeBoardService.getInstance();
-			Map<String, Object> map= service.getModifyNotice(no);
-			return new AttributeAndView("/WEB-INF/view/notice_board/modify_form.jsp", false, map);
-		}catch(Exception e){
-			e.printStackTrace();
-			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", e.getMessage());
-		}
+	//boardView
+	@RequestMapping("/boardView")
+	public ModelAndView boardView(int no){
+		Board board = service.getBoard(no);
+		return new ModelAndView("/board_detail.do", "board", board);
 	}
 	
-	//NoticeRemove
-	@RequestMapping("/NoticeRemove")
-	@ResponseBody
-	public String NoticeRemove(){
-		try{
-			int no = Integer.parseInt(request.getParameter("no"));
-			
-			NoticeBoardService service = NoticeBoardService.getInstance();
-			service.removeByNo(no);
-			return new AttributeAndView(request.getContextPath()+"/controller?command=noticeList&page="+request.getParameter("page"), true);
-		}catch(Exception e){
-			e.printStackTrace();
-			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", e.getMessage());
-		}
+	//boardWriterForm
+	@RequestMapping("/boardWriterForm")
+	public ModelAndView boardWriterForm(){
+		//service.writeBoard(new Board(0, "test", new Date(System.currentTimeMillis()), "testId", 0, "test content", 0, 5, "공연"));
+		//카테고리 불러와서 넘겨주는 곳
+		return new ModelAndView("/board_register.do");
 	}
-	
-	//NoticView
-	@RequestMapping("/NoticView")
-	@ResponseBody
-	public String NoticView(){
-		try{
-			int no = Integer.parseInt(request.getParameter("no"));
-			
-			NoticeBoardService service = NoticeBoardService.getInstance();
-			Notice notice = service.getNotice(no);
-			return new AttributeAndView("/WEB-INF/view/notice_board/notice_view.jsp", false, "notice", notice);
-		}catch(Exception e){
-			e.printStackTrace();
-			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", e.getMessage());
-		}
-	}
-	
-	//NoticeWriter
-	@RequestMapping("/NoticeWriter")
-	@ResponseBody
-	public String NoticeWriter(){
-		String prefix = request.getParameter("prefix");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		ArrayList<String> errorList = new ArrayList<String>();
+		
+	//boardWriter
+	@RequestMapping("/boardWriter")
+	public ModelAndView boardWriter(String board_title, String board_content){
+		/*ArrayList<String> errorList = new ArrayList<String>();
 		if(title==null || title.trim().isEmpty()){
 			errorList.add("공지사항 제목을 넣으세요.");
 		}
@@ -153,18 +122,13 @@ public class BoardController {
 		}
 		if(errorList.size() != 0){
 			return new AttributeAndView("/controller?command=noticeWriteForm", false, "errorList", errorList);
-		}
+		}*/
 		
-		Notice notice = new Notice(prefix, title, content, new Date());
-		NoticeBoardService service = NoticeBoardService.getInstance();
-		try{
-			service.writeNotice(notice);
-			return new AttributeAndView(request.getContextPath()+"/controller?command=noticeView&no="+notice.getNo(), true);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return new AttributeAndView("/WEB-INF/view/error.jsp", false, "errorMessage", "등록 도중 오류가 발생 : "+e.getMessage());
-		}
+		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), "test user", 0, board_content, 0, 5, "JYP");
+		service.writeBoard(board);
+		System.out.println("등록 no : " + board.getBoard_no());
+		return boardView(board.getBoard_no());
 	}
-	*/
+	
 
 }

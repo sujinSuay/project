@@ -57,9 +57,9 @@ public class BoardServiceImpl implements BoardService{
 	 * @return
 	 * @throws SQLException
 	 */
-	public Map<String, Object> list(int page){
+	public Map<String, Object> list(int singer_id, int page){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", dao.selectList(page));
+		map.put("list", dao.selectList(singer_id, page));
 		map.put("paging", new PagingBean(dao.selectCountContents(), page));
 		return map;
 	}
@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService{
 	 * @return
 	 * @throws SQLException
 	 */
-	public Map<String, Object> getModifyNotice(int no){
+	public Map<String, Object> getModifyBoard(int no){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		Board board = dao.selectByNo(no);
 		board.setBoard_title(TextUtil.htmlToText(board.getBoard_title()));
@@ -90,7 +90,7 @@ public class BoardServiceImpl implements BoardService{
 		return map;
 	}
 	
-	public void modifyNotice(Board board){
+	public void modifyBoard(Board board){
 		//제목과 내용을 HTML에 맞게 변환
 		board.setBoard_title(TextUtil.textToHtml(board.getBoard_title()));
 		board.setBoard_content(TextUtil.textToHtml(board.getBoard_content()));
