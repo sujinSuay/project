@@ -18,10 +18,14 @@
 		$("#form").on("submit",function(){
 			var flag=true;
 			if (!$("#m_id").val()) {
-				$("#id_er").text("이름을 입력해주세요");
+				$("#id_er").text("아이디를 입력해주세요");
 				$("#m_id").focus();
 				flag=false;
-			}else{$("#id_er").text("");}
+			}else if($("#m_id").val().length<6){
+				$("#id_er").text("아이디를 6글자이상 입력해주세요");
+				$("#m_id").focus();
+				flag=false;
+			}else {$("#id_er").text("");}
 			if (!$("#name").val()){
 				$("#name_er").text("이름을 입력해주세요");
 				$("#name").focus();
