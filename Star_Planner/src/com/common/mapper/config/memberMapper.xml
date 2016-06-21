@@ -20,8 +20,6 @@
 		<result column="address" property="address"/>
 		<result column="phone" property="phone"/>
 		<result column="favorite" property="favorite"/>
-		
-		
 	</resultMap>
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite})

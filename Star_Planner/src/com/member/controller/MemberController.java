@@ -33,7 +33,7 @@ public class MemberController {
 		System.out.println(m_id);
 		Member mem = memberService.getMemberById(m_id);
 		System.out.println(mem);
-		if(mem==null) return "true"; else return "false"; 
+		if(mem==null) return "false"; else return "true"; 
 	}
 	@RequestMapping("/login")
 	@ResponseBody
