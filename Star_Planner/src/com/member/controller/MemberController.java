@@ -2,6 +2,8 @@ package com.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,7 +27,7 @@ public class MemberController {
 	public ModelAndView joinMember(@ModelAttribute Member member) throws IOException{
 		System.out.println(member);
 		memberService.insertMember(member);
-		return new ModelAndView("/main.do");
+		return new ModelAndView("redirect:/main.do");
 	}
 	@RequestMapping("/checkId")
 	@ResponseBody
@@ -37,9 +39,19 @@ public class MemberController {
 	}
 	@RequestMapping("/login")
 	@ResponseBody
-	public ModelAndView login(String m_id, String password) throws IOException{
+	public ModelAndView login(String m_id, String password, HttpSession session) throws IOException{
 		Member mem = memberService.loginMember(m_id, password);
-		if(mem==null) return new ModelAndView("/login.do","m_id",m_id);
-		return new ModelAndView("/main.do","longinId",m_id);
+		System.out.println(mem);
+		if(mem==null){
+			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
+		}
+		session.setAttribute("loginId", mem.getM_id());
+		session.setAttribute("groupId", mem.getGroup_id());
+		return new ModelAndView("/main.do");
+	}
+	@RequestMapping("/logout")
+	public ModelAndView login(HttpSession session){
+		session.invalidate();
+		return new ModelAndView("/main.do");
 	}
 }

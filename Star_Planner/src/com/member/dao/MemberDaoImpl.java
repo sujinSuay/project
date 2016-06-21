@@ -28,6 +28,7 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("member.selectMemberById", m_id);
 	}
 	public Member selectMemberByIdAndPassword(String m_id, String password){
+
 		HashMap<String, String> map = new HashMap<String,String>();
 		map.put("m_id", m_id);
 		map.put("password", password);
