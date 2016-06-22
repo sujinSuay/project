@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,6 +57,30 @@
 	<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
 	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항삭제</a>
 </section>
+
+
+<p>
+
+
+<!--  댓글 부분 -->
+
+
+<jsp:include page="/WEB-INF/board/comment.jsp"  flush="true">
+                    <jsp:param name="m_id" value="${requestScope.board.m_id}"/>
+                    <jsp:param name="board_no" value="${requestScope.board.board_no}"/>
+                     <jsp:param name="list_comment" value="${requestScope.list_comment}"/>
+</jsp:include>
+
+
+
+
+<!--  게시글 list -->
+
+<%--   <jsp:include page="/WEB-INF/board/board_list.jsp"  flush="true"> --%>
+    <jsp:include page="/WEB-INF/board/board_list.jsp"  flush="true">
+                    <jsp:param name="list" value="${requestScope.list}"/>
+             	   <jsp:param name="paging" value="${requestScope.paging}"/>
+</jsp:include>
 
 </body>
 </html>

@@ -5,7 +5,6 @@
 		
 		
 <tiles-definitions>
-
 		
 <!--wild card 설정으로 xx/xx.jsp 형식을 여러개를 처리 하도록 한다. -->
 <definition name="*/*.tiles" template="/WEB-INF/common/template.jsp">

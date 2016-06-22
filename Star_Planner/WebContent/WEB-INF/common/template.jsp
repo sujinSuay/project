@@ -15,7 +15,6 @@ header{
 section{
 	padding: 15px;
 	min-height:400px;
-	float:left;
 }
 
 </style>
