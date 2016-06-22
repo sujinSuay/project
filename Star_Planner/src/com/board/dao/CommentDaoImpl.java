@@ -19,9 +19,20 @@ public class CommentDaoImpl implements CommentDao {
 	
 	
 	@Override
+	public int selectCommentId() {
+		
+		int comment_id = session.selectOne(namespace+"selectCommentId");
+		System.out.println("$$$$$$$$$$$$$$$$$$$   "+ comment_id);
+		return comment_id;
+	}
+	
+	
+	@Override
 	public int insertComment(Comment comment) {
 
-		return session.insert(namespace+"insertComment", comment);
+		int count =  session.insert(namespace+"insertComment", comment);
+		System.out.println("####################################  " + count);
+		return count;
 	}
 
 	@Override
@@ -48,5 +59,7 @@ public class CommentDaoImpl implements CommentDao {
 		System.out.println("CommentDaoImpl modifyComment실행");
 		return session.update(namespace + "modifyComment", map );
 	}
+
+	
 
 }

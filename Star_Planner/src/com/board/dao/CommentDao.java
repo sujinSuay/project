@@ -10,6 +10,7 @@ import com.board.vo.Comment;
 
 public interface CommentDao {
 
+	int selectCommentId();
 	int insertComment(Comment comment);
 	int updateComment(Comment comment);
 	int deleteComment(int comment_id);

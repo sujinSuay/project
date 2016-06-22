@@ -114,7 +114,7 @@ public class BoardController {
 	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session){
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), (String)session.getAttribute("loginId"), 0, board_content, 0, 5, "JYP");
 		service.writeBoard(board);
-		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+board.getBoard_no());
+		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+board.getBoard_no()+"&page=1");
 	}
 	
 	//searchSinger

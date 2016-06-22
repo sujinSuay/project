@@ -6,7 +6,6 @@ VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'suj
 
 
 
-
 CREATE TABLE member (
 	m_id VARCHAR2(50) PRIMARY KEY, /* id */
 	social_no VARCHAR(13) UNIQUE NOT NULL, /* 주민번호 */

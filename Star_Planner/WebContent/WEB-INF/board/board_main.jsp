@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>board_main</title>
-<script type="text/javascript" src="/jQuery_class/scripts/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	

@@ -31,6 +31,8 @@ public class CommentServiceImpl {
 	public void insertComment(Comment comment){
 		
 		System.out.println("CommentServiceImpl InsertCommnet 실행");
+		comment.setComment_id(dao.selectCommentId()); //현재 입력될 comment_id 값을 가져와서 생성자 comment에 재정의
+		
 		dao.insertComment(comment);
 	
 	}
