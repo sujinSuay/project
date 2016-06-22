@@ -13,7 +13,8 @@ import com.board.vo.Board;
 @Repository
 public class BoardDaoImpl implements BoardDao {
 	
-	private String namespace="board.";
+	private String namespace_board="board.";
+	private String namespace_singer="singer.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -28,7 +29,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Board selectByNo(int no) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+"selectByNo", no);
+		return session.selectOne(namespace_board+"selectByNo", no);
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class BoardDaoImpl implements BoardDao {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("singer_id", singer_id);
 		map.put("page", page);
-		return session.selectList(namespace+"selectList", map);
+		return session.selectList(namespace_board+"selectList", map);
 	}
 
 	/**
@@ -48,7 +49,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int selectCountContents() {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+"selectCountContents");
+		return session.selectOne(namespace_board+"selectCountContents");
 	}
 
 	/**
@@ -61,7 +62,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int insertBoard(Board board) {
 		// TODO Auto-generated method stub
-		return session.insert(namespace+"insert", board);
+		return session.insert(namespace_board+"insert", board);
 	}
 
 	/**
@@ -74,7 +75,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int updateViewCount(int no) {
 		// TODO Auto-generated method stub
-		return session.update(namespace+"updateViewCount", no);
+		return session.update(namespace_board+"updateViewCount", no);
 	}
 
 	/**
@@ -87,19 +88,25 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int updateBoard(Board board) {
 		// TODO Auto-generated method stub
-		return session.update(namespace+"update", board);
+		return session.update(namespace_board+"update", board);
 	}
 
 	@Override
 	public int deleteByNo(int no) {
 		// TODO Auto-generated method stub
-		return session.delete(namespace+"deleteByNo", no);
+		return session.delete(namespace_board+"deleteByNo", no);
 	}
 
 	@Override
 	public List<String> searchSinger(String keyword) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace+"searchSinger", keyword);
+		return session.selectList(namespace_singer+"searchSinger", keyword);
+	}
+
+	@Override
+	public int StringToIntSingerId(String singer_name) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace_singer+"StringToIntSingerId", singer_name);
 	}
 	
 	

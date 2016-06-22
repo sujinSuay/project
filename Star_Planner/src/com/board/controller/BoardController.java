@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +21,25 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	@RequestMapping("/boardMain")
+	public ModelAndView boardMain(HttpSession session){
+		String id = (String)session.getAttribute("loginId");
+		if(id!=null){
+			List<String> list = service.getFavorite(id);
+			return new ModelAndView("/board_main.do", "list" , list);
+		}else{
+			return new ModelAndView("/board_main.do");
+		}
+		
+	}
+	
 	//noticeList
 	@RequestMapping("/boardList")
-	public ModelAndView boardList(String singer, int page){
+	public ModelAndView boardList(String id, int page){
 		if(page==0){
 			page = 1;
 		}
-		int singer_id = 5;
+		int singer_id = service.StringToIntSingerId(id);
 		Map<String, Object> list = service.list(singer_id, page);
 		return new ModelAndView("/board_list.do", list);
 	}
@@ -63,13 +77,13 @@ public class BoardController {
 	//boardWriterForm
 	@RequestMapping("/boardWriterForm")
 	public ModelAndView boardWriterForm(){
-		return new ModelAndView("redirect:/board_register.do");
+		return new ModelAndView("/board_register.do");
 	}
 		
 	//boardWriter
 	@RequestMapping("/boardWriter")
-	public ModelAndView boardWriter(String id, String board_title, String board_content){
-		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), "test user", 0, board_content, 0, 5, "JYP");
+	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session){
+		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), (String)session.getAttribute("loginId"), 0, board_content, 0, 5, "JYP");
 		service.writeBoard(board);
 		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+board.getBoard_no());
 	}
@@ -78,9 +92,7 @@ public class BoardController {
 	@RequestMapping("/searchSinger")
 	@ResponseBody
 	public List<String> searchSinger(String keyword){
-		System.out.println(keyword);
 		List<String> list= service.searchSinger(keyword);
-		System.out.println(list);
 		return list;
 	}
 	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="singer">
+	
+	<select id="searchSinger" parameterType="string" resultType="string">
+		SELECT singer_name 
+		FROM singer 
+		WHERE singer_tag LIKE '%'||#{keyword}||'%'
+	</select>
+	<select id="StringToIntSingerId" parameterType="string" resultType="_int">
+		SELECT singer_id 
+		FROM singer 
+		WHERE singer_name = #{singer_name}
+	</select>
+
+</mapper> 

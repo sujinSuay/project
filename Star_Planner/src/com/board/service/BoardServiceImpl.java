@@ -1,6 +1,8 @@
 package com.board.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,7 @@ import com.common.dao.TypeListDao;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
 import com.common.vo.TypeList;
+import com.member.dao.MemberDao;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -22,65 +25,48 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	private TypeListDao tdao;
-
+	
+	@Autowired
+	private MemberDao mdao;
+	
+	public List<String> getFavorite(String m_id){
+		String fav = mdao.selectFavorite(m_id);
+		List<String> list = new ArrayList<String>(Arrays.asList(fav.split(",")));
+		return list;
+	}
+	
 	public List<TypeList> getWriteFormPrefix(String typeList){
 		return tdao.selectByCodeCateory(typeList);
 		
 	}
-	/**
-	 * 공지사항 등록 처리.
-	 * @param notice
-	 * @throws SQLException
-	 */
+
 	public void writeBoard(Board board){
 		//제목과 내용을 HTML에 맞게 변환
 		board.setBoard_title(TextUtil.textToHtml(board.getBoard_title()));
 		board.setBoard_content(TextUtil.textToHtml(board.getBoard_content()));
 		dao.insertBoard(board);
 	}
-	/**
-	 * 글번호로 공지사항을 조회하는 메소드.
-	 * 글 조회 + 조회수 1증가.
-	 * @param no
-	 * @return
-	 * @throws SQLException 
-	 */
-	public Board getBoard(int no){
-		Board board = dao.selectByNo(no);
-		dao.updateViewCount(no);
+
+	public Board getBoard(int board_no){
+		Board board = dao.selectByNo(board_no);
+		dao.updateViewCount(board_no);
 		return board;
 	}
-	/**
-	 * 공지사항 목록 조회 처리.
-	 * @param page 조회할 페이지 번호.
-	 * @return
-	 * @throws SQLException
-	 */
+
 	public Map<String, Object> list(int singer_id, int page){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", dao.selectList(singer_id, page));
 		map.put("paging", new PagingBean(dao.selectCountContents(), page));
 		return map;
 	}
-	/**
-	 * 공지 사항 글번호로 삭제 처리.
-	 * @param no
-	 * @throws SQLException
-	 */
-	public void removeByNo(int no){
-		dao.deleteByNo(no);
+
+	public void removeByNo(int board_no){
+		dao.deleteByNo(board_no);
 	}
-	/**
-	 * 글 수정폼 조회. 
-	 * - title과 content를 textarea에 맞게 변환한다.
-	 * 말머리 목록도 조회해서 리턴.
-	 * @param no
-	 * @return
-	 * @throws SQLException
-	 */
-	public Map<String, Object> getModifyBoard(int no){
+
+	public Map<String, Object> getModifyBoard(int board_no){
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		Board board = dao.selectByNo(no);
+		Board board = dao.selectByNo(board_no);
 		board.setBoard_title(TextUtil.htmlToText(board.getBoard_title()));
 		board.setBoard_content(TextUtil.htmlToText(board.getBoard_content()));
 		map.put("board", board);
@@ -97,7 +83,10 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	public List<String> searchSinger(String keyword){
-		System.out.println(keyword+" dao");
 		return dao.searchSinger(keyword);
+	}
+	
+	public int StringToIntSingerId(String singer_name){
+		return dao.StringToIntSingerId(singer_name);
 	}
 }
