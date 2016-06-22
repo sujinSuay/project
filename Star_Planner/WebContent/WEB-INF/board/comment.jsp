@@ -1,18 +1,19 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-<!DOCTYPE html>
-<html>
 
+<html>
+<meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 
 		$(document).ready(function(){
 			
 			var count = 0;
-
+			
+			
 			$.ajax({
 					"url" :  "/Star_Planner/comment/selectComment.do", 
 					"type" : "post",
-					"data" : {"board_no": 0},
+					"data" : {"board_no":  "${requestScope.board.board_no}" },
 					"dataType" : "json",
 					"success" : function(list){
 					
@@ -34,11 +35,15 @@
 			});  //end of ajax for select
 			
 			$('#register').on("click",function(){
+			
+				alert($('#content_input') .val()); 
 				$.ajax({
 					
 					type: "post",
 					url : "/Star_Planner/comment/insertComment.do",
-					data : {"comment_content" : $('#content') .val() },
+					data : {"comment_content" : $('#content_input') .val(),
+									"m_id" : "${requestScope.board.m_id}",
+									"board_no" : "${requestScope.board.board_no} "},
 					dataType : "json",
 					"success" : function(comment){
 			
@@ -112,7 +117,7 @@
 				var comment_id = txt2[0];
 				
 				var context_area = $(parent).parent().parent().find('.content');
-				var add_text = "<textarea class='modify'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
+				var add_text = "<textarea class='modify' rows='30' cols='50'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
 				context_area.html(add_text);
 		
 			}); //end of delete
@@ -162,11 +167,9 @@
 
 </script>
 
-
-<meta charset="UTF-8">
 <body>
 
-
+<br>
 <!--댓글 상단 -->
 						<div class="comment" id="comment">
 							<!--  댓글 제목 -->
@@ -197,12 +200,12 @@
 	<!--  댓글 등록 form -->
 			
 			<tbody class="reply_line" id="reply_line">
-	
-			<tr><td><span>아이디</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
-			<td><textarea id="content"></textarea></td>
+		
+			<tr><td><span>${requestScope.board.m_id}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
+			<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
 			<td></td>
 			<td><button id="register">댓글등록</button> </td></tr>
-				
+
 			</tbody>
 </table>
 </div>

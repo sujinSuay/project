@@ -20,6 +20,7 @@ public class BoardController {
 	//noticeList
 	@RequestMapping("/boardList")
 	public ModelAndView boardList(String singer, int page){
+		System.out.println("ggg");
 		if(page==0){
 			System.out.println("page=0 자동세팅->1");
 			page = 1;
@@ -99,7 +100,9 @@ public class BoardController {
 	@RequestMapping("/boardView")
 	public ModelAndView boardView(int no){
 		Board board = service.getBoard(no);
+		
 		return new ModelAndView("/board_detail.do", "board", board);
+		
 	}
 	
 	//boardWriterForm

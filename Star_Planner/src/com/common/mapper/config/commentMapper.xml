@@ -14,7 +14,7 @@
 
 <insert id="insertComment" parameterType="com.board.vo.Comment">
 INSERT INTO comments
-VALUES (#{board_no}, #{comment_id}, #{comment_content}, #{m_id}, #{comment_date})
+VALUES (#{board_no}, comment_id_seq.nextval , #{comment_content}, #{m_id}, #{comment_date})
 </insert>
 
 <select id="selectComment" resultMap="comment-result" parameterType="_int">

@@ -56,5 +56,25 @@
 	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항삭제</a>
 </section>
 
+
+<p>
+
+
+<!--  댓글 부분 -->
+
+<jsp:include page="/WEB-INF/board/comment.jsp"  flush="true">
+                    <jsp:param name="m_id" value="${requestScope.board.m_id}"/>
+                    <jsp:param name="board_no" value="${requestScope.board.board_no}"/>
+</jsp:include>
+
+
+<!--  게시글 list -->
+
+<%--   <jsp:include page="/WEB-INF/board/board_list.jsp"  flush="true"> --%>
+    <jsp:include page="/board/boardList.do"  flush="true">
+                    <jsp:param name="list" value="${requestScope.list }"/>
+</jsp:include>
+
+
 </body>
 </html>
