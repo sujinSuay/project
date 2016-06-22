@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member_modify</title>
+<title>회원정보</title>
 </head>
 <body>
 

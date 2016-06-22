@@ -4,6 +4,7 @@ package com.member.vo;
 
 public class Member {
 	
+	/*@NotEmpty(message="아이디를 입력해주세요")*/
 	private String m_id;  /**회원 아이디 **/
 	private String social_no; /** 회원 주민번호  **/
 	private String password; /**회원 비밀번호 **/
