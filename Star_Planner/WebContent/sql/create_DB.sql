@@ -1,6 +1,7 @@
 
 /* member */
 
+drop  sequence comment_id_seq
 drop sequence board_no_seq;
 drop sequence schedule_id_seq;
 drop table link_list;
@@ -84,6 +85,7 @@ CREATE TABLE comments (
 	comment_date DATE NOT NULL /* 일시 */
 );
 
+create sequence comment_id_seq nocache;
 
 /* search_data */
 CREATE TABLE search_data (
