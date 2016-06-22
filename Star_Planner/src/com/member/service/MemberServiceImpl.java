@@ -21,4 +21,7 @@ public class MemberServiceImpl implements MemberService{
 	public int insertMember(Member member) throws IOException{
 		return memberDao.insertMember(member);
 	}
+	public Member loginMember(String m_id, String password) throws IOException{
+		return memberDao.selectMemberByIdAndPassword(m_id, password);
+	}
 }

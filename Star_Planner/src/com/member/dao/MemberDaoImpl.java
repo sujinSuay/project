@@ -1,6 +1,8 @@
 package com.member.dao;
 
 
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,5 +26,12 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	public Member selectMemberById(String m_id){
 		return session.selectOne("member.selectMemberById", m_id);
+	}
+	public Member selectMemberByIdAndPassword(String m_id, String password){
+
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("m_id", m_id);
+		map.put("password", password);
+		return session.selectOne("member.selectMemberByIdAndPassword",map);
 	}
 }

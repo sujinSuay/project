@@ -18,10 +18,14 @@
 		$("#form").on("submit",function(){
 			var flag=true;
 			if (!$("#m_id").val()) {
-				$("#id_er").text("이름을 입력해주세요");
+				$("#id_er").text("아이디를 입력해주세요");
 				$("#m_id").focus();
 				flag=false;
-			}else{$("#id_er").text("");}
+			}else if($("#m_id").val().length<6){
+				$("#id_er").text("아이디를 6글자이상 입력해주세요");
+				$("#m_id").focus();
+				flag=false;
+			}else {$("#id_er").text("");}
 			if (!$("#name").val()){
 				$("#name_er").text("이름을 입력해주세요");
 				$("#name").focus();
@@ -40,16 +44,13 @@
 			if(!$(":input:radio[name=gender]:checked").val()){
 				$("#gender_er").text("성별을 선택해 주세요");
 				flag=false;
-			}else{
-				$("#gender_er").text("");
-			}
+			}else{$("#gender_er").text("");}
 			if(!$("#address2").val()){
 				$("#address_er").text("주소를 입력해 주세요");
 				$("#address").focus();
 				flag=false;
 			}else{$("#address_er").text("");}
 			if(!$("#social_no").val()){
-				alert($("#social_no").val());
 				$("#social_no_er").text("주민번호를 입력해주세요");
 				$("#social_no").focus();
 				flag=false;
@@ -64,8 +65,8 @@
 				$("#email").focus();
 				flag=false;
 			}else{$("#email").text("");}
-			alert(!flag + " / " + window.ckflag);
-			if(!flag || !checkId()){
+			/* alert(!flag + " / " + !window.ckflag); */
+			if(!flag || !window.ckflag){
 				return false;
 			}
 		});
@@ -84,26 +85,25 @@
 			"data":"m_id="+$("#m_id").val(),
 			"dataType":"text", 
 			"success":function(txt){
-				alert(txt);
-				if(txt=='false'){
+				alert("아이디체크완료");
+				if(txt=='true'){
 					$("#id_er").text("중복된 아이디입니다.");
 					$("#m_id").focus();
-					return false;
+					window.ckflag=false;
 				}else{
 					$("#id_er").text("사용가능한 아이디입니다.");
-					return true;
+					window.ckflag=true;
 				}
-				
 			},
 			"error":function(xhr,status,errorMsg){
 				alert("오류발생" + status+ ", " + errorMsg);
 			},
 			"beforeSend":function(){
-				if($("#m_id").val().length<5){
+				/* if($("#m_id").val().length<5){
 					$("#id_er").text("6글자 이상 입력해 주세요");
 					$("#m_id").focus();
 					return false;
-				}
+				} */
 			}
 		});
 	}

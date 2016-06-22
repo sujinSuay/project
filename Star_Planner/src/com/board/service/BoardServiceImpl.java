@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.board.dao.BoardDao;
 import com.board.vo.Board;
 import com.common.dao.TypeListDao;
-import com.common.util.Constants;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
 import com.common.vo.TypeList;
@@ -85,8 +84,8 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoard_title(TextUtil.htmlToText(board.getBoard_title()));
 		board.setBoard_content(TextUtil.htmlToText(board.getBoard_content()));
 		map.put("board", board);
-		List<TypeList> typeList = tdao.selectByCodeCateory(Constants.NOTICE_BOARD_PREFIX);
-		map.put("typeList", typeList);
+		/*List<TypeList> typeList = tdao.selectByCodeCateory(Constants.NOTICE_BOARD_PREFIX);
+		map.put("typeList", typeList);*/
 		return map;
 	}
 	
@@ -95,5 +94,10 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoard_title(TextUtil.textToHtml(board.getBoard_title()));
 		board.setBoard_content(TextUtil.textToHtml(board.getBoard_content()));
 		dao.updateBoard(board);
+	}
+	
+	public List<String> searchSinger(String keyword){
+		System.out.println(keyword+" dao");
+		return dao.searchSinger(keyword);
 	}
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>board_register</title>
+<title>board_modify</title>
 <style type="text/css">
 select{
 	width: 70px;
@@ -20,8 +20,10 @@ select{
 		</c:forEach>
 	</ul>
 </c:if>
-<form action="/Star_Planner/board/boardWriter.do" method="post">
+
+<form action="/Star_Planner/board/boardModify.do" method="post">
 <input type="hidden" name="id" value="${param.id }">
+<input type="hidden" name="no" value="${param.no }">
 <table>
 	<tr>
 		<td>
@@ -30,12 +32,12 @@ select{
 					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
 				</c:forEach>
 			</select> --%>
-			<input type="text" name="board_title" size="70" placeholder="제목" value="${param.board_title }">
+			<input type="text" name="board_title" size="70" placeholder="제목" value="${requestScope.board.board_title }">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<textarea rows="20" cols="100" name="board_content">${param.board_content }</textarea>
+			<textarea rows="20" cols="100" name="board_content">${requestScope.board.board_content }</textarea>
 		</td>
 	</tr>
 	<tr>
