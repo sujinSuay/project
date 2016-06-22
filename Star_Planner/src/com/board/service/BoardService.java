@@ -1,5 +1,6 @@
 package com.board.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.board.vo.Board;
@@ -11,4 +12,5 @@ public interface BoardService {
 	public void removeByNo(int no);
 	public Map<String, Object> getModifyBoard(int no);
 	public void modifyBoard(Board board);
+	public List<String> searchSinger(String keyword);
 }

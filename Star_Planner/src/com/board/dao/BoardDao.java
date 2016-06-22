@@ -12,4 +12,5 @@ public interface BoardDao {
 	public int updateViewCount(int no);
 	public int updateBoard(Board board);
 	public int deleteByNo(int no);
+	public List<String> searchSinger(String keyword);
 }

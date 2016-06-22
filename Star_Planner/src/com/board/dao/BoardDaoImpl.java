@@ -95,6 +95,14 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.delete(namespace+"deleteByNo", no);
 	}
+
+	@Override
+	public List<String> searchSinger(String keyword) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+"searchSinger", keyword);
+	}
+	
+	
 	
 
 }

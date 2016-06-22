@@ -52,7 +52,7 @@
 		<div><dl><dt id="title">글쓴이</dt><dd id="info">${requestScope.board.m_id }</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">조회수</dt><dd id="info">${ requestScope.board.board_hits}</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">좋아요</dt><dd id="info">${ requestScope.board.board_likes}</dd></dl></div>
 	</header>
 	<article id="content">${requestScope.board.board_content }</article>
-	<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
+	<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
 	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항삭제</a>
 </section>
 
