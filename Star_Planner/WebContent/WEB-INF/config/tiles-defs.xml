@@ -5,16 +5,12 @@
 		
 		
 <tiles-definitions>
-
 		
 <!--wild card 설정으로 xx/xx.jsp 형식을 여러개를 처리 하도록 한다. -->
 <definition name="*/*.tiles" template="/WEB-INF/common/template.jsp">
 	<put-attribute name="menu" value="/WEB-INF/common/menu.jsp"></put-attribute>
 	<put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp"/> <!-- 첫번째 *로 받은게 1에들어가고 2째 *로 받은게 2로 들어간다 -->
 </definition>	
-
-
-
 
 
 </tiles-definitions>

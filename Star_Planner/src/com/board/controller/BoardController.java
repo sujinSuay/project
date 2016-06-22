@@ -1,6 +1,7 @@
 package com.board.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.BoardService;
+import com.board.service.CommentServiceImpl;
 import com.board.vo.Board;
+import com.board.vo.Comment;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private CommentServiceImpl service_comment;
 	
 	//noticeList
 	@RequestMapping("/boardList")
@@ -56,11 +62,33 @@ public class BoardController {
 	
 	//boardView
 	@RequestMapping("/boardView")
-	public ModelAndView boardView(int no){
+	public ModelAndView boardView(int no, int page, String id){
+		
+		System.out.println("4444444");
 		Board board = service.getBoard(no);
+		System.out.println("페이지 : " + page);
 		
-		return new ModelAndView("/board_detail.do", "board", board);
+		List<Comment> list_comment = service_comment.selectComment(no);
 		
+		
+		//가수이름에 따른 가수 번호를 구하는 dao를 만들어서 적용하도록 추후 변경
+		int singer_id = 5; 
+		if(page==0){
+			page = 1;
+		}
+		
+		Map<String, Object> list_board = service.list(singer_id, page);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("board", board);
+		map.put("list_comment", list_comment);
+
+		map.put("list", list_board.get("list"));
+		map.put("paging", list_board.get("paging"));
+		
+		System.out.println("##"+map.toString());
+		
+		return new ModelAndView("/board_detail.do", map);
 	}
 	
 	//boardWriterForm
