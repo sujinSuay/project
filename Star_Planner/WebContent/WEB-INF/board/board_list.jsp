@@ -52,14 +52,17 @@ th, td {
 </table>
 <p>
 <!-- 글쓰기 -->
-<a href="/Star_Planner/board/boardWriterForm.do">글쓰기</a>
+<c:if test="${sessionScope.loginId != null }">
+	<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }">글쓰기</a>
+</c:if>
+
 
 <%--페이징 처리 --%>
 <p>
 <%--◀이전 페이지 그룹 처리 --%>
 <c:choose>
 	<c:when test="${requestScope.paging.previousPageGroup }">
-		<a href="/Star_Planner/board/boardList.do?id=twice&page=${requestScope.paging.beginPage - 1}">
+		<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">
 		◀
 		</a>
 	</c:when>
@@ -72,7 +75,7 @@ th, td {
 		 [${page }]
 		</c:when>
 		<c:otherwise>
-			<a href="/Star_Planner/board/boardList.do?id=twice&page=${page }">
+			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${page }">
 				${page }
 			</a>
 		</c:otherwise>
@@ -82,7 +85,7 @@ th, td {
 <%--다음 페이지 그룹 처리 ▶--%>
 <c:choose>
 	<c:when test="${requestScope.paging.nextPageGroup }">
-		<a href="/Star_Planner/board/boardList.do?id=twice&page=${requestScope.paging.endPage + 1}">
+		<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.endPage + 1}">
 		▶
 		</a>
 	</c:when>

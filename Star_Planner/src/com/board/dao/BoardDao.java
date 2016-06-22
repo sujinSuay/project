@@ -13,4 +13,5 @@ public interface BoardDao {
 	public int updateBoard(Board board);
 	public int deleteByNo(int no);
 	public List<String> searchSinger(String keyword);
+	public int StringToIntSingerId(String singer_name);
 }

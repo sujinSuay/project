@@ -2,12 +2,16 @@ package com.board.vo;
 
 import java.util.Date;
 
+import com.common.util.JsonDateConverter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class Comment {
 	
 	private int board_no;  /** 게시글 고유  번호 **/
 	private int comment_id; /** 댓글의 고유 아이디  **/
 	private String comment_content;  /** 댓글의 내용  **/
 	private String m_id; /** 댓글을 게시한  회원의 아이디  **/
+	@JsonSerialize(using=JsonDateConverter.class)
 	private Date comment_date; /** 댓글을 게시한 날짜  **/
 	
 	

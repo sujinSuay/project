@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <a href="/Star_Planner/main.do">main</a>  &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="/Star_Planner/schedule_main.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
-<a href="/Star_Planner/board_main.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="/Star_Planner/board/boardMain.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
 <c:choose>
 	<c:when test="${sessionScope.loginId == null }">
 		<a href="/Star_Planner/member_login.do">login</a> &nbsp; &nbsp; &nbsp; &nbsp;

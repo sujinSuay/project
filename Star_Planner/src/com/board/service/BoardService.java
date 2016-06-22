@@ -13,4 +13,6 @@ public interface BoardService {
 	public Map<String, Object> getModifyBoard(int no);
 	public void modifyBoard(Board board);
 	public List<String> searchSinger(String keyword);
+	public int StringToIntSingerId(String singer_id);
+	public List<String> getFavorite(String m_id);
 }

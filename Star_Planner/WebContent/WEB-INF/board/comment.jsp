@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
 <meta charset="UTF-8">
@@ -24,9 +25,9 @@
 					"success" : function(comment){
 			
 						//추가된 내용을 table에 추가 -> insertComment의 반환형은 comment
-										$('#reply_line').append(
-												"<tr><td id='user_layer' style='cursor:pointer;''><span>" +comment.comment_id +',' +comment.m_id + '</span></td> <td class="content"><span>' 
-												+comment.comment_content +'</span></td><td>'+comment.comment_date+'</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>');
+						$('#reply_line').append(
+								"<tr><td id='user_layer' style='cursor:pointer;''><span>" +comment.m_id + '</span></td> <td class="content"><span>' 
+								+comment.comment_content +'</span></td><td>'+comment.comment_date+'</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>');
 						
 						//textarea를 clear
 						$('#content_input').val("");
@@ -146,15 +147,17 @@
 
 <br>
 <!--댓글 상단 -->
-						<div class="comment" id="comment">
-							<!--  댓글 제목 -->
-							<div class="comment_title"> 	
-								<img src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" /><span id="comment_count">${requestScope.comment_count }</span>
-							</div>
-						</div>
+	<div class="comment" id="comment">
+		<!--  댓글 제목 -->
+		<div class="comment_title">
+			<img
+				src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" /><span
+				id="comment_count">${requestScope.comment_count }</span>
+		</div>
+	</div>
 
 
-<!-- 댓글 목록 구간 -->
+	<!-- 댓글 목록 구간 -->
             <div class="comment_list" id="comment_list" >
 
 <!--  댓글 목록 테이블 -->
@@ -174,17 +177,23 @@
 			<tbody class="reply_line" id="reply_line">
 			
 			<c:forEach var="comment"  items="${requestScope.list_comment}" varStatus="status">
-				<tr><td style='cursor:pointer;''><span>${comment.comment_id}, ${comment.m_id}</span></td> <td class="content"><span>
-				${comment.comment_content }</span></td><td>${comment.comment_date }</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>
+				<tr>
+					<td style='cursor:pointer;' align="center"><span>${comment.m_id}</span></td>
+					<td class="content"><span>${comment.comment_content }</span></td>
+					<td><fmt:formatDate value="${comment.comment_date }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td>
+				</tr>
 			</c:forEach>	
 
 			</tbody>
 				<!--  댓글 등록 form -->
-		
-			<tr><td><span>${requestScope.board.m_id}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
-			<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
-			<td></td>
-			<td><button id="register">댓글등록</button> </td></tr>
+			<c:if test="${sessionScope.loginId != null }">
+				<tr><td><span>${requestScope.board.m_id}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
+				<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
+				<td></td>
+				<td><button id="register">댓글등록</button></td></tr>
+			</c:if>
+			
 </table>
 </div>
 

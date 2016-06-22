@@ -10,6 +10,7 @@
 <typeAliases>
 		<package name="com.board.vo"/>
 		<package name="com.member.vo"/>
+		<package name="com.common.vo"/>
 </typeAliases>
 
 
@@ -18,7 +19,7 @@
 		<mapper resource="com/common/mapper/config/memberMapper.xml" />
 		<mapper resource="com/common/mapper/config/scheduleMapper.xml" />
 		<mapper resource="com/common/mapper/config/commentMapper.xml" />
-		
+		<mapper resource="com/common/mapper/config/singerMapper.xml" />
 	</mappers>
 
 
