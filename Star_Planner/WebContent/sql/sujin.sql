@@ -95,6 +95,8 @@ CREATE TABLE comments (
 	comment_date DATE NOT NULL /* 일시 */
 );
 
+create sequence comment_id_seq nocache;
+
 insert into COMMENTS values(0, 1, '댓글1내용', 'id-1', sysdate);
 insert into COMMENTS values(0, 2, '댓글2내용', 'id-1', sysdate);
 insert into COMMENTS values(0, 3, '댓글3내용', 'id-1', sysdate);

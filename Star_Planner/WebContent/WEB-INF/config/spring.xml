@@ -64,6 +64,8 @@
 		view-name="board/board_detail.tiles" />
 	<mvc:view-controller path="board_register.do"
 		view-name="board/board_register.tiles" />
+	<mvc:view-controller path="board_modify.do"
+		view-name="board/board_modify.tiles" />
 	<mvc:view-controller path="comment.do" view-name="board/comment.tiles" />
 
 	<!-- member에 해당하는 부분 -->
@@ -80,21 +82,9 @@
 		view-name="schedule/schedule_main.tiles" />
 	<mvc:view-controller path="board_main.do"
 		view-name="board/board_main.tiles" />
+	<mvc:view-controller path="mypage.do"
+		view-name="member/member_mypage.tiles" />
 
-
-	<!-- baord에 해당하는 부분 -->
-	<mvc:view-controller path="board_main.do"
-		view-name="board/board_main.tiles" />
-	<mvc:view-controller path="board_list.do"
-		view-name="board/board_list.tiles" />
-	<mvc:view-controller path="board_detail.do"
-		view-name="board/board_detail.tiles" />
-	<mvc:view-controller path="board_register.do"
-		view-name="board/board_register.tiles" />
-
-	<!-- member에 해당하는 부분 -->
-	<mvc:view-controller path="member_join.do"
-		view-name="member/member_join.tiles" />
 
 	<bean name="tilesConfig"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> <!-- tiles3로 선택 -->

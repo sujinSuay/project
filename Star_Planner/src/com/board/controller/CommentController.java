@@ -35,11 +35,11 @@ public class CommentController {
 	
 	@RequestMapping("/insertComment.do")
 	@ResponseBody
-	public Comment insertComment(@RequestParam(value="comment_content") String content){
+	public Comment insertComment(@RequestParam(value="comment_content") String content, String m_id, int board_no){
 		
 		//등록할 게시글의 고유 번호, 댓글의 고유 아이디, 댓글 내용, 댓글 게시한 회원 아이디, 댓글 게시한 날짜
 		System.out.println("입력받은 댓글 내용   " + content);
-		Comment comment = new Comment(0,3,content, "회원아이디", new Date() );
+		Comment comment = new Comment(board_no,0,content, m_id, new Date(System.currentTimeMillis()));
 		System.out.println(comment);
 		service.insertComment(comment);
 		
