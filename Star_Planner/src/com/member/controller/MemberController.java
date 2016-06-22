@@ -1,6 +1,7 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
 
 import com.member.service.MemberServiceImpl;
 import com.member.vo.Member;
@@ -46,7 +45,7 @@ public class MemberController {
 			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
 		}
 		session.setAttribute("loginId", mem.getM_id());
-		session.setAttribute("groupId", mem.getGroup_id());
+		session.setAttribute("group_Id", mem.getGroup_id());
 		return new ModelAndView("/main.do");
 	}
 	@RequestMapping("/logout")
@@ -63,6 +62,28 @@ public class MemberController {
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
 		System.out.println(mem);
 		return new ModelAndView("member/member_mypage.tiles","member",mem);
+		
+	}
+	@RequestMapping("/modifyForm")
+	public ModelAndView modifyForm(HttpSession session) throws IOException{
+		if(session.getAttribute("loginId")==null){
+			return new ModelAndView("/main.do","errors","로그인을 해주세요.");
+		} 
+		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
+		System.out.println(mem);
+		return new ModelAndView("member/member_modify.tiles","member",mem);
+		
+	}
+	@RequestMapping("/modify")
+	public ModelAndView modify(String m_id, String password, String email, String phone) throws IOException{
+		System.out.println(m_id);
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("password", password);
+		map.put("email", email);
+		map.put("phone", phone);
+		map.put("m_id", m_id);
+		memberService.updateMemberById(map);
+		return new ModelAndView("member/member_mypage.tiles");
 		
 	}
 }

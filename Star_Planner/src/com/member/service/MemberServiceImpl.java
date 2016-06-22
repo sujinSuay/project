@@ -1,6 +1,8 @@
 package com.member.service;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,5 +25,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 	public Member loginMember(String m_id, String password) throws IOException{
 		return memberDao.selectMemberByIdAndPassword(m_id, password);
+	}
+	public int updateMemberById(HashMap<String, String> map){
+		return memberDao.updateMemberById(map);
+		
 	}
 }

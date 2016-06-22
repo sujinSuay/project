@@ -2,6 +2,7 @@ package com.member.dao;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -33,5 +34,8 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("m_id", m_id);
 		map.put("password", password);
 		return session.selectOne("member.selectMemberByIdAndPassword",map);
+	}
+	public int updateMemberById(HashMap<String, String> map){
+		return session.update("member.updateMemberById", map);
 	}
 }
