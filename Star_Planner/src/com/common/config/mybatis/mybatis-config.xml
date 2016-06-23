@@ -20,6 +20,7 @@
 		<mapper resource="com/common/mapper/config/scheduleMapper.xml" />
 		<mapper resource="com/common/mapper/config/commentMapper.xml" />
 		<mapper resource="com/common/mapper/config/singerMapper.xml" />
+		<mapper resource="com/common/mapper/config/commonMapper.xml" />
 	</mappers>
 
 
