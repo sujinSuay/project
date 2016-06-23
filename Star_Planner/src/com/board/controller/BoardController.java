@@ -1,11 +1,14 @@
 package com.board.controller;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,6 +71,7 @@ public class BoardController {
 	//boardRemove
 	@RequestMapping("/boardRemove")
 	public ModelAndView boardRemove(String id, int no, int page){
+	
 		service.removeByNo(no);
 		return boardList(id, page);
 	}
@@ -75,7 +79,9 @@ public class BoardController {
 	//boardView
 	@RequestMapping("/boardView")
 	public ModelAndView boardView(int no, int page, String id){
-		
+		id = URLEncoder.encode(id);
+	
+		System.out.println("!!!!!!!!!!! " + id);
 		System.out.println("4444444");
 		Board board = service.getBoard(no);
 		System.out.println("페이지 : " + page);
@@ -114,6 +120,8 @@ public class BoardController {
 	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session){
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), (String)session.getAttribute("loginId"), 0, board_content, 0, 5, "JYP");
 		service.writeBoard(board);
+		System.out.println("@@@@@@@@@@@@@@@@@@" + id);
+		id = URLEncoder.encode(id);
 		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+board.getBoard_no()+"&page=1");
 	}
 	
