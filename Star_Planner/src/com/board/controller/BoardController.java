@@ -1,10 +1,14 @@
 package com.board.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +28,23 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	@Autowired
+	private CommentServiceImpl service_comment;
+	
 	@RequestMapping("/boardMain")
 	public ModelAndView boardMain(HttpSession session){
 		String id = (String)session.getAttribute("loginId");
 		if(id!=null){
 			List<String> list = service.getFavorite(id);
-			return new ModelAndView("/board_main.do", "list" , list);
+			if(list==null){
+				return new ModelAndView("/board_main.do");
+			}else{
+				return new ModelAndView("/board_main.do", "list" , list);
+			}
 		}else{
 			return new ModelAndView("/board_main.do");
 		}
-		
 	}
-	@Autowired
-	private CommentServiceImpl service_comment;
 	
 	//noticeList
 	@RequestMapping("/boardList")
@@ -45,16 +53,17 @@ public class BoardController {
 			page = 1;
 		}
 		int singer_id = service.StringToIntSingerId(id);
+		System.out.println(id+","+singer_id);
 		Map<String, Object> list = service.list(singer_id, page);
 		return new ModelAndView("/board_list.do", list);
 	}
 	
 	//NoticeModify
 	@RequestMapping("/boardModify")
-	public ModelAndView boardModify(String id, int no, String board_title, String board_content){
+	public ModelAndView boardModify(String id, int no, int page, String board_title, String board_content) throws UnsupportedEncodingException{
 		Board board = new Board(no, board_title, board_content);
 		service.modifyBoard(board);
-		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+no);
+		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+no+"&page="+page);
 	}
 
 	//boardModifyForm
@@ -74,31 +83,21 @@ public class BoardController {
 	
 	//boardView
 	@RequestMapping("/boardView")
-	public ModelAndView boardView(int no, int page, String id){
-		
-		System.out.println("4444444");
+	public ModelAndView boardView(int no, int page, String id) throws UnsupportedEncodingException{
+		String test = URLDecoder.decode(id,"UTF-8");
+		System.out.println(test);
 		Board board = service.getBoard(no);
-		System.out.println("페이지 : " + page);
 		
 		List<Comment> list_comment = service_comment.selectComment(no);
 		
-		
-		//가수이름에 따른 가수 번호를 구하는 dao를 만들어서 적용하도록 추후 변경
-		int singer_id = 5; 
-		if(page==0){
-			page = 1;
-		}
-		
+		int singer_id = service.StringToIntSingerId(id);
 		Map<String, Object> list_board = service.list(singer_id, page);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("board", board);
 		map.put("list_comment", list_comment);
-
 		map.put("list", list_board.get("list"));
 		map.put("paging", list_board.get("paging"));
-		
-		System.out.println("##"+map.toString());
 		
 		return new ModelAndView("/board_detail.do", map);
 	}
@@ -111,10 +110,13 @@ public class BoardController {
 		
 	//boardWriter
 	@RequestMapping("/boardWriter")
-	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session){
-		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), (String)session.getAttribute("loginId"), 0, board_content, 0, 5, "JYP");
+	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws UnsupportedEncodingException{
+		int singer_id = service.StringToIntSingerId(id);
+		String m_id = (String)session.getAttribute("loginId");
+		String group_name = service.selectGroupNameById(m_id);
+		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name);
 		service.writeBoard(board);
-		return new ModelAndView("redirect:/board/boardView.do?id="+id+"&no="+board.getBoard_no());
+		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+board.getBoard_no()+"&page=1");
 	}
 	
 	//searchSinger

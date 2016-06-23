@@ -15,6 +15,7 @@ public class BoardDaoImpl implements BoardDao {
 	
 	private String namespace_board="board.";
 	private String namespace_singer="singer.";
+	private String namespace_common="common.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -47,9 +48,9 @@ public class BoardDaoImpl implements BoardDao {
 	 * @throws SQLException
 	 */
 	@Override
-	public int selectCountContents() {
+	public int selectCountContents(int singer_id) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace_board+"selectCountContents");
+		return session.selectOne(namespace_board+"selectCountContents", singer_id);
 	}
 
 	/**
@@ -108,8 +109,12 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace_singer+"StringToIntSingerId", singer_name);
 	}
-	
-	
+
+	@Override
+	public String selectGroupNameById(String m_id) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
+	}
 	
 
 }

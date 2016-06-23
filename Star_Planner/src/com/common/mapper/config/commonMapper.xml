@@ -6,4 +6,9 @@
 		FROM type_list 
 		WHERE word_type = #{word_type}
 	</select>
+	<select id="selectGroupNameById" parameterType="string" resultType="string">
+		SELECT group_name 
+		FROM groups 
+		WHERE group_id=(SELECT group_id FROM member WHERE m_id=#{id})
+	</select>
 </mapper> 
