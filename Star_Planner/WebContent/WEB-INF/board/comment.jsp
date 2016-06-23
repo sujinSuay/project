@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <html>
 <meta charset="UTF-8">
@@ -18,15 +19,16 @@
 					type: "post",
 					url : "/Star_Planner/comment/insertComment.do",
 					data : {"comment_content" : $('#content_input') .val(),
-									"m_id" : "${requestScope.board.m_id}",
+									"m_id" : "${sessionScope.loginId}",
 									"board_no" : "${requestScope.board.board_no} "},
 					dataType : "json",
 					"success" : function(comment){
 			
 						//추가된 내용을 table에 추가 -> insertComment의 반환형은 comment
-										$('#reply_line').append(
-												"<tr><td id='user_layer' style='cursor:pointer;''><span>" +comment.comment_id +',' +comment.m_id + '</span></td> <td class="content"><span>' 
-												+comment.comment_content +'</span></td><td>'+comment.comment_date+'</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>');
+						alert(comment.comment_id);
+						$('#reply_line').append(
+								"<tr><td id='user_layer' style='cursor:pointer;'><span><input type='hidden'  class='comment_id' value='"+comment.comment_id+"''/>"+comment.m_id + '</span></td> <td class="content"><span>' 
+								+comment.comment_content +'</span></td><td>'+comment.comment_date+'</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>');
 						
 						//textarea를 clear
 						$('#content_input').val("");
@@ -51,10 +53,14 @@
 
 				var parent=this;
 				
-				var txt = 	$(this).closest('tr').text();
+				/* var txt = 	$(this).closest('tr').text();
 				var txt2 = txt.split(',');
-				
-				var comment_id = txt2[0];
+				 */
+				 
+					 var txt3 = $(parent).parent().parent().find('.comment_id');
+					alert(txt3.val());
+					var comment_id = txt3.val();
+			
 			
 				$.ajax({
 					
@@ -84,13 +90,14 @@
 			$('#reply_line').on("click", '.modify_comment',function(){  
 				
 			
+				
 				var parent=this;
 				
-				var txt = 	$(this).closest('tr').text();
+	
+				var txt3 = $(parent).parent().parent().find('.comment_id');
+				alert(txt3.val());
+				var comment_id = txt3.val();
 				
-				var txt2 = txt.split(',');
-
-				var comment_id = txt2[0];
 				
 				var context_area = $(parent).parent().parent().find('.content');
 				var add_text = "<textarea class='modify' rows='30' cols='50'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
@@ -102,10 +109,12 @@
 				
 				
 				var parent=this;
-				var txt = 	$(this).closest('tr').text();
-				var txt2 = txt.split(','); //comment_id 값 
+				
+				
+				var txt3 = $(parent).parent().parent().find('.comment_id');
+				alert(txt3.val());
+				var comment_id = txt3.val();
 	
-				var comment_id = txt2[0]; 
 				
 				var context_area = $(parent).parent().parent().find('.modify');
 				var new_context = context_area.val(); //textarea에 입력한 값을 가져와서 저장 
@@ -118,7 +127,7 @@
 								"comment_content" : new_context},
 					
 						"success" : function(){
-					
+		
 						//this=button= var parent 가 td에속해있으므로 parent인 td의 내용을 변경하도록 한다.
 						$(parent).parent().html('<span>'+new_context+'</span>'); 
 				
@@ -146,15 +155,17 @@
 
 <br>
 <!--댓글 상단 -->
-						<div class="comment" id="comment">
-							<!--  댓글 제목 -->
-							<div class="comment_title"> 	
-								<img src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" /><span id="comment_count">${requestScope.comment_count }</span>
-							</div>
-						</div>
+	<div class="comment" id="comment">
+		<!--  댓글 제목 -->
+		<div class="comment_title">
+			<img
+				src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" /><span
+				id="comment_count">${requestScope.comment_count }</span>
+		</div>
+	</div>
 
 
-<!-- 댓글 목록 구간 -->
+	<!-- 댓글 목록 구간 -->
             <div class="comment_list" id="comment_list" >
 
 <!--  댓글 목록 테이블 -->
@@ -174,17 +185,29 @@
 			<tbody class="reply_line" id="reply_line">
 			
 			<c:forEach var="comment"  items="${requestScope.list_comment}" varStatus="status">
-				<tr><td style='cursor:pointer;''><span>${comment.comment_id}, ${comment.m_id}</span></td> <td class="content"><span>
-				${comment.comment_content }</span></td><td>${comment.comment_date }</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>
+			
+				<tr>
+					<td style='cursor:pointer;' align="center"><input type="hidden"  class="comment_id" value="${comment.comment_id}"/><span>${comment.m_id}</span></td>
+					<td class="content"><span>${comment.comment_content }</span></td>
+					<td><fmt:formatDate value="${comment.comment_date }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td>
+							<c:if test="${sessionScope.loginId == comment.m_id}">
+									<button class="delete_comment">삭제</button><button class="modify_comment">수정</button>
+							</c:if>
+					</td>
+				</tr>
+				
 			</c:forEach>	
 
 			</tbody>
 				<!--  댓글 등록 form -->
-		
-			<tr><td><span>${requestScope.board.m_id}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
-			<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
-			<td></td>
-			<td><button id="register">댓글등록</button> </td></tr>
+			<c:if test="${sessionScope.loginId != null }">
+				<tr><td><span>${sessionScope.loginId}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
+				<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
+				<td></td>
+				<td><button id="register">댓글등록</button></td></tr>
+			</c:if>
+			
 </table>
 </div>
 

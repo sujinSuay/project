@@ -11,6 +11,8 @@ INSERT INTO GROUPS VALUES ( 13, 'YG', 'YG회사주소', '1111111', '1111' );
 INSERT INTO GROUPS VALUES ( 14, 'PlanA', 'PlanA회사주소', '1111111', '1111' );
 
 
+select * from groups;
+select group_name from groups where group_id=(select group_id from member where m_id='id-0001')
 
 --m_id, social_no, password, group, gender, name, email, address, phone, favorite
 --마스터 등록  (group 값이 0)
@@ -69,7 +71,7 @@ INSERT INTO singer VALUES(18, '코요테', 11, '혼성그룹', 'kimY@yg.com', 0,
 INSERT INTO singer VALUES(19, '악동뮤지션', 14, '혼성그룹', 'kimY@yg.com', 0, '악동뮤지션,악뮤,akmu');
 INSERT INTO singer VALUES(20, '클레지콰이', 12, '혼성그룹', 'kimY@yg.com', 0, '클레지콰이');
 
-
+commit;
 
 
 

@@ -50,12 +50,12 @@
 <p>${param.id } 갤러리</p>
 <section id="board_section">
 	<header id="board_header">
-		<div><dl><dt id="title">제목</dt><dd id="title_info">${requestScope.map.board.board_title }</dd><dd id="date"><fmt:formatDate value="${requestScope.map.board.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/></dd></dl></div>
-		<div><dl><dt id="title">글쓴이</dt><dd id="info">${requestScope.map.board.m_id }</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">조회수</dt><dd id="info">${ requestScope.map.board.board_hits}</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">좋아요</dt><dd id="info">${ requestScope.map.board.board_likes}</dd></dl></div>
+		<div><dl><dt id="title">제목</dt><dd id="title_info">${requestScope.board.board_title }</dd><dd id="date"><fmt:formatDate value="${requestScope.board.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/></dd></dl></div>
+		<div><dl><dt id="title">글쓴이</dt><dd id="info">${requestScope.board.m_id }</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">조회수</dt><dd id="info">${ requestScope.board.board_hits}</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt><dt id="title">좋아요</dt><dd id="info">${ requestScope.board.board_likes}</dd></dl></div>
 	</header>
-	<article id="content">${requestScope.map.board.board_content }</article>
-	<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.map.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
-	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.map.board.board_no}&page=${param.page}">공지사항삭제</a>
+	<article id="content">${requestScope.board.board_content }</article>
+	<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
+	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항삭제</a>
 </section>
 
 

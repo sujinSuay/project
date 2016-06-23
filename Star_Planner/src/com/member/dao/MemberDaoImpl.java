@@ -4,12 +4,8 @@ package com.member.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import com.member.vo.Member;
@@ -37,5 +33,8 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	public int updateMemberById(HashMap<String, String> map){
 		return session.update("member.updateMemberById", map);
+	}
+	public String selectFavorite(String m_id){
+		return session.selectOne("member.selectFavorite", m_id);
 	}
 }

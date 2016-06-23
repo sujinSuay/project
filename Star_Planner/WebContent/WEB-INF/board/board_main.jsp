@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>board_main</title>
-<script type="text/javascript" src="/jQuery_class/scripts/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -13,15 +13,19 @@ $(document).ready(function(){
 		$.ajax({
 			"url":"/Star_Planner/board/searchSinger.do",
 			"type":"post",
-			"data":"keyword="+$("#keyword").val(),//요청파라미터 두가지방식 다됨 - queryString(n=v&n=v) || Javascript객체{n:v,n:v}
-			"dataType":"text",//응답 데이터의 타입 지정: text가 default
-			"success":function(txt){
-				//매개변수: 1.응답데이터, 2.응답상태 메세지, 3.XMLHttpRequest - 3가지 모두 생략가능
-				$("#searchResult").html(txt);
-				//$("#layer").html(txt);//갱신
+			"data":"keyword="+$("#keyword").val(),
+			"dataType":"json",
+			"success":function(obj){
+				$("#searchResult").html("검색된 가수:&nbsp;&nbsp;")
+				if(obj.length == 0){
+					$("#searchResult").append("조건에 일치하는 가수가 없습니다.");
+				}else{
+					for (var i = 0; i < obj.length; i++) {
+						$("#searchResult").append("<a href='/Star_Planner/board/boardList.do?id="+obj[i]+"&page=1'>"+obj[i]+"</a>&nbsp;&nbsp;&nbsp;");
+					}	
+				}
 			},
 			"error":function(xhr, status, errorMsg){
-				//매개변수: 1.XMLhttpRequest, 2.응답메세지(jQuery) - success||error, 3.HTTP 응답 메세지 - 모두 생략가능
 				alert("오류 발생 - "+status+","+errorMsg);
 			},
 			"beforeSend":function(){
@@ -53,16 +57,17 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="4">
-			XX님 선호 가수 리스트:
-			<c:forEach items="${requestScope.favoriteList }" var="favorite">
-				<a href="board_list.do">${favorite.Name }</a>
-			</c:forEach>
+			<c:if test="${sessionScope.loginId != null }">
+				${sessionScope.loginId }님 선호 가수 리스트:&nbsp;&nbsp;
+				<c:forEach items="${requestScope.list }" var="favorite">
+					<a href="/Star_Planner/board/boardList.do?id=${favorite }&page=1">${favorite }</a>&nbsp;&nbsp;&nbsp;
+				</c:forEach>
+			</c:if>
 		</td>
 	</tr>
 	<tr>
 		<td colspan="4">
-			검색된 가수: <a href="board/boardList.do?id=twice&page=1">#twice 이동Test</a><br>
-			<div id="searchResult"></div>
+			<div id="searchResult">검색된 가수:&nbsp;&nbsp;</div>
 			<p>
 		</td>
 	</tr>

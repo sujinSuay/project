@@ -15,6 +15,14 @@
 				window.ckflag=checkId();
 			}
 		});
+		$(":input:radio[name=group_id]").on("click",function(){
+			if($(":input:radio[name=group_id]:checked").val()==3){
+				$("#favorite_tr").hide();
+			}else{
+				$("#favorite_tr").show();
+			}
+		});
+		
 		$("#form").on("submit",function(){
 			var flag=true;
 			if (!$("#m_id").val()) {
@@ -159,8 +167,8 @@
 		<table>
 			<tr>
 				<td colspan="2">
-					<input type="radio" id="group_id1"	name="group_id" value='-1'>매니져
-					<input type="radio"	id="group_id2" name="group_id" value="2" checked="checked">일반회원
+					<label><input type="radio" id="group_id1"	name="group_id" value='3'>매니져</label>
+					<label><input type="radio"	id="group_id2" name="group_id" value="2" checked="checked">일반회원</label>
 				</td>
 				<td><span id="group_er"></span><td>
 			</tr>
@@ -223,8 +231,8 @@
 			<table>
 				<tr>
 					<td>선호가수</td>
-					<td>sdfasdfasd</td>
-					<td></td>
+					<td><input type="button" id="favoriteBtn" onclick="window.open('Star_Planner/WEB-INF/member/searchSinger.jsp')"value="선호가수 검색"></td>
+					<td><span id=favorite"></span></td>
 				</tr>
 			</table>
 		</div>
