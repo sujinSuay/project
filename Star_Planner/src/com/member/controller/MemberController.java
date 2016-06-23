@@ -86,8 +86,4 @@ public class MemberController {
 		return new ModelAndView("member/member_mypage.tiles");
 		
 	}
-	@RequestMapping("/searchSinger")
-	public String searchSginer(){
-		return "Star_Planner/WEB-INF/member/searchSinger.jsp";
-	}
 }
