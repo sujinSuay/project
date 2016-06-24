@@ -2,6 +2,7 @@ package com.member.dao;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class MemberDaoImpl implements MemberDao {
 		map.put("password", password);
 		return session.selectOne("member.selectMemberByIdAndPassword",map);
 	}
+	public int updateMemberById(HashMap<String, String> map){
+		return session.update("member.updateMemberById", map);
+	}
 	public String selectFavorite(String m_id){
 		String fav = session.selectOne("member.selectFavorite", m_id);
 		if(fav==null){
@@ -39,5 +43,4 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		 
 	}
-	
 }

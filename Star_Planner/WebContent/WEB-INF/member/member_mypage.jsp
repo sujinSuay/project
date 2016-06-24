@@ -28,7 +28,7 @@
 			<td class="td">주소</td>
 			<td class="info">${requestScope.member.address }</td>
 			<td class="td"></td>
-			<td class="info"><input type="button" id="modify" value="정보변경"></td>
+			<td class="info"><input type="button" id="modify" value="정보변경" onclick="location.href='modifyForm.do'"></td>
 		</tr>
 		<tr>
 			<td class="td">생년월일</td>

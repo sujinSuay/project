@@ -10,11 +10,47 @@
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
+		$("#searchBtn").on("click",function(){
+			$.ajax({
+				"url":"/Star_Planner/board/searchSinger.do",
+				"type":"post",
+				"data":"keyword="+$("#keyword").val(),
+				"dataType":"json",
+				"success":function(obj){
+					$("#favoriteResult").html("검색된 가수:&nbsp;&nbsp;")
+					if(obj.length == 0){
+						$("#favorite").append("조건에 일치하는 가수가 없습니다.");
+					}else{
+						for (var i = 0; i < obj.length; i++) {
+							$("#favoriteResult").append("<input type='button' value='"+obj[i]+"' onclick='addFavorite(&quot;"+obj[i]+"&quot;)'> &nbsp;&nbsp;");
+						}
+					}
+				},
+				"error":function(xhr, status, errorMsg){
+					alert("오류 발생 - "+status+","+errorMsg);
+				},
+				"beforeSend":function(){
+					if(!$("#keyword").val()){
+						alert("조회할 가수 입력");
+						$("#keyword").focus();
+						return false;
+					};
+				}
+			});
+		});
 		$("#m_id").on("keyup",function(){
 			if($("#m_id").val().length>5){
 				window.ckflag=checkId();
 			}
 		});
+		$(":input:radio[name=group_id]").on("click",function(){
+			if($(":input:radio[name=group_id]:checked").val()==3){
+				$("#favorite_tr").hide();
+			}else{
+				$("#favorite_tr").show();
+			}
+		});
+		
 		$("#form").on("submit",function(){
 			var flag=true;
 			if (!$("#m_id").val()) {
@@ -78,6 +114,18 @@
 		}); */
 
 	});
+	function addFavorite(singerName){
+		
+		var fval = $("#favorite").val();
+		if(fval.indexOf(singerName) == -1){
+			fval = fval + singerName + ",";
+			$("#favorite").val(fval);
+			$("#favoriteTd").append(singerName + "&nbsp;&nbsp;");
+			
+		}else {
+			alert("이미 선택하셨습니다");
+		}
+	};
 	function checkId(){
 		$.ajax({
 			"url":"/Star_Planner/member/checkId.do",
@@ -85,7 +133,6 @@
 			"data":"m_id="+$("#m_id").val(),
 			"dataType":"text", 
 			"success":function(txt){
-				alert("아이디체크완료");
 				if(txt=='true'){
 					$("#id_er").text("중복된 아이디입니다.");
 					$("#m_id").focus();
@@ -159,8 +206,8 @@
 		<table>
 			<tr>
 				<td colspan="2">
-					<input type="radio" id="group_id1"	name="group_id" value='-1'>매니져
-					<input type="radio"	id="group_id2" name="group_id" value="2" checked="checked">일반회원
+					<label><input type="radio" id="group_id1"	name="group_id" value='3'>매니져</label>
+					<label><input type="radio"	id="group_id2" name="group_id" value="2" checked="checked">일반회원</label>
 				</td>
 				<td><span id="group_er"></span><td>
 			</tr>
@@ -222,10 +269,14 @@
 		<div id="favorite_tr">
 			<table>
 				<tr>
-					<td>선호가수</td>
-					<td>sdfasdfasd</td>
-					<td></td>
+					<td><input type="text" size="10" id="keyword"></td>
+					<td><input type="button" id="searchBtn" value="선호가수 검색"></td>
+					<td><span id="favoriteResult"></span></td>
 				</tr>
+				<tr>
+					<td colspan="2" id="favoriteTd">
+						<input type="hidden" id="favorite" value = "" name="favorite">
+					</td>
 			</table>
 		</div>
 		<table>

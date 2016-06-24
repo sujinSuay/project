@@ -32,6 +32,13 @@
 		<include refid="select-basic"/>
 		WHERE m_id=#{m_id} and password=#{password}
 	</select>
+	<update id="updateMemberById" parameterType="map">
+		UPDATE member
+		SET	password = #{password},
+			email = #{email},
+			phone = #{phone}
+		WHERE m_id = #{m_id}
+	</update>
 	<!-- 
 	<resultMap id="book-publisher-resultmap" type="book" extends="book-resultmap">
 		<association property="publisher" javaType="bookstore.vo.Publisher" resultMap="publisher.publisher-resultmap"/>

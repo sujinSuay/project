@@ -9,10 +9,10 @@
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
-(document).ready(function(){
+$(document).ready(function(){
 	$("#form").on("submit",function(){
 		var flag = true;
-		if($("#m_id").val().length<6){
+		if($("#m_id").val().length<1){
 			$("#id_er").text("6글자이상 입력해 주세요");
 			flag = false;
 		} else{$("#id_er").text("");}
