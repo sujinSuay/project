@@ -1,5 +1,6 @@
 package com.board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,4 +17,5 @@ public interface BoardService {
 	public int StringToIntSingerId(String singer_id);
 	public List<String> getFavorite(String m_id);
 	public String selectGroupNameById(String m_id);
+	public List<Board> selectBoardListByMemberId(HashMap<String, String> map);
 }

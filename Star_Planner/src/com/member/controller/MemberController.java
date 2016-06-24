@@ -2,6 +2,7 @@ package com.member.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.member.service.MemberServiceImpl;
+import com.member.service.MemberService;
 import com.member.vo.Member;
 
 @Controller
@@ -20,10 +21,19 @@ import com.member.vo.Member;
 public class MemberController {
 	
 	@Autowired
-	MemberServiceImpl memberService;
+	MemberService memberService;
 	
+	@RequestMapping("beforeJoin")
+	public ModelAndView beforeJoin(){
+		List<String> list = memberService.selectGroupList();
+		System.out.println(list);
+		return new ModelAndView("member/member_join.tiles","groupList",list);
+	}
 	@RequestMapping("/join")
-	public ModelAndView joinMember(@ModelAttribute Member member) throws IOException{
+	public ModelAndView joinMember(@ModelAttribute Member member, String tem_group2) throws IOException{
+		if(member.getTem_group().equals("기타")){
+			member.setTem_group(tem_group2);
+		}
 		System.out.println(member);
 		memberService.insertMember(member);
 		return new ModelAndView("redirect:/main.do");
@@ -84,6 +94,7 @@ public class MemberController {
 		map.put("m_id", m_id);
 		memberService.updateMemberById(map);
 		return new ModelAndView("member/member_mypage.tiles");
-		
 	}
+	
+	
 }

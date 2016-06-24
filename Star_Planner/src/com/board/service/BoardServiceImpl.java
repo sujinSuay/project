@@ -15,8 +15,7 @@ import com.common.dao.TypeListDao;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
 import com.common.vo.TypeList;
-import com.member.dao.MemberDao;
-
+import com.member.dao.memberDao;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	@Autowired
@@ -26,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 	private TypeListDao tdao;
 	
 	@Autowired
-	private MemberDao mdao;
+	private memberDao mdao;
 	
 	@Override
 	public String selectGroupNameById(String m_id) {
@@ -92,5 +91,8 @@ public class BoardServiceImpl implements BoardService{
 	
 	public int StringToIntSingerId(String singer_name){
 		return dao.StringToIntSingerId(singer_name);
+	}
+	public List<Board> selectBoardListByMemberId(HashMap map){
+		return dao.selectBoardListByMemberId(map);
 	}
 }

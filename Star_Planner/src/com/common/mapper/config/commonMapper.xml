@@ -11,4 +11,9 @@
 		FROM groups 
 		WHERE group_id=(SELECT group_id FROM member WHERE m_id=#{id})
 	</select>
+	<select id="selectGroupList" resultType="string">
+		SELECT group_name
+		FROM groups
+		WHERE group_id > 10
+	</select>
 </mapper> 

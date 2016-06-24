@@ -3,11 +3,15 @@ package com.board.vo;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.common.util.JsonDateConverter;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 public class Board implements Serializable{
 	
 	
 	private int board_no; /** 게시글 번호  **/
 	private String board_title;   /** 게시글 제목   **/
+	@JsonSerialize(using=JsonDateConverter.class)
 	private Date board_date;  /** 게시 날짜  **/
 	private String m_id; /** 게시한 사람의 id  **/
 	private int board_hits; /** 게시글 조회수  **/

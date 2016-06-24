@@ -1,5 +1,6 @@
 package com.board.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.board.vo.Board;
@@ -15,4 +16,5 @@ public interface BoardDao {
 	public List<String> searchSinger(String keyword);
 	public int StringToIntSingerId(String singer_name);
 	public String selectGroupNameById(String m_id);
+	public List<Board> selectBoardListByMemberId(HashMap map);
 }

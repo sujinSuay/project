@@ -46,7 +46,13 @@
 	<select id="selectCountContents" resultType="_int">
 		SELECT count(board_no) FROM board WHERE singer_id = #{singer_id}
 	</select>
-	
+	<select id="selectBoardListByMemberId" parameterType="map" resultType="board">
+		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
+		FROM(SELECT ceil(rownum/5) page, board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
+		FROM(SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
+		FROM board WHERE m_id = #{m_id} ORDER BY board_no DESC)) 
+		WHERE page = #{page}
+	</select>
 </mapper>
 
 

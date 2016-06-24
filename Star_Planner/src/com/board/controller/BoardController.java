@@ -1,5 +1,6 @@
 package com.board.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -21,6 +22,7 @@ import com.board.service.BoardService;
 import com.board.service.CommentServiceImpl;
 import com.board.vo.Board;
 import com.board.vo.Comment;
+import com.member.vo.Member;
 
 @Controller
 @RequestMapping("/board")
@@ -126,6 +128,17 @@ public class BoardController {
 		List<String> list= service.searchSinger(keyword);
 		return list;
 	}
-	
+	//mypage에서 사용할 게시판글 목록 서치
+	@RequestMapping("/searchBoardList")
+	@ResponseBody
+	public List<Board> searchBoardListbyMemberId(String m_id) throws IOException{
+		System.out.println(m_id);
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("m_id", m_id);
+		map.put("page", "1");
+		List<Board> list = service.selectBoardListByMemberId(map);
+		System.out.println(list);
+		return list;
+	}
 
 }

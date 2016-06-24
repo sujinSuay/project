@@ -116,5 +116,7 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
 	}
 	
-
+	public List<Board> selectBoardListByMemberId(HashMap map){
+		return session.selectList("board.selectBoardListByMemberId", map);
+	}
 }

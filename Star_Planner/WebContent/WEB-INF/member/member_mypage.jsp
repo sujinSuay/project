@@ -38,5 +38,7 @@
 		</tr>
 	</table>
 </div>
+    <jsp:include page="/WEB-INF/member/member_mypage_board_list.jsp"/>
+   	
 </body>
 </html>
