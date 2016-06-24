@@ -1,5 +1,7 @@
 package com.schedule.service;
 
-public interface ScheduleService {
+import java.util.Map;
 
+public interface ScheduleService {
+	public Map<String, Object> getCategoryList(int group);
 }

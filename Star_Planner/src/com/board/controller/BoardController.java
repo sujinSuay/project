@@ -33,16 +33,24 @@ public class BoardController {
 	
 	@RequestMapping("/boardMain")
 	public ModelAndView boardMain(HttpSession session){
+		
+		Map<String, Object> singer = service.singerList();
+		
+		
 		String id = (String)session.getAttribute("loginId");
 		if(id!=null){
-			List<String> list = service.getFavorite(id);
-			if(list==null){
-				return new ModelAndView("/board_main.do");
+			List<String> favorite = service.getFavorite(id);
+			if(favorite==null){
+				return new ModelAndView("/board_main.do", singer);
 			}else{
-				return new ModelAndView("/board_main.do", "list" , list);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("singer", singer);
+				map.put("favorite", favorite);
+				return new ModelAndView("/board_main.do", map);
+//				return new ModelAndView("/board_main.do", "favorite" , favorite);
 			}
 		}else{
-			return new ModelAndView("/board_main.do");
+			return new ModelAndView("/board_main.do", singer);
 		}
 	}
 	
@@ -53,6 +61,9 @@ public class BoardController {
 			page = 1;
 		}
 		int singer_id = service.StringToIntSingerId(id);
+		if(singer_id == -1){
+			return new ModelAndView("redirect:/board/boardMain.do");
+		}
 		Map<String, Object> list = service.list(singer_id, page);
 		return new ModelAndView("/board_list.do", list);
 	}

@@ -6,5 +6,5 @@ import com.common.vo.TypeList;
 
 
 public interface TypeListDao{
-	public List<TypeList> selectByCodeCateory(String typeList);
+	public List<String> selectByCodeCateory(String typeList);
 }

@@ -7,8 +7,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.common.vo.TypeList;
-
 @Repository
 public class TypeListDaoImpl implements TypeListDao{
 private String namespace="common.";
@@ -22,8 +20,8 @@ private String namespace="common.";
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<TypeList> selectByCodeCateory(String typeList){
-		List<TypeList> list = session.selectList(namespace+"selectByCodeCateory", typeList);
+	public List<String> selectByCodeCateory(String typeList){
+		List<String> list = session.selectList(namespace+"selectByCodeCateory", typeList);
 		return list;
 	}
 	

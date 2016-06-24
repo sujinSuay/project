@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>schedule_main</title>
-<link href='/WEB-INF/fullcalendar-2.7.3/fullcalendar.css' rel='stylesheet' />
-<link href='/WEB-INF/fullcalendar-2.7.3/fullcalendar.print.css' rel='stylesheet' media='print' />
-<script src='/WEB-INF/fullcalendar-2.7.3/lib/moment.min.js'></script>
-<script src='/calendar_test/fullcalendar-2.7.3/fullcalendar-2.7.3/lib/jquery.min.js'></script>
-<script src='/calendar_test/fullcalendar-2.7.3/fullcalendar-2.7.3/fullcalendar.min.js'></script>
+<link href='/Star_Planner/fullcalendar-2.7.3/fullcalendar.css' rel='stylesheet' />
+<link href='/Star_Planner/fullcalendar-2.7.3/fullcalendar.print.css' rel='stylesheet' media='print' />
+<script src='/Star_Planner/fullcalendar-2.7.3/lib/moment.min.js'></script>
+<script src='/Star_Planner/fullcalendar-2.7.3/lib/jquery.min.js'></script>
+<script src='/Star_Planner/fullcalendar-2.7.3/fullcalendar.min.js'></script>
 <script>
 
 	$(document).ready(function() {
@@ -116,50 +116,27 @@
 				}
 			});
 		});
-		$("#ajaxBtn").on("click",function(){
-			$.ajax({
-				"url":"/calendar_test/calendar/findById_json.do",
-				"type":"post",
-				"data":"id="+$("#id").val(),//요청파라미터 두가지방식 다됨 - queryString(n=v&n=v) || Javascript객체{n:v,n:v}
-				"dataType":"text",//응답 데이터의 타입 지정: text가 default
-				"success":function(txt){
-				},
-				"error":function(xhr, status, errorMsg){
-					//오류 응답이 있을때 처리할 함수 등록
-					//매개변수: 1.XMLhttpRequest, 2.응답메세지(jQuery) - success||error, 3.HTTP 응답 메세지 - 모두 생략가능
-					alert("오류 발생 - "+status+","+errorMsg);
-				},
-				"beforeSend":function(){
-				}
-			});
-		});
-		
-		
 		
 	});
 
 </script>
-<style>
-
+<!-- <style>
 	body {
 		margin: 40px 10px;
 		padding: 0;
 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 		font-size: 14px;
 	}
-
 	#calendar {
 		max-width: 900px;
 		margin: 0 auto;
 	}
-
-</style>
+</style> -->
 </head>
 <body>
-
 	<div id='calendar'></div>
 	<h2>Ajax 요청 페이지</h2>
-	<input type="text" id="id"><button id="jsonBtn">JSON호출btn</button><button id="ajaxBtn">ajax호출btn</button>
+	<input type="text" id="id"><button id="jsonBtn">JSON호출btn</button>
 	<p>
 	<div id="result"></div>
 </body>

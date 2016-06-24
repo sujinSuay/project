@@ -66,12 +66,13 @@ create sequence board_no_seq nocache;
 /* schedule */
 CREATE TABLE schedule (
 	schedule_id NUMBER(10) PRIMARY KEY, /* 스캐쥴번호 */
-	schedule_time DATE NOT NULL, /* 일시 */
-	schedule_time_range NUMBER(2) NOT NULL, /* 공연시간 */
+	schedule_start VARCHAR2(19) NOT NULL, /* 일시 */
+	schedule_end VARCHAR2(19) NOT NULL, /* 공연시간 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	schedule_name VARCHAR2(200) NOT NULL, /* 행사이름 */
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */
-	schedule_address VARCHAR2(500) NOT NULL /* 장소 */
+	schedule_address VARCHAR2(500), /* 장소 */
+	schedule_contents VARCHAR2(900)
 );
 
 create sequence schedule_id_seq nocache;

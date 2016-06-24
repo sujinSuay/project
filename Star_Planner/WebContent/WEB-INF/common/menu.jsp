@@ -4,6 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <a href="/Star_Planner/main.do">main</a>  &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="/Star_Planner/schedule_main.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
+<c:if test="${sessionScope.loginId != null && sessionScope.groupId != 2}">
+	<a href="/Star_Planner/schedule/scheduleRegisterForm.do">schedule 등록</a> &nbsp; &nbsp; &nbsp; &nbsp;
+</c:if>
+
 <a href="/Star_Planner/board/boardMain.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
 <c:choose>
 	<c:when test="${sessionScope.loginId == null }">

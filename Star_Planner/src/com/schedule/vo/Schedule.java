@@ -1,31 +1,33 @@
 package com.schedule.vo;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class Schedule {
+public class Schedule implements Serializable{
 	
 	private int schedule_id;  /** 스케줄 고유 번호 **/
-	private Date schedule_time;  /** 스케줄 일시 **/
-	private int schedule_time_range;  /** 스케줄의 공연 시간  **/
+	private String schedule_start;  /** 스케줄 일시 **/
+	private String schedule_end;  /** 스케줄 일시 **/
 	private int singer_id; /** 스케줄이 있는 가수의 고유 아이디 **/
 	private String schedule_name; /** 스케줄의 이름 **/
 	private String type_name; /** 스케줄의 타입 - 행사, 드라마, 광고...  **/
 	private String schedule_address; /** 스케줄이 열리는 위치(장소) **/
+	private String schedule_contents; /** 스케줄 정보 **/
 	
 	public Schedule(){
 		
 	}
 
-	public Schedule(int schedule_id, Date schedule_time, int schedule_time_range, int singer_id, String schedule_name,
-			String type_name, String schedule_address) {
+	public Schedule(int schedule_id, String schedule_start, String schedule_end, int singer_id, String schedule_name,
+			String type_name, String schedule_address, String schedule_contents) {
 		super();
 		this.schedule_id = schedule_id;
-		this.schedule_time = schedule_time;
-		this.schedule_time_range = schedule_time_range;
+		this.schedule_start = schedule_start;
+		this.schedule_end = schedule_end;
 		this.singer_id = singer_id;
 		this.schedule_name = schedule_name;
 		this.type_name = type_name;
 		this.schedule_address = schedule_address;
+		this.schedule_contents = schedule_contents;
 	}
 
 	public int getSchedule_id() {
@@ -36,20 +38,20 @@ public class Schedule {
 		this.schedule_id = schedule_id;
 	}
 
-	public Date getSchedule_time() {
-		return schedule_time;
+	public String getSchedule_start() {
+		return schedule_start;
 	}
 
-	public void setSchedule_time(Date schedule_time) {
-		this.schedule_time = schedule_time;
+	public void setSchedule_start(String schedule_start) {
+		this.schedule_start = schedule_start;
 	}
 
-	public int getSchedule_time_range() {
-		return schedule_time_range;
+	public String getSchedule_end() {
+		return schedule_end;
 	}
 
-	public void setSchedule_time_range(int schedule_time_range) {
-		this.schedule_time_range = schedule_time_range;
+	public void setSchedule_end(String schedule_end) {
+		this.schedule_end = schedule_end;
 	}
 
 	public int getSinger_id() {
@@ -84,11 +86,20 @@ public class Schedule {
 		this.schedule_address = schedule_address;
 	}
 
+	public String getSchedule_contents() {
+		return schedule_contents;
+	}
+
+	public void setSchedule_contents(String schedule_contents) {
+		this.schedule_contents = schedule_contents;
+	}
+
 	@Override
 	public String toString() {
-		return "Schedule [schedule_id=" + schedule_id + ", schedule_time=" + schedule_time + ", schedule_time_range="
-				+ schedule_time_range + ", singer_id=" + singer_id + ", schedule_name=" + schedule_name + ", type_name="
-				+ type_name + ", schedule_address=" + schedule_address + "]";
+		return "Schedule [schedule_id=" + schedule_id + ", schedule_start=" + schedule_start + ", schedule_end="
+				+ schedule_end + ", singer_id=" + singer_id + ", schedule_name=" + schedule_name + ", type_name="
+				+ type_name + ", schedule_address=" + schedule_address + ", schedule_contents=" + schedule_contents
+				+ "]";
 	}
 
 	@Override
@@ -96,10 +107,11 @@ public class Schedule {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((schedule_address == null) ? 0 : schedule_address.hashCode());
+		result = prime * result + ((schedule_contents == null) ? 0 : schedule_contents.hashCode());
+		result = prime * result + ((schedule_end == null) ? 0 : schedule_end.hashCode());
 		result = prime * result + schedule_id;
 		result = prime * result + ((schedule_name == null) ? 0 : schedule_name.hashCode());
-		result = prime * result + ((schedule_time == null) ? 0 : schedule_time.hashCode());
-		result = prime * result + schedule_time_range;
+		result = prime * result + ((schedule_start == null) ? 0 : schedule_start.hashCode());
 		result = prime * result + singer_id;
 		result = prime * result + ((type_name == null) ? 0 : type_name.hashCode());
 		return result;
@@ -119,6 +131,16 @@ public class Schedule {
 				return false;
 		} else if (!schedule_address.equals(other.schedule_address))
 			return false;
+		if (schedule_contents == null) {
+			if (other.schedule_contents != null)
+				return false;
+		} else if (!schedule_contents.equals(other.schedule_contents))
+			return false;
+		if (schedule_end == null) {
+			if (other.schedule_end != null)
+				return false;
+		} else if (!schedule_end.equals(other.schedule_end))
+			return false;
 		if (schedule_id != other.schedule_id)
 			return false;
 		if (schedule_name == null) {
@@ -126,12 +148,10 @@ public class Schedule {
 				return false;
 		} else if (!schedule_name.equals(other.schedule_name))
 			return false;
-		if (schedule_time == null) {
-			if (other.schedule_time != null)
+		if (schedule_start == null) {
+			if (other.schedule_start != null)
 				return false;
-		} else if (!schedule_time.equals(other.schedule_time))
-			return false;
-		if (schedule_time_range != other.schedule_time_range)
+		} else if (!schedule_start.equals(other.schedule_start))
 			return false;
 		if (singer_id != other.singer_id)
 			return false;
@@ -142,11 +162,6 @@ public class Schedule {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
 
 }

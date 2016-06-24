@@ -45,7 +45,7 @@ public class MemberController {
 			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
 		}
 		session.setAttribute("loginId", mem.getM_id());
-		session.setAttribute("group_Id", mem.getGroup_id());
+		session.setAttribute("groupId", mem.getGroup_id());
 		return new ModelAndView("/main.do");
 	}
 	@RequestMapping("/logout")

@@ -3,6 +3,7 @@ package com.board.dao;
 import java.util.List;
 
 import com.board.vo.Board;
+import com.common.vo.Singer;
 
 public interface BoardDao {
 	public Board selectByNo(int no) ;
@@ -16,4 +17,5 @@ public interface BoardDao {
 	public int StringToIntSingerId(String singer_name);
 	public String selectGroupNameById(String m_id);
 	public int updateLikesCount(int no);
+	public List<Singer> selectAllSinger();
 }

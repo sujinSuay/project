@@ -4,8 +4,6 @@ select * from comments;
 INSERT INTO member
 VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'sujin@kosta', '주소', '전화번호', '선호그룹' )
 
-
-
 CREATE TABLE member (
 	m_id VARCHAR2(50) PRIMARY KEY, /* id */
 	social_no VARCHAR(13) UNIQUE NOT NULL, /* 주민번호 */

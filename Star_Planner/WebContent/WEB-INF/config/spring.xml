@@ -76,6 +76,9 @@
 	<mvc:view-controller path="member_logout.do"
 	view-name="member/logout.do" />
 	
+	<!-- schedule -->
+	<mvc:view-controller path="schedule_register.do"
+		view-name="schedule/schedule_register.tiles" />
 	
 	<!-- menu_bar 에 해당하는 부분 -->
 	<mvc:view-controller path="main.do" view-name="common/main.tiles" />

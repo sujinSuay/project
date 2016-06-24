@@ -43,6 +43,10 @@ INSERT INTO type_list VALUES('남자솔로' , 'singer_type');
 INSERT INTO type_list VALUES('혼성그룹' , 'singer_type');
 INSERT INTO type_list VALUES('기타' , 'singer_type');
 
+INSERT INTO type_list VALUES('TV' , 'event_type');
+INSERT INTO type_list VALUES('공연' , 'event_type');
+INSERT INTO type_list VALUES('촬영' , 'event_type');
+
 select * from TYPE_LIST
 select * from singer;
 
