@@ -38,7 +38,10 @@
 		</tr>
 	</table>
 </div>
+	<h2>내가쓴 게시글</h2>
     <jsp:include page="/WEB-INF/member/member_mypage_board_list.jsp"/>
+    <h2>내가쓴 댓글</h2>
+    <jsp:include page="/WEB-INF/member/member_mypage_comment_list.jsp"/>
    	
 </body>
 </html>

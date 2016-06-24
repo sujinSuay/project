@@ -55,7 +55,6 @@ public class BoardController {
 			page = 1;
 		}
 		int singer_id = service.StringToIntSingerId(id);
-		System.out.println(id+","+singer_id);
 		Map<String, Object> list = service.list(singer_id, page);
 		return new ModelAndView("/board_list.do", list);
 	}
@@ -115,6 +114,10 @@ public class BoardController {
 	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws UnsupportedEncodingException{
 		int singer_id = service.StringToIntSingerId(id);
 		String m_id = (String)session.getAttribute("loginId");
+		if(m_id==null){
+			System.out.println("자동 로그아웃됨");
+			return new ModelAndView("redirect:/board/boardList.do?id="+URLEncoder.encode(id,"UTF-8")+"&page=1");
+		}
 		String group_name = service.selectGroupNameById(m_id);
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name);
 		service.writeBoard(board);
@@ -128,17 +131,14 @@ public class BoardController {
 		List<String> list= service.searchSinger(keyword);
 		return list;
 	}
-	//mypage에서 사용할 게시판글 목록 서치
-	@RequestMapping("/searchBoardList")
+	
+	//boardLike
+	@RequestMapping("/boardLike")
 	@ResponseBody
-	public List<Board> searchBoardListbyMemberId(String m_id) throws IOException{
-		System.out.println(m_id);
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("m_id", m_id);
-		map.put("page", "1");
-		List<Board> list = service.selectBoardListByMemberId(map);
-		System.out.println(list);
-		return list;
+	public int boardLike(int no, int likes){
+		service.updateLikesCount(no);
+		return likes+1;
 	}
+	
 
 }

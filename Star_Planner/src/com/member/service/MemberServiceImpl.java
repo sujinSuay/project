@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.board.vo.Board;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.Member;
+import com.member.vo.MyPage;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -53,5 +55,13 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<String> selectGroupList(){
 		return memberDao.selectGroupList();
+	}
+	@Override
+	public List<MyPage> selectBoardListByMemberId(HashMap<String, String> map){
+		return memberDao.selectBoardListByMemberId(map);
+	}
+	@Override
+	public List<MyPage> selectCommentListByMemberId(HashMap<String, String> map){
+		return memberDao.selectCommentListByMemberId(map);
 	}
 }

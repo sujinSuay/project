@@ -9,7 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.board.vo.Board;
 import com.member.vo.Member;
+import com.member.vo.MyPage;
 
 @Repository
 public class MemberDaoImpl implements memberDao {
@@ -70,5 +72,12 @@ public class MemberDaoImpl implements memberDao {
 	public List<String> selectGroupList(){
 		return session.selectList("common.selectGroupList");
 	}
-	
+	@Override
+	public List<MyPage> selectBoardListByMemberId(HashMap<String, String> map){
+		return session.selectList("board.selectBoardListByMemberId", map);
+	}
+	@Override
+	public List<MyPage> selectCommentListByMemberId(HashMap<String, String> map){
+		return session.selectList("comment.selectCommentListByMemberId", map);
+	}
 }

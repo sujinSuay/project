@@ -4,8 +4,14 @@ select * from comments;
 INSERT INTO member
 VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'sujin@kosta', '주소', '전화번호', '선호그룹' )
 
+SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name
+FROM board b, singer s WHERE m_id = 'manager4' and b.singer_id=s.singer_id ORDER BY board_no DESC 
 
-
+SELECT c.board_no, c.comment_id, c.comment_content, c.m_id, c.comment_date, s.singer_name, b.board_title
+FROM comments c, board b, singer s
+WHERE c.m_id = 'manager4' and b.board_no = c.board_no and s.singer_id = b.singer_id
+ORDER BY comment_date DESC
+	
 CREATE TABLE member (
 	m_id VARCHAR2(50) PRIMARY KEY, /* id */
 	social_no VARCHAR(13) UNIQUE NOT NULL, /* 주민번호 */

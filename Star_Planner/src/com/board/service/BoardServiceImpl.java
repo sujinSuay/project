@@ -92,7 +92,10 @@ public class BoardServiceImpl implements BoardService{
 	public int StringToIntSingerId(String singer_name){
 		return dao.StringToIntSingerId(singer_name);
 	}
-	public List<Board> selectBoardListByMemberId(HashMap map){
-		return dao.selectBoardListByMemberId(map);
+	
+	@Override
+	public int updateLikesCount(int no) {
+		// TODO Auto-generated method stub
+		return dao.updateLikesCount(no);
 	}
 }

@@ -16,9 +16,14 @@ table, td, th {
 table {
     border-collapse: collapse;
     min-width: 800px;
+    width: 100%;
+    
 }
 th, td {
     padding: 5px;
+}
+div{
+	width: 100%;
 }
 </style>
 </head>
@@ -38,16 +43,16 @@ th, td {
 	<tbody align="center">
 		<c:forEach items="${requestScope.list }" var="board">
 			<tr>
-				<td>${board.board_no }</td>
-				<td align="left">
+				<td width="10%">${board.board_no }</td>
+				<td align="left" width="50%">
 					<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
 						${board.board_title }
 					</a>
 				</td>
-				<td>${board.m_id }</td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
-				<td>${board.board_hits }</td>
-				<td>${board.board_likes }</td>
+				<td width="10%">${board.m_id }</td>
+				<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
+				<td width="5%">${board.board_hits }</td>
+				<td width="5%">${board.board_likes }</td>
 			</tr>	
 		</c:forEach>
 	</tbody>
@@ -62,37 +67,39 @@ th, td {
 <%--페이징 처리 --%>
 <p>
 <%--◀이전 페이지 그룹 처리 --%>
-<c:choose>
-	<c:when test="${requestScope.paging.previousPageGroup }">
-		<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">
-		◀
-		</a>
-	</c:when>
-	<c:otherwise>◀</c:otherwise>
-</c:choose>
-<%--페이지 처리 --%>
-<c:forEach begin="${requestScope.paging.beginPage }" end="${requestScope.paging.endPage }" var="page">
+<div align="center">
 	<c:choose>
-		<c:when test="${page == requestScope.paging.page }">
-		 [${page }]
-		</c:when>
-		<c:otherwise>
-			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${page }">
-				${page }
+		<c:when test="${requestScope.paging.previousPageGroup }">
+			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">
+			◀
 			</a>
-		</c:otherwise>
+		</c:when>
+		<c:otherwise>◀</c:otherwise>
 	</c:choose>
-&nbsp;&nbsp;
-</c:forEach>
-<%--다음 페이지 그룹 처리 ▶--%>
-<c:choose>
-	<c:when test="${requestScope.paging.nextPageGroup }">
-		<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.endPage + 1}">
-		▶
-		</a>
-	</c:when>
-	<c:otherwise>▶</c:otherwise>
-</c:choose>
-</p>
+	<%--페이지 처리 --%>
+	<c:forEach begin="${requestScope.paging.beginPage }" end="${requestScope.paging.endPage }" var="page">
+		<c:choose>
+			<c:when test="${page == requestScope.paging.page }">
+			 [${page }]
+			</c:when>
+			<c:otherwise>
+				<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${page }">
+					${page }
+				</a>
+			</c:otherwise>
+		</c:choose>
+	&nbsp;&nbsp;
+	</c:forEach>
+	<%--다음 페이지 그룹 처리 ▶--%>
+	<c:choose>
+		<c:when test="${requestScope.paging.nextPageGroup }">
+			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.endPage + 1}">
+			▶
+			</a>
+		</c:when>
+		<c:otherwise>▶</c:otherwise>
+	</c:choose>
+</div>
+
 </body>
 </html>

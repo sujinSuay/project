@@ -12,5 +12,10 @@
 		FROM singer 
 		WHERE singer_name = #{singer_name}
 	</select>
+	<select id="selectSingerNameById" parameterType="string" resultType="string">
+		SELECT singer_name
+		FROM singer
+		WHERE singer_id={#singer_id}
+	</select> 
 
 </mapper> 
