@@ -10,6 +10,7 @@
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
+		$("#manager").hide();
 		$("#searchBtn").on("click",function(){
 			$.ajax({
 				"url":"/Star_Planner/board/searchSinger.do",
@@ -46,11 +47,12 @@
 		$(":input:radio[name=group_id]").on("click",function(){
 			if($(":input:radio[name=group_id]:checked").val()==3){
 				$("#favorite_tr").hide();
+				$("#manager").show();
 			}else{
 				$("#favorite_tr").show();
+				$("#manager").hide();
 			}
 		});
-		
 		$("#form").on("submit",function(){
 			var flag=true;
 			if (!$("#m_id").val()) {
@@ -101,24 +103,30 @@
 				$("#email").focus();
 				flag=false;
 			}else{$("#email").text("");}
+			if($("#tem_group").val()=="소속사"){ 
+				$("#tem_group_er").text("회사를 선택해 주세요");
+			}else if($("#tem_group").val()=='기타' && !$("#tem_group2").val()){
+				$("#tem_group_er").text("회사를 입력해 주세요");
+				$("#tem_group2").focus();
+				flag=false;
+			}else{$("#tem_group_er").text("");} 
+		 	 
 			/* alert(!flag + " / " + !window.ckflag); */
 			if(!flag || !window.ckflag){
 				return false;
 			}
 		});
-		/* $("#group_id2").on("click",function(){
-			document.$("#favorite_tr").show("fast");
-		});
-		$("#group_id1").on("click",function(){
-			document.$("#favorite_tr").hide("fast");
-		}); */
-
 	});
 	function addFavorite(singerName){
 		
 		var fval = $("#favorite").val();
 		if(fval.indexOf(singerName) == -1){
-			fval = fval + singerName + ",";
+			if(fval!=""){
+				fval = fval +","+ singerName ;
+			} else {
+				fval = singerName;
+			}
+			alert(fval);
 			$("#favorite").val(fval);
 			$("#favoriteTd").append(singerName + "&nbsp;&nbsp;");
 			
@@ -266,6 +274,17 @@
 				<td><span id="social_no_er"></span><td>
 			</tr>
 		</table>
+		<div id="manager">
+			<select name="tem_group" id="tem_group">
+				<option value="소속사">소속사</option>
+				<c:forEach items="${requestScope.groupList }" var="groupName">
+					<option value="${groupName }">${groupName }</option>
+				</c:forEach>
+				<option value="기타">직접입력</option>
+			</select>
+			<input type="text" name="tem_group2"><span id="tem_group_er"></span>
+		</div>
+		
 		<div id="favorite_tr">
 			<table>
 				<tr>

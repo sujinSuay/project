@@ -48,5 +48,12 @@ WHERE comment_id = #{comment_id}
 
 </update>
 
+<!-- memeber mypage에 코멘트 리스트 불러오는 쿼리 -->
+<select id="selectCommentListByMemberId" parameterType="map" resultType="myPage">
+	SELECT c.board_no, c.comment_id, c.comment_content, c.m_id, c.comment_date, s.singer_name, b.board_title
+	FROM comments c, board b, singer s
+	WHERE c.m_id = #{m_id} and b.board_no = c.board_no and s.singer_id = b.singer_id
+	ORDER BY comment_date DESC
+</select>
 
 </mapper>

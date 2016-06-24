@@ -51,7 +51,10 @@
 	<select id="selectCountContents" resultType="_int">
 		SELECT count(board_no) FROM board WHERE singer_id = #{singer_id}
 	</select>
-	
+	<select id="selectBoardListByMemberId" parameterType="map" resultType="myPage">
+		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name
+		FROM board b, singer s WHERE m_id = #{m_id} and b.singer_id=s.singer_id ORDER BY board_no DESC  
+	</select>
 </mapper>
 
 

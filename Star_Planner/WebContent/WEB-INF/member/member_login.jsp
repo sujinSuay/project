@@ -40,7 +40,7 @@ $(document).ready(function(){
 		<td><span id="password_er"></span></td>
 	</tr>
 	<tr>
-		<td><input type="button" id="join" value="회원가입" onclick="location.href='/Star_Planner/member_join.do'"></td>
+		<td><input type="button" id="join" value="회원가입" onclick="location.href='/Star_Planner/member/beforeJoin.do'"></td>
 		<td><input type="submit" value="로그인"></td>
 		<td></td>
 	</tr>
