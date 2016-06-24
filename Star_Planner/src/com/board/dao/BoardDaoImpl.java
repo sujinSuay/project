@@ -78,7 +78,12 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.update(namespace_board+"updateViewCount", no);
 	}
-
+	
+	@Override
+	public int updateLikesCount(int no) {
+		// TODO Auto-generated method stub
+		return session.update(namespace_board+"updateLikesCount", no);
+	}
 	/**
 	 * 공지사항 글번호로 하나 update
 	 * @param conn
@@ -115,6 +120,7 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
 	}
+
 	
 
 }

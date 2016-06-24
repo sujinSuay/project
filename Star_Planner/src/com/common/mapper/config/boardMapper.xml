@@ -24,6 +24,11 @@
 		SET board_hits = board_hits + 1 
 		WHERE board_no = #{board_no}
 	</update>
+	<update id="updateLikesCount" parameterType="board">
+		UPDATE board 
+		SET board_likes = board_likes + 1 
+		WHERE board_no = #{board_no}
+	</update>
 	
 	<!-- delete -->
 	<delete id="deleteByNo" parameterType="_int">

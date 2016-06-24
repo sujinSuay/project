@@ -15,4 +15,5 @@ public interface BoardDao {
 	public List<String> searchSinger(String keyword);
 	public int StringToIntSingerId(String singer_name);
 	public String selectGroupNameById(String m_id);
+	public int updateLikesCount(int no);
 }
