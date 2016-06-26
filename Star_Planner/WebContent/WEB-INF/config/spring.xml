@@ -92,6 +92,8 @@
 		<!--  admin에 해당하는 부분  -->
 		<mvc:view-controller path="admin/admin_main.do" view-name="admin/admin_page.tiles" />
 
+		<mvc:view-controller path="common/main.do" view-name="common/main.tiles" />
+
 
 	<bean name="tilesConfig"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"> <!-- tiles3로 선택 -->

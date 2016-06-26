@@ -1,5 +1,7 @@
 package com.member.dao;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.common.vo.Group;
+import com.common.vo.LinkList;
 import com.common.vo.Singer;
 import com.member.vo.Member;
 
@@ -57,15 +60,23 @@ public class AdminDaoImpl implements AdminDao {
 
 	//매니저 등록
 	@Override
-	public int insertManager(String m_id) {
+	public int insertManager(HashMap<String, Object> map) {
 		
-		System.out.println("##AdminDaoImp + insertManager(" + m_id +")");
-		
-		return 0;
+		System.out.println("##AdminDaoImp + insertManager(" +map + ")");
+		System.out.println("$$$$" + map);
+		return session.update("admin.insertManager", map);
+	}
+
+	
+	//매니저 등록 거절
+	@Override
+	public int denyManager(String m_id) {
+		System.out.println("##AdminDaoImp + denyManager()");
+		return session.update("admin.denyManager", m_id);
 	}
 
 
-	//매니저 거절
+	//매니저  삭제
 	@Override
 	public int deleteManager(String m_id) {
 		
@@ -127,6 +138,30 @@ public class AdminDaoImpl implements AdminDao {
 
 		return session.insert("admin.insertCompany", group);
 	}
+	
+	public int insertMainLink(HashMap<String, Object> map){
+		System.out.println("##AdminDaoImp + insertMainLink()");
+		return session.insert("admin.insertMainLink", map);
+		
+	}
+
+
+
+	public int deleteMainLink(int count) {
+		System.out.println("##AdminDaoImp + deleteMainLink()");
+		return session.update("admin.deleteMainLink", count);
+	}
+	
+	//메인화면 링크 조회
+	public List<String> selectMainLink(){
+		System.out.println("##AdminDaoImp + selectMainLink()");
+		return session.selectList("admin.selectMainLink");
+		
+	}
+
+
+
+	
 
 
 

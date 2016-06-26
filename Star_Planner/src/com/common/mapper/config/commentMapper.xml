@@ -11,15 +11,6 @@
 </resultMap>
 
 
-
-<insert id="insertComment" parameterType="com.board.vo.Comment" >
-	<selectKey keyProperty="comment_id" resultType="int">
-		select comment_id_seq.nextval as comment_id from dual
-	</selectKey>
-INSERT INTO comments
-VALUES (#{board_no},comment_id , #{comment_content}, #{m_id}, #{comment_date})
-</insert>
-
 <select id="selectCommentId" resultType="_int">
 select comment_id_seq.nextval from dual
 </select>

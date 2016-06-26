@@ -132,22 +132,18 @@ $(document).ready(function(){
 		var text =$(parent).parent().parent().find('.m_id');
 	
 		var m_id = text.text();
-	
-	/* 	$.ajax({
+		var group_name = $(parent).parent().parent().find('#singerCompany').val();
+
+		
+	$.ajax({
 			type: "post",
-			data : {"m_id" : m_id} ,
-			url : "/Star_Planner/member/insertManager.do",
+			data : {"m_id" : m_id,
+						"group_name" : group_name} ,
+			url : "/Star_Planner/admin/insertManager.do",
 			dataType : "json",
 			"success" : function(list){
 			
-				//매니저 테이블의 내용을 삭제
-			$('#result_manager').empty();
-			
-				for(var i=0; i<list.length; i++){
-					$('#result_manager').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
-							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="등록"/></td></tr>');
-				}  
-				
+			alert("성공");				
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -155,9 +151,37 @@ $(document).ready(function(){
 			"beforeSend" : function(){
 			
 			}
-		}); //end of ajax  */
+		}); //end of ajax  
 		
 	}); // end of delete button
+	
+	
+	//매니저 등록 거절
+	$('#result_manager').on('click','.deny_manager', function(){
+	
+		var parent = this;
+		var text =$(parent).parent().parent().find('.m_id');
+	
+		var m_id = text.text();
+	
+	$.ajax({
+			type: "post",
+			data : {"m_id" : m_id},
+			url : "/Star_Planner/admin/denyManager.do",
+			dataType : "json",
+			"success" : function(list){
+			
+			alert("거절 성공");
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+			}
+		}); //end of ajax  
+		
+	}); // end of deny button 매니저 등록 거절
 	
 	
 	//가수 등록 - register_singer_btn
@@ -178,7 +202,7 @@ $(document).ready(function(){
 						'singer_tag' : singer_tag} ,
 			url : "/Star_Planner/admin/insertSinger.do",
 			dataType : "json",
-			"success" : function(){
+			"success" : function(list){
 			
 					alert('등록되었습니다');
 			
@@ -255,6 +279,122 @@ $(document).ready(function(){
 		}); //end of ajax
 		
 	}); //end of 회사 등록 버튼 -register_com_btn
+	
+	
+	///////////////////////링크처리
+	//링크 등록
+	$('#link_tbody').on("click" , '.link_register_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+		
+		var input_text= $(parent).parent().parent().find( '.link_input').val();
+		
+
+$.ajax({
+			type: "post",
+			data : { "count" : get_count,
+							"input" : input_text,
+							},
+			url : "/Star_Planner/admin/insertMainLink.do",
+			dataType : "json",
+			"success" : function(){
+	
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+					if(input_text==''){
+						alert('링크를 입력해주세요');
+						return false;
+					}				
+		}
+		}); //end of ajax
+		
+		
+		
+	} );
+	
+	
+	
+	//링크 삭제
+	$('#link_tbody').on("click" , '.link_delete_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+
+		var input_text_sapn= $(parent).parent().parent().find( '.link_input').text();
+		alert(input_text_sapn);
+		
+		$.ajax({
+			type: "post",
+			data : { "count" : get_count 	},
+			url : "/Star_Planner/admin/deleteMainLink.do",
+			dataType : "json",
+			"success" : function(){
+		
+				alert('삭제되었습니다');
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+							
+		}
+		}); //end of ajax
+		
+		
+	} ); //end of 링크 삭제
+	
+
+	//링크 수정
+	$('#link_tbody').on("click" , '.link_modify_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+		
+	
+		// <input type="text" class="link_input"/>
+		$(parent).parent().parent().find( '#input_td').empty();
+		$(parent).parent().parent().find( '#input_td').append('<input type="text" class="link_input"/>');
+
+		
+		
+/* $.ajax({
+			type: "post",
+			data : { "count" : get_count,
+							"input" : input_text
+							},
+			url : "/Star_Planner/admin/insertMainLink.do",
+			dataType : "json",
+			"success" : function(){
+		
+				alert('성공');
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+					if(input_text==''){
+						alert('링크를 입력해주세요');
+						return false;
+					}				
+		}
+		}); //end of ajax
+		 */
+		
+		
+	} );
+	
+	
 	
 	
 });
@@ -374,6 +514,8 @@ table {
 				<td>아이디</td> 
 				<td>이름</td>
 				<td>전화번호</td>
+				<td>요청회사</td>
+				<td>소속사</td>
 				<td></td>
 			</tr>
 
@@ -383,6 +525,17 @@ table {
 					<td class="m_id">${manager.m_id} </td>
 					<td>${manager.name}</td>
 					<td>${manager.phone}</td>
+					<td>${manager.tem_group }</td>
+					<td>
+							<select name="singerCompany" id="singerCompany" >
+								<option>회사 분류</option>
+								<c:forEach var="type" items="${requestScope.list_singerCompany }">
+								<option value="${type}">
+									${type}
+								</option>
+								</c:forEach>
+							</select>		
+					</td>
 					<td><input type="button" class="register_manager" value="등록"/>
 							<input type="button" class="deny_manager" value="거절"/></td>
 				</tr>
@@ -461,33 +614,36 @@ table {
 <div class="layout-down-rigth">
 	<h2>메인페이지 링크 등록</h2>
 	<table>
-		<tr>
-			<td>1번 링크</td>
-			<td><input type="text" id="link1_input"/>
-			<input type="button" id="link1_register_btn" value="등록"/>
-			<input type="button" id="link1_modify_btn" value="수정"/>
-			<input type="button" id="link1_delete_btn" value="삭제"/></td>
+	<tbody id="link_tbody">
+	<c:forEach var="link" items="${requestScope.list_mainLink }" varStatus="status">
+	<tr class="link_tr" >
+			<td class='link_count' >${status.count }번 링크</td>
+			
+			<td id="input_td">
+			<c:choose>
+			<c:when test="${link eq '' || link eq null}">
+			
+    		 <input type="text" class="link_input"/>
+			<input type="button" class="link_register_btn" value="등록"/>
+			
+		
+    		</c:when>
+
+  			 <c:otherwise>
+
+			<span class="link_input">${link }</span><br>
+			<input type="button" class="link_modify_btn" value="수정"/>
+			<input type="button" class="link_delete_btn" value="삭제"/>
+
+   			 </c:otherwise>
+			</c:choose>
+			</td>
+		
 		</tr>
-		<tr>
-			<td>2번 링크</td>
-			<td><input type="text" id="link2_input"/><input type="button" id="link2_btn"/></td>
-		</tr>
-		<tr>
-			<td>3번 링크</td>
-			<td><input type="text" id="link3_input"/><input type="button" id="link3_btn"/></td>
-		</tr>	
-		<tr>
-			<td>4번 링크</td>
-		<td><input type="text" id="link4_input"/><input type="button" id="link4_btn"/></td>
-		</tr>	
-		<tr>
-			<td>5번 링크</td>
-			<td><input type="text" id="link5_input"/><input type="button" id="link5_btn"/></td>
-		</tr>	
-		<tr>
-			<td>6번 링크</td>
-			<td><input type="text" id="link6_input"/><input type="button" id="link6_btn"/></td>
-		</tr>	
+	</c:forEach>
+	
+	</tbody>
+	
 	
 	</table>
 	

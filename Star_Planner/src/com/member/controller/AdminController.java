@@ -51,6 +51,11 @@ public class AdminController {
 		System.out.println(list_singerCompany);
 		map.put("list_singerCompany", list_singerCompany);
 		
+		//메인화면 링크 조회
+		List<String> list_mainLink = adminService.selectMainLink();
+		System.out.println(list_mainLink);
+		map.put("list_mainLink", list_mainLink);
+ 		
 		return new ModelAndView("/admin/admin_main.do" ,map);
 		
 		
@@ -113,7 +118,7 @@ public class AdminController {
 
 	@RequestMapping("/insertManager")
 	@ResponseBody
-	public List<Member> insertManager(String m_id){
+	public List<Member> insertManager(String m_id, String group_name){
 		
 		System.out.println("##AdminController + insertManager(" + m_id +")");
 		
@@ -121,8 +126,27 @@ public class AdminController {
 		
 		List<Member> list = adminService.selectManager();
 		System.out.println("매니저 목록 : " +list);
+		
+		//매니저 추가
+		adminService.insertManager(m_id, group_name);
+		
 		return list;
 	}
+	
+	//매니저 등록 거절
+	@RequestMapping("/denyManager")
+	@ResponseBody
+	public List<Member> denyManager(String m_id){
+		
+		System.out.println("##AdminController + denyManager(" + m_id +")");
+		 adminService.denyManager(m_id);
+		 
+		 List<Member> list = adminService.selectManager();
+		 return list;
+	}
+	
+	
+	
 	
 	
 	//가수등록
@@ -131,9 +155,8 @@ public class AdminController {
 	public int insertSinger(String singer_name, String singer_type, String singer_company, String singer_link, String singer_tag){
 		
 		System.out.println("##AdminController + insertSinger()");
-		adminService.insertSinger(singer_name, singer_type, singer_company, singer_link, singer_tag);
-		//추가하는 부분
-		return 0;
+		return adminService.insertSinger(singer_name, singer_type, singer_company, singer_link, singer_tag);
+		
 	}
 	
 	
@@ -143,10 +166,33 @@ public class AdminController {
 	public int insertCompany(String group_name, String group_address, String group_phone, String group_link){
 		
 		System.out.println("##AdminController + insertSinger()");
-		adminService.insertCompany(group_name, group_address, group_phone, group_link);
-		//추가하는 부분
-		return 0;
+		return adminService.insertCompany(group_name, group_address, group_phone, group_link);
+	
 	}
+	
+	
+	//메인화면의 링크 추가
+	@RequestMapping("/insertMainLink")
+	@ResponseBody
+	public int insertMainLink(int count, String input){
+		
+		System.out.println("##AdminController + insertMainLink()");
+		return adminService.insertMainLink(count, input);
+	
+	}
+	
+	//메인화면의 링크 삭제
+		@RequestMapping("/deleteMainLink")
+		@ResponseBody
+		public int deleteMainLink(int count){
+			
+			System.out.println("##AdminController + deleteMainLink()");
+			return adminService.deleteMainLink(count);
+		
+		}
+	
+	
+	
 	
 	
 	

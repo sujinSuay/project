@@ -2,8 +2,9 @@ alter table member add tem_group varchar2(200)  --member에 메니져 소속사 
 
 /* member */
 
-
-drop  sequence comment_id_seq
+drop sequence singer_no_seq;
+drop sequence group_id_seq;
+drop  sequence comment_id_seq;
 drop sequence board_no_seq;
 drop sequence schedule_id_seq;
 drop table link_list;
@@ -27,7 +28,7 @@ CREATE TABLE member (
 	address VARCHAR2(500), /* 주소 */
 	phone VARCHAR2(15), /* 전화번호 */
 	favorite VARCHAR2(1000), /* 선호그룹 */
-	temgroup varchar2(200)
+	tem_group varchar2(200)
 );
 
 /* groups */

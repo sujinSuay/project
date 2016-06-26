@@ -1,11 +1,13 @@
 package com.member.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.common.vo.Group;
+import com.common.vo.LinkList;
 import com.common.vo.Singer;
 
 import com.member.dao.AdminDaoImpl;
@@ -60,13 +62,29 @@ public class AdminServiceImpl {
 	}
 	
 	//매니저로 승낙
-	public int insertManager(String id){
+	public int insertManager(String id, String group_name){
 
-		System.out.println("##AdminServiceImpl insertManagers(" + id + ")");
+		System.out.println("##AdminServiceImpl insertManagers(" + id + ", " + group_name +" )");
+		
+		int group_id = adminDao.selectGroupIdByName(group_name);
 		
 		//디비의 member의 group_id 정보를 수정
-		return adminDao.insertAdmin(id);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("m_id", id);
+		map.put("group_id", group_id);
+		
+		return adminDao.insertManager(map);
 	}
+	
+	//매니저로 승낙 거절
+		public int denyManager(String m_id){
+
+			System.out.println("##AdminServiceImpl denyManager()");
+			return adminDao.denyManager(m_id);
+		}
+	
+	
 	
 	
 	//가수등록 - 가수 분류 selector
@@ -93,11 +111,9 @@ public class AdminServiceImpl {
 		int singer_id = adminDao.selectSingerId();
 		
 		Singer singer = new Singer(singer_id, singer_name, group_id, singer_type, singer_link, 0, singer_tag);
-		System.out.println("%%%" + singer);
-		int test = adminDao.insertSinger(singer);
-		System.out.println("ggg "+ test);
 		
-		return 0;
+		return adminDao.insertSinger(singer);
+	
 	}
 
 	public int insertCompany(String group_name, String group_address, String group_phone, String group_link) {
@@ -108,6 +124,30 @@ public class AdminServiceImpl {
 		Group group = new Group(0, group_name, group_address, group_phone, group_link);
 		return adminDao.insertCompany(group);
 		
+	}
+	
+	//링크 등록
+	public int insertMainLink(int count, String input){
+		System.out.println("##AdminServiceImpl insertMainLink()");
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("count" , count);
+		map.put("input", input);
+	System.out.println("%%%%%" + map);
+		return adminDao.insertMainLink(map);
+		
+	}
+
+	//링크 삭제
+	public int deleteMainLink(int count) {
+		System.out.println("##AdminServiceImpl deleteMainLink()");
+		return adminDao.deleteMainLink(count);
+	}
+	
+	//링크조회
+	public List<String> selectMainLink(){
+		System.out.println("##AdminServiceImpl selectMainLink()");
+		return adminDao.selectMainLink();
 	}
 	
 }
