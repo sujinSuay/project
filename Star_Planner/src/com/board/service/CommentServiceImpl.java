@@ -12,14 +12,14 @@ import com.board.dao.CommentDao;
 import com.board.vo.Comment;
 
 @Service
-public class CommentServiceImpl {
+public class CommentServiceImpl implements CommentService{
 
 	@Autowired
 	@Qualifier("commentDaoImpl")
 	private CommentDao dao;
 	
 	
-	
+	@Override
 	public List<Comment> selectComment(int board_no){
 		
 		List<Comment> list =  dao.selectComment(board_no);
@@ -27,7 +27,7 @@ public class CommentServiceImpl {
 		return list;	
 	}
 	
-
+	@Override
 	public void insertComment(Comment comment){
 		
 		System.out.println("CommentServiceImpl InsertCommnet 실행");
@@ -36,13 +36,13 @@ public class CommentServiceImpl {
 		dao.insertComment(comment);
 	
 	}
-	
+	@Override
 	public void deleteComment(int comment_id){
 	
 		System.out.println("CommentServiceImpl deleteComment 실행");
 		dao.deleteComment(comment_id);
 	}
-	
+	@Override
 	public void modifyComment(HashMap<String, Object> map){
 		System.out.println("CommentServiceImpl modifyComment 실행");
 		dao.modifyComment(map);

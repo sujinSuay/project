@@ -9,6 +9,20 @@
 	<select id="selectGroupNameById" parameterType="string" resultType="string">
 		SELECT group_name 
 		FROM groups 
-		WHERE group_id=(SELECT group_id FROM member WHERE m_id=#{id})
+		WHERE group_id=(SELECT group_id FROM member WHERE m_id = #{id})
+	</select>
+	<select id="selectSingerByGroup" parameterType="_int" resultType="singer">
+		SELECT singer_id, singer_name 
+		FROM singer 
+		WHERE group_id = #{group_id}
+	</select>
+	<select id="selectAllSinger" resultType="singer">
+		SELECT * 
+		FROM singer
+	</select>
+	<select id="selectGroupList" resultType="string">
+		SELECT group_name
+		FROM groups
+		WHERE group_id > 10
 	</select>
 </mapper> 

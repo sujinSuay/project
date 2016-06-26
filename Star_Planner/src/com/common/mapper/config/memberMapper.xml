@@ -5,7 +5,7 @@
 
 	<sql id="select-basic">
 		SELECT 	m_id, social_no, password, group_id, gender,
-				name, email, address, phone, favorite
+				name, email, address, phone, favorite, tem_group
 		FROM 	member
 	</sql>
 	
@@ -20,9 +20,10 @@
 		<result column="address" property="address"/>
 		<result column="phone" property="phone"/>
 		<result column="favorite" property="favorite"/>
+		<result column="tem_group" property="tem_group"/>
 	</resultMap>
 	<insert id="insertMember" parameterType="member">
-		INSERT INTO member values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite})
+		INSERT INTO member values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group})
 	</insert>
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="select-basic"/>
@@ -32,6 +33,13 @@
 		<include refid="select-basic"/>
 		WHERE m_id=#{m_id} and password=#{password}
 	</select>
+	<update id="updateMemberById" parameterType="map">
+		UPDATE member
+		SET	password = #{password},
+			email = #{email},
+			phone = #{phone}
+		WHERE m_id = #{m_id}
+	</update>
 	<!-- 
 	<resultMap id="book-publisher-resultmap" type="book" extends="book-resultmap">
 		<association property="publisher" javaType="bookstore.vo.Publisher" resultMap="publisher.publisher-resultmap"/>
@@ -77,9 +85,5 @@
 		WHERE m_id = #{m_id}
 	</select>
 	
-	
-	
-	
-	
-	
+
 </mapper>

@@ -39,18 +39,24 @@ $(document).ready(function(){
 	});
 });
 </script>
-
+<style type="text/css">
+table {
+    border-collapse: collapse;
+    min-width: 800px;
+    width: 100%;
+}
+</style>
 </head>
 <body>
 
 <table>
 	<tr align="center">
 		<td colspan="4">
-			<select name="prefix">
+			<%-- <select name="prefix">
 				<c:forEach items="${requestScope.codeList }" var="code">
 					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
 				</c:forEach>
-			</select>
+			</select> --%>
 			<input type="text" id="keyword" size="20">
 			<input type="button" id="searchBtn" value="검색">
 		</td>
@@ -59,7 +65,7 @@ $(document).ready(function(){
 		<td colspan="4">
 			<c:if test="${sessionScope.loginId != null }">
 				${sessionScope.loginId }님 선호 가수 리스트:&nbsp;&nbsp;
-				<c:forEach items="${requestScope.list }" var="favorite">
+				<c:forEach items="${requestScope.favorite }" var="favorite">
 					<a href="/Star_Planner/board/boardList.do?id=${favorite }&page=1">${favorite }</a>&nbsp;&nbsp;&nbsp;
 				</c:forEach>
 			</c:if>
@@ -67,22 +73,40 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td colspan="4">
-			<div id="searchResult">검색된 가수:&nbsp;&nbsp;</div>
-			<p>
+			<div id="searchResult">검색된 가수:&nbsp;&nbsp;</div><br><br><br>
 		</td>
 	</tr>
-	
-	<tr>
-		<td align="center">남자그룹</td>
-		<td align="center">여자그룹</td>
-		<td align="center">남자솔로</td>
-		<td align="center">여자솔로</td>
+	<tr align="center">
+		<td>남자그룹</td>
+		<td>여자그룹</td>
+		<td>남자솔로</td>
+		<td>여자솔로</td>
 	</tr>
-	<tr>
-		<td width="200">남자그룹 리스트</td>
-		<td width="200">여자가수 리스트</td>
-		<td width="200">남자솔로 리스트</td>
-		<td width="200">여자솔로 리스트</td>
+	<tr align="center">
+		<td width="200">
+			<c:forEach items="${requestScope.singer.mGroup }" var="singer">
+				<a href="/Star_Planner/board/boardList.do?id=${singer.singer_name }&page=1">${singer.singer_name }</a>
+				<br>
+			</c:forEach>
+		</td>
+		<td width="200">
+			<c:forEach items="${requestScope.singer.fGroup }" var="singer">
+				<a href="/Star_Planner/board/boardList.do?id=${singer.singer_name }&page=1">${singer.singer_name }</a>
+				<br>
+			</c:forEach>
+		</td>
+		<td width="200">
+			<c:forEach items="${requestScope.singer.mSolo }" var="singer">
+				<a href="/Star_Planner/board/boardList.do?id=${singer.singer_name }&page=1">${singer.singer_name }</a>
+				<br>
+			</c:forEach>
+		</td>
+		<td width="200">
+			<c:forEach items="${requestScope.singer.fSolo }" var="singer">
+				<a href="/Star_Planner/board/boardList.do?id=${singer.singer_name }&page=1">${singer.singer_name }</a>
+				<br>
+			</c:forEach>
+		</td>
 	</tr>
 </table>
 

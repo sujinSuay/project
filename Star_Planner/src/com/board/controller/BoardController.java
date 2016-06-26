@@ -1,5 +1,7 @@
 package com.board.controller;
 
+
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -22,6 +24,7 @@ import com.board.service.BoardService;
 import com.board.service.CommentServiceImpl;
 import com.board.vo.Board;
 import com.board.vo.Comment;
+import com.member.vo.Member;
 
 @Controller
 @RequestMapping("/board")
@@ -34,16 +37,24 @@ public class BoardController {
 	
 	@RequestMapping("/boardMain")
 	public ModelAndView boardMain(HttpSession session){
+		
+		Map<String, Object> singer = service.singerList();
+		
+		
 		String id = (String)session.getAttribute("loginId");
 		if(id!=null){
-			List<String> list = service.getFavorite(id);
-			if(list==null){
-				return new ModelAndView("/board_main.do");
+			List<String> favorite = service.getFavorite(id);
+			if(favorite==null){
+				return new ModelAndView("/board_main.do", singer);
 			}else{
-				return new ModelAndView("/board_main.do", "list" , list);
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("singer", singer);
+				map.put("favorite", favorite);
+				return new ModelAndView("/board_main.do", map);
+//				return new ModelAndView("/board_main.do", "favorite" , favorite);
 			}
 		}else{
-			return new ModelAndView("/board_main.do");
+			return new ModelAndView("/board_main.do", singer);
 		}
 	}
 	
@@ -54,7 +65,9 @@ public class BoardController {
 			page = 1;
 		}
 		int singer_id = service.StringToIntSingerId(id);
-		System.out.println(id+","+singer_id);
+		if(singer_id == -1){
+			return new ModelAndView("redirect:/board/boardMain.do");
+		}
 		Map<String, Object> list = service.list(singer_id, page);
 		return new ModelAndView("/board_list.do", list);
 	}
@@ -117,6 +130,10 @@ public class BoardController {
 	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws UnsupportedEncodingException{
 		int singer_id = service.StringToIntSingerId(id);
 		String m_id = (String)session.getAttribute("loginId");
+		if(m_id==null){
+			System.out.println("자동 로그아웃됨");
+			return new ModelAndView("redirect:/board/boardList.do?id="+URLEncoder.encode(id,"UTF-8")+"&page=1");
+		}
 		String group_name = service.selectGroupNameById(m_id);
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name);
 		service.writeBoard(board);
@@ -131,6 +148,14 @@ public class BoardController {
 	public List<String> searchSinger(String keyword){
 		List<String> list= service.searchSinger(keyword);
 		return list;
+	}
+	
+	//boardLike
+	@RequestMapping("/boardLike")
+	@ResponseBody
+	public int boardLike(int no, int likes){
+		service.updateLikesCount(no);
+		return likes+1;
 	}
 	
 

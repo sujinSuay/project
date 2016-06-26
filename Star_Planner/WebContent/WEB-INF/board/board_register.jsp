@@ -9,17 +9,16 @@
 select{
 	width: 70px;
 }
-
 </style>
 </head>
 <body>
-<c:if test="${not empty requestScope.errorList }">
+<%-- <c:if test="${not empty requestScope.errorList }">
 	<ul id="error">
 		<c:forEach items="${requestScope.errorList }" var="error">
 			<li>${error }</li>
 		</c:forEach>
 	</ul>
-</c:if>
+</c:if> --%>
 <form action="/Star_Planner/board/boardWriter.do" method="post">
 <input type="hidden" name="id" value="${param.id }">
 <table>
@@ -30,16 +29,20 @@ select{
 					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
 				</c:forEach>
 			</select> --%>
-			<input type="text" name="board_title" size="70" placeholder="제목" value="${param.board_title }">
+			<input type="text" name="board_title" size="70" placeholder="제목" value="${param.board_title }" required="required">
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<textarea rows="20" cols="100" name="board_content">${param.board_content }</textarea>
+			<textarea rows="20" cols="100" name="board_content" required="required">${param.board_content }</textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="저장"> <input type="reset" value="초기화"></td>
+		<td align="center">
+			<input type="submit" value="저장">&nbsp;
+			<input type="reset" value="초기화">&nbsp;
+			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1">취소</a>
+		</td>
 	</tr>	
 </table>
 </form>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.vo.Board;
+import com.common.vo.Singer;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -20,13 +21,6 @@ public class BoardDaoImpl implements BoardDao {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	/**
-	 * 글번호로 하나의 공지사항 글을 조회하는 메소드.
-	 * @param conn
-	 * @param no
-	 * @return 조회한 공지사항. 글이 없을 경우 null
-	 * @throws SQLException
-	 */
 	@Override
 	public Board selectByNo(int no) {
 		// TODO Auto-generated method stub
@@ -78,7 +72,12 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.update(namespace_board+"updateViewCount", no);
 	}
-
+	
+	@Override
+	public int updateLikesCount(int no) {
+		// TODO Auto-generated method stub
+		return session.update(namespace_board+"updateLikesCount", no);
+	}
 	/**
 	 * 공지사항 글번호로 하나 update
 	 * @param conn
@@ -115,6 +114,12 @@ public class BoardDaoImpl implements BoardDao {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
 	}
-	
 
+	@Override
+	public List<Singer> selectAllSinger() {
+		return session.selectList(namespace_common+"selectAllSinger");
+	}
+
+	
+	
 }

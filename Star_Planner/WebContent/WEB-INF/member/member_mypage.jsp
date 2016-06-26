@@ -28,7 +28,7 @@
 			<td class="td">주소</td>
 			<td class="info">${requestScope.member.address }</td>
 			<td class="td"></td>
-			<td class="info"><input type="button" id="modify" value="정보변경"></td>
+			<td class="info"><input type="button" id="modify" value="정보변경" onclick="location.href='modifyForm.do'"></td>
 		</tr>
 		<tr>
 			<td class="td">생년월일</td>
@@ -38,5 +38,10 @@
 		</tr>
 	</table>
 </div>
+	<h2>내가쓴 게시글</h2>
+    <jsp:include page="/WEB-INF/member/member_mypage_board_list.jsp"/>
+    <h2>내가쓴 댓글</h2>
+    <jsp:include page="/WEB-INF/member/member_mypage_comment_list.jsp"/>
+   	
 </body>
 </html>

@@ -14,9 +14,8 @@ import com.board.vo.Board;
 import com.common.dao.TypeListDao;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
-import com.common.vo.TypeList;
-import com.member.dao.MemberDao;
-
+import com.common.vo.Singer;
+import com.member.dao.memberDao;
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
 	@Autowired
@@ -26,7 +25,7 @@ public class BoardServiceImpl implements BoardService{
 	private TypeListDao tdao;
 	
 	@Autowired
-	private MemberDao mdao;
+	private memberDao mdao;
 	
 	@Override
 	public String selectGroupNameById(String m_id) {
@@ -39,10 +38,10 @@ public class BoardServiceImpl implements BoardService{
 		return list;
 	}
 	
-	public List<TypeList> getWriteFormPrefix(String typeList){
+	/*public List<TypeList> getWriteFormPrefix(String typeList){
 		return tdao.selectByCodeCateory(typeList);
 		
-	}
+	}*/
 
 	public void writeBoard(Board board){
 		//제목과 내용을 HTML에 맞게 변환
@@ -91,6 +90,52 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	public int StringToIntSingerId(String singer_name){
-		return dao.StringToIntSingerId(singer_name);
+		try {
+			int singer_id = dao.StringToIntSingerId(singer_name);
+			return singer_id;
+		} catch (NullPointerException e) {
+			return -1;
+		}
+		
 	}
+	
+	@Override
+	public int updateLikesCount(int no) {
+		// TODO Auto-generated method stub
+		return dao.updateLikesCount(no);
+	}
+
+	@Override
+	public Map<String, Object> singerList() {
+		List<Singer> s_list = dao.selectAllSinger();
+		List<String> t_list = tdao.selectByCodeCateory("singer_type");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		for (int i = 0; i < t_list.size(); i++) {
+			List<Singer> result = new ArrayList<Singer>();
+			for (int j = 0; j < s_list.size(); j++) {
+				if(s_list.get(j).getType_name().equals(t_list.get(i))){
+					result.add(s_list.get(j));
+				}
+			}
+			switch (t_list.get(i)) {
+				case "남자그룹":
+					map.put("mGroup", result);
+					break;
+				case "여자그룹":
+					map.put("fGroup", result);
+					break;
+				case "남자솔로":
+					map.put("mSolo", result);
+					break;
+				case "여자솔로":
+					map.put("fSolo", result);
+					break;
+			}
+		}
+		return map;
+	}
+	
+	
 }

@@ -15,14 +15,16 @@ public class Member {
 	private String address; /**회원 주소 **/
 	private String phone; /**회원 전화번호 **/
 	private String favorite;  /**회원이 선호하는 그룹의 이름. 선호그릅은 다중 선택 가능. ','로 구분 **/
+	private String tem_group;
 	
 	
 	public Member(){
 		
 	}
-	
-	public Member(String m_id, String social_no, String password, int group_id, String gender, String name, String email,
-			String address, String phone, String favorite) {
+
+
+	public Member(String m_id, String social_no, String password, int group_id, String gender, String name,
+			String email, String address, String phone, String favorite, String tem_group) {
 		super();
 		this.m_id = m_id;
 		this.social_no = social_no;
@@ -34,79 +36,120 @@ public class Member {
 		this.address = address;
 		this.phone = phone;
 		this.favorite = favorite;
+		this.tem_group = tem_group;
 	}
-	
-	
+
+
 	public String getM_id() {
 		return m_id;
 	}
+
+
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
+
+
 	public String getSocial_no() {
 		return social_no;
 	}
+
+
 	public void setSocial_no(String social_no) {
 		this.social_no = social_no;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 	public int getGroup_id() {
 		return group_id;
 	}
+
+
 	public void setGroup_id(int group_id) {
 		this.group_id = group_id;
 	}
+
+
 	public String getGender() {
 		return gender;
 	}
+
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 	public String getAddress() {
 		return address;
 	}
+
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
+
 	public String getPhone() {
 		return phone;
 	}
+
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+
 	public String getFavorite() {
 		return favorite;
 	}
+
+
 	public void setFavorite(String favorite) {
 		this.favorite = favorite;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "Member [m_id=" + m_id + ", social_no=" + social_no + ", password=" + password + ", group_id=" + group_id
-				+ ", gender=" + gender + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
-				+ phone + ", favorite=" + favorite + "]";
+
+
+	public String getTem_group() {
+		return tem_group;
 	}
-	
-	
+
+
+	public void setTem_group(String tem_group) {
+		this.tem_group = tem_group;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -121,10 +164,11 @@ public class Member {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result + ((social_no == null) ? 0 : social_no.hashCode());
+		result = prime * result + ((tem_group == null) ? 0 : tem_group.hashCode());
 		return result;
 	}
-	
-	
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -181,10 +225,13 @@ public class Member {
 				return false;
 		} else if (!social_no.equals(other.social_no))
 			return false;
+		if (tem_group == null) {
+			if (other.tem_group != null)
+				return false;
+		} else if (!tem_group.equals(other.tem_group))
+			return false;
 		return true;
 	}
-	
-	
 	
 	
 

@@ -1,6 +1,8 @@
 package com.common.vo;
 
-public class Singer {
+import java.io.Serializable;
+
+public class Singer implements Serializable{
 	
 	private int singer_id; /** 가수 고유 id **/
 	private String singer_name;  /** 가수 이름 **/
@@ -15,9 +17,15 @@ public class Singer {
 		
 	}
 	
-	
-	public Singer(int singer_id, String singer_name, int group_id, String type_name, String singer_link,
-			int singer_favorite, String singer_tag) {
+
+	public Singer(int singer_id, String singer_name) {
+		super();
+		this.singer_id = singer_id;
+		this.singer_name = singer_name;
+	}
+
+
+	public Singer(int singer_id, String singer_name, int group_id, String type_name, String singer_link, int singer_favorite, String singer_tag) {
 		super();
 		this.singer_id = singer_id;
 		this.singer_name = singer_name;

@@ -7,13 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.common.vo.Group;
 import com.common.vo.Singer;
+
 import com.member.dao.AdminDaoImpl;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.Member;
 
 
 @Service("adminService")
-public class AdminServiceImpl implements MemberService {
+public class AdminServiceImpl {
 
 	@Autowired
 	private AdminDaoImpl adminDao;
