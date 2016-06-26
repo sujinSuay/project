@@ -31,7 +31,13 @@ public class MemberDaoImpl implements MemberDao {
 		return session.selectOne("member.selectMemberByIdAndPassword",map);
 	}
 	public String selectFavorite(String m_id){
-		return session.selectOne("member.selectFavorite", m_id);
+		String fav = session.selectOne("member.selectFavorite", m_id);
+		if(fav==null){
+			return "";
+		}else{
+			return fav;
+		}
+		 
 	}
 	
 }

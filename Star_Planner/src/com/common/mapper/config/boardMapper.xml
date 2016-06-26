@@ -40,11 +40,11 @@
 		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
 		FROM(SELECT ceil(rownum/5) page, board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
 		FROM(SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
-		FROM board ORDER BY board_no DESC)) 
-		WHERE page = #{page} AND singer_id = #{singer_id}
+		FROM board WHERE singer_id = #{singer_id} ORDER BY board_no DESC)) 
+		WHERE page = #{page}
 	</select>
 	<select id="selectCountContents" resultType="_int">
-		SELECT count(board_no) FROM board
+		SELECT count(board_no) FROM board WHERE singer_id = #{singer_id}
 	</select>
 	
 </mapper>

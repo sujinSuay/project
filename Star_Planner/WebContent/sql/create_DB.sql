@@ -35,6 +35,10 @@ CREATE TABLE groups (
 	group_phone VARCHAR2(50) NOT NULL, /* 전화번호 */
 	group_link VARCHAR2(500) /* 링크 */
 );
+
+--매니저는 11번부터 group_id에 등록
+CREATE SEQUENCE  group_id_seq START WITH  11 INCREMENT BY 1  NOCACHE;
+
 /* singer */
 CREATE TABLE singer (
 	singer_id NUMBER(4) PRIMARY KEY, /* 가수 */
@@ -46,6 +50,8 @@ CREATE TABLE singer (
 	singer_tag VARCHAR2(500) NOT NULL /* 검색태그 */
 );
 
+--디비에 20번까지 등록되있어서 21로 설정함
+create sequence singer_no_seq start with 21  nocache;
 
 /* board */
 
@@ -76,6 +82,9 @@ CREATE TABLE schedule (
 
 create sequence schedule_id_seq nocache;
 /* comment */
+
+
+
 
 CREATE TABLE comments (
 	board_no NUMBER(10) NOT NULL, /* 게시글번호 */

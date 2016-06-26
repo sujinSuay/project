@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="admin">
+
+<select id="selectAdmin"  resultType="Member" >
+	<include refid="member.select-basic"/>
+		WHERE group_id=1
+</select>
+	
+<!--  관리자의 group_id=1  -->	
+
+<!-- 관리자 등록 -->
+<update id="insertAdmin" parameterType="string">
+update member
+set group_id = 1
+where m_id=#{m_id}
+</update>
+
+<!--  관리자 해제 / 해제되면 일반회원으로 전환 2 -->
+<update id="deleteAdmin" parameterType="string">
+update member
+set group_id = 2
+where m_id=#{m_id}
+</update>
+
+<!--  매니저로 신청한 목록을 보여주는 쿼리/ 매니저 신청한 회원의 group_id=3 -->	
+<select id="selectManager"  resultMap="member.member-resultmap">
+<include refid="member.select-basic"/>
+	WHERE group_id=3
+</select>	
+
+<!-- 매니저 등록 -->
+<update id="insertManager" parameterType="string">
+update member
+set group_id = group_id_seq.nextval
+where m_id=#{m_id}
+</update>
+
+<select id="selectSingerType" resultType="string">
+select type_name
+from type_list
+where word_type='singer_type'
+</select>	
+
+<select id="selectSingerCompany" resultType="string">
+select group_name
+from groups
+where group_id > 10
+</select>	
+
+<select id="selectGroupIdByName" resultType="_int" parameterType="string">
+select group_id
+from groups
+where group_name = #{value}
+</select>
+
+<select id="selectSingerId" resultType="_int">
+select singer_no_seq.nextval from dual
+</select>
+
+<insert id="insertSinger" parameterType="com.common.vo.Singer" >
+insert into singer values (#{singer_id}, #{singer_name}, #{group_id}, #{type_name}, #{singer_link}, #{singer_favorite}, #{singer_tag})
+</insert>
+
+<insert id="insertCompany" parameterType="com.common.vo.Group">
+	<selectKey resultType="_int" keyProperty="group_id" order="BEFORE">
+		select group_id_seq.nextval from dual
+	</selectKey>
+	insert into groups values(#{group_id},  #{group_name}, #{group_address}, #{group_phone}, #{group_link} )
+</insert>
+
+</mapper>

@@ -35,6 +35,11 @@ INSERT INTO member VALUES ('manager1', '000000000013', '0000',  11, 'male', 'JYP
 INSERT INTO member VALUES ('manager2', '000000000009', '0000',  12, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹' );
 INSERT INTO member VALUES ('manager3', '000000000012', '0000',  13, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹' );
 
+--manager(매니저가 되기 위해 대기중인 매니저)
+INSERT INTO member VALUES ('manager4', '000000000102', '0000',  3, 'male', 'JYP메니져이름DD', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹' );
+INSERT INTO member VALUES ('manager5', '000000000100', '0000',  3, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹' );
+INSERT INTO member VALUES ('manager6', '000000000101', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹' );
+
 
 INSERT INTO type_list VALUES('여자그룹' , 'singer_type');
 INSERT INTO type_list VALUES('남자그룹' , 'singer_type');

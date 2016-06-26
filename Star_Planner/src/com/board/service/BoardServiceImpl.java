@@ -1,6 +1,5 @@
 package com.board.service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,6 +28,11 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private MemberDao mdao;
 	
+	@Override
+	public String selectGroupNameById(String m_id) {
+		return dao.selectGroupNameById(m_id);
+	}
+
 	public List<String> getFavorite(String m_id){
 		String fav = mdao.selectFavorite(m_id);
 		List<String> list = new ArrayList<String>(Arrays.asList(fav.split(",")));
@@ -56,7 +60,7 @@ public class BoardServiceImpl implements BoardService{
 	public Map<String, Object> list(int singer_id, int page){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", dao.selectList(singer_id, page));
-		map.put("paging", new PagingBean(dao.selectCountContents(), page));
+		map.put("paging", new PagingBean(dao.selectCountContents(singer_id), page));
 		return map;
 	}
 

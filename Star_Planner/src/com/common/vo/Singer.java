@@ -4,7 +4,7 @@ public class Singer {
 	
 	private int singer_id; /** 가수 고유 id **/
 	private String singer_name;  /** 가수 이름 **/
-	private int group;  /** 가수가 속한 그룹 **/
+	private int group_id;  /** 가수가 속한 그룹 **/
 	private String type_name; /** 가수의 분류 - 여자그룹, 남자그룹, 여자 솔로, 남자 솔로, 기타 **/
 	private String singer_link; /** 가수의 개인 사이트(검색) 링크 **/
 	private int singer_favorite; /** 가수를 선호하는 회원의 수 **/
@@ -16,12 +16,12 @@ public class Singer {
 	}
 	
 	
-	public Singer(int singer_id, String singer_name, int group, String type_name, String singer_link,
+	public Singer(int singer_id, String singer_name, int group_id, String type_name, String singer_link,
 			int singer_favorite, String singer_tag) {
 		super();
 		this.singer_id = singer_id;
 		this.singer_name = singer_name;
-		this.group = group;
+		this.group_id = group_id;
 		this.type_name = type_name;
 		this.singer_link = singer_link;
 		this.singer_favorite = singer_favorite;
@@ -51,13 +51,13 @@ public class Singer {
 	}
 
 
-	public int getGroup() {
-		return group;
+	public int getGroup_id() {
+		return group_id;
 	}
 
 
-	public void setGroup(int group) {
-		this.group = group;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 
 
@@ -103,7 +103,7 @@ public class Singer {
 
 	@Override
 	public String toString() {
-		return "Singer [singer_id=" + singer_id + ", singer_name=" + singer_name + ", group=" + group + ", type_name="
+		return "Singer [singer_id=" + singer_id + ", singer_name=" + singer_name + ", group_id=" + group_id + ", type_name="
 				+ type_name + ", singer_link=" + singer_link + ", singer_favorite=" + singer_favorite + ", singer_tag="
 				+ singer_tag + "]";
 	}
@@ -113,7 +113,7 @@ public class Singer {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + group;
+		result = prime * result + group_id;
 		result = prime * result + singer_favorite;
 		result = prime * result + singer_id;
 		result = prime * result + ((singer_link == null) ? 0 : singer_link.hashCode());
@@ -133,7 +133,7 @@ public class Singer {
 		if (getClass() != obj.getClass())
 			return false;
 		Singer other = (Singer) obj;
-		if (group != other.group)
+		if (group_id != other.group_id)
 			return false;
 		if (singer_favorite != other.singer_favorite)
 			return false;

@@ -24,6 +24,7 @@ select{
 <form action="/Star_Planner/board/boardModify.do" method="post">
 <input type="hidden" name="id" value="${param.id }">
 <input type="hidden" name="no" value="${param.no }">
+<input type="hidden" name="page" value="${param.page }">
 <table>
 	<tr>
 		<td>

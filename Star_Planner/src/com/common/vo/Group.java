@@ -2,7 +2,7 @@ package com.common.vo;
 
 public class Group {
 	
-	private int group;  /** 회원이 속한 그룹.  1번:admin, 2번: 일반회원, 3번: 소속사 매니저 **/
+	private int group_id;  /** 회원이 속한 그룹.  1번:admin, 2번: 일반회원, 3번: 소속사 매니저 **/
 	private String group_name;  /** 그룹 이름 **/
 	private String group_address;  /** 그룹의 위치(회사의 주소) **/
 	private String group_phone; /** 그룹의 전화번호 (회사 전화번호)  **/
@@ -15,9 +15,9 @@ public class Group {
 	}
 	
 	
-	public Group(int group, String group_name, String group_address, String group_phone, String group_link) {
+	public Group(int group_id, String group_name, String group_address, String group_phone, String group_link) {
 		super();
-		this.group = group;
+		this.group_id = group_id;
 		this.group_name = group_name;
 		this.group_address = group_address;
 		this.group_phone = group_phone;
@@ -25,13 +25,13 @@ public class Group {
 	}
 
 
-	public int getGroup() {
-		return group;
+	public int getGroup_id() {
+		return group_id;
 	}
 
 
-	public void setGroup(int group) {
-		this.group = group;
+	public void setGroup_id(int group_id) {
+		this.group_id = group_id;
 	}
 
 
@@ -77,7 +77,7 @@ public class Group {
 
 	@Override
 	public String toString() {
-		return "Group [group=" + group + ", group_name=" + group_name + ", group_address=" + group_address
+		return "Group [group_id=" + group_id + ", group_name=" + group_name + ", group_address=" + group_address
 				+ ", group_phone=" + group_phone + ", group_link=" + group_link + "]";
 	}
 
@@ -86,7 +86,7 @@ public class Group {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + group;
+		result = prime * result + group_id;
 		result = prime * result + ((group_address == null) ? 0 : group_address.hashCode());
 		result = prime * result + ((group_link == null) ? 0 : group_link.hashCode());
 		result = prime * result + ((group_name == null) ? 0 : group_name.hashCode());
@@ -104,7 +104,7 @@ public class Group {
 		if (getClass() != obj.getClass())
 			return false;
 		Group other = (Group) obj;
-		if (group != other.group)
+		if (group_id != other.group_id)
 			return false;
 		if (group_address == null) {
 			if (other.group_address != null)

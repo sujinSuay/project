@@ -1,4 +1,4 @@
-select * from member
+select * from member where m_id='master';
 select * from comments;
 
 INSERT INTO member
@@ -82,6 +82,9 @@ CREATE TABLE schedule (
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */
 	schedule_address VARCHAR2(500) NOT NULL /* 장소 */
 );
+
+
+select * from board;
 
 create sequence schedule_id_seq nocache;
 /* comment */

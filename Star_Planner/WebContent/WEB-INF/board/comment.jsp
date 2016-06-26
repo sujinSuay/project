@@ -26,6 +26,8 @@
 			
 						//추가된 내용을 table에 추가 -> insertComment의 반환형은 comment
 						alert(comment.comment_id);
+						
+						//기존에 있던걸 다지우고 리스트르 받아와서 뿌려주도록
 						$('#reply_line').append(
 								"<tr><td id='user_layer' style='cursor:pointer;'><span><input type='hidden'  class='comment_id' value='"+comment.comment_id+"''/>"+comment.m_id + '</span></td> <td class="content"><span>' 
 								+comment.comment_content +'</span></td><td>'+comment.comment_date+'</td><td><button class="delete_comment">삭제</button><button class="modify_comment">수정</button></td></tr>');
