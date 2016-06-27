@@ -64,7 +64,8 @@ public class AdminDaoImpl implements AdminDao {
 		
 		System.out.println("##AdminDaoImp + insertManager(" +map + ")");
 		System.out.println("$$$$" + map);
-		return session.update("admin.insertManager", map);
+		int c =session.update("admin.insertManager", map);
+		return c;
 	}
 
 	

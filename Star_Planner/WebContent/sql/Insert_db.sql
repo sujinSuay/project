@@ -38,6 +38,15 @@ INSERT INTO member VALUES ('manager3', '000000000012', '0000',  13, 'male', 'YG�
 INSERT INTO member VALUES ('manager4', '000000000102', '0000',  3, 'male', 'JYP메니져이름DD', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
 INSERT INTO member VALUES ('manager5', '000000000100', '0000',  3, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
 INSERT INTO member VALUES ('manager6', '000000000101', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager7', '000000000105', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager8', '000000000106', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+
+
+
+
+commit
+
+delete from member where m_id='manager8';
 
 
 INSERT INTO type_list VALUES('여자그룹' , 'singer_type');

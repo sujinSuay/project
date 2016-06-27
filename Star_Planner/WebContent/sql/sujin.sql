@@ -138,8 +138,16 @@ update member set group_id=2 where m_id='manager5'
 commit
 select * from link_list;
 delete from link_list;
-select * from member where group_id=3
-select * from groups
+select * from member where group_id=13
+select * from 
+
+update member
+set group_id=13
+where m_id='manager4';
+
+
+select * from member where m_id='manager6';
+[group_id=13, m_id=manager4 ]
 
 CREATE TABLE link_list(
 	link_type 		VARCHAR2(200),

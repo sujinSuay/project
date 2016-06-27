@@ -360,11 +360,10 @@ $.ajax({
 		
 		var get_count_split = get_count_td.split("번");
 		var get_count = get_count_split[0];
-		
+		alert('ddddd');
 	
-		// <input type="text" class="link_input"/>
-		$(parent).parent().parent().find( '#input_td').empty();
-		$(parent).parent().parent().find( '#input_td').append('<input type="text" class="link_input"/>');
+//sujin
+		$(parent).parent().parent().find( '#input_td').html('<input type="text" class="link_input"/> <input type="button" class="link_register_btn" value="등록"/>');
 
 		
 		
@@ -522,7 +521,7 @@ table {
 			<tbody  id="result_manager">
 			<c:forEach var="manager" items="${requestScope.list_manager }">
 				<tr>
-					<td class="m_id">${manager.m_id} </td>
+					<td class="m_id">${manager.m_id}</td>
 					<td>${manager.name}</td>
 					<td>${manager.phone}</td>
 					<td>${manager.tem_group }</td>
