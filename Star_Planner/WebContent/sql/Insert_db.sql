@@ -10,30 +10,43 @@ INSERT INTO GROUPS VALUES ( 12, 'SM', 'SM회사주소', '1111111', '1111' );
 INSERT INTO GROUPS VALUES ( 13, 'YG', 'YG회사주소', '1111111', '1111' );
 INSERT INTO GROUPS VALUES ( 14, 'PlanA', 'PlanA회사주소', '1111111', '1111' );
 
-
 select * from groups;
 select group_name from groups where group_id=(select group_id from member where m_id='id-0001')
-
---m_id, social_no, password, group, gender, name, email, address, phone, favorite
+select * from member
+--m_id, social_no, password, group_id, gender, name, email, address, phone, favorite, temgroup
 --마스터 등록  (group 값이 0)
-INSERT INTO member VALUES ('master', '000000000000', 'master',  0, '여', 'master', 'master@kosta.com', null , null, null ); 
+INSERT INTO member VALUES ('master', '000000000000', 'master',  0, '여', 'master', 'master@kosta.com',  '주소b', '전화번호', '선호그룹' , 'temgroup'); 
 --일반회원 등록 (group 값이 2)
-INSERT INTO member VALUES ('id-0001', '000000000011', '0000',  2, 'female', 'id-0001', 'id-0001@kosta.com', null, '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('id-0002', '000000000001', '0000',  2, 'female', 'id-0002', 'id-0002@kosta.com', '주소b', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('id-0003', '000000000002', '0000',  2, 'female', 'id-0003', 'id-0003@kosta.com', '주소c', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('id-0004', '000000000003', '0000',  2, 'female', 'id-0004', 'id-0004@kosta.com', '주소d', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('id-0005', '000000000004', '0000',  2, 'female', 'id-0005', 'id-0005@kosta.com', '주소e', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('id-0006', '000000000005', '0000',  2, 'female', 'id-0006', 'id-0006@kosta.com', '주소f', '전화번호', '선호그룹' );
+INSERT INTO member VALUES ('id-0001', '000000000011', '0000',  2, 'female', 'id-0001', 'id-0001@kosta.com',  '주소b', '전화번호', '선호그룹', 'temgroup' );
+INSERT INTO member VALUES ('id-0002', '000000000001', '0000',  2, 'female', 'id-0002', 'id-0002@kosta.com', '주소b', '전화번호', '선호그룹' , 'temgroup');
+INSERT INTO member VALUES ('id-0003', '000000000002', '0000',  2, 'female', 'id-0003', 'id-0003@kosta.com', '주소c', '전화번호', '선호그룹','temgroup');
+INSERT INTO member VALUES ('id-0004', '000000000003', '0000',  2, 'female', 'id-0004', 'id-0004@kosta.com', '주소d', '전화번호', '선호그룹' ,'temgroup');
+INSERT INTO member VALUES ('id-0005', '000000000004', '0000',  2, 'female', 'id-0005', 'id-0005@kosta.com', '주소e', '전화번호', '선호그룹' ,'temgroup');
+INSERT INTO member VALUES ('id-0006', '000000000005', '0000',  2, 'female', 'id-0006', 'id-0006@kosta.com', '주소f', '전화번호', '선호그룹' ,'temgroup');
 --admin
-INSERT INTO member VALUES ('admin1', '000000000006', 'master',  1, '여', 'admin1', 'admin@kosta.com', null , null, null ); 
-INSERT INTO member VALUES ('admin2', '000000000007', 'master',  1, '여', 'admin2', 'admin@kosta.com', null , null, null ); 
-INSERT INTO member VALUES ('admin3', '000000000008', 'master',  1, '여', 'admin3', 'admin@kosta.com', null , null, null ); 
+INSERT INTO member VALUES ('admin1', '000000000006', 'master',  1, '여', 'admin1', 'admin@kosta.com', null , null, null ,'temgroup'); 
+INSERT INTO member VALUES ('admin2', '000000000007', 'master',  1, '여', 'admin2', 'admin@kosta.com', null , null, null ,'temgroup'); 
+INSERT INTO member VALUES ('admin3', '000000000008', 'master',  1, '여', 'admin3', 'admin@kosta.com', null , null, null ,'temgroup'); 
 
 
 --manager
-INSERT INTO member VALUES ('manager1', '000000000013', '0000',  11, 'male', 'JYP메니져이름', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('manager2', '000000000009', '0000',  12, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹' );
-INSERT INTO member VALUES ('manager3', '000000000012', '0000',  13, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹' );
+INSERT INTO member VALUES ('manager1', '000000000013', '0000',  11, 'male', 'JYP메니져이름', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
+INSERT INTO member VALUES ('manager2', '000000000009', '0000',  12, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager3', '000000000012', '0000',  13, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+
+--manager(매니저가 되기 위해 대기중인 매니저)
+INSERT INTO member VALUES ('manager4', '000000000102', '0000',  3, 'male', 'JYP메니져이름DD', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
+INSERT INTO member VALUES ('manager5', '000000000100', '0000',  3, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
+INSERT INTO member VALUES ('manager6', '000000000101', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager7', '000000000105', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager8', '000000000106', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+
+
+
+
+commit
+
+delete from member where m_id='manager8';
 
 
 INSERT INTO type_list VALUES('여자그룹' , 'singer_type');
@@ -75,6 +88,16 @@ INSERT INTO singer VALUES(18, '코요테', 11, '혼성그룹', 'kimY@yg.com', 0,
 INSERT INTO singer VALUES(19, '악동뮤지션', 14, '혼성그룹', 'kimY@yg.com', 0, '악동뮤지션,악뮤,akmu');
 INSERT INTO singer VALUES(20, '클레지콰이', 12, '혼성그룹', 'kimY@yg.com', 0, '클레지콰이');
 
+
+--main link 등록
+insert into  link_list values ('main_link',null, null, 1);
+insert into  link_list values ('main_link',null, null, 2);
+insert into  link_list values ('main_link',null, null, 3);
+insert into  link_list values ('main_link',null, null, 4);
+insert into  link_list values ('main_link',null, null, 5);
+insert into  link_list values ('main_link',null, null, 6);
+
+
 commit;
 
 
@@ -86,7 +109,7 @@ commit
 
 
 
-select * from member
+select * from member where group_id=3
 select * from groups
 
 

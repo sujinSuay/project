@@ -22,6 +22,7 @@
 		<result column="favorite" property="favorite"/>
 		<result column="tem_group" property="tem_group"/>
 	</resultMap>
+	
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group})
 	</insert>
@@ -84,4 +85,6 @@
 		FROM member 
 		WHERE m_id = #{m_id}
 	</select>
+	
+
 </mapper>

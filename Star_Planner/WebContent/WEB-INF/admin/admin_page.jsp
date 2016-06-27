@@ -1,224 +1,652 @@
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=utf-8"%>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+
+
+	
+	//검색버튼 이벤트
+	$('#search').on("click", function(){
+	
+		
+		$.ajax({
+			type: "post",
+			data : {"id" : $('#admin_id').val()} ,
+			url : "/Star_Planner/admin/selectById.do",
+			dataType : "json",
+			"success" : function(member){
+				
+				if(member.name==null){
+					$('#result_search').html('입력하신 아이디는 존재 하지 않습니다');
+				}else if(member.group_id==1){
+					$('#result_search').html('이미 관리자 입니다');
+				}else if(member.group_id==0){
+					$('#result_search').html('마스터 계정은 수정 불가합니다');
+				}
+				else{
+			
+					$('#result_search').html('<span id="input_name">' + member.m_id+'</span>' + '<input type="button" class="register_admin" value="등록"/>');
+				}
+				
+			}, "error" : function(xhr, status, errorMsg){
+				
+				alert("오류발생  " + status + errorMsg);
+			
+			},
+			"beforeSend" : function(){
+			
+				if($('#admin_id').val()==''){
+					alert("아이디를 입력해주세요");
+					return false;
+				}
+			
+			}
+		}); //end of ajax
+		
+	}); // end of search button
+	
+ 	$('#result_search').on("click", ".register_admin" , function(){
+
+ 		var text = $('#admin_id').val();
+ 		
+ 		$.ajax({
+			type: "post",
+			data : {"id" : $('#admin_id').val()} ,
+			url : "/Star_Planner/admin/register.do",
+			dataType : "json",
+			"success" : function(list){
+		
+				$('#admin_id').empty();
+				$('#result_admin').empty();
+				
+				for(var i=0; i<list.length; i++){
+					$('#result_admin').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
+							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="삭제"/></td></tr>');
+					
+				}  
+				
+			}, "error" : function(xhr, status, errorMsg){
+				
+				alert("오류발생  " + status + errorMsg);
+			
+			},
+			"beforeSend" : function(){
+			
+				if($('#admin_id').val()==''){
+					alert("아이디를 입력해주세요");
+					return false;
+				}
+			
+			}
+		}); //end of ajax 
+		
+	});
+	 
+	
+	//삭제 버튼
+	$('#result_admin').on('click','.delete', function(){
+	
+		var parent = this;
+		var text =$(parent).parent().parent().find('.m_id');
+	
+		var m_id = text.text();
+		alert(m_id);
+		
+		
+		$.ajax({
+			type: "post",
+			data : {"m_id" : m_id} ,
+			url : "/Star_Planner/admin/delete.do",
+			dataType : "json",
+			"success" : function(list){
+			
+				//관리자 결과 테이블의 내용을 삭제
+			$('#result_admin').empty();
+			
+				for(var i=0; i<list.length; i++){
+					$('#result_admin').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
+							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="삭제"/></td></tr>');
+				}  
+				
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+			}
+		}); //end of ajax 
+		
+	}); // end of delete button
+	
+	
+	//매니저 등록
+	$('#result_manager').on('click','.register_manager', function(){
+	
+		var parent = this;
+		var text =$(parent).parent().parent().find('.m_id');
+	
+		var m_id = text.text();
+		var group_name = $(parent).parent().parent().find('#singerCompany').val();
+
+		
+	$.ajax({
+			type: "post",
+			data : {"m_id" : m_id,
+						"group_name" : group_name} ,
+			url : "/Star_Planner/admin/insertManager.do",
+			dataType : "json",
+			"success" : function(list){
+			
+			alert("성공");				
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+			}
+		}); //end of ajax  
+		
+	}); // end of delete button
+	
+	
+	//매니저 등록 거절
+	$('#result_manager').on('click','.deny_manager', function(){
+	
+		var parent = this;
+		var text =$(parent).parent().parent().find('.m_id');
+	
+		var m_id = text.text();
+	
+	$.ajax({
+			type: "post",
+			data : {"m_id" : m_id},
+			url : "/Star_Planner/admin/denyManager.do",
+			dataType : "json",
+			"success" : function(list){
+			
+			alert("거절 성공");
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+			}
+		}); //end of ajax  
+		
+	}); // end of deny button 매니저 등록 거절
+	
+	
+	//가수 등록 - register_singer_btn
+	$('#register_singer_btn').on("click", function(){
+			
+			var singer_name = $('#singer_name').val();
+			var singer_type = $('#singerType').val();
+			var singer_company = $('#singerCompany').val();
+			var singer_link = $('#singer_link').val();
+			var singer_tag = $('#singer_tag').val();
+		
+	 	$.ajax({
+			type: "post",
+			data : {'singer_name': singer_name,
+						'singer_type' : singer_type,
+						'singer_company' :singer_company,
+						'singer_link' : singer_link,
+						'singer_tag' : singer_tag} ,
+			url : "/Star_Planner/admin/insertSinger.do",
+			dataType : "json",
+			"success" : function(list){
+			
+					alert('등록되었습니다');
+			
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+				
+			// singer_name  singer_type   singer_company singer_link singer_tag
+			if(singer_name==''){
+				$('#result_singer_register').html('가수 이름을 입력해주세요');
+				return false;
+			}else if(singer_tag==''){
+				$('#result_singer_register').html('가수 태그를 입력해주세요');
+				return false;
+			}else if(singer_link==''){
+				$('#result_singer_register').html('가수 링크를 입력해주세요');
+				return false;
+			}else if(singer_type=='가수 분류'){
+				$('#result_singer_register').html('가수 분류를 선택해주세요');
+				return false;
+			}else if(singer_company=='회사 분류'){
+				$('#result_singer_register').html('회사 분류를 선택해주세요.');
+				return false;
+			}
+		}
+			
+		}); //end of ajax 
+		
+	}); //end of 가수 등록 버튼
+	
+	//회사등록 버튼 - register_com_btn
+	$('#register_com_btn').on("click", function(){
+	
+		var group_name = $('#com_input').val();
+		var group_address = $('#name_input').val();
+		var group_phone = $('#phone_input').val();
+		var  group_link = $('#address_input').val();
+		
+		$.ajax({
+			
+			type: "post",
+			data : { "group_name" : group_name,
+							"group_address" : group_address,
+							"group_phone" : group_phone,
+							"group_link" : group_link
+							},
+			url : "/Star_Planner/admin/insertCompany.do",
+			dataType : "json",
+			"success" : function(){
+		
+				alert('성공');
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+
+				if(group_name==''){
+					$('#result_company_register').html('회사 이름을 입력해주세요');
+					return false;
+				}else if(group_address==''){
+					$('#result_company_register').html('회사 주소를 입력해주세요');
+					return false;
+				}else if(group_phone==''){
+					$('#result_company_register').html('회사 전화번호를 를 입력해주세요');
+					return false;
+				}else if(group_link==''){
+					$('#result_company_register').html('회사 링크를 입력해주세요');
+					return false;
+				}
+		}
+		}); //end of ajax
+		
+	}); //end of 회사 등록 버튼 -register_com_btn
+	
+	
+	///////////////////////링크처리
+	//링크 등록
+	$('#link_tbody').on("click" , '.link_register_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+		
+		var input_text= $(parent).parent().parent().find( '.link_input').val();
+		
+
+$.ajax({
+			type: "post",
+			data : { "count" : get_count,
+							"input" : input_text,
+							},
+			url : "/Star_Planner/admin/insertMainLink.do",
+			dataType : "json",
+			"success" : function(){
+	
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+					if(input_text==''){
+						alert('링크를 입력해주세요');
+						return false;
+					}				
+		}
+		}); //end of ajax
+		
+		
+		
+	} );
+	
+	
+	
+	//링크 삭제
+	$('#link_tbody').on("click" , '.link_delete_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+
+		var input_text_sapn= $(parent).parent().parent().find( '.link_input').text();
+		alert(input_text_sapn);
+		
+		$.ajax({
+			type: "post",
+			data : { "count" : get_count 	},
+			url : "/Star_Planner/admin/deleteMainLink.do",
+			dataType : "json",
+			"success" : function(){
+		
+				alert('삭제되었습니다');
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+							
+		}
+		}); //end of ajax
+		
+		
+	} ); //end of 링크 삭제
+	
+
+	//링크 수정
+	$('#link_tbody').on("click" , '.link_modify_btn' ,function(){
+		 
+		var parent = this;
+		var get_count_td = $(parent).parent().parent().find( '.link_count').text();
+		
+		var get_count_split = get_count_td.split("번");
+		var get_count = get_count_split[0];
+		alert('ddddd');
+	
+//sujin
+		$(parent).parent().parent().find( '#input_td').html('<input type="text" class="link_input"/> <input type="button" class="link_register_btn" value="등록"/>');
+
+		
+		
+/* $.ajax({
+			type: "post",
+			data : { "count" : get_count,
+							"input" : input_text
+							},
+			url : "/Star_Planner/admin/insertMainLink.do",
+			dataType : "json",
+			"success" : function(){
+		
+				alert('성공');
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+					if(input_text==''){
+						alert('링크를 입력해주세요');
+						return false;
+					}				
+		}
+		}); //end of ajax
+		 */
+		
+		
+	} );
+	
+	
+	
+	
+});
+</script>
+
 <head>
 <meta charset="UTF-8">
-<title>관리자 전용 페이지</title>
 <style type="text/css">
-#board_section {
-   min-width: 800px;
-   border: 1px solid gray;
-}
 
-#board_header {
-   background-color: #F6F6F6;
-}
-
-#content {
-   min-height: 300px; /*최소 높이 300px*/
-   height: auto; /*자동으로 늘어나기*/
-   padding: 10px;
-}
-
-#title {
-   text-align: left;
-   float: left;
-   color: #8C8C8C;
-}
-
-#title_info {
-   text-align: left;
-   float: left;
-   font-weight: bold;
-}
-
-#info {
-   text-align: left;
-   float: left;
-}
-
-#date {
-   text-align: right;
-}
-
-#separator {
-   text-align: left;
-   float: left;
-   color: #8C8C8C;
-}
+/*  id에 값을 적용 시킬때는 #으로 하고 class에 style을 적용 시킬떄는 .을 사용 */
+ .layout-left {
+        width: 46%;
+        height : 500px;
+        padding: 10px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #bcbcbc;
+      }
+ .layout-right { 
+        width: 46%;
+         height : 500px;
+        padding: 10px;
+        margin-bottom: 20px;
+        float: right;
+        border: 1px solid #bcbcbc;
+      }
+  
+      
+  .layout-down-left{
+  		 width: 30%;
+         height : 500px;
+        padding: 10px;
+        margin-bottom: 20px;
+        float: left;
+        border: 1px solid #bcbcbc;
+  
+  }
+  
+    .layout-down-center{
+  		 width: 30%;
+         height : 500px;
+        padding: 10px;
+        margin-bottom: 20px;
+        margin-left : 30px;
+        float: left;
+        border: 1px solid #bcbcbc;
+  
+  }
+  
+    .layout-down-rigth{
+  		 width: 30%;
+         height : 500px;
+        padding: 10px;
+        margin-bottom: 20px;
+        float: right;
+        border: 1px solid #bcbcbc;
+  
+  }
 
 /* table 스타일 처리  */
 table, td, th {
    border: 1px solid gray;
 }
 
+
 table {
    border-collapse: collapse;
-   min-width: 800px;
+   min-width: 60px;
 }
 
-th, td {
-   padding: 5px;
-}
+
 </style>
 
 
 </head>
 <body>
 
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>관리자 권한 부여</h2> <br>
-               <div>
-                  <dl>
-                     <dt id=title>관리자 권한 부여
-                     <dd id="title_info"></dd>
-                  </dl>
-                  <table id="title_info">
-                     <tr>
+<div class="layout-left">
 
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name="register"
-                           value="등록"></td>
-                     </tr>
-                     <tr>
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name="register"
-                           value="등록"></td>
-                     </tr>
-                     <tr>
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name="register"
-                           value="등록"></td>
-                     </tr>
-                  </table>
-               </div>
-            </td>
-         </tr>
-      </table>
-   </div>
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>관리자 리스트</h2> <br>
-               <div>
-                  <dl>
-                     <dt id=title>관리자 권한 부여
-                  </dl>
-                  <table>
-                     <tr>
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name=""
-                           value="권한취소"></td>
-                     </tr>
-                     <tr>
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name=""
-                           value="권한취소"></td>
-                     </tr>
-                     <tr>
-                        <td align="center">아이디</td>
-                        <td align="center"><input type="button" name=""
-                           value="권한취소"></td>
-                     </tr>
-                  </table>
-               </div>
-      </table>
-   </div>
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>매니저 권한부여</h2> <br> 매니저 신청자
-               <table>
-                  <tr>
-                     <td align="center">sm01</td>
-                     <td align="center"><input type="button" name="" value="수락"></td>
-                  </tr>
-                  <tr>
-                     <td align="center">YG02</td>
-                     <td align="center"><input type="button" name="" value="수락"></td>
-                  </tr>
-                  <tr>
-                     <td align="center">JYP03</td>
-                     <td align="center"><input type="button" name="" value="수락"></td>
-                  </tr>
-               </table>
-            </td>
-         </tr>
-      </table>
-   </div>
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>가수등록</h2> <br> 가수이름<input type="text" name="singer_name"
-               value="가수이름"> <br> 가수분류 <br> <!-- 카테고리 --> 가수회사 <br>
-               <!-- 카테고리 -->
-               <h2>가수 리스트</h2> <br>
-               <table>
-                  <tr>
-                     <td align="center">회사</td>
-                     <td align="center">분류</td>
-                     <td align="center">이름</td>
-                  </tr>
-                  <tr>
-                     <td align="center">JYP</td>
-                     <!-- db -->
-                     <td align="center">여자그룹</td>
-                     <!-- db -->
-                     <td align="center">트와이스</td>
-                     <!-- db -->
-                  </tr>
-               </table>
-            </td>
-         </tr>
-      </table>
-   </div>
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>회사등록</h2> <br> 회사이름 <input type="text" name=""
-               value="회사이름"> <br> <input type="button" name=""
-               value="등록"> <br>
-            </td>
-         </tr>
-      </table>
-   </div>
-   <div >
-      <table>
-         <tr>
-            <td>
-               <h2>회사 리스트</h2>
-               <table>
-                  <tr>
-                     <td align="center">회사이름</td>
-                  </tr>
-                  <tr>
-                     <td align="center">JYP</td>
-                     <!-- DB -->
-                  </tr>
-               </table>
-            </td>
-         </tr>
-      </table>
-   </div>
-   <div id="title_info">
-      <table>
-         <tr>
-            <td>
-               <h2>메인페이지 링크 등록</h2> 
-               1번링크<br>
-                2번링크<br> 
-                <input type="button" name="" value="등록">
-            </td>
-         </tr>
-      </table>
-   </div>
+<h2>관리자 권한 부여</h2> <br>
+
+<input type="text" id="admin_id">&nbsp;&nbsp;<input type="button" value="검색" id="search"/>
+<br>
+
+<div id="result_search" >
+</div>
+<br>
+
+<table>
+<tr>
+	<td>아이디</td> 
+	<td>이름</td>
+	<td>전화번호</td>
+	<td></td>
+</tr>
+
+<tbody  id="result_admin">
+<c:forEach var="admin" items="${requestScope.list_admin }">
+		<tr>
+		<td class="m_id">${admin.m_id} </td>
+		<td>${admin.name}</td>
+		<td>${admin.phone}</td>
+		<td><input type="button" class="delete" value="삭제"/></td>
+		</tr>
+</c:forEach>
+
+</tbody>
+</table>
+ 
+</div>
+
+<div class="layout-right">
+		<h2>매니저  등록 관리 </h2> 
+		<br>
+		<table>
+			<tr>
+				<td>아이디</td> 
+				<td>이름</td>
+				<td>전화번호</td>
+				<td>요청회사</td>
+				<td>소속사</td>
+				<td></td>
+			</tr>
+
+			<tbody  id="result_manager">
+			<c:forEach var="manager" items="${requestScope.list_manager }">
+				<tr>
+					<td class="m_id">${manager.m_id}</td>
+					<td>${manager.name}</td>
+					<td>${manager.phone}</td>
+					<td>${manager.tem_group }</td>
+					<td>
+							<select name="singerCompany" id="singerCompany" >
+								<option>회사 분류</option>
+								<c:forEach var="type" items="${requestScope.list_singerCompany }">
+								<option value="${type}">
+									${type}
+								</option>
+								</c:forEach>
+							</select>		
+					</td>
+					<td><input type="button" class="register_manager" value="등록"/>
+							<input type="button" class="deny_manager" value="거절"/></td>
+				</tr>
+			</c:forEach>
+			
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="layout-down-left">
+	<h2>가수등록</h2>
+	<table>
+	<tr>
+		<td>가수 이름</td><td><input type="text" id="singer_name"/></td></tr>
+		<tr>
+		<td>가수 분류</td>
+		<td>
+					<select name="singerType" id="singerType" >
+					<option>가수 분류</option>
+					<c:forEach var="type" items="${requestScope.list_singerType }">
+					<option value="${type}">
+						${type}
+					</option>
+					</c:forEach>
+					</select>
+		</td> </tr>
+		<tr>	<td>가수 회사</td>
+		<td>
+					<select name="singerCompany" id="singerCompany" >
+					<option>회사 분류</option>
+					<c:forEach var="type" items="${requestScope.list_singerCompany }">
+					<option value="${type}">
+						${type}
+					</option>
+					</c:forEach>
+					</select>		
+		
+		</td></tr>
+		<tr><td>정보링크</td><td><input type="text" id="singer_link"/></td></tr>
+		<tr><td>검색태그</td><td><input type="text" id="singer_tag"/></td></tr>
+
+	</table>
+	
+	<input type="button" id="register_singer_btn" value="등록"/> 
+	<div id="result_singer_register"></div>
+	
+	</div>
+	
+	<div class="layout-down-center">
+	<h2>회사등록</h2>
+	<table>
+	<tr>
+		<td>회사이름</td>
+		<td><input type="text" id="com_input"/></td>
+	</tr>
+	<tr>
+		<td>회사주소</td>
+		<td><input type="text" id="name_input"/></td>
+	</tr>
+	<tr>
+		<td>회사전화번호</td>
+		<td><input type="text" id="phone_input"/></td>
+	</tr>
+	<tr>
+		<td>회사링크</td>
+		<td><input type="text" id="address_input"/></td>
+	</tr>
+	
+	</table>
+	
+	<input type="button" id="register_com_btn" value="등록"/> 
+	<div id="result_company_register"></div>
+	</div>
+	
+	
+<div class="layout-down-rigth">
+	<h2>메인페이지 링크 등록</h2>
+	<table>
+	<tbody id="link_tbody">
+	<c:forEach var="link" items="${requestScope.list_mainLink }" varStatus="status">
+	<tr class="link_tr" >
+			<td class='link_count' >${status.count }번 링크</td>
+			
+			<td id="input_td">
+			<c:choose>
+			<c:when test="${link eq '' || link eq null}">
+			
+    		 <input type="text" class="link_input"/>
+			<input type="button" class="link_register_btn" value="등록"/>
+			
+		
+    		</c:when>
+
+  			 <c:otherwise>
+
+			<span class="link_input">${link }</span><br>
+			<input type="button" class="link_modify_btn" value="수정"/>
+			<input type="button" class="link_delete_btn" value="삭제"/>
+
+   			 </c:otherwise>
+			</c:choose>
+			</td>
+		
+		</tr>
+	</c:forEach>
+	
+	</tbody>
+	
+	
+	</table>
+	
+	</div>  
+	
 </body>
 </html>

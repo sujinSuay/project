@@ -1,11 +1,13 @@
-select * from member
+select * from member where m_id='master';
 select * from comments;
+select * from singer;
+
 
 INSERT INTO member
 VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'sujin@kosta', '주소', '전화번호', '선호그룹' )
+select group_id_seq.nextval from dual
+select * from groups;
 
-<<<<<<< HEAD
-=======
 SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name
 FROM board b, singer s WHERE m_id = 'manager4' and b.singer_id=s.singer_id ORDER BY board_no DESC 
 
@@ -13,8 +15,8 @@ SELECT c.board_no, c.comment_id, c.comment_content, c.m_id, c.comment_date, s.si
 FROM comments c, board b, singer s
 WHERE c.m_id = 'manager4' and b.board_no = c.board_no and s.singer_id = b.singer_id
 ORDER BY comment_date DESC
-	
->>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
+
+
 CREATE TABLE member (
 	m_id VARCHAR2(50) PRIMARY KEY, /* id */
 	social_no VARCHAR(13) UNIQUE NOT NULL, /* 주민번호 */
@@ -92,6 +94,9 @@ CREATE TABLE schedule (
 	schedule_address VARCHAR2(500) NOT NULL /* 장소 */
 );
 
+
+select * from board;
+
 create sequence schedule_id_seq nocache;
 /* comment */
 
@@ -128,6 +133,21 @@ CREATE TABLE type_list (
 	type_name VARCHAR2(200) PRIMARY KEY, /* 타입 */
 	word_type VARCHAR2(200) NOT NULL /* 타입종류 */
 );
+
+update member set group_id=2 where m_id='manager5'
+commit
+select * from link_list;
+delete from link_list;
+select * from member where group_id=13
+select * from 
+
+update member
+set group_id=13
+where m_id='manager4';
+
+
+select * from member where m_id='manager6';
+[group_id=13, m_id=manager4 ]
 
 CREATE TABLE link_list(
 	link_type 		VARCHAR2(200),

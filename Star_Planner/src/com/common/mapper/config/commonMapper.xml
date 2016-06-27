@@ -25,4 +25,9 @@
 		FROM groups
 		WHERE group_id > 10
 	</select>
+	<select id="selectMainLink" resultType="string">
+	SELECT link_address 
+	FROM link_list
+	WHERE link_type ='main_link'
+	</select>
 </mapper> 

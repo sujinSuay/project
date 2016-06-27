@@ -1,5 +1,6 @@
 package com.board.controller;
 
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -27,7 +28,7 @@ import com.board.vo.Comment;
 public class BoardController {
 	@Autowired
 	private BoardService service;
-	
+	  
 	@Autowired
 	private CommentServiceImpl service_comment;
 	
@@ -87,15 +88,18 @@ public class BoardController {
 	//boardRemove
 	@RequestMapping("/boardRemove")
 	public ModelAndView boardRemove(String id, int no, int page){
+	
 		service.removeByNo(no);
 		return boardList(id, page);
 	}
 	
 	//boardView
 	@RequestMapping("/boardView")
+
 	public ModelAndView boardView(int no, int page, String id) throws UnsupportedEncodingException{
 		String test = URLDecoder.decode(id,"UTF-8");
 		System.out.println(test);
+
 		Board board = service.getBoard(no);
 		
 		List<Comment> list_comment = service_comment.selectComment(no);
@@ -130,7 +134,9 @@ public class BoardController {
 		String group_name = service.selectGroupNameById(m_id);
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name);
 		service.writeBoard(board);
+
 		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+board.getBoard_no()+"&page=1");
+
 	}
 	
 	//searchSinger
