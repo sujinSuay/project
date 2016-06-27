@@ -3,7 +3,7 @@ alter table member add tem_group varchar2(200)  --member에 메니져 소속사 
 /* member */
 
 
-drop  sequence comment_id_seq
+drop sequence comment_id_seq
 drop sequence board_no_seq;
 drop sequence schedule_id_seq;
 drop table link_list;
@@ -27,7 +27,7 @@ CREATE TABLE member (
 	address VARCHAR2(500), /* 주소 */
 	phone VARCHAR2(15), /* 전화번호 */
 	favorite VARCHAR2(1000), /* 선호그룹 */
-	temgroup varchar2(200)
+	tem_group varchar2(200)
 );
 
 /* groups */
@@ -69,8 +69,8 @@ create sequence board_no_seq nocache;
 /* schedule */
 CREATE TABLE schedule (
 	schedule_id NUMBER(10) PRIMARY KEY, /* 스캐쥴번호 */
-	schedule_start VARCHAR2(19) NOT NULL, /* 일시 */
-	schedule_end VARCHAR2(19) NOT NULL, /* 공연시간 */
+	schedule_start VARCHAR2(21) NOT NULL, /* 일시 */
+	schedule_end VARCHAR2(21) NOT NULL, /* 공연시간 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	schedule_name VARCHAR2(200) NOT NULL, /* 행사이름 */
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */

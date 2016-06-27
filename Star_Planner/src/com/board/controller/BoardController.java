@@ -1,6 +1,5 @@
 package com.board.controller;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -22,7 +21,6 @@ import com.board.service.BoardService;
 import com.board.service.CommentServiceImpl;
 import com.board.vo.Board;
 import com.board.vo.Comment;
-import com.member.vo.Member;
 
 @Controller
 @RequestMapping("/board")

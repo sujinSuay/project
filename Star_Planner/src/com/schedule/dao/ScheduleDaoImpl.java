@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.common.vo.Singer;
+import com.schedule.vo.Schedule;
 
 @Repository
 public class ScheduleDaoImpl implements ScheduleDao {
@@ -19,6 +20,18 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public List<Singer> selectSingerByGroup(int group) {
 		return session.selectList(namespace_common + "selectSingerByGroup", group);
+	}
+
+	@Override
+	public int insertSchedule(Schedule schedule) {
+		// TODO Auto-generated method stub
+		return session.insert(namespace_schedule+"insert", schedule);
+	}
+
+	@Override
+	public List<Schedule> selectAllSchedule() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_schedule+"selectAllSchedule");
 	}
 
 	

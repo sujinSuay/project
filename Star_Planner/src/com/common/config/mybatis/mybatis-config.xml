@@ -11,6 +11,7 @@
 		<package name="com.board.vo"/>
 		<package name="com.member.vo"/>
 		<package name="com.common.vo"/>
+		<package name="com.schedule.vo"/>
 </typeAliases>
 
 

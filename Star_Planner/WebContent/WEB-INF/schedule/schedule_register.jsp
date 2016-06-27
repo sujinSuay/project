@@ -66,8 +66,8 @@ function execDaumPostcode() {
 	<table>
 		<tr>
 			<td>날짜</td>
-			<td><input type="text" class="some_class" value="" id="some_class_1" required="required"/>&nbsp; ~&nbsp;
-				<input type="text" class="some_class" value="" id="some_class_2" required="required"/>
+			<td><input type="text" class="some_class" value="" id="some_class_1" name="schedule_start" required="required"/>&nbsp; ~&nbsp;
+				<input type="text" class="some_class" value="" id="some_class_2" name="schedule_end" required="required"/>
 			</td>
 		</tr>
 		<tr>
@@ -92,25 +92,25 @@ function execDaumPostcode() {
 		</tr>
 		<tr>
 			<td>일정 이름</td>
-			<td><input type="text" id="schedule_name" required="required"></td>
+			<td><input type="text" id="schedule_name" name="schedule_name" required="required"></td>
 		</tr>
 		<tr>
 			<td>일정 장소</td>
 			<td colspan="2">
-				<input type="text" name="address" id="postcode" placeholder="우편번호" required="required"> 
+				<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required"> 
 				<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>
-				<input type="text" id="address" name="address"	placeholder="주소" required="required"> 
-				<input type="text" id="address2" name="address" placeholder="상세주소" required="required">
+				<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required"> 
+				<input type="text" id="address2" name="schedule_address" placeholder="상세주소" required="required">
 			</td>
 		</tr>
 		<tr>
 			<td>일정 내용</td>
-			<td><textarea id="schedule_content" rows="3" cols="50"></textarea></td>
+			<td><textarea id="schedule_contents" name="schedule_contents" rows="3" cols="50"></textarea></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="2">
@@ -125,7 +125,7 @@ function execDaumPostcode() {
 <script>
 	$('.some_class').datetimepicker({
 		lang:'ko',
-		format: 'Y-m-d H:i'
+		format: 'Y-m-d \\TH:i'
 	});
 </script>
 </html>
