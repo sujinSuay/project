@@ -189,9 +189,11 @@ $(document).ready(function(){
 			
 			var singer_name = $('#singer_name').val();
 			var singer_type = $('#singerType').val();
-			var singer_company = $('#singerCompany').val();
+			var singer_company = $('#singerCompanyType').val();
 			var singer_link = $('#singer_link').val();
-			var singer_tag = $('#singer_tag').val();
+			var singer_tag = $('#singer_tag').val(); 
+			
+		alert(singer_company);
 		
 	 	$.ajax({
 			type: "post",
@@ -255,7 +257,7 @@ $(document).ready(function(){
 			dataType : "json",
 			"success" : function(){
 		
-				alert('성공');
+				window.location.reload(); //페이지 refresh
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -673,7 +675,7 @@ table {
 		</td> </tr>
 		<tr>	<td>가수 회사</td>
 		<td>
-					<select name="singerCompany" id="singerCompany" >
+					<select name="singerCompanyType" id="singerCompanyType" >
 					<option>회사 분류</option>
 					<c:forEach var="type" items="${requestScope.list_singerCompany }">
 					<option value="${type}">
@@ -703,7 +705,7 @@ table {
 							</select>	
 		<input type="button" id="selectSingerList" value="조회"/>
 							
-<div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
+<div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
 <table >
 			<tr>
 				<td>가수분류</td> 
@@ -759,7 +761,7 @@ table {
 	
 	<!--  회사 목록 조회 -->
 	<h3>회사 목록 조회</h3>
-	<div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
+	<div style=" height: 200px; overflow-x: hidden; overflow-y: scroll;">
 	<table >
 			<tr>
 				<td>회사이름</td> 
