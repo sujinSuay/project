@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="schedule">
-
+	<insert id="insert" parameterType="Schedule">
+		<selectKey keyProperty="schedule_id" resultType="_int" order="BEFORE">
+			SELECT schedule_id_seq.nextval 
+			FROM dual
+		</selectKey>
+		INSERT INTO schedule 
+		VALUES (#{schedule_id},#{schedule_start},#{schedule_end},#{singer_id},#{schedule_name},#{type_name},#{schedule_address},#{schedule_contents})
+	</insert>
+	<select id="selectAllSchedule" resultType="Schedule">
+		SELECT * 
+		FROM schedule
+	</select>
 </mapper>

@@ -17,6 +17,18 @@ public class Schedule implements Serializable{
 		
 	}
 
+	public Schedule(String schedule_start, String schedule_end, int singer_id, String schedule_name, String type_name,
+			String schedule_address, String schedule_contents) {
+		super();
+		this.schedule_start = schedule_start;
+		this.schedule_end = schedule_end;
+		this.singer_id = singer_id;
+		this.schedule_name = schedule_name;
+		this.type_name = type_name;
+		this.schedule_address = schedule_address;
+		this.schedule_contents = schedule_contents;
+	}
+
 	public Schedule(int schedule_id, String schedule_start, String schedule_end, int singer_id, String schedule_name,
 			String type_name, String schedule_address, String schedule_contents) {
 		super();

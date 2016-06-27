@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <a href="/Star_Planner/main/home.do">main</a>  &nbsp; &nbsp; &nbsp; &nbsp;
+<!-- <a href="/Star_Planner/schedule/scheduleMain.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp; -->
 <a href="/Star_Planner/schedule_main.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
 <c:if test="${sessionScope.loginId != null && sessionScope.groupId != 2}">
 	<a href="/Star_Planner/schedule/scheduleRegisterForm.do">schedule 등록</a> &nbsp; &nbsp; &nbsp; &nbsp;
