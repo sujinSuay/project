@@ -145,6 +145,18 @@ update member
 set group_id=13
 where m_id='manager4';
 
+select * from singer
+
+select group_name,   singer_name,  type_name,  singer_favorite
+from singer s, groups g
+where s.group_id=g.group_id;
+
+
+select group_name,   singer_name,  type_name,  singer_favorite
+from singer s, groups g
+where s.group_id=g.group_id;
+
+
 
 select * from member where m_id='manager6';
 [group_id=13, m_id=manager4 ]

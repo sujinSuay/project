@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.vo.Group;
 import com.common.vo.Singer;
 import com.member.service.AdminServiceImpl;
+import com.member.vo.ManagerList;
 import com.member.vo.Member;
+import com.member.vo.SingerList;
 
 @Controller
 @RequestMapping("/admin")
@@ -55,6 +58,22 @@ public class AdminController {
 		List<String> list_mainLink = adminService.selectMainLink();
 		System.out.println(list_mainLink);
 		map.put("list_mainLink", list_mainLink);
+		
+		//매니저 목록 전체 조회
+		List<ManagerList> list_managerListAll = adminService.selectManagerList(null);
+		System.out.println("list manager all " + list_managerListAll);
+		map.put("list_managerAll", list_managerListAll);
+		
+		//가수 목록 조회
+		List<SingerList> list_singerListAll = adminService.selectSingerList(null);
+		System.out.println("list manager all " + list_singerListAll);
+		map.put("list_singerListAll", list_singerListAll);
+
+		//회사목록 조회
+		List<Group> list_groupListAll = adminService.selectGroupAll();
+		System.out.println(list_groupListAll);
+		map.put("list_groupListAll", list_groupListAll);
+		
  		
 		return new ModelAndView("/admin/admin_main.do" ,map);
 		
@@ -145,7 +164,16 @@ public class AdminController {
 		 return list;
 	}
 	
-	
+	//매니저 목록 키워드로 조회
+	@RequestMapping("/selectManagerByCompany")
+	@ResponseBody
+	public List<ManagerList> selectManagerByCompany(String id){
+		System.out.println("##AdminController + selectManagerList(" + id +")");
+		List<ManagerList> list = adminService.selectManagerList(id);
+		System.out.println("###"+list);
+		return list;
+		
+	}
 	
 	
 	
@@ -157,6 +185,18 @@ public class AdminController {
 		System.out.println("##AdminController + insertSinger()");
 		return adminService.insertSinger(singer_name, singer_type, singer_company, singer_link, singer_tag);
 		
+	}
+	
+	
+	//가수 목록 키워드로 조회
+	@RequestMapping("/selectSingerList")
+	@ResponseBody
+	public List<SingerList> selectSingerList(String id){
+		System.out.println("##AdminController + selectSingerList()");
+		
+		List<SingerList> list = adminService.selectSingerList(id);
+		System.out.println("$$"+list);
+		return list;
 	}
 	
 	

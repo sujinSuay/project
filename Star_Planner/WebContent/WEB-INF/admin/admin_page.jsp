@@ -142,8 +142,8 @@ $(document).ready(function(){
 			url : "/Star_Planner/admin/insertManager.do",
 			dataType : "json",
 			"success" : function(list){
-			
-			alert("성공");				
+				window.location.reload(); //페이지 refresh
+		
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -170,8 +170,8 @@ $(document).ready(function(){
 			url : "/Star_Planner/admin/denyManager.do",
 			dataType : "json",
 			"success" : function(list){
-			
-			alert("거절 성공");
+				window.location.reload(); //페이지 refresh
+		
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -303,6 +303,7 @@ $.ajax({
 			dataType : "json",
 			"success" : function(){
 	
+				window.location.reload(); //페이지 refresh
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
 			},
@@ -339,6 +340,7 @@ $.ajax({
 			"success" : function(){
 		
 				alert('삭제되었습니다');
+				window.location.reload();
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -360,14 +362,13 @@ $.ajax({
 		
 		var get_count_split = get_count_td.split("번");
 		var get_count = get_count_split[0];
-		alert('ddddd');
-	
-//sujin
-		$(parent).parent().parent().find( '#input_td').html('<input type="text" class="link_input"/> <input type="button" class="link_register_btn" value="등록"/>');
 
+		var input_text= $(parent).parent().parent().find( '.link_input').val();
+	
+
+		$(parent).parent().parent().find( '#input_td').html('<input type="text" class="link_input"/> <input type="button" class="link_register_btn" value="등록"/>');
 		
-		
-/* $.ajax({
+	$.ajax({
 			type: "post",
 			data : { "count" : get_count,
 							"input" : input_text
@@ -376,7 +377,7 @@ $.ajax({
 			dataType : "json",
 			"success" : function(){
 		
-				alert('성공');
+				window.location.reload();
 				
 			}, "error" : function(xhr, status, errorMsg){
 				alert("오류발생  " + status + errorMsg);
@@ -386,13 +387,83 @@ $.ajax({
 						alert('링크를 입력해주세요');
 						return false;
 					}				
-		}
-		}); //end of ajax
-		 */
-		
+		} 
+		}); //end of ajax		
 		
 	} );
 	
+	//매니저 목록 조회 버튼 이벤트
+	$('#selectManagerList').on("click", function(){
+		
+		var text = $('#managerCompany').val();
+
+		
+		$.ajax({
+			type: "post",
+			data : { "id" : text	},
+			url : "/Star_Planner/admin/selectManagerByCompany.do",
+			dataType : "json",
+			"success" : function(list){
+		
+				
+				$('#result_managerList').empty(); 
+				
+				for(var i=0; i<list.length; i++){
+					
+				var txt = 	'<tr><td class="m_id">' + list[i].m_id + 
+							 		'</td><td>'+ list[i].name + '</td><td>' + list[i].phone + '</td><td>' +
+							 		list[i].group_name + '</td></tr>';
+					
+			$('#result_managerList').append(txt);
+				}
+		
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+						
+		} 
+		}); //end of ajax		
+		
+	}); //end of 매니저 목록 조회 버튼
+	
+	
+	//가수 목록 조회 - 그룹 타입에 따른
+	$('#selectSingerList').on("click", function(){
+		
+		var txt = $('#singerTypeList').val();
+	
+		$.ajax({
+			type: "post",
+			data : { "id" : txt	},
+			url : "/Star_Planner/admin/selectSingerList.do",
+			dataType : "json",
+			"success" : function(list){
+		
+				$('#result_SingerList').empty(); 
+				
+				for(var i=0; i<list.length; i++){
+					
+				var txt = 	'<tr><td>' + list[i].type_name + 
+							 		'</td><td>'+ list[i].singer_name + '</td><td>' + list[i].group_name + '</td><td>' +
+							 		list[i].singer_favorite + '</td></tr>';
+					
+			$('#result_SingerList').append(txt);
+				}
+		
+				
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			
+						
+		} 
+		}); //end of ajax		
+		
+	})
 	
 	
 	
@@ -516,8 +587,9 @@ table {
 				<td>요청회사</td>
 				<td>소속사</td>
 				<td></td>
-			</tr>
-
+			</tr>  
+	
+		
 			<tbody  id="result_manager">
 			<c:forEach var="manager" items="${requestScope.list_manager }">
 				<tr>
@@ -542,7 +614,45 @@ table {
 			
 			</tbody>
 		</table>
-	</div>
+		
+<br>
+<!-- 매니저 목록 조회 -->
+<h4>매니저 목록 조회</h4>
+						<select name="managerCompany" id="managerCompany" >
+								<option>회사 분류</option>
+								<c:forEach var="type" items="${requestScope.list_singerCompany }">
+								<option value="${type}">
+									${type}
+								</option>
+								</c:forEach>
+							</select>	
+		<input type="button" id="selectManagerList" value="조회"/>
+							
+<div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
+<table >
+			<tr>
+				<td>아이디</td> 
+				<td>이름</td>
+				<td>전화번호</td>
+				<td>소속사</td>
+			</tr>  	
+			<tbody  id="result_managerList" >
+		
+			<c:forEach var="manager" items="${requestScope.list_managerAll }">
+				<tr>
+					<td class="m_id">${manager.m_id}</td>
+					<td>${manager.name}</td>
+					<td>${manager.phone}</td>
+					<td>${manager.group_name }	</td>
+				</tr>
+			</c:forEach>
+		
+			</tbody>
+		</table>
+		</div>
+		</div>
+		
+
 	
 	<div class="layout-down-left">
 	<h2>가수등록</h2>
@@ -581,7 +691,46 @@ table {
 	<input type="button" id="register_singer_btn" value="등록"/> 
 	<div id="result_singer_register"></div>
 	
-	</div>
+	<!--  가수 목록 조회 -->
+<h3>가수 목록 조회</h3>
+						<select name="singerTypeList" id="singerTypeList" >
+								<option>가수분류</option>
+								<c:forEach var="type" items="${requestScope.list_singerType }">
+								<option value="${type}">
+									${type}
+								</option>
+								</c:forEach>
+							</select>	
+		<input type="button" id="selectSingerList" value="조회"/>
+							
+<div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
+<table >
+			<tr>
+				<td>가수분류</td> 
+				<td>가수이름</td>
+				<td>소속사</td>
+				<td>선호도</td>
+			</tr>  	
+		
+			<tbody  id="result_SingerList" >
+		
+			<c:forEach var="singer" items="${requestScope.list_singerListAll }">
+				<tr>
+					<td >${singer.type_name}</td>
+					<td>${singer.singer_name}</td>
+					<td>${singer.group_name}</td>
+					<td>${singer.singer_favorite}	</td>
+				</tr>
+			</c:forEach>
+		
+			</tbody>
+		</table>
+		</div>
+	
+	
+	
+	
+	</div> <!--  end of 가수등록 -->
 	
 	<div class="layout-down-center">
 	<h2>회사등록</h2>
@@ -607,6 +756,34 @@ table {
 	
 	<input type="button" id="register_com_btn" value="등록"/> 
 	<div id="result_company_register"></div>
+	
+	<!--  회사 목록 조회 -->
+	<h3>회사 목록 조회</h3>
+	<div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
+	<table >
+			<tr>
+				<td>회사이름</td> 
+				<td>회사주소</td>
+				<td>회사 전화번호</td>
+				<td>회사링크</td>
+			</tr>  	
+		
+			<tbody  id="result_SingerList" >
+		
+			<c:forEach var="group" items="${requestScope.list_groupListAll }">
+				<tr>
+					<td >${group.group_name}</td>
+					<td>${group.group_address}</td>
+					<td>${group.group_phone}</td>
+					<td>${group.group_link}	</td>
+				</tr>
+			</c:forEach>
+		
+			</tbody>
+		</table>
+		</div>
+	
+	
 	</div>
 	
 	
@@ -647,6 +824,6 @@ table {
 	</table>
 	
 	</div>  
-	
+
 </body>
 </html>

@@ -88,7 +88,9 @@ CREATE TABLE schedule (
 create sequence schedule_id_seq nocache;
 /* comment */
 
-
+select m_id, name, phone, group_name
+from member m, groups g
+where m.group_id=g.group_id and m.group_id>10;
 
 
 CREATE TABLE comments (
