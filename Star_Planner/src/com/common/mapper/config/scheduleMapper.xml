@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="schedule">
+	<resultMap type="Schedule" id="schedule-singer-group-resultmap" autoMapping="true">
+		<collection property="singer" ofType="singer" autoMapping="true"/>
+		<collection property="group" ofType="group" autoMapping="true"/>
+	</resultMap>
 	<insert id="insert" parameterType="Schedule">
 		<selectKey keyProperty="schedule_id" resultType="_int" order="BEFORE">
 			SELECT schedule_id_seq.nextval 
 			FROM dual
 		</selectKey>
 		INSERT INTO schedule 
-		VALUES (#{schedule_id},#{schedule_start},#{schedule_end},#{singer_id},#{schedule_name},#{type_name},#{schedule_address},#{schedule_contents})
+		VALUES (#{schedule_id},#{schedule_start},#{schedule_end},#{singer_id},#{group_id},#{schedule_name},#{type_name},#{schedule_address},#{schedule_contents})
 	</insert>
-	<select id="selectAllSchedule" resultType="Schedule">
-		SELECT * 
-		FROM schedule
+	<select id="selectAllSchedule" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule, singer, groups
+		WHERE singer.singer_id = schedule.singer_id AND groups.group_id = schedule.group_id
+	</select>
+	<select id="selectScheduleByLocation" parameterType="string" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule, singer, groups
+		WHERE schedule.schedule_address LIKE '%'||#{keyword}||'%' AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
+	</select>
+	<select id="selectScheduleBySinger" parameterType="_int" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule, singer, groups
+		WHERE schedule.singer_id = #{singer_id} AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
+	</select>
+	<select id="selectScheduleByGroup" parameterType="_int" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule, singer, groups
+		WHERE schedule.group_id = #{group_id} AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
 	</select>
 </mapper>

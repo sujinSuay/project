@@ -60,6 +60,10 @@ INSERT INTO type_list VALUES('TV' , 'event_type');
 INSERT INTO type_list VALUES('공연' , 'event_type');
 INSERT INTO type_list VALUES('촬영' , 'event_type');
 
+INSERT INTO type_list VALUES('가수' , 'search_type');
+INSERT INTO type_list VALUES('회사' , 'search_type');
+INSERT INTO type_list VALUES('지역' , 'search_type');
+
 select * from TYPE_LIST
 select * from singer;
 

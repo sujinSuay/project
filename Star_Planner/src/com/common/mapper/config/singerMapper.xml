@@ -5,7 +5,12 @@
 	<select id="searchSinger" parameterType="string" resultType="string">
 		SELECT singer_name 
 		FROM singer 
-		WHERE singer_tag LIKE '%'||#{keyword}||'%'
+		WHERE UPPER(singer_tag) LIKE '%'||UPPER(#{keyword})||'%'
+	</select>
+	<select id="searchSingerAllData" parameterType="string" resultType="singer">
+		SELECT * 
+		FROM singer 
+		WHERE UPPER(singer_tag) LIKE '%'||UPPER(#{keyword})||'%'
 	</select>
 	<select id="StringToIntSingerId" parameterType="string" resultType="_int">
 		SELECT singer_id 

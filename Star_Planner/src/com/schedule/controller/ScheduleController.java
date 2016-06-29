@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.common.vo.Group;
+import com.common.vo.Singer;
 import com.schedule.service.ScheduleService;
 import com.schedule.vo.Schedule;
 
@@ -39,29 +41,57 @@ public class ScheduleController {
 		return new ModelAndView("redirect:/schedule/scheduleRegisterForm.do");
 	}
 	
-	/*@RequestMapping("/scheduleMain")
-	public ModelAndView scheduleMain(HttpSession session){
-		
-		System.out.println("schedule main");
-		return new ModelAndView("/schedule_main.do");
-	}*/
-	
-	@RequestMapping("/calendar")
+	@RequestMapping("/selectAllSchedule")
 	@ResponseBody
-	public List<Schedule> scheduleEvents(){
-		System.out.println("get schedule events");
-		return service.selectAllSchedule();
+	public List<Schedule> selectAllSchedule(){
+		List<Schedule> list = service.selectAllSchedule();
+		System.out.println(list);
+		return list;
 	}
-	/*@RequestMapping("/calendar")
+	
+	@RequestMapping("/searchSinger")
 	@ResponseBody
-	public Map<String, Object> scheduleEvents(){
-		Map<String, Object> map = new HashMap<>();
-		map.put("title", "Meeting");
-		map.put("start", "2016-05-12T10:30:00");
-		map.put("end", "2016-05-12T12:30:00");
-		System.out.println(map);
-		return map;
-	}*/
+	public List<Singer> searchSinger(String keyword){
+		List<Singer> list = service.searchSinger(keyword); 
+		return list;
+	}
+	
+	@RequestMapping("/searchGroup")
+	@ResponseBody
+	public List<Group> searchGroup(String keyword){
+		List<Group> list = service.searchGroup(keyword); 
+		return list;
+	}
+	
+	@RequestMapping("/selectScheduleBySinger")
+	@ResponseBody
+	public List<Schedule> selectScheduleBySinger(int singer_id){
+		List<Schedule> list = service.selectScheduleBySinger(singer_id);
+		System.out.println(list);
+		return list;
+	}
+	
+	@RequestMapping("/selectScheduleByGroup")
+	@ResponseBody
+	public List<Schedule> selectScheduleByGroup(int group_id){
+		List<Schedule> list = service.selectScheduleByGroup(group_id);
+		System.out.println(list);
+		return list;
+	}
+	
+	@RequestMapping("/selectScheduleByLocation")
+	@ResponseBody
+	public List<Schedule> selectScheduleByLocation(String keyword){
+		List<Schedule> list = service.selectScheduleByLocation(keyword);
+		System.out.println(list);
+		return list;
+	}
+	
+	@RequestMapping("/scheduleMain")
+	public ModelAndView scheduleMain(){
+		List<String> list = service.getCategoryList();
+		return new ModelAndView("/schedule_main.do", "categoryList", list);
+	}
 	
 	
 }

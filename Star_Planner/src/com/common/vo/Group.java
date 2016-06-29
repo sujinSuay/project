@@ -1,6 +1,8 @@
 package com.common.vo;
 
-public class Group {
+import java.io.Serializable;
+
+public class Group implements Serializable{
 	
 	private int group_id;  /** 회원이 속한 그룹.  1번:admin, 2번: 일반회원, 3번: 소속사 매니저 **/
 	private String group_name;  /** 그룹 이름 **/
@@ -13,7 +15,7 @@ public class Group {
 	public Group(){
 		
 	}
-	
+
 	
 	public Group(int group_id, String group_name, String group_address, String group_phone, String group_link) {
 		super();

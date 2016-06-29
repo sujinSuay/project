@@ -80,6 +80,7 @@ CREATE TABLE schedule (
 	schedule_start VARCHAR2(21) NOT NULL, /* 일시 */
 	schedule_end VARCHAR2(21) NOT NULL, /* 공연시간 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
+	group_id NUMBER(4) NOT NULL, /* 회사 */
 	schedule_name VARCHAR2(200) NOT NULL, /* 행사이름 */
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */
 	schedule_address VARCHAR2(500), /* 장소 */

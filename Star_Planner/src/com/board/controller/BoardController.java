@@ -2,7 +2,6 @@ package com.board.controller;
 
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
@@ -48,7 +47,6 @@ public class BoardController {
 				map.put("singer", singer);
 				map.put("favorite", favorite);
 				return new ModelAndView("/board_main.do", map);
-//				return new ModelAndView("/board_main.do", "favorite" , favorite);
 			}
 		}else{
 			return new ModelAndView("/board_main.do", singer);
@@ -97,9 +95,6 @@ public class BoardController {
 	@RequestMapping("/boardView")
 
 	public ModelAndView boardView(int no, int page, String id) throws UnsupportedEncodingException{
-		String test = URLDecoder.decode(id,"UTF-8");
-		System.out.println(test);
-
 		Board board = service.getBoard(no);
 		
 		List<Comment> list_comment = service_comment.selectComment(no);

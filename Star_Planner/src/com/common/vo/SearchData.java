@@ -1,9 +1,10 @@
 package com.common.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /** 해당하는 day에 특정 가수의 조회수를 알기위해서 필요한 테이블의 vo  **/
-public class SearchData {
+public class SearchData implements Serializable{
 	
 
 	private int singer_id;  /** 가수 고유 id  **/
