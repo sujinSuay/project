@@ -2,7 +2,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="java.net.URLEncoder" %>
 <!DOCTYPE html>
 <html>
 <head>

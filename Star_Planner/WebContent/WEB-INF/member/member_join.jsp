@@ -54,7 +54,12 @@
 			}
 		});
 		$("#form").on("submit",function(){
+			
+			
+		 	 
+			
 			var flag=true;
+			
 			if (!$("#m_id").val()) {
 				$("#id_er").text("아이디를 입력해주세요");
 				$("#m_id").focus();
@@ -64,53 +69,63 @@
 				$("#m_id").focus();
 				flag=false;
 			}else {$("#id_er").text("");}
+			
 			if (!$("#name").val()){
 				$("#name_er").text("이름을 입력해주세요");
 				$("#name").focus();
 				flag=false;
 			}else{$("#name_er").text("");}
+			
 			if (!$("#password").val()){
 				$("#password_er").text("Password를 입력해주세요");
 				$("#password").focus();
 				flag=false;
 			}else{$("#password_er").text("");}
+			
 			if($("#password").val()!=$("#passwordCK").val()){
 				$("#passwordCK_er").text("패스워드가 서로 다릅니다");
 				$("#password").focus();
 				flag=false;
 			}else{$("#passwordCK_er").text("");}
+			
 			if(!$(":input:radio[name=gender]:checked").val()){
 				$("#gender_er").text("성별을 선택해 주세요");
 				flag=false;
 			}else{$("#gender_er").text("");}
+			
 			if(!$("#address2").val()){
 				$("#address_er").text("주소를 입력해 주세요");
 				$("#address").focus();
 				flag=false;
 			}else{$("#address_er").text("");}
+			
 			if(!$("#social_no").val()){
 				$("#social_no_er").text("주민번호를 입력해주세요");
 				$("#social_no").focus();
 				flag=false;
 			}else{$("#social_no_er").text("");}
+			
 			if(!$("#phone").val()){
 				$("#phone_er").text("전화번호를 입력해주세요");
 				$("#phone").focus();
 				flag=false;
 			}else{$("#phone").text("");}
+			
 			if(!$("#email").val()){
 				$("#email_er").text("이메일을 입력해주세요");
 				$("#email").focus();
 				flag=false;
 			}else{$("#email").text("");}
-			if($("#tem_group").val()=="소속사"){ 
+			
+			/* alert($("#tem_group").find("option:selected").val() + "/" + $("#tem_group2").val() ); */
+			if($("#tem_group").find("option:selected").val()=="소속사"){ 
 				$("#tem_group_er").text("회사를 선택해 주세요");
-			}else if($("#tem_group").val()=='기타' && !$("#tem_group2").val()){
+			}else if($("#tem_group").find("option:selected").val()=='기타' && !$("#tem_group2").val()){
 				$("#tem_group_er").text("회사를 입력해 주세요");
 				$("#tem_group2").focus();
 				flag=false;
 			}else{$("#tem_group_er").text("");} 
-		 	 
+		 	  
 			/* alert(!flag + " / " + !window.ckflag); */
 			if(!flag || !window.ckflag){
 				return false;
@@ -282,7 +297,7 @@
 				</c:forEach>
 				<option value="기타">직접입력</option>
 			</select>
-			<input type="text" name="tem_group2"><span id="tem_group_er"></span>
+			<input type="text" name="tem_group2" id="tem_group2"><span id="tem_group_er"></span>
 		</div>
 		
 		<div id="favorite_tr">

@@ -26,8 +26,13 @@
 		WHERE group_id > 10
 	</select>
 	<select id="selectMainLink" resultType="string">
-	SELECT link_address 
-	FROM link_list
-	WHERE link_type ='main_link'
+		SELECT link_address 
+		FROM link_list
+		WHERE link_type ='main_link'
+	</select>
+	<select id="searchGroup" parameterType="string" resultType="Group">
+		SELECT * 
+		FROM groups 
+		WHERE UPPER(group_name) LIKE '%'||UPPER(#{keyword})||'%'
 	</select>
 </mapper> 

@@ -116,5 +116,8 @@
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:order="3" />
 
-
+	<!-- 파일업로드 -->
+	<bean name="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"/>
 </beans>

@@ -52,11 +52,6 @@ table {
 <table>
 	<tr align="center">
 		<td colspan="4">
-			<%-- <select name="prefix">
-				<c:forEach items="${requestScope.codeList }" var="code">
-					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
-				</c:forEach>
-			</select> --%>
 			<input type="text" id="keyword" size="20">
 			<input type="button" id="searchBtn" value="검색">
 		</td>

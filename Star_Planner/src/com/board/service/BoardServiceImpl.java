@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.board.dao.BoardDao;
 import com.board.vo.Board;
-import com.common.dao.TypeListDao;
+import com.common.dao.CommonDao;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
 import com.common.vo.Singer;
@@ -22,14 +22,14 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao dao;
 	
 	@Autowired
-	private TypeListDao tdao;
+	private CommonDao cdao;
 	
 	@Autowired
 	private memberDao mdao;
 	
 	@Override
 	public String selectGroupNameById(String m_id) {
-		return dao.selectGroupNameById(m_id);
+		return cdao.selectGroupNameById(m_id);
 	}
 
 	public List<String> getFavorite(String m_id){
@@ -73,6 +73,9 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoard_title(TextUtil.htmlToText(board.getBoard_title()));
 		board.setBoard_content(TextUtil.htmlToText(board.getBoard_content()));
 		map.put("board", board);
+		String[] file_names = board.getBoard_link().split(",");
+		if(!board.getBoard_link().equals("noData")) map.put("file_names", file_names);
+		
 		/*List<TypeList> typeList = tdao.selectByCodeCateory(Constants.NOTICE_BOARD_PREFIX);
 		map.put("typeList", typeList);*/
 		return map;
@@ -86,12 +89,12 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	public List<String> searchSinger(String keyword){
-		return dao.searchSinger(keyword);
+		return cdao.searchSinger(keyword);
 	}
 	
 	public int StringToIntSingerId(String singer_name){
 		try {
-			int singer_id = dao.StringToIntSingerId(singer_name);
+			int singer_id = cdao.StringToIntSingerId(singer_name);
 			return singer_id;
 		} catch (NullPointerException e) {
 			return -1;
@@ -107,8 +110,8 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Map<String, Object> singerList() {
-		List<Singer> s_list = dao.selectAllSinger();
-		List<String> t_list = tdao.selectByCodeCateory("singer_type");
+		List<Singer> s_list = cdao.selectAllSinger();
+		List<String> t_list = cdao.selectByCodeCateory("singer_type");
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		

@@ -1,6 +1,6 @@
 alter table member add tem_group varchar2(200)  --member에 메니져 소속사 넣어주는 컬럼 추가하는 쿼리!!
-
-/* member */
+alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓글인 경우 부모의 ID */
+alter table comments add comment_check NUMBER(2) NOT NULL ;
 
 
 drop sequence comment_id_seq
@@ -80,6 +80,7 @@ CREATE TABLE schedule (
 	schedule_start VARCHAR2(21) NOT NULL, /* 일시 */
 	schedule_end VARCHAR2(21) NOT NULL, /* 공연시간 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
+	group_id NUMBER(4) NOT NULL, /* 회사 */
 	schedule_name VARCHAR2(200) NOT NULL, /* 행사이름 */
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */
 	schedule_address VARCHAR2(500), /* 장소 */

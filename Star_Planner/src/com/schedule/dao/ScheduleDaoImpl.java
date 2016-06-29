@@ -6,21 +6,16 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.common.vo.Singer;
 import com.schedule.vo.Schedule;
 
 @Repository
 public class ScheduleDaoImpl implements ScheduleDao {
 	private String namespace_schedule = "schedule.";
-	private String namespace_common = "common.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
 
-	@Override
-	public List<Singer> selectSingerByGroup(int group) {
-		return session.selectList(namespace_common + "selectSingerByGroup", group);
-	}
+	
 
 	@Override
 	public int insertSchedule(Schedule schedule) {
@@ -33,6 +28,28 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace_schedule+"selectAllSchedule");
 	}
+
+	@Override
+	public List<Schedule> selectScheduleByLocation(String keyword) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_schedule+"selectScheduleByLocation", keyword);
+	}
+
+	@Override
+	public List<Schedule> selectScheduleBySinger(int singer_id) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_schedule+"selectScheduleBySinger", singer_id);
+	}
+
+	@Override
+	public List<Schedule> selectScheduleByGroup(int group_id) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_schedule+"selectScheduleByGroup", group_id);
+	}
+
+	
+	
+	
 
 	
 }

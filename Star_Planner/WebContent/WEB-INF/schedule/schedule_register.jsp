@@ -58,16 +58,25 @@ function execDaumPostcode() {
 				}
 			}).open();
 }
+$(document).keydown(function(e){
+	if(e.target.nodeName == "INPUT" && e.target.getAttribute("readonly") == "readonly"){
+		if(e.keyCode == 8){
+			return false;
+		}
+	}
+});
 </script>
 </head>
 <body>
 <h2>스케줄 등록</h2>
 <form action="/Star_Planner/schedule/scheduleRegister.do" method="post">
+<input type="hidden" id="group_id" name="group_id" value="${sessionScope.groupId }">
 	<table>
 		<tr>
 			<td>날짜</td>
-			<td><input type="text" class="some_class" value="" id="some_class_1" name="schedule_start" required="required"/>&nbsp; ~&nbsp;
-				<input type="text" class="some_class" value="" id="some_class_2" name="schedule_end" required="required"/>
+			<td>
+				<input type="text" class="some_class" value="" id="some_class_1" name="schedule_start" required="required" readonly="readonly"/>&nbsp; ~&nbsp;
+				<input type="text" class="some_class" value="" id="some_class_2" name="schedule_end" required="required" readonly="readonly"/>
 			</td>
 		</tr>
 		<tr>
@@ -75,7 +84,7 @@ function execDaumPostcode() {
 			<td>
 				<select name="singer_id">
 					<c:forEach items="${requestScope.singerList }" var="singer">
-						<option ${singer.singer_name == param.prefix?'selected="selected"':'' } value="${singer.singer_id }">${singer.singer_name }</option>
+						<option value="${singer.singer_id }">${singer.singer_name }</option>
 					</c:forEach>
 				</select>
 			</td>
@@ -85,7 +94,7 @@ function execDaumPostcode() {
 			<td>
 				<select name="type_name">
 					<c:forEach items="${requestScope.eventList }" var="type">
-						<option ${type == param.prefix?'selected="selected"':'' } >${type }</option>
+						<option>${type }</option>
 					</c:forEach>
 				</select>
 			</td>
@@ -105,7 +114,7 @@ function execDaumPostcode() {
 			<td></td>
 			<td>
 				<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required"> 
-				<input type="text" id="address2" name="schedule_address" placeholder="상세주소" required="required">
+				<input type="text" id="address2" name="schedule_address" placeholder="상세주소">
 			</td>
 		</tr>
 		<tr>

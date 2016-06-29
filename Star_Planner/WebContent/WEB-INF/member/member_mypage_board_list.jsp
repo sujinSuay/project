@@ -22,7 +22,7 @@ $(document).ready(function(){
 				for(var i=0;i<board.length;i++){
 					thtml="<tr><td>" + board[i].board_no+"</td>"+
 					 		"<td align='center'><a href='/Star_Planner/board/boardView.do?id="+board[i].singer_name+"&no="+board[i].board_no+"&page=1'>"+board[i].board_title+"</a></td>"+
-					 		"<td>"+board[i].m_id+"</td>"+
+					 		"<td>"+board[i].singer_name+"</td>"+
 							"<td>"+board[i].board_date+"</td>"+
 							"<td>"+board[i].board_hits+"</td>"+
 							"<td>"+board[i].board_likes+"</td>"+
@@ -61,21 +61,23 @@ function deleteBoard(board_no){
 </script>
 </head>
 <body>
-<table>
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th width="300">제목</th>
-			<th width="150">글쓴이</th>
-			<th width="200">날짜</th>
-			<th>조회</th>
-			<th>추천</th>
-			<th>삭제</th>
-		</tr>
-	</thead>
-	<tbody align="center" id="listTable">
-		
-	</tbody>
-</table>
+<div style=" height: 200px; width:950px; overflow-x: hidden; overflow-y: scroll;">
+	<table>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th width="300">제목</th>
+				<th width="150">게시판</th>
+				<th width="200">날짜</th>
+				<th>조회</th>
+				<th>추천</th>
+				<th>삭제</th>
+			</tr>
+		</thead>
+		<tbody align="center" id="listTable">
+			
+		</tbody>
+	</table>
+</div>
 </body>
 </html>

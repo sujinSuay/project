@@ -9,14 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.vo.Board;
-import com.common.vo.Singer;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
 	
 	private String namespace_board="board.";
-	private String namespace_singer="singer.";
-	private String namespace_common="common.";
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -97,29 +94,5 @@ public class BoardDaoImpl implements BoardDao {
 		return session.delete(namespace_board+"deleteByNo", no);
 	}
 
-	@Override
-	public List<String> searchSinger(String keyword) {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace_singer+"searchSinger", keyword);
-	}
-
-	@Override
-	public int StringToIntSingerId(String singer_name) {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace_singer+"StringToIntSingerId", singer_name);
-	}
-
-	@Override
-	public String selectGroupNameById(String m_id) {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
-	}
-
-	@Override
-	public List<Singer> selectAllSinger() {
-		return session.selectList(namespace_common+"selectAllSinger");
-	}
-
-	
 	
 }
