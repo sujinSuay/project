@@ -43,7 +43,8 @@ CREATE TABLE groups (
 	group_link VARCHAR2(200) /* 링크 */
 );
 
-
+SELECT * FROM COMMENTS WHERE BOARD_NO=2;
+select * from comments;
 
 INSERT INTO singer
 VALUES (0, '가수이름', 0, '가수타입', '정보링크', 0, '검색태그')

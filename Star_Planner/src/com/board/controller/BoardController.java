@@ -103,15 +103,19 @@ public class BoardController {
 		Board board = service.getBoard(no);
 		
 		List<Comment> list_comment = service_comment.selectComment(no);
+		int comment_count = list_comment.size();
 		
 		int singer_id = service.StringToIntSingerId(id);
 		Map<String, Object> list_board = service.list(singer_id, page);
 		
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("board", board);
 		map.put("list_comment", list_comment);
+		map.put("comment_count", comment_count);
 		map.put("list", list_board.get("list"));
 		map.put("paging", list_board.get("paging"));
+		
 		
 		return new ModelAndView("/board_detail.do", map);
 	}

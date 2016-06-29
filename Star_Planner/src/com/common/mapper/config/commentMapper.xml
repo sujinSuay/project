@@ -8,6 +8,8 @@
 	<id column="comment_content" property="comment_content"/>
 	<id column="m_id" property="m_id"/>
 	<id column="comment_date" property="comment_date"/>
+	<id column="comment_family_id" property="comment_family_id"/>
+	<id column="comment_check" property="comment_check"/>
 </resultMap>
 
 
@@ -17,19 +19,24 @@ select comment_id_seq.nextval from dual
 
 <insert id="insertComment" parameterType="com.board.vo.Comment" >
 INSERT INTO comments
-VALUES (#{board_no},#{comment_id} , #{comment_content}, #{m_id}, #{comment_date})
+VALUES (#{board_no},#{comment_id} , #{comment_content}, #{m_id}, #{comment_date}, #{comment_family_id},#{comment_check})
 </insert>
 
 <select id="selectComment" resultMap="comment-result" parameterType="_int">
 SELECT 
-board_no, comment_id, comment_content, m_id, comment_date
+board_no, comment_id, comment_content, m_id, comment_date,comment_family_id,comment_check
 FROM comments
-WHERE board_no=#{board_no}
+WHERE board_no=#{board_no} 
+ORDER BY comment_family_id, comment_date
 
 </select>
 
 <delete id="deleteComment" parameterType="_int">
 delete from comments where comment_id=#{comment_id}
+</delete>
+
+<delete id="deleteCommentAll" parameterType="_int">
+delete from comments where comment_family_id=#{comment_id}
 </delete>
 
 <update id="modifyComment" parameterType="hashmap">
@@ -44,6 +51,13 @@ WHERE comment_id = #{comment_id}
 	FROM comments c, board b, singer s
 	WHERE c.m_id = #{m_id} and b.board_no = c.board_no and s.singer_id = b.singer_id
 	ORDER BY comment_date DESC
+</select>
+
+<select id="selectById" parameterType="int" resultType="com.board.vo.Comment">
+SELECT 
+board_no, comment_id, comment_content, m_id, comment_date,comment_family_id,comment_check
+FROM comments
+WHERE comment_id = #{comment_id}
 </select>
 
 </mapper>

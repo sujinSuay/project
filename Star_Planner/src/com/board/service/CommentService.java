@@ -7,11 +7,12 @@ import com.board.vo.Comment;
 
 public interface CommentService {
 
-	void modifyComment(HashMap<String, Object> map);
+	int modifyComment(HashMap<String, Object> map);
 
-	void deleteComment(int comment_id);
+	int deleteComment(int comment_id);
 
-	void insertComment(Comment comment);
+	int insertComment(Comment comment);
+
 
 	List<Comment> selectComment(int board_no);
 	

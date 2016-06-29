@@ -87,20 +87,18 @@ CREATE TABLE schedule (
 );
 
 create sequence schedule_id_seq nocache;
+
 /* comment */
-
-select m_id, name, phone, group_name
-from member m, groups g
-where m.group_id=g.group_id and m.group_id>10;
-
 
 CREATE TABLE comments (
 	board_no NUMBER(10) NOT NULL, /* 게시글번호 */
-	comment_id NUMBER(10) NOT NULL, /* 댓글ID */
+	comment_id NUMBER(10) PRIMARY KEY, /* 댓글ID */
 	comment_content VARCHAR2(300) NOT NULL, /* 내용 */
 	m_id VARCHAR2(200) NOT NULL, /* id */
-	comment_date DATE NOT NULL /* 일시 */
-);
+	comment_date DATE NOT NULL, /* 일시 */
+	comment_family_id NUMBER(10) NOT NULL, /* 댓글의 댓글인 경우 부모의 ID */
+	comment_check NUMBER(2) NOT NULL  /*댓글일 경우 0, 댓글의 댓글이면 1*/
+); 
 
 create sequence comment_id_seq nocache;
 
