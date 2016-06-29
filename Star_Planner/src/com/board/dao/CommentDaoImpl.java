@@ -22,7 +22,6 @@ public class CommentDaoImpl implements CommentDao {
 	public int selectCommentId() {
 		
 		int comment_id = session.selectOne(namespace+"selectCommentId");
-		System.out.println("$$$$$$$$$$$$$$$$$$$   "+ comment_id);
 		return comment_id;
 	}
 	
@@ -31,7 +30,6 @@ public class CommentDaoImpl implements CommentDao {
 	public int insertComment(Comment comment) {
 
 		int count =  session.insert(namespace+"insertComment", comment);
-		System.out.println("####################################  " + count);
 		return count;
 	}
 
@@ -48,16 +46,30 @@ public class CommentDaoImpl implements CommentDao {
 	}
 
 	@Override
-	public int deleteComment(int id) {
+	public int deleteComment(int comment_id) {
 		
 		System.out.println("CommentDaoImpl deleteComment실행");
-		return session.delete(namespace+"deleteComment", id);
+		return session.delete(namespace+"deleteCommentAll", comment_id);
 	}
 
 	@Override
 	public int modifyComment(HashMap<String, Object> map) {
 		System.out.println("CommentDaoImpl modifyComment실행");
 		return session.update(namespace + "modifyComment", map );
+	}
+
+
+	@Override
+	public int deleteCommentAndReply(int comment_id) {
+		System.out.println("CommentDaoImpl deleteCommentAndReply실행");
+		return session.delete(namespace+"deleteComment", comment_id);
+	}
+
+
+	@Override
+	public Comment selectById(int comment_id) {
+		
+		return session.selectOne(namespace + "selectById", comment_id);
 	}
 
 	

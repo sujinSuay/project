@@ -29,6 +29,10 @@ public class CommentController {
 	
 		
 	 List<Comment> list = service.selectComment(board_no);
+	 
+	 
+	 
+	 
 	 System.out.println("CommentController  \n" +  list);
 	 return list;
 	}
@@ -36,28 +40,39 @@ public class CommentController {
 	
 	@RequestMapping("/insertComment.do")
 	@ResponseBody
-	public Comment insertComment(@RequestParam(value="comment_content") String content, String m_id, int board_no){
+	public List<Comment> insertComment(@RequestParam(value="comment_content") String content, String m_id, int board_no){
 		//등록할 게시글의 고유 번호, 댓글의 고유 아이디, 댓글 내용, 댓글 게시한 회원 아이디, 댓글 게시한 날짜
 		System.out.println("입력받은 댓글 내용   " + content);
-		Comment comment = new Comment(board_no,0,content, m_id, new Date(System.currentTimeMillis()));
+		Comment comment = new Comment(board_no,0,content, m_id, new Date(System.currentTimeMillis()),0, 0);
 		service.insertComment(comment);
-		return comment;
 		
+		return service.selectComment(board_no);
+		
+	}
+	
+	//댓글 등록
+	@RequestMapping("/insertReply.do")
+	@ResponseBody
+	public List<Comment> insertReply(int comment_id, String comment_content, String m_id, int board_no){
+		Comment comment = new Comment(board_no, 0, comment_content, m_id, new Date(System.currentTimeMillis()),comment_id,1);
+		service.insertComment(comment);
+		
+		return service.selectComment(board_no);
 	}
 	
 	@RequestMapping("/deleteComment.do")
 	@ResponseBody
-	public List<Comment> deleteComment(int comment_id ){
+	public List<Comment> deleteComment(int comment_id, int board_no ){
 		
 		System.out.println("deleteComment");
 		service.deleteComment(comment_id);
 		
-		return null;
+		return service.selectComment(board_no);
 	}
 	
 	@RequestMapping("/modifyComment.do")
 	@ResponseBody
-	public HashMap<String, Object> modifyComment(int comment_id,String comment_content){
+	public int modifyComment(int comment_id,String comment_content){
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -66,9 +81,8 @@ public class CommentController {
 		
 		
 		System.out.println("modifyComment 전송받은 값 :" + map.toString());
-		service.modifyComment(map);
 		
-		return map;
+		return service.modifyComment(map);
 	}
 	
 	

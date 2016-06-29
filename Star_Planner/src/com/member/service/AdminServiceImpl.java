@@ -12,7 +12,9 @@ import com.common.vo.Singer;
 
 import com.member.dao.AdminDaoImpl;
 import com.member.dao.MemberDaoImpl;
+import com.member.vo.ManagerList;
 import com.member.vo.Member;
+import com.member.vo.SingerList;
 
 
 @Service("adminService")
@@ -84,7 +86,11 @@ public class AdminServiceImpl {
 			return adminDao.denyManager(m_id);
 		}
 	
-	
+		//매니저(이미 매니저가 된) 리스트 조회
+	public List<ManagerList> selectManagerList(String id){
+		System.out.println("##AdminServiceImpl selectManagerList()");
+		return adminDao.selectManagerList(id);
+	}
 	
 	
 	//가수등록 - 가수 분류 selector
@@ -101,6 +107,7 @@ public class AdminServiceImpl {
 		return adminDao.selectSingerCompany();
 	}
 	
+	//가수 등록
 	public int insertSinger(String singer_name, String singer_type, String singer_company, String singer_link, String singer_tag){
 		
 		System.out.println("##AdminServiceImpl insertSinger()");
@@ -115,7 +122,14 @@ public class AdminServiceImpl {
 		return adminDao.insertSinger(singer);
 	
 	}
+	
+	//가수 목록 조회
+	public List<SingerList> selectSingerList(String id){
+		System.out.println("##AdminServiceImpl selectSingerList()");
+		return adminDao.selectSingerList(id);
+	}
 
+	//회사 등록
 	public int insertCompany(String group_name, String group_address, String group_phone, String group_link) {
 		
 		System.out.println("##AdminServiceImpl insertCompany()");
@@ -124,6 +138,11 @@ public class AdminServiceImpl {
 		Group group = new Group(0, group_name, group_address, group_phone, group_link);
 		return adminDao.insertCompany(group);
 		
+	}
+	
+	public List<Group> selectGroupAll(){
+		System.out.println("##AdminServiceImpl selectGroupAll()");
+		return adminDao.selectGroupAll();
 	}
 	
 	//링크 등록

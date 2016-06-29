@@ -41,6 +41,11 @@ INSERT INTO member VALUES ('manager6', '000000000101', '0000',  3, 'male', 'YG�
 INSERT INTO member VALUES ('manager7', '000000000105', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
 INSERT INTO member VALUES ('manager8', '000000000106', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
 
+INSERT INTO member VALUES ('manager10', '000000002', '0000',  3, 'male', 'JYP메니져이름DD', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
+INSERT INTO member VALUES ('manager11', '000000003', '0000',  3, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
+INSERT INTO member VALUES ('manager12', '000000004', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager13', '000000005', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
+INSERT INTO member VALUES ('manager14', '000000006', '0000',  3, 'male', 'YG메니져', 'YG@yg.yg', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
 
 
 

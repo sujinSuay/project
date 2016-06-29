@@ -13,23 +13,30 @@ public class Comment {
 	private String m_id; /** 댓글을 게시한  회원의 아이디  **/
 	@JsonSerialize(using=JsonDateConverter.class)
 	private Date comment_date; /** 댓글을 게시한 날짜  **/
+	private int comment_family_id; /**댓글의 댓글인 경우 부모 댓글 id**/
+	private int comment_check;  /**댓글의 댓글인지 체크 여부 **/
 	
 	
 	public Comment(){
-		
 	}
-	
-	
-	public Comment(int board_no, int comment_id, String comment_content, String m_id, Date comment_date) {
+
+
+	public Comment(int board_no, int comment_id, String comment_content, String m_id, Date comment_date,
+			int comment_family_id, int comment_check) {
 		super();
 		this.board_no = board_no;
 		this.comment_id = comment_id;
 		this.comment_content = comment_content;
 		this.m_id = m_id;
 		this.comment_date = comment_date;
+		this.comment_family_id = comment_family_id;
+		this.comment_check = comment_check;
 	}
 
 
+	
+	
+	
 	public int getBoard_no() {
 		return board_no;
 	}
@@ -80,10 +87,31 @@ public class Comment {
 	}
 
 
+	public int getComment_family_id() {
+		return comment_family_id;
+	}
+
+
+	public void setComment_family_id(int comment_family_id) {
+		this.comment_family_id = comment_family_id;
+	}
+
+
+	public int getComment_check() {
+		return comment_check;
+	}
+
+
+	public void setComment_check(int comment_check) {
+		this.comment_check = comment_check;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Comment [board_no=" + board_no + ", comment_id=" + comment_id + ", comment_content=" + comment_content
-				+ ", m_id=" + m_id + ", comment_date=" + comment_date + "]";
+				+ ", m_id=" + m_id + ", comment_date=" + comment_date + ", comment_family_id=" + comment_family_id
+				+ ", comment_check=" + comment_check + "]";
 	}
 
 
@@ -92,8 +120,10 @@ public class Comment {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + board_no;
+		result = prime * result + comment_check;
 		result = prime * result + ((comment_content == null) ? 0 : comment_content.hashCode());
 		result = prime * result + ((comment_date == null) ? 0 : comment_date.hashCode());
+		result = prime * result + comment_family_id;
 		result = prime * result + comment_id;
 		result = prime * result + ((m_id == null) ? 0 : m_id.hashCode());
 		return result;
@@ -111,6 +141,8 @@ public class Comment {
 		Comment other = (Comment) obj;
 		if (board_no != other.board_no)
 			return false;
+		if (comment_check != other.comment_check)
+			return false;
 		if (comment_content == null) {
 			if (other.comment_content != null)
 				return false;
@@ -121,6 +153,8 @@ public class Comment {
 				return false;
 		} else if (!comment_date.equals(other.comment_date))
 			return false;
+		if (comment_family_id != other.comment_family_id)
+			return false;
 		if (comment_id != other.comment_id)
 			return false;
 		if (m_id == null) {
@@ -130,6 +164,10 @@ public class Comment {
 			return false;
 		return true;
 	}
+	
+	
+	
+
 	
 	
 	

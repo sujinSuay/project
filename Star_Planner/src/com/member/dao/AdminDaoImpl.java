@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 import com.common.vo.Group;
 import com.common.vo.LinkList;
 import com.common.vo.Singer;
+import com.member.vo.ManagerList;
 import com.member.vo.Member;
+import com.member.vo.SingerList;
 
 @Repository
 public class AdminDaoImpl implements AdminDao {
@@ -80,12 +82,20 @@ public class AdminDaoImpl implements AdminDao {
 	//매니저  삭제
 	@Override
 	public int deleteManager(String m_id) {
-		
+		//사용하지 않는 함수 - 혹시 추후 사용될까봐 냅둠
 		System.out.println("##AdminDaoImp + deleteManager(" + m_id +")");
 		
 		return 0;
 	}
 
+	public List<ManagerList> selectManagerList(String id){
+		System.out.println("##AdminDaoImp + selectManagerList(" + id  +")");
+		if(id==null || id.equals("회사 분류")){ //전체조회
+			return session.selectList("admin.selectManagerAllList");
+		}else{ //검색한 키워드로 조회
+			return session.selectList("admin.selectManagerByCompany", id);
+		}
+	}
 
 	//가수 분류 조회
 	@Override
@@ -95,6 +105,8 @@ public class AdminDaoImpl implements AdminDao {
 		
 		return session.selectList("admin.selectSingerType");
 	}
+	
+	
 
 
 	//가수 회사 조회
@@ -126,19 +138,38 @@ public class AdminDaoImpl implements AdminDao {
 				
 	}
 	
+	//가수 등록
 	public int insertSinger(Singer singer){
 		System.out.println("##AdminDaoImp + insertSinger()");
 		return session.update("admin.insertSinger", singer);
 	}
 
+	//가수 목록 조회
+	public List<SingerList> selectSingerList(String id){
+		System.out.println("##AdminDaoImp + selectSingerList()");
+		if(id==null ||id.equals("가수분류")){
+			return session.selectList("admin.selectSingerListAll");
+		}else{
+			return session.selectList("admin.selectSingerList", id);
+		}
+		
+	}
 
 
+	//회사 등록
 	@Override
 	public int insertCompany(Group group) {
 		System.out.println("##AdminDaoImp + insertCompany()");
 
 		return session.insert("admin.insertCompany", group);
 	}
+	
+	//회사 목록 조회
+	public List<Group> selectGroupAll(){
+		System.out.println("##AdminDaoImp + selectGroupAll()");
+		return session.selectList("admin.selectGroupAll");
+	}
+	
 	
 	public int insertMainLink(HashMap<String, Object> map){
 		System.out.println("##AdminDaoImp + insertMainLink()");

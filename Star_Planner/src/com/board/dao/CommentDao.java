@@ -14,6 +14,8 @@ public interface CommentDao {
 	int insertComment(Comment comment);
 	int updateComment(Comment comment);
 	int deleteComment(int comment_id);
+	int deleteCommentAndReply(int comment_id);
+	Comment selectById(int comment_id);
 	int modifyComment(HashMap<String, Object> map);
 	
 	List<Comment> selectComment(int board_no);

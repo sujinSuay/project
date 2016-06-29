@@ -43,7 +43,8 @@ CREATE TABLE groups (
 	group_link VARCHAR2(200) /* 링크 */
 );
 
-
+SELECT * FROM COMMENTS WHERE BOARD_NO=2;
+select * from comments;
 
 INSERT INTO singer
 VALUES (0, '가수이름', 0, '가수타입', '정보링크', 0, '검색태그')
@@ -144,6 +145,18 @@ select * from
 update member
 set group_id=13
 where m_id='manager4';
+
+select * from singer
+
+select group_name,   singer_name,  type_name,  singer_favorite
+from singer s, groups g
+where s.group_id=g.group_id;
+
+
+select group_name,   singer_name,  type_name,  singer_favorite
+from singer s, groups g
+where s.group_id=g.group_id;
+
 
 
 select * from member where m_id='manager6';

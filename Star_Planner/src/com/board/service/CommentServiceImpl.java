@@ -28,36 +28,40 @@ public class CommentServiceImpl implements CommentService{
 	}
 	
 	@Override
-	public void insertComment(Comment comment){
+	public int insertComment(Comment comment){
 		
 		System.out.println("CommentServiceImpl InsertCommnet 실행");
-		comment.setComment_id(dao.selectCommentId()); //현재 입력될 comment_id 값을 가져와서 생성자 comment에 재정의
+		int selectCommentId = dao.selectCommentId();
+		comment.setComment_id(selectCommentId); //현재 입력될 comment_id 값을 가져와서 생성자 comment에 재정의
 		
-		dao.insertComment(comment);
-	
+		if(comment.getComment_check()==0){
+			comment.setComment_family_id(selectCommentId);
+		}
+		
+		return dao.insertComment(comment); 
 	}
+	
+	
 	@Override
-	public void deleteComment(int comment_id){
+	public int deleteComment(int comment_id){
 	
 		System.out.println("CommentServiceImpl deleteComment 실행");
-		dao.deleteComment(comment_id);
+		Comment comment = dao.selectById(comment_id);
+		if(comment.getComment_check()==0){
+			return dao.deleteComment(comment_id);
+		}else{ //댓글의 댓글인 경우
+			return dao.deleteCommentAndReply(comment_id);
+		}
+		
+		
+		
 	}
 	@Override
-	public void modifyComment(HashMap<String, Object> map){
+	public int modifyComment(HashMap<String, Object> map){
 		System.out.println("CommentServiceImpl modifyComment 실행");
-		dao.modifyComment(map);
+		return dao.modifyComment(map);
 	}
 	
-	
-	/*public void Business() {
-		
-		Date date = new Date(2016, 05, 25);
-		Comment comment = new Comment(1,0, "댓글2", "회원3", date );
-		System.out.println(comment);
-		dao.insertComment(comment);
-		
-		
-	}*/
 		
 		
 	
