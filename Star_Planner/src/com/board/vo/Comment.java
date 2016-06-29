@@ -34,9 +34,8 @@ public class Comment {
 	}
 
 
-	
-	
-	
+
+
 	public int getBoard_no() {
 		return board_no;
 	}

@@ -38,6 +38,7 @@ public class CommentController {
 	}
 	
 	
+	//comment등록
 	@RequestMapping("/insertComment.do")
 	@ResponseBody
 	public List<Comment> insertComment(@RequestParam(value="comment_content") String content, String m_id, int board_no){
@@ -50,12 +51,14 @@ public class CommentController {
 		
 	}
 	
-	//댓글 등록
+	//reply 등록
 	@RequestMapping("/insertReply.do")
 	@ResponseBody
-	public List<Comment> insertReply(int comment_id, String comment_content, String m_id, int board_no){
+	public List<Comment> insertReply(int family_id, int comment_id, String comment_content, String m_id, int board_no){
+	
+		
 		Comment comment = new Comment(board_no, 0, comment_content, m_id, new Date(System.currentTimeMillis()),comment_id,1);
-		service.insertComment(comment);
+		service.insertComment(comment, family_id);
 		
 		return service.selectComment(board_no);
 	}
