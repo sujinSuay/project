@@ -19,6 +19,7 @@ public class Board implements Serializable{
 	private int board_likes; /** 게시글 좋아요 갯수  **/
 	private int singer_id;  /** 어떤 가수의 갤러리인지를 나타내기 위한 가수의 고유 id  **/
 	private String board_writer_type;  /**  게시자 타입 **/
+	private String board_link;
 	
 	
 	public Board(){
@@ -32,10 +33,18 @@ public class Board implements Serializable{
 		this.board_title = board_title;
 		this.board_content = board_content;
 	}
+	
+	public Board(int board_no, String board_title, String board_content,String board_link) {
+		super();
+		this.board_no = board_no;
+		this.board_title = board_title;
+		this.board_content = board_content;
+		this.board_link = board_link;
+	}
 
 
 	public Board(int board_no, String board_title, Date board_date, String m_id, int board_hits, String board_content,
-			int board_likes, int singer_id, String board_writer_type) {
+			int board_likes, int singer_id, String board_writer_type, String board_link) {
 		super();
 		this.board_no = board_no;
 		this.board_title = board_title;
@@ -46,6 +55,7 @@ public class Board implements Serializable{
 		this.board_likes = board_likes;
 		this.singer_id = singer_id;
 		this.board_writer_type = board_writer_type;
+		this.board_link = board_link;
 	}
 
 
@@ -139,11 +149,13 @@ public class Board implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Board [board_no=" + board_no + ", board_title=" + board_title + ", board_date=" + board_date + ", m_id="
-				+ m_id + ", board_hits=" + board_hits + ", board_content=" + board_content + ", board_likes="
-				+ board_likes + ", singer_id=" + singer_id + ", board_writer_type=" + board_writer_type + "]";
+	public String getBoard_link() {
+		return board_link;
+	}
+
+
+	public void setBoard_link(String board_link) {
+		this.board_link = board_link;
 	}
 
 
@@ -155,6 +167,7 @@ public class Board implements Serializable{
 		result = prime * result + ((board_date == null) ? 0 : board_date.hashCode());
 		result = prime * result + board_hits;
 		result = prime * result + board_likes;
+		result = prime * result + ((board_link == null) ? 0 : board_link.hashCode());
 		result = prime * result + board_no;
 		result = prime * result + ((board_title == null) ? 0 : board_title.hashCode());
 		result = prime * result + ((board_writer_type == null) ? 0 : board_writer_type.hashCode());
@@ -187,6 +200,11 @@ public class Board implements Serializable{
 			return false;
 		if (board_likes != other.board_likes)
 			return false;
+		if (board_link == null) {
+			if (other.board_link != null)
+				return false;
+		} else if (!board_link.equals(other.board_link))
+			return false;
 		if (board_no != other.board_no)
 			return false;
 		if (board_title == null) {
@@ -208,13 +226,16 @@ public class Board implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+	@Override
+	public String toString() {
+		return "Board [board_no=" + board_no + ", board_title=" + board_title + ", board_date=" + board_date + ", m_id="
+				+ m_id + ", board_hits=" + board_hits + ", board_content=" + board_content + ", board_likes="
+				+ board_likes + ", singer_id=" + singer_id + ", board_writer_type=" + board_writer_type
+				+ ", board_link=" + board_link + "]";
+	}
+
+
 	
 }

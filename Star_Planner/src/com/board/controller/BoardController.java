@@ -1,8 +1,11 @@
 package com.board.controller;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.BoardService;
@@ -69,8 +74,25 @@ public class BoardController {
 	
 	//NoticeModify
 	@RequestMapping("/boardModify")
-	public ModelAndView boardModify(String id, int no, int page, String board_title, String board_content) throws UnsupportedEncodingException{
-		Board board = new Board(no, board_title, board_content);
+	public ModelAndView boardModify(@RequestParam List upfile, String id, int no, int page, String board_title, String board_content, HttpServletRequest req) throws IllegalStateException, IOException{
+		String board_link = "";
+		String saveDir = req.getServletContext().getRealPath("/uploadFile"); //파일저장 디렉토리
+		if(upfile != null){ //null인 경우 upfile 이름으로 넘어온 요청파라미터가 없는 경우
+			for(Object f: upfile){
+				MultipartFile file = (MultipartFile)f;
+				if(!file.isEmpty()){
+					String fileName="B"+String.valueOf(System.currentTimeMillis());
+					board_link +=(fileName) + ",";
+					File dest = new File(saveDir,fileName);
+					file.transferTo(dest);
+				}
+			}
+		}
+		if(board_link.equals("")) board_link="noData";
+		System.out.println("board_link : " + board_link);
+		Board board = new Board(no, board_title, board_content, board_link);
+		System.out.println(board);
+		System.out.println(board);
 		service.modifyBoard(board);
 		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+no+"&page="+page);
 	}
@@ -79,6 +101,7 @@ public class BoardController {
 	@RequestMapping("/boardModifyForm")
 	public ModelAndView boardModifyForm(int no){
 		Map<String, Object> board = service.getModifyBoard(no);
+		System.out.println(board);
 		return new ModelAndView("/board_modify.do", board);
 	}
 	
@@ -105,7 +128,11 @@ public class BoardController {
 		
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
+		String[] file_names = board.getBoard_link().split(",");
+		if(board.getBoard_link().equals("noData")) file_names=null;
+		System.out.println(file_names);
 		map.put("board", board);
+		map.put("file_names", file_names);
 		map.put("list_comment", list_comment);
 		map.put("comment_count", comment_count);
 		map.put("list", list_board.get("list"));
@@ -123,15 +150,33 @@ public class BoardController {
 		
 	//boardWriter
 	@RequestMapping("/boardWriter")
-	public ModelAndView boardWriter(String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws UnsupportedEncodingException{
+	public ModelAndView boardWriter(@RequestParam List upfile,String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException{
 		int singer_id = service.StringToIntSingerId(id);
 		String m_id = (String)session.getAttribute("loginId");
 		if(m_id==null){
 			System.out.println("자동 로그아웃됨");
 			return new ModelAndView("redirect:/board/boardList.do?id="+URLEncoder.encode(id,"UTF-8")+"&page=1");
 		}
+		// 파일 업로드 처리
+	
+		String saveDir = req.getServletContext().getRealPath("/uploadFile"); //파일저장 디렉토리
+		System.out.println(saveDir);
+		String board_link = "";
+		if(upfile != null){ //null인 경우 upfile 이름으로 넘어온 요청파라미터가 없는 경우
+			for(Object f: upfile){
+				MultipartFile file = (MultipartFile)f;
+				if(!file.isEmpty()){
+					String fileName="B"+String.valueOf(System.currentTimeMillis());
+					board_link +=(fileName) + ",";
+					File dest = new File(saveDir,fileName);
+					file.transferTo(dest);
+				}
+			}
+		}
+		if(board_link.equals("")) board_link="noData";
+		System.out.println(board_link);
 		String group_name = service.selectGroupNameById(m_id);
-		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name);
+		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name, board_link);
 		service.writeBoard(board);
 
 		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+board.getBoard_no()+"&page=1");

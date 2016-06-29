@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 
 
 <!DOCTYPE html>
@@ -10,7 +12,6 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	
 	$("#likeBtn").on("click",function(){
 		$.ajax({
 			"url":"/Star_Planner/board/boardLike.do",
@@ -78,7 +79,16 @@ $(document).ready(function(){
 			</dl>
 		</div>
 	</header>
-	<article id="content">${requestScope.board.board_content }</article>
+	<article id="content">
+		<div id="upfile">
+			<c:forEach items="${requestScope.file_names }" var="file">
+				<c:if test="${file != null || file !=' ' }">
+					<img width="50%" height="50%" src="/Star_Planner/uploadFile/${file}">
+				</c:if>
+			</c:forEach>
+		</div>
+		${requestScope.board.board_content }
+	</article>
 	<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항수정</a>&nbsp;&nbsp;&nbsp;
 	<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">공지사항삭제</a>&nbsp;&nbsp;&nbsp;
 	<input type="button" id="likeBtn" value="좋아요">

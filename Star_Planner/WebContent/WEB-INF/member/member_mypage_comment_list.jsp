@@ -20,7 +20,7 @@ $(document).ready(function(){
 				for(var i=0;i<comment.length;i++){
 					thtml="<tr><td>" + comment[i].comment_id+"</td>"+
 					 		"<td align='center'><a href='/Star_Planner/board/boardView.do?id="+comment[i].singer_name+"&no="+comment[i].board_no+"&page=1'>"+comment[i].comment_content+"</a></td>"+
-					 		"<td>"+comment[i].m_id+"</td>"+
+					 		"<td>"+comment[i].singer_name+"</td>"+
 							"<td>"+comment[i].comment_date+"</td>"+
 							"<td><button id='deleteComment' value='삭제' onclick='deleteComment("+comment[i].comment_id+")'>삭제</button></td></tr>";
 					$("#commentTable").append(thtml); 
@@ -57,19 +57,21 @@ function deleteComment(comment_id){
 </script>
 </head>
 <body>
-<table>
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th width="300">내용</th>
-			<th width="150">글쓴이</th>
-			<th width="200">날짜</th>
-			<th>삭제</th>
-		</tr>
-	</thead>
-	<tbody align="center" id="commentTable">
-		
-	</tbody>
-</table>
+<div style=" height: 200px; width:950px; overflow-x: hidden; overflow-y: scroll;">
+	<table>
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th width="300">내용</th>
+				<th width="150">게시판</th>
+				<th width="200">날짜</th>
+				<th>삭제</th>
+			</tr>
+		</thead>
+		<tbody align="center" id="commentTable">
+			
+		</tbody>
+	</table>
+</div>
 </body>
 </html>
