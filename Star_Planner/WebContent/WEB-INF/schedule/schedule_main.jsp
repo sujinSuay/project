@@ -183,7 +183,6 @@
 				var eventsData = [];
 				if (data.length != 0) {
 					$.each(data, function(key, val) {
-						/* alert(val.singer_info.singer_name); */
 						var t = '('+val.singer.singer_name+') '+ val.schedule_name;
 						if(val.group_id == '${sessionScope.groupId}'){
 							eventsData.push({
@@ -240,8 +239,8 @@
 			}, */
 			eventRender : function(event, element) {
 				element.bind('click', function() { // 일정보기,수정
-					//alert(event.title+"\n"+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
-					ShowEventPopup(event.title); 
+					alert(event.title+"\n"+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
+					//ShowEventPopup(event.title); 
 				});
 			},
 			editable : false,

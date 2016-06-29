@@ -45,7 +45,6 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectAllSchedule(){
 		List<Schedule> list = service.selectAllSchedule();
-		System.out.println(list);
 		return list;
 	}
 	
@@ -67,7 +66,6 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleBySinger(int singer_id){
 		List<Schedule> list = service.selectScheduleBySinger(singer_id);
-		System.out.println(list);
 		return list;
 	}
 	
@@ -75,7 +73,6 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByGroup(int group_id){
 		List<Schedule> list = service.selectScheduleByGroup(group_id);
-		System.out.println(list);
 		return list;
 	}
 	
@@ -83,7 +80,6 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByLocation(String keyword){
 		List<Schedule> list = service.selectScheduleByLocation(keyword);
-		System.out.println(list);
 		return list;
 	}
 	
