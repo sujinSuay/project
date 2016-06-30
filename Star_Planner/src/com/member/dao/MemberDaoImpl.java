@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.board.vo.Board;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
 
 @Repository
 public class MemberDaoImpl implements memberDao {
@@ -79,5 +80,14 @@ public class MemberDaoImpl implements memberDao {
 	@Override
 	public List<MyPage> selectCommentListByMemberId(HashMap<String, String> map){
 		return session.selectList("comment.selectCommentListByMemberId", map);
+	}
+	@Override
+	public List<Schedule> selectScheduleByMemberId(String m_id){
+		return session.selectList("schedule.selectScheduleByMemberId", m_id);
+	}
+	@Override
+	public List<Schedule> selectScheduleByMemberGroup(int group_id) {
+		// TODO Auto-generated method stub
+		return session.selectList("schedule.selectScheduleByGroup", group_id);
 	}
 }

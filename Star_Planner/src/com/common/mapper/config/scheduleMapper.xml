@@ -11,7 +11,7 @@
 			FROM dual
 		</selectKey>
 		INSERT INTO schedule 
-		VALUES (#{schedule_id},#{schedule_start},#{schedule_end},#{singer_id},#{group_id},#{schedule_name},#{type_name},#{schedule_address},#{schedule_contents})
+		VALUES (#{schedule_id},#{schedule_start},#{schedule_end},#{singer_id},#{group_id},#{schedule_name},#{type_name},#{schedule_address},#{schedule_contents},#{m_id})
 	</insert>
 	<select id="selectAllSchedule" resultMap="schedule-singer-group-resultmap">
 		SELECT *
@@ -33,4 +33,13 @@
 		FROM schedule, singer, groups
 		WHERE schedule.group_id = #{group_id} AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
 	</select>
+	<select id="selectScheduleByMemberId" parameterType="string" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule s, singer sn, groups g
+		WHERE s.m_id = #{m_id} and s.singer_id = sn.singer_id and s.group_id = g.group_id and sn.group_id=g.group_id
+	</select>
+	
+	<delete id="deleteScheduleById" parameterType="_int">
+		DELETE FROM schedule WHERE schedule_id = #{schedule_id} 
+	</delete>
 </mapper>

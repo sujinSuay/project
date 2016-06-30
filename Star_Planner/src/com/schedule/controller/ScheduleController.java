@@ -88,6 +88,18 @@ public class ScheduleController {
 		List<String> list = service.getCategoryList();
 		return new ModelAndView("/schedule_main.do", "categoryList", list);
 	}
-	
-	
+	@RequestMapping("/deleteSchedule")
+	public ModelAndView deleteScheduleById(int schedule_id){
+		service.deleteScheduleById(schedule_id);
+		return new ModelAndView("redirect:/member/mypage.do");
+	}
+	@RequestMapping("/scheduleModifyForm")
+	public ModelAndView scheduleModifyForm(HttpSession session, int schedule_id){
+		if(session.getAttribute("groupId")==null){
+			return new ModelAndView("redirect:/member_login.do");
+		}
+		int group = (int)session.getAttribute("groupId");
+		Map<String, Object> list = service.getCategoryList(group);
+		return new ModelAndView("/schedule_register.do", list);
+	}
 }

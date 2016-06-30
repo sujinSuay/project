@@ -76,5 +76,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return cdao.searchSingerAllData(keyword);
 	}
 
+	@Override
+	public int deleteScheduleById(int schedule_id) {
+		// TODO Auto-generated method stub
+		return dao.deleteScheduleById(schedule_id);
+	}
+
 	
 }

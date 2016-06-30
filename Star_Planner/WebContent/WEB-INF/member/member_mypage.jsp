@@ -7,6 +7,11 @@
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 </head>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+});
+</script>
 <body>
 <h2>회원정보</h2>
 
@@ -38,7 +43,11 @@
 		</tr>
 	</table>
 </div>
-	<h2>내가쓴 게시글</h2>
+	<c:if test="${sessionScope.groupId>10}">
+		<h2>스케쥴</h2>
+		<jsp:include page="/WEB-INF/member/member_mypage_manager.jsp"/>
+		<h2>내가쓴 게시글</h2>
+	</c:if>
     <jsp:include page="/WEB-INF/member/member_mypage_board_list.jsp"/>
     <h2>내가쓴 댓글</h2>
     <jsp:include page="/WEB-INF/member/member_mypage_comment_list.jsp"/>

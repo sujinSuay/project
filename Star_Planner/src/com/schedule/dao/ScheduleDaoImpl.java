@@ -47,6 +47,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		return session.selectList(namespace_schedule+"selectScheduleByGroup", group_id);
 	}
 
+	@Override
+	public int deleteScheduleById(int schedule_id) {
+		// TODO Auto-generated method stub
+		return session.delete(namespace_schedule+"deleteScheduleById", schedule_id);
+	}
+	
 	
 	
 	

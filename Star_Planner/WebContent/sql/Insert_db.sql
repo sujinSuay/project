@@ -1,4 +1,4 @@
-select * from groups;
+select * from schedule;
 
 INSERT INTO GROUPS VALUES ( 0, '마스터', '마스터' , '마스터' , '마스터'  );
 INSERT INTO GROUPS VALUES ( 1, '관리자','관리자' , '관리자', '관리자' );

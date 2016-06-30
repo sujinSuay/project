@@ -3,7 +3,7 @@ package com.member.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-
+import java.util.*;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,9 @@ import com.board.vo.Board;
 import com.member.service.MemberService;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
+
+import sun.util.calendar.BaseCalendar.Date;
 
 @Controller
 @RequestMapping("/member")
@@ -139,4 +142,20 @@ public class MemberController {
 		boardService.removeByNo(board_no);
 		return new ModelAndView("member/member_mypage.tiles");
 	}
+	
+	@RequestMapping("/searchScheduleById")
+	@ResponseBody
+	public List<Schedule> selectScheduleByMemberId(String m_id){
+		List<Schedule> list = memberService.selectScheduleByMemberId(m_id);
+		System.out.println(list);
+		return list;
+	}
+	@RequestMapping("/searchScheduleByGroup")
+	@ResponseBody
+	public List<Schedule> selectScheduleByMemberGroup(int group_id){
+		List<Schedule> list = memberService.selectScheduleByMemberGroup(group_id);
+		System.out.println(list);
+		return list;
+	}
+	
 }

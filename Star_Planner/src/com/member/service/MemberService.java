@@ -7,6 +7,7 @@ import java.util.List;
 import com.board.vo.Board;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
 
 public interface MemberService {
 	Member getMemberById(String m_id) throws IOException;
@@ -16,4 +17,6 @@ public interface MemberService {
 	List<String> selectGroupList();
 	List<MyPage> selectBoardListByMemberId(HashMap<String, String> map);
 	List<MyPage> selectCommentListByMemberId(HashMap<String, String> map);
+	List<Schedule> selectScheduleByMemberId(String m_id);
+	List<Schedule> selectScheduleByMemberGroup(int group_id);
 }
