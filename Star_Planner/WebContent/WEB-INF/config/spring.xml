@@ -20,7 +20,7 @@
 	 <!-- DataSource -->
 	 <bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 	 	   p:driverClassName="oracle.jdbc.driver.OracleDriver"
-	 	   p:url="jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+	 	   p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
 	 	   p:username="scott"  
 	 	   p:password="tiger"
 	 	   p:maxTotal="100"/>
