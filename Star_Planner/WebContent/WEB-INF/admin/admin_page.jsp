@@ -133,7 +133,7 @@ $(document).ready(function(){
 	
 		var m_id = text.text();
 		var group_name = $(parent).parent().parent().find('#singerCompany').val();
-
+	
 		
 	$.ajax({
 			type: "post",
@@ -150,6 +150,11 @@ $(document).ready(function(){
 			},
 			"beforeSend" : function(){
 			
+				if(group_name=='회사 분류'){
+					alert('회사를 선택해 주세요');
+					return false;
+				}
+
 			}
 		}); //end of ajax  
 		
@@ -581,6 +586,7 @@ table {
 <div class="layout-right">
 		<h2>매니저  등록 관리 </h2> 
 		<br>
+		<div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
 		<table>
 			<tr>
 				<td>아이디</td> 
@@ -616,6 +622,7 @@ table {
 			
 			</tbody>
 		</table>
+		</div>
 		
 <br>
 <!-- 매니저 목록 조회 -->
@@ -787,45 +794,48 @@ table {
 	
 	
 	</div>
-	
-	
-<div class="layout-down-rigth">
-	<h2>메인페이지 링크 등록</h2>
-	<table>
-	<tbody id="link_tbody">
-	<c:forEach var="link" items="${requestScope.list_mainLink }" varStatus="status">
-	<tr class="link_tr" >
-			<td class='link_count' >${status.count }번 링크</td>
-			
-			<td id="input_td">
-			<c:choose>
-			<c:when test="${link eq '' || link eq null}">
-			
-    		 <input type="text" class="link_input"/>
-			<input type="button" class="link_register_btn" value="등록"/>
-			
-		
-    		</c:when>
 
-  			 <c:otherwise>
 
-			<span class="link_input">${link }</span><br>
-			<input type="button" class="link_modify_btn" value="수정"/>
-			<input type="button" class="link_delete_btn" value="삭제"/>
+	<div class="layout-down-rigth">
+		<h2>메인페이지 링크 등록</h2>
+		<div style="height: 400px; overflow-x: hidden; overflow-y: scroll;">
+			<table style="height: 380px; word-break: break-all;">
 
-   			 </c:otherwise>
-			</c:choose>
-			</td>
-		
-		</tr>
-	</c:forEach>
-	
-	</tbody>
-	
-	
-	</table>
-	
-	</div>  
+				<tbody id="link_tbody">
+					<c:forEach var="link" items="${requestScope.list_mainLink }" 	varStatus="status">
+					
+						<c:if test="${status.index==0 }">
+						<tr><td></td><td><h4>동영상</h4></td></tr>
+						</c:if>
+					
+						<c:if test="${status.index==3 }">
+						<tr><td></td><td><h4>이미지</h4></td></tr>
+						</c:if>
+						
+					<tr class="link_tr">
+							<td class='link_count'>${status.count }번링크</td>
+							<td id="input_td"><c:choose>
+									<c:when test="${link eq '' || link eq null}">
+										<input type="text" class="link_input" />
+										<input type="button" class="link_register_btn" value="등록" />
+									</c:when>
+
+									<c:otherwise>
+										<span class="link_input">${link }</span>
+										<br>
+										<input type="button" class="link_modify_btn" value="수정" />
+										<input type="button" class="link_delete_btn" value="삭제" />
+									</c:otherwise>
+								</c:choose></td>
+
+						</tr>
+					</c:forEach>
+
+				</tbody>
+			</table>
+		</div>
+
+	</div>
 
 </body>
 </html>

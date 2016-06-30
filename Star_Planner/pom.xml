@@ -55,7 +55,8 @@
 +spring-context
 +commons-dbcp2
 +mybatis
-
++javax.mail (mail을 보내주기 위한 설정)
++spring-context-support (javax.mail이 spring에서 실행되도록 support해주는 역할)
 -->
 
 	<dependencies>
@@ -139,6 +140,20 @@
 		    <artifactId>spring-context</artifactId>
 		    <version>4.2.6.RELEASE</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+<!--  javax.mail을 spring에서 support 해주는 dependency -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context-support</artifactId>
+    <version>4.2.6.RELEASE</version>
+</dependency>
+
 
 	</dependencies>
 
