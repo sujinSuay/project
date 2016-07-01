@@ -1,5 +1,6 @@
 package com.common.dao;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.common.vo.Group;
+import com.common.vo.SearchData;
 import com.common.vo.Singer;
 
 @Repository
@@ -46,7 +48,13 @@ private String namespace_singer="singer.";
 	@Override
 	public String selectGroupNameById(String m_id) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace_common+"selectGroupNameById"	, m_id);
+		String str = session.selectOne(namespace_common+"selectGroupNameById", m_id);
+		if(str.equals("일반")){
+			return "";
+		}else{
+			return str;
+		}
+		 
 	}
 
 	@Override
@@ -69,6 +77,40 @@ private String namespace_singer="singer.";
 	public List<Group> searchGroup(String keyword) {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace_common+"searchGroup", keyword);
+	}
+
+	@Override
+	public int insertSearchData(SearchData searchData) {
+		// TODO Auto-generated method stub
+		return session.insert(namespace_common+"insertSearchData", searchData);
+	}
+
+	@Override
+	public int selectSearchData(SearchData searchData) {
+		// TODO Auto-generated method stub
+		if(session.selectOne(namespace_common+"selectSearchData", searchData)==null){
+			return 0;
+		}else{
+			return 1;
+		}
+	}
+
+	@Override
+	public int updateSearchData(SearchData searchData) {
+		// TODO Auto-generated method stub
+		return session.update(namespace_common+"updateSearchCount", searchData);
+	}
+
+	@Override
+	public List<SearchData> selectSearchDataDesc(SearchData search_data) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_common+"selectSearchDataDesc", search_data);
+	}
+
+	@Override
+	public List<Singer> selectSingerByFavorite() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_singer+"selectSingerByFavorite");
 	}
 
 }

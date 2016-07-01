@@ -77,6 +77,10 @@ public class CommentServiceImpl implements CommentService{
 		return dao.modifyComment(map);
 	}
 	
+	public int deleteCommentByBoard(int board_no){
+		System.out.println("CommentServiceImpl deleteCommentByBoard 실행 board: + "+ board_no);
+		return dao.deleteCommentByBoard(board_no);
+	}
 		
 		
 	

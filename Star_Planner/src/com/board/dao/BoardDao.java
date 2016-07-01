@@ -3,7 +3,6 @@ package com.board.dao;
 import java.util.List;
 
 import com.board.vo.Board;
-import com.common.vo.Singer;
 
 public interface BoardDao {
 	public Board selectByNo(int no) ;
@@ -14,4 +13,6 @@ public interface BoardDao {
 	public int updateBoard(Board board);
 	public int deleteByNo(int no);
 	public int updateLikesCount(int no);
+	public List<Board> selectBoardByLikes();
+	public List<Board> selectBoardByView();
 }

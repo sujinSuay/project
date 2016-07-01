@@ -145,7 +145,9 @@ public class MemberController {
 		map.put("m_id", m_id);
 		map.put("page", "1");
 		List<MyPage> list = memberService.selectBoardListByMemberId(map);
-		System.out.println(list);
+		for(Object i:list){
+			System.out.println(i);
+		}
 		return list;
 	}
 	@RequestMapping("/searchCommentList")

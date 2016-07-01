@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.common.vo.Group;
+import com.common.vo.SearchData;
 import com.common.vo.Singer;
 import com.schedule.vo.Schedule;
 
@@ -18,6 +19,7 @@ public interface ScheduleService {
 	public List<Singer> searchSinger(String keyword);
 	public List<Group> searchGroup(String keyword);
 	public int deleteScheduleById(int schedule_id);
-	Schedule selectScheduleById(int schedule_id);
 	public int updateScheduleById(Schedule schedule);
+	public Schedule selectScheduleById(int schedule_id);
+	public int updateCountSearch(SearchData searchData);
 }

@@ -132,8 +132,6 @@ CREATE TABLE link_list(
 	link_id 		NUMBER(10)
 );
 
-
-
 alter table comments add constraint fk_comments foreign key(board_no) references board(board_no);
 alter table member add constraint fk_member foreign key(group_id) references groups(group_id);
 alter table singer add constraint fk_singer foreign key(group_id) references groups(group_id);

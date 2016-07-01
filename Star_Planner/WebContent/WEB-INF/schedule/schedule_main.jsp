@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>schedule_main</title>
+
+
 <link rel='stylesheet' href='/Star_Planner/fullcalendar-2.7.3/lib/cupertino/jquery-ui.min.css' />
 <link href='/Star_Planner/fullcalendar-2.7.3/fullcalendar.css' rel='stylesheet' />
 <link href='/Star_Planner/fullcalendar-2.7.3/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -12,6 +14,9 @@
 <script src='/Star_Planner/fullcalendar-2.7.3/lib/jquery.min.js'></script>
 <script src='/Star_Planner/fullcalendar-2.7.3/fullcalendar.min.js'></script>
 <script src='/Star_Planner/fullcalendar-2.7.3/lang-all.js'></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+
 <script>
 	var tmpUrl = "/Star_Planner/schedule/selectSchedule.do";
 
@@ -92,6 +97,21 @@
 				}
 			});
 		});
+		
+		$("#detail").dialog({
+	    	autoOpen: false,
+	    	resizable:false,
+	    	draggable: false,
+	    	minWidth: 780,
+	    	buttons:{
+                "확인":function(){
+                    $(this).dialog("close");
+                },"취소":function(){
+                    $(this).dialog("close");
+                }
+            }
+	    	
+	    });
 		
 	});
 	
@@ -239,8 +259,9 @@
 			}, */
 			eventRender : function(event, element) {
 				element.bind('click', function() { // 일정보기,수정
-					alert(event.title+"\n"+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
-					//ShowEventPopup(event.title); 
+					//alert(event.id +","+ event.title+"\n"+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
+					//ShowEventPopup(event.title);
+					getData(event);
 				});
 			},
 			editable : false,
@@ -248,16 +269,36 @@
 			events : eventsData
 		});
 	}
+	function getData(event){
+		$.ajax({
+			url : "/Star_Planner/schedule/getDataById.do",
+			type : 'post',
+			data: "schedule_id="+event.id,
+			dataType : 'json',
+			success : function(data) {
+				/* alert("일정: "+event.title+"\n시간: "+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm")
+						+"\n장소: "+data.schedule_address+"\n내용: "+(data.schedule_contents==null?'':data.schedule_contents)); */
+				$("#title").html(event.title);
+				$("#date").html(event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
+				$("#address").html(data.schedule_address);
+				$("#contents").html((data.schedule_contents==null?'':data.schedule_contents));
+				$("#detail").dialog("open");
+				
+			},
+			error : function(request, textStatus, errorThrown) {
+				alert('error: ' + textStatus);
+			}
+		});
+	}
 	
-	function ShowEventPopup(date) {
-	    ClearPopupFormValues();
-	    $('#popupEventForm').show();
-	    $('#eventTitle').focus(); 
-	}  
 </script>
 <style type="text/css">
-#search{
+#search {
 	text-align: center;
+}
+tr{
+	vertical-align: top;
+	padding-bottom: 10px;
 }
 </style>
 </head>
@@ -275,28 +316,28 @@
 	<div id="searchResult">검색 결과:&nbsp;&nbsp;</div>
 	<p>
 	<div id='calendar'></div>
-
-	<div id="popupEventForm" style="display: none;">
-		<div class="modal-header">
-			<h3>Add new event</h3>
-		</div>
-		<div class="modal-body">
-			<form id="EventForm" class="well">
-				<input type="hidden" id="eventID"> <label>Event
-					title</label> <input type="text" id="eventTitle" placeholder="Title here"><br />
-				<label>Scheduled date</label> <input type="text" id="eventDate"><br />
-				<label>Scheduled time</label> <input type="text" id="eventTime"><br />
-				<label>Appointment length (minutes)</label> <input type="text"
-					id="eventDuration" placeholder="15"><br />
-			</form>
-		</div>
-		<div class="modal-footer">
-			<button type="button" id="btnPopupCancel" data-dismiss="modal"
-				class="btn">Cancel</button>
-			<button type="button" id="btnPopupSave" data-dismiss="modal"
-				class="btn btn-primary">Save event</button>
-		</div>
+	
+	<div id="detail" title="상세정보">
+		<table>
+			<tr>
+				<td width="80">일정:&nbsp;</td>
+				<td id="title"></td>
+			</tr>
+			<tr>
+				<td>시간:&nbsp;</td>
+				<td id="date" width="700"></td>
+			</tr>
+			<tr>
+				<td>장소:&nbsp;</td>
+				<td id="address"></td>
+			</tr>
+			<tr>
+				<td>내용:&nbsp;</td>
+				<td id="contents"></td>
+			</tr>
+		</table>
 	</div>
+
 
 </body>
 </html>

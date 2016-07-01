@@ -42,13 +42,13 @@ div{
 	<tbody align="center">
 		<c:forEach items="${requestScope.list }" var="board">
 			<tr>
-				<td width="10%">${board.board_no }</td>
+				<td width="10%">${board.board_writer_type}&nbsp;${board.board_no }</td>
 				<td align="left" width="50%">
 					<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
 						${board.board_title }
 					</a>
 				</td>
-				<td width="10%">${board.m_id }</td>
+				<td width="10%"><%--  --%>${board.m_id }</td>
 				<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
 				<td width="5%">${board.board_hits }</td>
 				<td width="5%">${board.board_likes }</td>
