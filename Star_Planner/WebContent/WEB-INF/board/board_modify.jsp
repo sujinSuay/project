@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,17 @@ select{
 }
 
 </style>
+<script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#fileDelete").on("click",function(){
+		var file = $("#upfile").val();
+		document.getElementById(file).remove();
+		$(this).remove();
+		$("#upfile").val(null);
+	});
+});
+</script>
 </head>
 <body>
 <c:if test="${not empty requestScope.errorList }">
@@ -34,6 +46,21 @@ select{
 				</c:forEach>
 			</select> --%>
 			<input type="text" name="board_title" size="70" placeholder="제목" value="${requestScope.board.board_title }">
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div id="upfileList">
+				<c:forEach items="${requestScope.file_names }" var="file">
+					<div id="${file }blcok">
+						<c:if test="${file != null ||file !='' }">
+							<img width="20%" height="20%" id="${file}" src="/Star_Planner/uploadFile/${file}">
+							<input type="button" id="fileDelete" value="삭제">
+							<input type="hidden" id="upfile" name="upfile" value='${file}'>
+						</c:if>
+					</div>
+				</c:forEach>
+			</div>
 		</td>
 	</tr>
 	<tr>

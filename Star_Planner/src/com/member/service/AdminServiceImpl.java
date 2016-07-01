@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.common.vo.Group;
-import com.common.vo.LinkList;
 import com.common.vo.Singer;
-
 import com.member.dao.AdminDaoImpl;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.ManagerList;
@@ -23,8 +21,11 @@ public class AdminServiceImpl {
 	@Autowired
 	private AdminDaoImpl adminDao;
 	
+	
+	
 	@Autowired
 	private MemberDaoImpl memberDao;
+	
 	
 	public List<Member> getAdminList(){
 		
@@ -168,5 +169,8 @@ public class AdminServiceImpl {
 		System.out.println("##AdminServiceImpl selectMainLink()");
 		return adminDao.selectMainLink();
 	}
+	
+	
+	
 	
 }

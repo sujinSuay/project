@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="board">
-	
+	<sql id="select-basic">
+		SELECT 	board_no, board_title, board_date, m_id, gender,
+				board_content, singer_id, board_writer_type, board_link
+		FROM 	board
+	</sql>
 	<!-- insert -->
 	<insert id="insert" parameterType="board">
 		<selectKey keyProperty="board_no" resultType="_int" order="BEFORE">
@@ -10,13 +14,13 @@
 			FROM dual
 		</selectKey>
 		INSERT INTO board 
-		VALUES (#{board_no},#{board_title},#{board_date},#{m_id},0,#{board_content},0,#{singer_id},#{board_writer_type})
+		VALUES (#{board_no},#{board_title},#{board_date},#{m_id},0,#{board_content},0,#{singer_id},#{board_writer_type},#{board_link})
 	</insert>
 
 	<!-- update -->
 	<update id="update" parameterType="board">
 		UPDATE board 
-		SET board_title = #{board_title}, board_content = #{board_content} 
+		SET board_title = #{board_title}, board_content = #{board_content}, board_link = #{board_link}
 		WHERE board_no = #{board_no}
 	</update>
 	<update id="updateViewCount" parameterType="_int">
@@ -37,14 +41,14 @@
 
 	<!-- select -->
 	<select id="selectByNo" parameterType="_int" resultType="board">
-		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
+		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type, board_link
 		FROM board 
 		WHERE board_no = #{board_no}
 	</select>
 	<select id="selectList" parameterType="map" resultType="board">
-		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
-		FROM(SELECT ceil(rownum/5) page, board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
-		FROM(SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type 
+		SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type, board_link
+		FROM(SELECT ceil(rownum/5) page, board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type, board_link 
+		FROM(SELECT board_no, board_title, board_date, m_id, board_hits, board_content, board_likes, singer_id, board_writer_type, board_link 
 		FROM board WHERE singer_id = #{singer_id} ORDER BY board_no DESC)) 
 		WHERE page = #{page}
 	</select>
@@ -52,7 +56,7 @@
 		SELECT count(board_no) FROM board WHERE singer_id = #{singer_id}
 	</select>
 	<select id="selectBoardListByMemberId" parameterType="map" resultType="myPage">
-		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name
+		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, b.board_link, s.singer_name
 		FROM board b, singer s WHERE m_id = #{m_id} and b.singer_id=s.singer_id ORDER BY board_no DESC  
 	</select>
 	<select id="selectBoardByLikes" resultType="MyPage">

@@ -105,7 +105,7 @@ insert into  link_list values ('main_link',null, null, 3);
 insert into  link_list values ('main_link',null, null, 4);
 insert into  link_list values ('main_link',null, null, 5);
 insert into  link_list values ('main_link',null, null, 6);
-
+insert into  link_list values ('main_link',null, null, 7);
 
 commit;
 

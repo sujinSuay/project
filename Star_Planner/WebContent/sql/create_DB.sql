@@ -1,7 +1,7 @@
 alter table member add tem_group varchar2(200)  --member에 메니져 소속사 넣어주는 컬럼 추가하는 쿼리!!
-
-/* member */
-
+alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓글인 경우 부모의 ID */
+alter table comments add comment_check NUMBER(2) NOT NULL ;
+alter table board add board_link varchar2(2000);
 
 drop sequence comment_id_seq
 drop sequence singer_no_seq;
@@ -69,7 +69,8 @@ CREATE TABLE board (
 	board_content CLOB NOT NULL, /* 내용 */
 	board_likes NUMBER(10) NOT NULL, /* 추천 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
-	board_writer_type VARCHAR2(50) /* 게시자타입 */
+	board_writer_type VARCHAR2(50), /* 게시자타입 */
+	board_link varchar2(2000)
 );
 
 create sequence board_no_seq nocache;

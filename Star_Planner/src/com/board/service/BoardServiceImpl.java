@@ -75,6 +75,9 @@ public class BoardServiceImpl implements BoardService{
 		board.setBoard_title(TextUtil.htmlToText(board.getBoard_title()));
 		board.setBoard_content(TextUtil.htmlToText(board.getBoard_content()));
 		map.put("board", board);
+		String[] file_names = board.getBoard_link().split(",");
+		if(!board.getBoard_link().equals("noData")) map.put("file_names", file_names);
+		
 		/*List<TypeList> typeList = tdao.selectByCodeCateory(Constants.NOTICE_BOARD_PREFIX);
 		map.put("typeList", typeList);*/
 		return map;

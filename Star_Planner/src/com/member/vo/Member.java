@@ -232,6 +232,14 @@ public class Member {
 			return false;
 		return true;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Member [m_id=" + m_id + ", social_no=" + social_no + ", password=" + password + ", group_id=" + group_id
+				+ ", gender=" + gender + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
+				+ phone + ", favorite=" + favorite + ", tem_group=" + tem_group + "]";
+	}
 	
 	
 

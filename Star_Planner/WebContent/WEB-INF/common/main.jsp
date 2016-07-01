@@ -2,29 +2,31 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+
+
 <head>
 <meta charset="UTF-8">
 <title>main</title>
 </head>
-<body>
-
-<c:forEach var="link" items="${requestScope.list }" varStatus="status">
-
-	<iframe width="350" height="300" src="${link }" frameborder="0" allowfullscreen></iframe>
-&nbsp; &nbsp;
-		<c:if test="${status.count}==3">
-			<br><br>
-		</c:if>
-</c:forEach>
+<body  >
 
 
-<!-- https://www.youtube.com/embed/nrlh9RfbweE
-https://www.youtube.com/embed/FjWMQyZXm20
-https://www.youtube.com/embed/hth1VQNPtj0
-https://www.youtube.com/embed/BbQG-S4mU0U
-https://www.youtube.com/embed/c7rCyll5AeY
-https://www.youtube.com/embed/c7rCyll5AeY?list=RDc7rCyll5AeY -->
+	<c:forEach var="link" items="${requestScope.list }" varStatus="status">
+	
+	<c:choose>
+		<c:when test="${status.index == 0 || status.index == 1 || status.index == 2}">
+			<iframe width="420" height="250" src="${link }"   scrolling=no></iframe>
+		</c:when>
+		<c:otherwise>
+			<img class="content" width="320px" height="400px" src="${link }">
+		</c:otherwise>
+	
+		
+		
+		</c:choose>
+	</c:forEach>
 
+<!--    <img class="content" width="300px" src=" "> -->
 
 
 
