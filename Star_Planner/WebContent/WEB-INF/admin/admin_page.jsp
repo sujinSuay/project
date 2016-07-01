@@ -550,7 +550,7 @@ table {
 </head>
 <body>
 
-<div class="layout-left">
+<div class="layout-left" style="display: block;">
 
 <h2>관리자 권한 부여</h2> <br>
 
