@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.vo.Group;
+import com.common.vo.SearchData;
 import com.common.vo.Singer;
 import com.schedule.service.ScheduleService;
 import com.schedule.vo.Schedule;
@@ -66,6 +67,7 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleBySinger(int singer_id){
 		List<Schedule> list = service.selectScheduleBySinger(singer_id);
+		service.updateCountSearch(new SearchData(singer_id, 0, new java.sql.Date(System.currentTimeMillis())));
 		return list;
 	}
 	
@@ -73,6 +75,7 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByGroup(int group_id){
 		List<Schedule> list = service.selectScheduleByGroup(group_id);
+		System.out.println(list);
 		return list;
 	}
 	
@@ -87,6 +90,13 @@ public class ScheduleController {
 	public ModelAndView scheduleMain(){
 		List<String> list = service.getCategoryList();
 		return new ModelAndView("/schedule_main.do", "categoryList", list);
+	}
+	
+	@RequestMapping("/getDataById")
+	@ResponseBody
+	public Schedule getDataById(int schedule_id){
+		Schedule s = service.selectScheduleById(schedule_id);
+		return s;
 	}
 	
 	

@@ -33,4 +33,9 @@
 		FROM schedule, singer, groups
 		WHERE schedule.group_id = #{group_id} AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
 	</select>
+	<select id="selectScheduleById" parameterType="_int" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule, singer, groups
+		WHERE schedule.schedule_id = #{schedule_id} AND schedule.singer_id = singer.singer_id AND schedule.group_id = groups.group_id
+	</select>
 </mapper>

@@ -63,6 +63,9 @@ $(document).ready(function(){
 	float: left;
 	color: #8C8C8C;
 }
+#content_input{
+	width: 100%;
+}
 </style>
 </head>
 

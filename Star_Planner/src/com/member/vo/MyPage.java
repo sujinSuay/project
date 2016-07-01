@@ -22,6 +22,21 @@ public class MyPage {
 	private Date comment_date; /** 댓글을 게시한 날짜  **/
 	private String singer_name;
 	
+	public MyPage(int board_no, String board_title, Date board_date, String m_id, int board_hits, String board_content,
+			int board_likes, int singer_id, String board_writer_type, String singer_name) {
+		super();
+		this.board_no = board_no;
+		this.board_title = board_title;
+		this.board_date = board_date;
+		this.m_id = m_id;
+		this.board_hits = board_hits;
+		this.board_content = board_content;
+		this.board_likes = board_likes;
+		this.singer_id = singer_id;
+		this.board_writer_type = board_writer_type;
+		this.singer_name = singer_name;
+	}
+
 	public MyPage(){}
 
 	public MyPage(int board_no, String board_title, Date board_date, String m_id, int board_hits, String board_content,

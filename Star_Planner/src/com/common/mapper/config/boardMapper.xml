@@ -23,12 +23,12 @@
 		SET board_title = #{board_title}, board_content = #{board_content}, board_link = #{board_link}
 		WHERE board_no = #{board_no}
 	</update>
-	<update id="updateViewCount" parameterType="board">
+	<update id="updateViewCount" parameterType="_int">
 		UPDATE board 
 		SET board_hits = board_hits + 1 
 		WHERE board_no = #{board_no}
 	</update>
-	<update id="updateLikesCount" parameterType="board">
+	<update id="updateLikesCount" parameterType="_int">
 		UPDATE board 
 		SET board_likes = board_likes + 1 
 		WHERE board_no = #{board_no}
@@ -58,6 +58,18 @@
 	<select id="selectBoardListByMemberId" parameterType="map" resultType="myPage">
 		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, b.board_link, s.singer_name
 		FROM board b, singer s WHERE m_id = #{m_id} and b.singer_id=s.singer_id ORDER BY board_no DESC  
+	</select>
+	<select id="selectBoardByLikes" resultType="MyPage">
+		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name 
+		FROM board b, singer s
+		WHERE b.singer_id = s.singer_id
+		ORDER BY board_likes DESC
+	</select>
+	<select id="selectBoardByView" resultType="MyPage">
+		SELECT b.board_no, b.board_title, b.board_date, b.m_id, b.board_hits, b.board_content, b.board_likes, b.singer_id, b.board_writer_type, s.singer_name 
+		FROM board b, singer s
+		WHERE b.singer_id = s.singer_id
+		ORDER BY board_hits DESC
 	</select>
 </mapper>
 

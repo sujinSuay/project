@@ -304,7 +304,7 @@ function printList(comment, m_id){
 				<!--  댓글 등록 form -->
 			<c:if test="${sessionScope.loginId != null }">
 				<tr><td><span>${sessionScope.loginId}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
-				<td><textarea id="content_input"  rows="5" cols="40"></textarea></td>
+				<td><textarea id="content_input"  rows="5" cols="40" ></textarea></td>
 				<td></td>
 				<td><button id="register">댓글등록</button></td></tr>
 			</c:if>

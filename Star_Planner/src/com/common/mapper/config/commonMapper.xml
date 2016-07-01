@@ -37,4 +37,28 @@
 		FROM groups 
 		WHERE UPPER(group_name) LIKE '%'||UPPER(#{keyword})||'%'
 	</select>
+	<insert id="insertSearchData" parameterType="SearchData">
+		INSERT INTO search_data 
+		VALUES (#{singer_id},#{singer_count},#{search_date})
+	</insert>
+	<select id="selectSearchData" parameterType="SearchData" resultType="SearchData">
+		SELECT * 
+		FROM search_data 
+		WHERE singer_id = #{singer_id} AND search_date = #{search_date}
+	</select>
+	<update id="updateSearchCount" parameterType="SearchData">
+		UPDATE search_data 
+		SET singer_count = singer_count + 1 
+		WHERE singer_id = #{singer_id} AND search_date = #{search_date}
+	</update>
+	
+	<resultMap type="SearchData" id="SearchData-singer-resultmap" autoMapping="true">
+		<collection property="singer" ofType="singer" autoMapping="true"/>
+	</resultMap>
+	<select id="selectSearchDataDesc" parameterType="SearchData" resultMap="SearchData-singer-resultmap">
+		SELECT * 
+		FROM search_data, singer
+		WHERE search_date = #{search_date} AND search_data.singer_id = singer.singer_id
+		ORDER BY singer_count DESC
+	</select>
 </mapper> 

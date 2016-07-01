@@ -1,5 +1,6 @@
 package com.board.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ import com.board.vo.Board;
 import com.common.dao.CommonDao;
 import com.common.util.PagingBean;
 import com.common.util.TextUtil;
+import com.common.vo.SearchData;
 import com.common.vo.Singer;
 import com.member.dao.memberDao;
 @Service("boardService")
@@ -139,6 +141,44 @@ public class BoardServiceImpl implements BoardService{
 		}
 		return map;
 	}
+
+	@Override
+	public int updateCountSearch(SearchData searchData) {
+		// TODO Auto-generated method stub
+		int i = -1;
+		if(cdao.selectSearchData(searchData)==0){
+			i = cdao.insertSearchData(searchData);
+		}else{
+			i = cdao.updateSearchData(searchData);
+		}
+		return i;
+	}
+
+	@Override
+	public List<SearchData> selectSearchDataDesc(Date search_date) {
+		// TODO Auto-generated method stub
+		return cdao.selectSearchDataDesc(new SearchData(0, 0, search_date));
+	}
+
+	@Override
+	public List<Board> selectBoardByLikes() {
+		// TODO Auto-generated method stub
+		return dao.selectBoardByLikes();
+	}
+
+	@Override
+	public List<Board> selectBoardByView() {
+		// TODO Auto-generated method stub
+		return dao.selectBoardByView();
+	}
+
+	@Override
+	public List<Singer> selectSingerByFavorite() {
+		// TODO Auto-generated method stub
+		return cdao.selectSingerByFavorite();
+	}
+
+	
 	
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.common.dao.CommonDao;
 import com.common.vo.Group;
+import com.common.vo.SearchData;
 import com.common.vo.Singer;
 import com.schedule.dao.ScheduleDao;
 import com.schedule.vo.Schedule;
@@ -76,5 +77,21 @@ public class ScheduleServiceImpl implements ScheduleService {
 		return cdao.searchSingerAllData(keyword);
 	}
 
-	
+	@Override
+	public Schedule selectScheduleById(int schedule_id) {
+		// TODO Auto-generated method stub
+		return dao.selectScheduleById(schedule_id);
+	}
+
+	@Override
+	public int updateCountSearch(SearchData searchData) {
+		// TODO Auto-generated method stub
+		int i = -1;
+		if(cdao.selectSearchData(searchData)==0){
+			i = cdao.insertSearchData(searchData);
+		}else{
+			i = cdao.updateSearchData(searchData);
+		}
+		return i;
+	}
 }
