@@ -92,7 +92,7 @@ insert into singer values (#{singer_id}, #{singer_name}, #{group_id}, #{type_nam
 
 <insert id="insertMainLink" parameterType="hashMap">
 update link_list
-set link_address= #{input}
+set link_address= #{input}, file_name=#{input_explain}
 where link_id=#{count}
 </insert>
 
@@ -102,8 +102,9 @@ set link_address=null
 where link_id=#{count}
 </update>
 
-<select id="selectMainLink" resultType="string">
-select link_address
+
+<select id="selectMainLink" resultType="LinkList">
+select link_type, link_address, file_name, link_id
 from link_list
 where link_type='main_link'
 order by link_id 

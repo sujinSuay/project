@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.common.dao.MainLoadingDaoImpl;
+import com.common.vo.LinkList;
 
 @Service("mainLoadingService")
 public class MainLoadingServiceImpl {
@@ -13,7 +14,7 @@ public class MainLoadingServiceImpl {
 	@Autowired
 	private MainLoadingDaoImpl mainLinkDao;
 	
-	public List<String> getMainLink(){
+	public List<LinkList> getMainLink(){
 		return mainLinkDao.selectMainLink();
 	}
 }

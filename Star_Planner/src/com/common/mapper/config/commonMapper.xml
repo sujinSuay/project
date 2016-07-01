@@ -26,11 +26,12 @@
 		WHERE group_id > 10
 	</select>
 	
-	<select id="selectMainLink" resultType="string">
-		SELECT link_address 
-		FROM link_list
-		WHERE link_type ='main_link'
-	</select>
+	<select id="selectMainLink" resultType="LinkList">
+select link_type, link_address, file_name, link_id
+from link_list
+where link_type='main_link'
+order by link_id 
+</select>
 	
 	<select id="searchGroup" parameterType="string" resultType="Group">
 		SELECT * 
@@ -61,4 +62,7 @@
 		WHERE search_date = #{search_date} AND search_data.singer_id = singer.singer_id
 		ORDER BY singer_count DESC
 	</select>
+	
+	
+	
 </mapper> 

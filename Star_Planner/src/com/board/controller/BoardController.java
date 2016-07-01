@@ -130,7 +130,6 @@ public class BoardController {
 	
 	//boardView
 	@RequestMapping("/boardView")
-
 	public ModelAndView boardView(int no, int page, String id) throws UnsupportedEncodingException{
 		Board board = service.getBoard(no);
 		

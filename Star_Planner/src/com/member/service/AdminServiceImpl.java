@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.common.vo.Group;
+import com.common.vo.LinkList;
 import com.common.vo.Singer;
 import com.member.dao.AdminDaoImpl;
 import com.member.dao.MemberDaoImpl;
@@ -147,12 +148,13 @@ public class AdminServiceImpl {
 	}
 	
 	//링크 등록
-	public int insertMainLink(int count, String input){
+	public int insertMainLink(int count, String input, String input_explain){
 		System.out.println("##AdminServiceImpl insertMainLink()");
 		
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("count" , count);
 		map.put("input", input);
+		map.put("input_explain", input_explain);
 	System.out.println("%%%%%" + map);
 		return adminDao.insertMainLink(map);
 		
@@ -165,7 +167,7 @@ public class AdminServiceImpl {
 	}
 	
 	//링크조회
-	public List<String> selectMainLink(){
+	public List<LinkList> selectMainLink(){
 		System.out.println("##AdminServiceImpl selectMainLink()");
 		return adminDao.selectMainLink();
 	}

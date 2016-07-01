@@ -82,8 +82,7 @@ public class CommentServiceImpl implements CommentService{
 		return dao.deleteCommentByBoard(board_no);
 	}
 		
-		
-	
+
 	
 	
 }

@@ -58,6 +58,6 @@ public interface AdminDao {
 	public int deleteMainLink(int count);
 	
 	//메인화면 링크 조회
-	public List<String> selectMainLink();
+	public List<LinkList> selectMainLink();
 
 }

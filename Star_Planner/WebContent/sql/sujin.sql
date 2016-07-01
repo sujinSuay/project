@@ -2,7 +2,6 @@ select * from member where m_id='master';
 select * from comments;
 select * from singer;
 
-
 INSERT INTO member
 VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'sujin@kosta', '주소', '전화번호', '선호그룹' )
 select group_id_seq.nextval from dual

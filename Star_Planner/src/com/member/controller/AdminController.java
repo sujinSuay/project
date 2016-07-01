@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.vo.Group;
+import com.common.vo.LinkList;
 import com.common.vo.Singer;
 import com.member.service.AdminServiceImpl;
 import com.member.vo.ManagerList;
@@ -55,9 +56,12 @@ public class AdminController {
 		map.put("list_singerCompany", list_singerCompany);
 		
 		//메인화면 링크 조회
-		List<String> list_mainLink = adminService.selectMainLink();
+		List<LinkList> list_mainLink = adminService.selectMainLink();
 		System.out.println(list_mainLink);
 		map.put("list_mainLink", list_mainLink);
+		
+		
+		
 		
 		//매니저 목록 전체 조회
 		List<ManagerList> list_managerListAll = adminService.selectManagerList(null);
@@ -214,10 +218,10 @@ public class AdminController {
 	//메인화면의 링크 추가
 	@RequestMapping("/insertMainLink")
 	@ResponseBody
-	public int insertMainLink(int count, String input){
+	public int insertMainLink(int count, String input, String input_explain){
 		
 		System.out.println("##AdminController + insertMainLink()");
-		return adminService.insertMainLink(count, input);
+		return adminService.insertMainLink(count, input, input_explain);
 	
 	}
 	

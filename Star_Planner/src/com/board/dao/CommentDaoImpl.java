@@ -80,7 +80,6 @@ public class CommentDaoImpl implements CommentDao {
 	public int deleteCommentByBoard(int board_no){
 		return session.delete(namespace + "deleteCommentByBoard", board_no);
 	}
-
 	
 
 }

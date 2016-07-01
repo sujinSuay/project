@@ -8,7 +8,6 @@
 $(document).ready(function(){
 	
 
-
 	
 	//검색버튼 이벤트
 	$('#search').on("click", function(){
@@ -299,12 +298,15 @@ $(document).ready(function(){
 		var get_count = get_count_split[0];
 		
 		var input_text= $(parent).parent().parent().find( '.link_input').val();
+		var input_explain = $(parent).parent().parent().find('.link_explain').val();
 		
+	
 
 $.ajax({
 			type: "post",
 			data : { "count" : get_count,
 							"input" : input_text,
+							"input_explain" : input_explain
 							},
 			url : "/Star_Planner/admin/insertMainLink.do",
 			dataType : "json",
@@ -315,8 +317,8 @@ $.ajax({
 				alert("오류발생  " + status + errorMsg);
 			},
 			"beforeSend" : function(){
-					if(input_text==''){
-						alert('링크를 입력해주세요');
+					if(input_text=='' || input_explain=='' ){
+						alert('입력해주세요');
 						return false;
 					}				
 		}
@@ -371,9 +373,10 @@ $.ajax({
 		var get_count = get_count_split[0];
 
 		var input_text= $(parent).parent().parent().find( '.link_input').val();
-	
+		var input_explain = $(parent).parent().parent().find('.link_explain').val();
 
-		$(parent).parent().parent().find( '#input_td').html('<input type="text" class="link_input"/> <input type="button" class="link_register_btn" value="등록"/>');
+		
+		$(parent).parent().parent().find( '#input_td').html('<b>링     크:</b> <input type="text" class="link_input"/><br><b>검색태그:</b>  <input type="text" class="link_explain" /><br><input type="button" class="link_register_btn" value="등록"/>');
 		
 	$.ajax({
 			type: "post",
@@ -813,16 +816,17 @@ table {
 						</c:if>
 						
 					<tr class="link_tr">
-							<td class='link_count'>${status.count }번링크</td>
+							<td class='link_count'>${status.count }</td>
 							<td id="input_td"><c:choose>
-									<c:when test="${link eq '' || link eq null}">
-										<input type="text" class="link_input" />
+									<c:when test="${link.link_address eq '' || link.link_address eq null}">
+										링&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;크: <input type="text" class="link_input" /> <br>
+										검색태그: <input type="text" class="link_explain" /><br>
 										<input type="button" class="link_register_btn" value="등록" />
 									</c:when>
 
 									<c:otherwise>
-										<span class="link_input">${link }</span>
-										<br>
+										 <b>링&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;크:</b> <span class="link_input">${link.link_address }</span><br>
+										<b>검색태그: </b><span class="link_explain">${link.file_name }</span><br>
 										<input type="button" class="link_modify_btn" value="수정" />
 										<input type="button" class="link_delete_btn" value="삭제" />
 									</c:otherwise>

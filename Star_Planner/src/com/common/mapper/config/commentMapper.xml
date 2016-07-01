@@ -72,4 +72,10 @@ from comments
 where board_no=#{board_no}
 </delete>
 
+<select id="selectListAdmin" resultType="string">
+	select m_id
+	from member
+	where group_id=0 or group_id=1
+	</select>
+
 </mapper>
