@@ -111,6 +111,10 @@ public class BoardController {
 	public ModelAndView boardRemove(String id, int no, int page){
 	
 		service.removeByNo(no);
+		
+		//해당하는 게시글의 댓글 삭제
+		service_comment.deleteCommentByBoard(no);
+		
 		return boardList(id, page);
 	}
 	

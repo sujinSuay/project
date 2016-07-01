@@ -75,6 +75,11 @@ public class CommentDaoImpl implements CommentDao {
 	public int selectFamilyId(int family_id){
 		return session.selectOne(namespace + "selectFamilyId", family_id);
 	}
+	
+	//게시글 삭제시 댓글 삭제
+	public int deleteCommentByBoard(int board_no){
+		return session.delete(namespace + "deleteCommentByBoard", board_no);
+	}
 
 	
 

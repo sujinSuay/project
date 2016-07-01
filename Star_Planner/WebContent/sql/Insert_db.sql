@@ -107,19 +107,8 @@ insert into  link_list values ('main_link',null, null, 5);
 insert into  link_list values ('main_link',null, null, 6);
 insert into  link_list values ('main_link',null, null, 7);
 
+
+
 commit;
-
-
-
-
-
-commit
-
-
-
-
-select * from member where group_id=3
-select * from groups
-
 
 

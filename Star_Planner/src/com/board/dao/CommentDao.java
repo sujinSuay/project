@@ -22,4 +22,6 @@ public interface CommentDao {
 	
 	int selectFamilyId(int family_id);
 	
+	public int deleteCommentByBoard(int board_no);
+	
 }

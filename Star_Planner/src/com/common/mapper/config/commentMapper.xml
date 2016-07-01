@@ -66,4 +66,10 @@ from comments
 where comment_id=#{family_id}
 </select>
 
+<delete id="deleteCommentByBoard" parameterType="_int">
+delete 
+from comments
+where board_no=#{board_no}
+</delete>
+
 </mapper>
