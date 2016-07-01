@@ -171,8 +171,7 @@ function printList(comment, m_id, groupId){
 			
 				parent_m_id = $(this).parent().parent().find('.m_id').text();
 				
-				alert(parent_m_id);
-				
+		
 				var m_id = '${sessionScope.loginId}';
 				var reply_form = '<tr><td><input type="hidden" id="reply_id" value="'+comment_id +'"</input><span> 답글/'+m_id+'</span></td><td><textarea id="reply_input"  rows="5" cols="40" >['+ parent_m_id+ ']    </textarea></td>'+
 										'<td></td><td><button id="reply_register">답글등록</button><button id="reply_cancel">취소</button></td></tr>';
