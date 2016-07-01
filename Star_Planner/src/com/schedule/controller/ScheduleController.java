@@ -93,13 +93,32 @@ public class ScheduleController {
 		service.deleteScheduleById(schedule_id);
 		return new ModelAndView("redirect:/member/mypage.do");
 	}
+	
 	@RequestMapping("/scheduleModifyForm")
 	public ModelAndView scheduleModifyForm(HttpSession session, int schedule_id){
+		System.out.println("schedule modify");
 		if(session.getAttribute("groupId")==null){
 			return new ModelAndView("redirect:/member_login.do");
 		}
 		int group = (int)session.getAttribute("groupId");
+		System.out.println(group);
+		Schedule preSchedule = service.selectScheduleById(schedule_id);
+		System.out.println(preSchedule);
+		String[] adr = preSchedule.getSchedule_address().split(",");
 		Map<String, Object> list = service.getCategoryList(group);
-		return new ModelAndView("/schedule_register.do", list);
+		list.put("preSchedule", preSchedule);
+		list.put("temAdr",adr);
+		
+		return new ModelAndView("schedule/schedule_modify.tiles",list);
 	}
+	
+	@RequestMapping("/scheduleModify")
+	public ModelAndView scheduleModify(Schedule schedule){
+		schedule.setSchedule_start(schedule.getSchedule_start().replace(" ", ""));
+		schedule.setSchedule_end(schedule.getSchedule_end().replace(" ", ""));
+		
+		service.updateScheduleById(schedule);
+		return new ModelAndView("member/member_mypage.tiles");
+	}
+
 }

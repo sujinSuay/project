@@ -66,12 +66,12 @@ public class MemberServiceImpl implements MemberService{
 		return memberDao.selectCommentListByMemberId(map);
 	}
 	@Override
-	public List<Schedule> selectScheduleByMemberId(String m_id){
-		return memberDao.selectScheduleByMemberId(m_id);
+	public List<Schedule> selectScheduleByMemberId(HashMap<String, String> map){
+		return memberDao.selectScheduleByMemberId(map);
 	}
 	@Override
-	public List<Schedule> selectScheduleByMemberGroup(int group_id) {
+	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
-		return memberDao.selectScheduleByMemberGroup(group_id);
+		return memberDao.selectScheduleByGroup(map);
 	}
 }

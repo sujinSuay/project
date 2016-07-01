@@ -34,12 +34,27 @@ public class CommentServiceImpl implements CommentService{
 		int selectCommentId = dao.selectCommentId();
 		comment.setComment_id(selectCommentId); //현재 입력될 comment_id 값을 가져와서 생성자 comment에 재정의
 		
-		if(comment.getComment_check()==0){
+	
 			comment.setComment_family_id(selectCommentId);
-		}
 		
 		return dao.insertComment(comment); 
 	}
+	
+	
+	//reply에대한 답글인 경우
+	public int insertComment(Comment comment, int family_id){
+		
+		System.out.println("CommentServiceImpl InsertCommnet 실행");
+		int family = dao.selectFamilyId(family_id);		
+		int selectCommentId = dao.selectCommentId();
+		comment.setComment_id(selectCommentId); //현재 입력될 comment_id 값을 가져와서 생성자 comment에 재정의
+		
+			comment.setComment_family_id(family);
+			System.out.println("%%  " + family);
+		
+		return dao.insertComment(comment); 
+	}
+	
 	
 	
 	@Override

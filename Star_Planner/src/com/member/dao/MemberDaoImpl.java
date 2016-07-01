@@ -82,12 +82,12 @@ public class MemberDaoImpl implements memberDao {
 		return session.selectList("comment.selectCommentListByMemberId", map);
 	}
 	@Override
-	public List<Schedule> selectScheduleByMemberId(String m_id){
-		return session.selectList("schedule.selectScheduleByMemberId", m_id);
+	public List<Schedule> selectScheduleByMemberId(HashMap<String, String> map){
+		return session.selectList("schedule.selectScheduleByMemberId", map);
 	}
 	@Override
-	public List<Schedule> selectScheduleByMemberGroup(int group_id) {
+	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
-		return session.selectList("schedule.selectScheduleByGroup", group_id);
+		return session.selectList("schedule.selectScheduleByGroup2", map);
 	}
 }

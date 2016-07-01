@@ -20,6 +20,6 @@ public interface CommentDao {
 	
 	List<Comment> selectComment(int board_no);
 	
-
+	int selectFamilyId(int family_id);
 	
 }

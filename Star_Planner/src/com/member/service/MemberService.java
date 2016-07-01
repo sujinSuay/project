@@ -17,6 +17,6 @@ public interface MemberService {
 	List<String> selectGroupList();
 	List<MyPage> selectBoardListByMemberId(HashMap<String, String> map);
 	List<MyPage> selectCommentListByMemberId(HashMap<String, String> map);
-	List<Schedule> selectScheduleByMemberId(String m_id);
-	List<Schedule> selectScheduleByMemberGroup(int group_id);
+	List<Schedule> selectScheduleByGroup(HashMap<String, String> map);
+	List<Schedule> selectScheduleByMemberId(HashMap<String, String> map);
 }

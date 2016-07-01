@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.*;
+
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.board.service.BoardService;
 import com.board.service.CommentService;
 import com.board.vo.Board;
+import com.common.vo.Email;
+import com.member.service.AdminServiceImpl;
 import com.member.service.MemberService;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
 import com.schedule.vo.Schedule;
 
-import sun.util.calendar.BaseCalendar.Date;
 
 @Controller
 @RequestMapping("/member")
@@ -34,6 +40,13 @@ public class MemberController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	AdminServiceImpl adminService;
+	
+	@Autowired
+	private EmailSender emailSender;
+	
+	
 	@RequestMapping("beforeJoin")
 	public ModelAndView beforeJoin(){
 		List<String> list = memberService.selectGroupList();
@@ -41,12 +54,30 @@ public class MemberController {
 		return new ModelAndView("member/member_join.tiles","groupList",list);
 	}
 	@RequestMapping("/join")
-	public ModelAndView joinMember(@ModelAttribute Member member, String tem_group2) throws IOException{
+	public ModelAndView joinMember(@ModelAttribute Member member, String tem_group2) throws Exception{
 		if(member.getTem_group().equals("기타")){
 			member.setTem_group(tem_group2);
 		}
 		System.out.println(member);
 		memberService.insertMember(member);
+		
+		System.out.println("$$$$" + member);
+		
+		//이메일 보내주기 위한 로직 호출
+		 Email email = new Email();
+         
+	        System.out.println("send mail 로 호출 호출 호출 호출");
+	        String reciver = "xxoo246@gmail.com"; //받을사람의 이메일
+	        String subject = "[StarPlanner][매니저 승인 요청]";
+	        String content = "아이디 [ " + member.getM_id() + "]님이  [" + member.getTem_group() + "] 소속사의 매니저로 승인 요청 하였습니다";
+	        
+	        email.setReciver(reciver);
+	        email.setSubject(subject);
+	        email.setContent(content);
+	         
+	        emailSender.SendEmail(email);
+	 
+		
 		return new ModelAndView("redirect:/main.do");
 	}
 	@RequestMapping("/checkId")
@@ -146,14 +177,29 @@ public class MemberController {
 	@RequestMapping("/searchScheduleById")
 	@ResponseBody
 	public List<Schedule> selectScheduleByMemberId(String m_id){
-		List<Schedule> list = memberService.selectScheduleByMemberId(m_id);
+		Date d = new Date();
+		
+		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
+				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("schedule_start", schedule_start);
+		map.put("m_id", m_id);
+		System.out.println(schedule_start + " / " + m_id);
+		List<Schedule> list = memberService.selectScheduleByMemberId(map);
 		System.out.println(list);
 		return list;
 	}
 	@RequestMapping("/searchScheduleByGroup")
 	@ResponseBody
-	public List<Schedule> selectScheduleByMemberGroup(int group_id){
-		List<Schedule> list = memberService.selectScheduleByMemberGroup(group_id);
+	public List<Schedule> selectScheduleByGroup(String group_id){
+		Date d = new Date();
+		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
+				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
+		System.out.println(schedule_start + " / " + group_id);
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("schedule_start", schedule_start);
+		map.put("group_id", group_id);
+		List<Schedule> list = memberService.selectScheduleByGroup(map);
 		System.out.println(list);
 		return list;
 	}

@@ -2,8 +2,10 @@ alter table member add tem_group varchar2(200)  --member에 메니져 소속사 
 alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓글인 경우 부모의 ID */
 alter table comments add comment_check NUMBER(2) NOT NULL ;
 alter table board add board_link varchar2(2000);
+--여기부터     6/30 정현 추가
 alter table schedule add m_id varchar2(200) not null; --스캐쥴에 m_id컬럼 추가
-
+alter table schedule add constraint fk_schedule_m_id foreign key(m_id) references member(m_id);
+--여기까지
 drop sequence comment_id_seq
 drop sequence singer_no_seq;
 drop sequence group_id_seq;
@@ -71,7 +73,11 @@ CREATE TABLE board (
 	board_likes NUMBER(10) NOT NULL, /* 추천 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	board_writer_type VARCHAR2(50), /* 게시자타입 */
+<<<<<<< HEAD
 	board_link varchar2(2000) 
+=======
+	board_link varchar2(2000)
+>>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 );
 
 create sequence board_no_seq nocache;

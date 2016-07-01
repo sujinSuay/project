@@ -12,4 +12,6 @@ public interface ScheduleDao {
 	public List<Schedule> selectScheduleBySinger(int singer_id);
 	public List<Schedule> selectScheduleByGroup(int group_id);
 	public int deleteScheduleById(int schedule_id);
+	public Schedule selectScheduleById(int schedule_id);
+	public int updateScheduleById(Schedule schedule);
 }

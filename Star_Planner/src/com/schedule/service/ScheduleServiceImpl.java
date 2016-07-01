@@ -81,6 +81,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 		// TODO Auto-generated method stub
 		return dao.deleteScheduleById(schedule_id);
 	}
+	@Override
+	public Schedule selectScheduleById(int schedule_id){
+		return dao.selectScheduleById(schedule_id);
+	}
 
+	@Override
+	public int updateScheduleById(Schedule schedule) {
+		// TODO Auto-generated method stub
+		return dao.updateScheduleById(schedule);
+	}
 	
 }

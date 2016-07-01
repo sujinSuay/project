@@ -12,6 +12,7 @@ public interface CommentService {
 	int deleteComment(int comment_id);
 
 	int insertComment(Comment comment);
+	int insertComment(Comment comment, int family_id);
 
 
 	List<Comment> selectComment(int board_no);

@@ -71,6 +71,10 @@ public class CommentDaoImpl implements CommentDao {
 		
 		return session.selectOne(namespace + "selectById", comment_id);
 	}
+	
+	public int selectFamilyId(int family_id){
+		return session.selectOne(namespace + "selectFamilyId", family_id);
+	}
 
 	
 

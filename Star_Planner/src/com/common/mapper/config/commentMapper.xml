@@ -60,4 +60,10 @@ FROM comments
 WHERE comment_id = #{comment_id}
 </select>
 
+<select id="selectFamilyId" parameterType="_int" resultType="_int">
+select comment_family_id
+from comments
+where comment_id=#{family_id}
+</select>
+
 </mapper>
