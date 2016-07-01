@@ -66,7 +66,7 @@
 										title : t,
 										start : val.schedule_start,
 										end : val.schedule_end,
-										editable : true
+										/* editable : true */
 									});
 								}else{
 									eventsData.push({
@@ -131,7 +131,7 @@
 								title : val.schedule_name,
 								start : val.schedule_start,
 								end : val.schedule_end,
-								editable : true
+								/* editable : true */
 							});
 						}else{
 							eventsData.push({
@@ -171,7 +171,7 @@
 								title : t,
 								start : val.schedule_start,
 								end : val.schedule_end,
-								editable : true
+								/* editable : true */
 							});
 						}else{
 							eventsData.push({
@@ -210,7 +210,7 @@
 								title : t,
 								start : val.schedule_start,
 								end : val.schedule_end,
-								editable : true
+								/* editable : true */
 							});
 						}else{
 							eventsData.push({

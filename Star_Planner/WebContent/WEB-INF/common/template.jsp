@@ -16,7 +16,29 @@ section{
 	padding: 15px;
 	min-height:400px;
 }
-
+.body{
+	width: 100%;
+}
+.innerBody{
+	width: 80%;
+	min-width: 800px;
+	text-align: center;
+}
+.gallery{
+	color: #5B79C8;
+}
+.galleryName{
+	color: #5D5D5D;
+}
+.btn{
+	width: 50%;
+}
+.gallery{
+	color: #5B79C8;
+}
+.galleryName{
+	color: #5D5D5D;
+}
 </style>
 
 </head>

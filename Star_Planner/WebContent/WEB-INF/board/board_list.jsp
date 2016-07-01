@@ -16,51 +16,57 @@ table {
     border-collapse: collapse;
     min-width: 800px;
     width: 100%;
+    margin-bottom: 20px;
     
 }
-th, td {
-    padding: 5px;
-}
-div{
-	width: 100%;
-}
+
 </style>
 </head>
 <body>
-<h2>${param.id } 갤러리</h2>
-<table>
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th width="300">제목</th>
-			<th width="150">글쓴이</th>
-			<th width="200">날짜</th>
-			<th>조회</th>
-			<th>추천</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<c:forEach items="${requestScope.list }" var="board">
-			<tr>
-				<td width="10%">${board.board_writer_type}&nbsp;${board.board_no }</td>
-				<td align="left" width="50%">
-					<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
-						${board.board_title }
-					</a>
-				</td>
-				<td width="10%"><%--  --%>${board.m_id }</td>
-				<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
-				<td width="5%">${board.board_hits }</td>
-				<td width="5%">${board.board_likes }</td>
-			</tr>	
-		</c:forEach>
-	</tbody>
-</table>
+<div class="body" align="center">
+	<div class="innerBody">
+		<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th width="300">제목</th>
+					<th width="150">글쓴이</th>
+					<th width="200">날짜</th>
+					<th>조회</th>
+					<th>추천</th>
+				</tr>
+			</thead>
+			<tbody align="center">
+				<c:forEach items="${requestScope.list }" var="board">
+					<tr>
+						<td width="10%">${board.board_writer_type}&nbsp;${board.board_no }</td>
+						<td align="left" width="50%">
+							<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+								${board.board_title }
+							</a>
+						</td>
+						<td width="10%"><%--  --%>${board.m_id }</td>
+						<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
+						<td width="5%">${board.board_hits }</td>
+						<td width="5%">${board.board_likes }</td>
+					</tr>	
+				</c:forEach>
+			</tbody>
+		</table>
+		<div align="left" class="btn"><a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1">전체보기</a></div>
+		<c:if test="${sessionScope.loginId != null }">
+			<div align="right" class="btn"><a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }">글쓰기</a></div>
+		</c:if>
+	</div>
+
+</div>
+
+
 <p>
 <!-- 글쓰기 -->
-<c:if test="${sessionScope.loginId != null }">
-	<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }">글쓰기</a>
-</c:if>
+
+
 
 
 <%--페이징 처리 --%>

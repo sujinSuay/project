@@ -244,9 +244,8 @@ function printList(comment, m_id){
 	<div class="comment" id="comment">
 		<!--  댓글 제목 -->
 		<div class="comment_title">
-			<img
-				src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" /><span
-				id="comment_count">${requestScope.comment_count }</span>
+			<img src="http://nstatic.dcinside.com/dgn/gallery/images/title_re.gif" />
+			<span id="comment_count">${requestScope.comment_count }</span>
 		</div>
 	</div>
 
@@ -281,7 +280,7 @@ function printList(comment, m_id){
 			</c:otherwise>
 			</c:choose>
 			
-					<td class="content"><span>${comment.comment_content }</span></td>
+					<td class="content" align="left"><span>${comment.comment_content }</span></td>
 					<td><fmt:formatDate value="${comment.comment_date }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 					<td>
 
