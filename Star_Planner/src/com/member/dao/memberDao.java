@@ -6,6 +6,7 @@ import java.util.List;
 import com.board.vo.Board;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
 
 public interface memberDao {
 
@@ -17,5 +18,7 @@ public interface memberDao {
 	List<String> selectGroupList();
 	List<MyPage> selectBoardListByMemberId(HashMap<String, String> map);
 	List<MyPage> selectCommentListByMemberId(HashMap<String, String> map);
+	List<Schedule> selectScheduleByMemberId(HashMap<String, String> map);
+	List<Schedule> selectScheduleByGroup(HashMap<String, String> map);
 
 }

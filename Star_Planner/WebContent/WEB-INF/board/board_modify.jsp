@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,11 +16,28 @@ select{
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#fileDelete").on("click",function(){
-		var file = $("#upfile").val();
-		document.getElementById(file).remove();
-		$(this).remove();
-		$("#upfile").val(null);
+	$("#fileDelete1").on("click",function(){
+		this.parentNode.innerHTML="";
+		var i=document.createElement("input");
+		i.setAttribute('type', 'file');
+		i.setAttribute('name', 'upfile1');
+		$("#file1_field").append(i);
+	});
+	
+	$("#fileDelete2").on("click",function(){
+		this.parentNode.innerHTML="";
+		var i=document.createElement("input");
+		i.setAttribute('type', 'file');
+		i.setAttribute('name', 'upfile2');
+		$("#file2_field").append(i);
+	});
+	
+	$("#fileDelete3").on("click",function(){
+		this.parentNode.innerHTML="";
+		var i=document.createElement("input");
+		i.setAttribute('type', 'file');
+		i.setAttribute('name', 'upfile3');
+		$("#file3_field").append(i);
 	});
 });
 </script>
@@ -33,7 +51,7 @@ $(document).ready(function(){
 	</ul>
 </c:if>
 
-<form action="/Star_Planner/board/boardModify.do" method="post">
+<form action="/Star_Planner/board/boardModify.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="${param.id }">
 <input type="hidden" name="no" value="${param.no }">
 <input type="hidden" name="page" value="${param.page }">
@@ -51,15 +69,43 @@ $(document).ready(function(){
 	<tr>
 		<td>
 			<div id="upfileList">
-				<c:forEach items="${requestScope.file_names }" var="file">
-					<div id="${file }blcok">
-						<c:if test="${file != null ||file !='' }">
-							<img width="20%" height="20%" id="${file}" src="/Star_Planner/uploadFile/${file}">
-							<input type="button" id="fileDelete" value="삭제">
-							<input type="hidden" id="upfile" name="upfile" value='${file}'>
-						</c:if>
-					</div>
-				</c:forEach>
+				<div id="file1_field">
+					<c:choose>
+						<c:when test="${requestScope.upfile1 != 'noData' }">
+							<img width="20%" height="20%" id="fileImg1" src="/Star_Planner/uploadFile/${requestScope.upfile1}">
+							<input type	="button" id="fileDelete1" value="삭제">
+							<input type="hidden" name="upfile1_lo" value="${requestScope.upfile1 }">
+						</c:when>
+						<c:otherwise>
+							<input type="file" name="upfile1">
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div id="file2_field">
+					<c:choose>
+						<c:when test="${requestScope.upfile2 != 'noData' }">
+							<img width="20%" height="20%" id="fileImg2" src="/Star_Planner/uploadFile/${requestScope.upfile2}">
+							<input type="button" id="fileDelete2" value="삭제">
+							<input type="hidden" name="upfile2_lo" value="${requestScope.upfile2 }">
+						</c:when>
+						<c:otherwise>
+							<input type="file" name="upfile2">
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div id="file3_field">
+					<c:choose>
+						<c:when test="${requestScope.upfile3 != 'noData' }">
+							<img width="20%" height="20%" id="fileImg3" src="/Star_Planner/uploadFile/${requestScope.upfile3}">
+							<input type="button" id="fileDelete3" value="삭제">
+							<input type="hidden" name="upfile3_lo" value="${requestScope.upfile3 }">
+						</c:when>
+						<c:otherwise>
+							<input type="file" name="upfile3">
+							<input type="hidden" name="upfile3_lo" value="noData">
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</div>
 		</td>
 	</tr>
@@ -69,7 +115,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="저장"> <input type="reset" value="초기화"></td>
+		<td align="center"><input type="submit" value="저장"> <input type="reset" value="초기화">
 	</tr>	
 </table>
 </form>

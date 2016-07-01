@@ -13,6 +13,7 @@ import com.board.vo.Board;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
 
 @Service("memberService")
 public class MemberServiceImpl implements MemberService{
@@ -63,5 +64,14 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<MyPage> selectCommentListByMemberId(HashMap<String, String> map){
 		return memberDao.selectCommentListByMemberId(map);
+	}
+	@Override
+	public List<Schedule> selectScheduleByMemberId(HashMap<String, String> map){
+		return memberDao.selectScheduleByMemberId(map);
+	}
+	@Override
+	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.selectScheduleByGroup(map);
 	}
 }

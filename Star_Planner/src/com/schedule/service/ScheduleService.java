@@ -18,6 +18,8 @@ public interface ScheduleService {
 	public List<Schedule> selectScheduleByGroup(int group_id);
 	public List<Singer> searchSinger(String keyword);
 	public List<Group> searchGroup(String keyword);
+	public int deleteScheduleById(int schedule_id);
+	public int updateScheduleById(Schedule schedule);
 	public Schedule selectScheduleById(int schedule_id);
 	public int updateCountSearch(SearchData searchData);
 }

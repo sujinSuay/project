@@ -85,7 +85,7 @@ $(document).ready(function(){
 	<article id="content">
 		<div id="upfile">
 			<c:forEach items="${requestScope.file_names }" var="file">
-				<c:if test="${file != null || file !=' ' }">
+				<c:if test="${file != 'noData' }">
 					<img width="50%" height="50%" src="/Star_Planner/uploadFile/${file}">
 				</c:if>
 			</c:forEach>

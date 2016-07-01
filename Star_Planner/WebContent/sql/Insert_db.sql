@@ -1,4 +1,4 @@
-select * from groups;
+select * from schedule;
 
 INSERT INTO GROUPS VALUES ( 0, '마스터', '마스터' , '마스터' , '마스터'  );
 INSERT INTO GROUPS VALUES ( 1, '관리자','관리자' , '관리자', '관리자' );
@@ -111,4 +111,23 @@ insert into  link_list values ('main_link',null, null, 7);
 
 commit;
 
+<<<<<<< HEAD
+
+
+
+
+commit
+
+
+
+
+select * from member where group_id=3
+select * from groups
+
+SELECT * from schedule
+FROM schedule s, singer sn, groups g
+WHERE s.m_id = 'manager3' and s.singer_id = sn.singer_id and s.group_id = g.group_id and sn.group_id=g.group_id and s.schedule_start > '2016-06-03T'
+ORDER BY schedule_start DESC
+=======
+>>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 
