@@ -3,6 +3,7 @@ package com.member.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.*;
 
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -25,6 +26,8 @@ import com.member.service.AdminServiceImpl;
 import com.member.service.MemberService;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
+import com.schedule.vo.Schedule;
+
 
 @Controller
 @RequestMapping("/member")
@@ -142,7 +145,9 @@ public class MemberController {
 		map.put("m_id", m_id);
 		map.put("page", "1");
 		List<MyPage> list = memberService.selectBoardListByMemberId(map);
-		System.out.println(list);
+		for(Object i:list){
+			System.out.println(i);
+		}
 		return list;
 	}
 	@RequestMapping("/searchCommentList")
@@ -170,4 +175,35 @@ public class MemberController {
 		boardService.removeByNo(board_no);
 		return new ModelAndView("member/member_mypage.tiles");
 	}
+	
+	@RequestMapping("/searchScheduleById")
+	@ResponseBody
+	public List<Schedule> selectScheduleByMemberId(String m_id){
+		Date d = new Date();
+		
+		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
+				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("schedule_start", schedule_start);
+		map.put("m_id", m_id);
+		System.out.println(schedule_start + " / " + m_id);
+		List<Schedule> list = memberService.selectScheduleByMemberId(map);
+		System.out.println(list);
+		return list;
+	}
+	@RequestMapping("/searchScheduleByGroup")
+	@ResponseBody
+	public List<Schedule> selectScheduleByGroup(String group_id){
+		Date d = new Date();
+		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
+				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
+		System.out.println(schedule_start + " / " + group_id);
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("schedule_start", schedule_start);
+		map.put("group_id", group_id);
+		List<Schedule> list = memberService.selectScheduleByGroup(map);
+		System.out.println(list);
+		return list;
+	}
+	
 }

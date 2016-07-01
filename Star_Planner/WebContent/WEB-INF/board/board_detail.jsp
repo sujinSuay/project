@@ -96,7 +96,7 @@ $(document).ready(function(){
 		<article id="content">
 			<div id="upfile">
 				<c:forEach items="${requestScope.file_names }" var="file">
-					<c:if test="${file != null || file !=' ' }">
+					<c:if test="${file != 'noData' }">
 						<img width="50%" height="50%" src="/Star_Planner/uploadFile/${file}">
 					</c:if>
 				</c:forEach>
@@ -111,6 +111,7 @@ $(document).ready(function(){
 		</div>
 		<div align="center">
 			<input type="button" id="likeBtn" value="좋아요">
+
 		</div>
 	</section>
 	<!--  댓글 부분 -->

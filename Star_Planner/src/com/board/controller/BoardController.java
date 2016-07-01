@@ -84,29 +84,33 @@ public class BoardController {
 	
 	//NoticeModify
 	@RequestMapping("/boardModify")
-	public ModelAndView boardModify(@RequestParam List upfile, String id, int no, int page, String board_title, String board_content, HttpServletRequest req) throws IllegalStateException, IOException{
+	public ModelAndView boardModify(@RequestParam(required=false) MultipartFile upfile1,@RequestParam(required=false) MultipartFile upfile2,@RequestParam(required=false) MultipartFile upfile3, String id, int no, int page, String board_title, String board_content, HttpServletRequest req, String upfile1_lo,String upfile2_lo,String upfile3_lo) throws IllegalStateException, IOException{
 		String board_link = "";
 		String saveDir = req.getServletContext().getRealPath("/uploadFile"); //파일저장 디렉토리
-		if(upfile != null){ //null인 경우 upfile 이름으로 넘어온 요청파라미터가 없는 경우
-			for(Object f: upfile){
-				MultipartFile file = (MultipartFile)f;
-				if(!file.isEmpty()){
-					String fileName="B"+String.valueOf(System.currentTimeMillis());
-					board_link +=(fileName) + ",";
-					File dest = new File(saveDir,fileName);
-					file.transferTo(dest);
-				}
-			}
-		}
-		if(board_link.equals("")) board_link="noData";
+		
+		board_link = saveFile(upfile1,saveDir, upfile1_lo);
+		board_link +=","+saveFile(upfile2,saveDir,upfile2_lo);
+		board_link +=","+saveFile(upfile3,saveDir,upfile3_lo);
+		
 		System.out.println("board_link : " + board_link);
 		Board board = new Board(no, board_title, board_content, board_link);
-		System.out.println(board);
 		System.out.println(board);
 		service.modifyBoard(board);
 		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+no+"&page="+page);
 	}
-
+	//file check
+	public String saveFile(MultipartFile upfile, String saveDir, String link) throws IllegalStateException, IOException{
+		String board_link;
+		System.out.println(link);
+		if(upfile!=null && !upfile.isEmpty()){
+			String fileName="B"+String.valueOf(System.currentTimeMillis());
+			board_link = fileName;
+			File dest = new File(saveDir,fileName);
+			upfile.transferTo(dest);
+		} else if(link!=null) board_link=link; 
+		  else board_link = "noData";
+		return board_link;
+	}
 	//boardModifyForm
 	@RequestMapping("/boardModifyForm")
 	public ModelAndView boardModifyForm(int no){
@@ -121,12 +125,15 @@ public class BoardController {
 	public ModelAndView boardRemove(String id, int no, int page) throws ParseException{
 	
 		service.removeByNo(no);
+		
+		//해당하는 게시글의 댓글 삭제
+		service_comment.deleteCommentByBoard(no);
+		
 		return boardList(id, page);
 	}
 	
 	//boardView
 	@RequestMapping("/boardView")
-
 	public ModelAndView boardView(int no, int page, String id) throws UnsupportedEncodingException{
 		Board board = service.getBoard(no);
 		
@@ -139,7 +146,6 @@ public class BoardController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String[] file_names = board.getBoard_link().split(",");
-		if(board.getBoard_link().equals("noData")) file_names=null;
 		System.out.println(file_names);
 		map.put("board", board);
 		map.put("file_names", file_names);
@@ -180,10 +186,12 @@ public class BoardController {
 					board_link +=(fileName) + ",";
 					File dest = new File(saveDir,fileName);
 					file.transferTo(dest);
+				}else{
+					board_link +="noData,";
 				}
 			}
 		}
-		if(board_link.equals("")) board_link="noData";
+		if(board_link.equals("")) board_link="noData,noData,noData,";
 		System.out.println(board_link);
 		String group_name = service.selectGroupNameById(m_id);
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name, board_link);

@@ -2,7 +2,10 @@ alter table member add tem_group varchar2(200)  --member에 메니져 소속사 
 alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓글인 경우 부모의 ID */
 alter table comments add comment_check NUMBER(2) NOT NULL ;
 alter table board add board_link varchar2(2000);
-
+--여기부터     6/30 정현 추가
+alter table schedule add m_id varchar2(200) not null; --스캐쥴에 m_id컬럼 추가
+alter table schedule add constraint fk_schedule_m_id foreign key(m_id) references member(m_id);
+--여기까지
 drop sequence comment_id_seq
 drop sequence singer_no_seq;
 drop sequence group_id_seq;
@@ -70,7 +73,11 @@ CREATE TABLE board (
 	board_likes NUMBER(10) NOT NULL, /* 추천 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	board_writer_type VARCHAR2(50), /* 게시자타입 */
+<<<<<<< HEAD
+	board_link varchar2(2000) 
+=======
 	board_link varchar2(2000)
+>>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 );
 
 create sequence board_no_seq nocache;
@@ -85,7 +92,8 @@ CREATE TABLE schedule (
 	schedule_name VARCHAR2(200) NOT NULL, /* 행사이름 */
 	type_name VARCHAR2(200) NOT NULL, /* 행사타입 */
 	schedule_address VARCHAR2(500), /* 장소 */
-	schedule_contents VARCHAR2(900)
+	schedule_contents VARCHAR2(900),
+	m_id varchar2(200) not null
 );
 
 create sequence schedule_id_seq nocache;
@@ -124,14 +132,13 @@ CREATE TABLE link_list(
 	link_id 		NUMBER(10)
 );
 
-
-
 alter table comments add constraint fk_comments foreign key(board_no) references board(board_no);
 alter table member add constraint fk_member foreign key(group_id) references groups(group_id);
 alter table singer add constraint fk_singer foreign key(group_id) references groups(group_id);
 alter table singer add constraint fk_singer_type foreign key(type_name) references type_list(type_name);
 alter table schedule add constraint fk_schedule foreign key(singer_id) references singer(singer_id);
 alter table schedule add constraint fk_schedule_type foreign key(type_name) references type_list(type_name);
+alter table schedule add constraint fk_schedule_m_id foreign key(m_id) references member(m_id);
 alter table search_data add constraint fk_search_data foreign key(singer_id) references singer(singer_id);
 alter table board add constraint fk_board foreign key(singer_id) references singer(singer_id);
 alter table board add constraint fk_board_member foreign key(m_id) references member(m_id);

@@ -185,7 +185,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	//메인화면 링크 조회
-	public List<String> selectMainLink(){
+	public List<LinkList> selectMainLink(){
 		System.out.println("##AdminDaoImp + selectMainLink()");
 		return session.selectList("admin.selectMainLink");
 		

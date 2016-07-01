@@ -7,13 +7,11 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
+function printList(comment, m_id, groupId){
 
-function printList(comment, m_id){
-	
 	var count =  comment.length;
 	var family_id;
 	var parent_m_id;
-
 	$('#comment_count').text(count);	
 	
 	$('#reply_line').empty();
@@ -22,37 +20,36 @@ function printList(comment, m_id){
 		var text ='';
 		
 		 if(comment[i].comment_check =="1"){
-			text = "<tr><td id='user_layer' style='cursor:pointer;'><input type='hidden'  class='comment_id' value='"+comment[i].comment_id+"'/><span id='reply_check'>└─→</span><span class='m_id'>"+comment[i].m_id + '</span></td> <td class="content"><span>' 
-				+comment[i].comment_content +'</span></td><td>'+comment[i].comment_date+'</td>';
+			text = "<tr><td style='cursor:pointer;'><input type='hidden'  class='comment_id' value='"+comment[i].comment_id+"'/><span id='reply_check'>└─→</span><span class='m_id'>"+comment[i].m_id + '</span></td> <td class="content"><span>' 
+				+comment[i].comment_content +'</span></td><td>'+comment[i].comment_date+'</td><td>';
 		 }else{
-			 text = "<tr><td id='user_layer' style='cursor:pointer;'><input type='hidden'  class='comment_id' value='"+comment[i].comment_id+"''/><span id='reply_check'></span><span class='m_id'>"+comment[i].m_id + '</span></td> <td class="content"><span>' 
-				+comment[i].comment_content +'</span></td><td>'+comment[i].comment_date+'</td>';
+			 text = "<tr><td style='cursor:pointer;'><input type='hidden'  class='comment_id' value='"+comment[i].comment_id+"''/><span id='reply_check'></span><span class='m_id'>"+comment[i].m_id + '</span></td> <td class="content"><span>' 
+				+comment[i].comment_content +'</span></td><td>'+comment[i].comment_date+'</td><td>';
 		 }
 		
-		if(m_id==comment[i].m_id){ 
+		if(m_id==comment[i].m_id){  //로그인 한 고객이 게시한 댓글 인 경우
 			
-				$('#reply_line').append(text + '<td><button class="reply_comment">답글</button><button class="modify_comment">수정</button><button class="delete_comment">삭제</button></td></tr>');
+				$('#reply_line').append(text + '<button class="reply_comment">답글</button><button class="modify_comment">수정</button><button class="delete_comment">삭제</button></td></tr>');
 		
-		}else{ //로그인한 사람이 아닐때 
-		
-			$('#reply_line').append(text + '<td><button class="reply_comment">답글</button></td></tr>');
+		}else{ //로그인 한 사람이 게시한 댓글이 아닌 경우
+			
+				if(groupId ==1 || groupId==0){ //관리자가 로그인 한 경우
+					text = text +  '<button class="delete_comment">삭제</button>';
+			}
+			$('#reply_line').append(text + '<button class="reply_comment">답글</button></td></tr>');
 		
 		} 
 	}
 	
 }
-
-
-
 		$(document).ready(function(){
 			
+			var parent_m_id;
 			var m_id = '${sessionScope.loginId}';
-
 			var comment_count  = '${requestScope.comment_count}';
-		
+			var groupId = '${sessionScope.groupId}';
 		
 			$('#register').on("click",function(){
-
 				$.ajax({
 					
 					type: "post",
@@ -63,7 +60,7 @@ function printList(comment, m_id){
 					dataType : "json",
 					"success" : function(comment){
 			
-						printList(comment, m_id); //전체 리스트 출력
+						printList(comment, m_id, groupId); //전체 리스트 출력
 						 
 						//textarea를 clear
 						$('#content_input').val("");
@@ -83,7 +80,6 @@ function printList(comment, m_id){
 			
 			//삭제버튼을 생성한 부모에 대한 이벤트를 줘야 한다. delete_comment
 			$('#reply_line').on("click", '.delete_comment',function(){  //#reply_line 의 자식 중에서 class가 'delete_comment'인것에 적용
-
 				var m_id = '${sessionScope.loginId}';
 				var parent=this;
 				
@@ -101,7 +97,7 @@ function printList(comment, m_id){
 								"board_no" : "${requestScope.board.board_no} "},
 					"success" : function(comment){
 					
-						printList(comment, m_id); //전체 리스트 출력
+						printList(comment, m_id,groupId); //전체 리스트 출력
 						
 					}, "error" : function(xhr, status, errorMsg){
             			alert("오류발생  " + status + errorMsg);
@@ -168,15 +164,14 @@ function printList(comment, m_id){
 		
 			
 			
-			//댓글의 댓글을 등록
+			//댓글의 댓글을 등록버튼 클릭시 폼생성
 				$('#reply_line').on("click", '.reply_comment',function(){  
-
 				var comment_id = $(this).parent().parent().find('.comment_id').val();
 				family_id = comment_id;
 			
 				parent_m_id = $(this).parent().parent().find('.m_id').text();
-			
 				
+		
 				var m_id = '${sessionScope.loginId}';
 				var reply_form = '<tr><td><input type="hidden" id="reply_id" value="'+comment_id +'"</input><span> 답글/'+m_id+'</span></td><td><textarea id="reply_input"  rows="5" cols="40" >['+ parent_m_id+ ']    </textarea></td>'+
 										'<td></td><td><button id="reply_register">답글등록</button><button id="reply_cancel">취소</button></td></tr>';
@@ -195,6 +190,7 @@ function printList(comment, m_id){
 				var reply_input = $(this).parent().parent().find('#reply_input').val();
 				
 				var reply_id = $(this).parent().parent().find('#reply_id').val();
+			
 				
 		 $.ajax({
 					
@@ -209,7 +205,7 @@ function printList(comment, m_id){
 					dataType : "json",
 					"success" : function(comment){
 			
-						printList(comment,m_id);
+						printList(comment,m_id,groupId);
 						
 					}, "error" : function(xhr, status, errorMsg){
             			alert("오류발생  " + status + errorMsg);
@@ -230,10 +226,6 @@ function printList(comment, m_id){
 			
 			
 		}); //end of document
-
-
-
-
 </script>
  		
 
@@ -273,7 +265,7 @@ function printList(comment, m_id){
 			<tr>
 			<c:choose>
 			<c:when test="${comment.comment_check=='0' }">
-			<td style='cursor:pointer;' ><input type="hidden"  class="comment_id" value="${comment.comment_id}"/><span >${comment.m_id}</span></td>
+			<td style='cursor:pointer;' ><input type="hidden"  class="comment_id" value="${comment.comment_id}"/><span class='m_id' >${comment.m_id}</span></td>
 			</c:when>
 			<c:otherwise>
 			<td style='cursor:pointer;'><input type="hidden"  class="comment_id" value="${comment.comment_id}"/><span id="reply_check">└─→</span><span class="m_id">${comment.m_id}</span></td>
@@ -290,10 +282,18 @@ function printList(comment, m_id){
 							<button class="modify_comment" >수정</button>
 							<button class="delete_comment" >삭제</button>
 						</c:when>
-						<c:otherwise>
-									<button class="reply_comment">답글</button>
-						</c:otherwise>
-				</c:choose>
+								<c:otherwise>
+									
+										<c:if test="${sessionScope.groupId ==0 || sessionScope.groupId ==1 }">
+											<button class="delete_comment">삭제</button>
+										</c:if>
+									
+
+									<c:if test="${sessionScope.loginId!=null}">
+										<button class="reply_comment">답글</button>
+									</c:if>
+								</c:otherwise>
+							</c:choose>
 						
 					</td>
 				</tr>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.common.service.MainLoadingServiceImpl;
+import com.common.vo.LinkList;
 
 @Controller
 @RequestMapping("/main")
@@ -25,7 +26,7 @@ public class MainLoadingController {
 		HashMap<String, Object> map = new HashMap<>();
 		
 		System.out.println("## MainLoadingController + LoadingMain");
-		List<String> list = mainService.getMainLink();
+		List<LinkList> list = mainService.getMainLink();
 		System.out.println(list);
 		map.put("list", list);
 

@@ -16,9 +16,9 @@ $(document).ready(function(){
 		"dataType":"json",
 		"success":function(board){
 			if(board.isEmpty){
-				$("#listTable").append("<tr><td colspan='6'>게시글이 없습니다.</td></tr>");
+				$("#baordTable").append("<tr><td colspan='6'>게시글이 없습니다.</td></tr>");
 			}else{
-				var thtml="";
+				var thtml="111";
 				for(var i=0;i<board.length;i++){
 					thtml="<tr><td>" + board[i].board_no+"</td>"+
 					 		"<td align='center'><a href='/Star_Planner/board/boardView.do?id="+board[i].singer_name+"&no="+board[i].board_no+"&page=1'>"+board[i].board_title+"</a></td>"+
@@ -28,7 +28,7 @@ $(document).ready(function(){
 							"<td>"+board[i].board_likes+"</td>"+
 							"<td><button id='deleteBoard' value='삭제' onclick='deleteBoard("+board[i].board_no+")'>삭제</button></td></tr>";
 		
-					$("#listTable").append(thtml); 
+					$("#baordTable").append(thtml); 
 				}
 				
 			}
@@ -74,8 +74,7 @@ function deleteBoard(board_no){
 				<th>삭제</th>
 			</tr>
 		</thead>
-		<tbody align="center" id="listTable">
-			
+		<tbody align="center" id="baordTable">
 		</tbody>
 	</table>
 </div>

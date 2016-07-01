@@ -18,9 +18,28 @@ public class Schedule implements Serializable{
 	private String schedule_contents; /** 스케줄 정보 **/
 	private Singer singer;
 	private Group group;
+	private String m_id;
 	
 	public Schedule(){
 		
+	}
+	
+	public Schedule(int schedule_id, String schedule_start, String schedule_end, int singer_id, int group_id,
+			String schedule_name, String type_name, String schedule_address, String schedule_contents, Singer singer,
+			Group group, String m_id) {
+		super();
+		this.schedule_id = schedule_id;
+		this.schedule_start = schedule_start;
+		this.schedule_end = schedule_end;
+		this.singer_id = singer_id;
+		this.group_id = group_id;
+		this.schedule_name = schedule_name;
+		this.type_name = type_name;
+		this.schedule_address = schedule_address;
+		this.schedule_contents = schedule_contents;
+		this.singer = singer;
+		this.group = group;
+		this.m_id = m_id;
 	}
 
 	public Schedule(int schedule_id, String schedule_start, String schedule_end, int singer_id, int group_id,
@@ -142,21 +161,27 @@ public class Schedule implements Serializable{
 	public void setGroup(Group group) {
 		this.group = group;
 	}
+	public String getM_id(){
+		return m_id;
+	}
+	public void setM_id(String m_id){
+		this.m_id = m_id;
+	}
 
 	@Override
 	public String toString() {
 		return "Schedule [schedule_id=" + schedule_id + ", schedule_start=" + schedule_start + ", schedule_end="
 				+ schedule_end + ", singer_id=" + singer_id + ", group_id=" + group_id + ", schedule_name="
 				+ schedule_name + ", type_name=" + type_name + ", schedule_address=" + schedule_address
-				+ ", schedule_contents=" + schedule_contents + ", singer=" + singer + ", group=" + group + "]";
+				+ ", schedule_contents=" + schedule_contents + ", singer=" + singer + ", group=" + group + ", m_id="+m_id+"]";
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((group == null) ? 0 : group.hashCode());
 		result = prime * result + group_id;
+		result = prime * result + ((m_id == null) ? 0 : m_id.hashCode());
 		result = prime * result + ((schedule_address == null) ? 0 : schedule_address.hashCode());
 		result = prime * result + ((schedule_contents == null) ? 0 : schedule_contents.hashCode());
 		result = prime * result + ((schedule_end == null) ? 0 : schedule_end.hashCode());
@@ -168,7 +193,6 @@ public class Schedule implements Serializable{
 		result = prime * result + ((type_name == null) ? 0 : type_name.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -184,6 +208,11 @@ public class Schedule implements Serializable{
 		} else if (!group.equals(other.group))
 			return false;
 		if (group_id != other.group_id)
+			return false;
+		if (m_id == null) {
+			if (other.m_id != null)
+				return false;
+		} else if (!m_id.equals(other.m_id))
 			return false;
 		if (schedule_address == null) {
 			if (other.schedule_address != null)
@@ -226,6 +255,8 @@ public class Schedule implements Serializable{
 			return false;
 		return true;
 	}
+
+
 
 
 }
