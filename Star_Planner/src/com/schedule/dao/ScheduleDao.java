@@ -11,4 +11,5 @@ public interface ScheduleDao {
 	public List<Schedule> selectScheduleByLocation(String keyword);
 	public List<Schedule> selectScheduleBySinger(int singer_id);
 	public List<Schedule> selectScheduleByGroup(int group_id);
+	public Schedule selectScheduleById(int schedule_id);
 }

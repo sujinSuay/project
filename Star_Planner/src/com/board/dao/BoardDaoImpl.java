@@ -94,5 +94,17 @@ public class BoardDaoImpl implements BoardDao {
 		return session.delete(namespace_board+"deleteByNo", no);
 	}
 
+	@Override
+	public List<Board> selectBoardByLikes() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_board+"selectBoardByLikes");
+	}
+
+	@Override
+	public List<Board> selectBoardByView() {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace_board+"selectBoardByView");
+	}
+
 	
 }

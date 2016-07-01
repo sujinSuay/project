@@ -3,6 +3,7 @@ package com.board.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,8 @@ import com.board.service.BoardService;
 import com.board.service.CommentServiceImpl;
 import com.board.vo.Board;
 import com.board.vo.Comment;
+import com.common.vo.SearchData;
+import com.common.vo.Singer;
 
 @Controller
 @RequestMapping("/board")
@@ -33,29 +36,36 @@ public class BoardController {
 	
 	@RequestMapping("/boardMain")
 	public ModelAndView boardMain(HttpSession session){
-		
 		Map<String, Object> singer = service.singerList();
-		
+		List<SearchData> list1 = service.selectSearchDataDesc(new java.sql.Date(System.currentTimeMillis()));
+		List<Board> list2 = service.selectBoardByView();
+		List<Board> list3 = service.selectBoardByLikes();
+		List<Singer> list4 = service.selectSingerByFavorite();
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("singer", singer);
+		map.put("list1", list1);
+		map.put("list2", list2);
+		map.put("list3", list3);
+		map.put("list4", list4);
 		
 		String id = (String)session.getAttribute("loginId");
 		if(id!=null){
 			List<String> favorite = service.getFavorite(id);
 			if(favorite==null){
-				return new ModelAndView("/board_main.do", singer);
+				return new ModelAndView("/board_main.do", map);
 			}else{
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("singer", singer);
 				map.put("favorite", favorite);
 				return new ModelAndView("/board_main.do", map);
 			}
 		}else{
-			return new ModelAndView("/board_main.do", singer);
+			return new ModelAndView("/board_main.do", map);
 		}
 	}
 	
 	//noticeList
 	@RequestMapping("/boardList")
-	public ModelAndView boardList(String id, int page){
+	public ModelAndView boardList(String id, int page) throws ParseException{
 		if(page==0){
 			page = 1;
 		}
@@ -64,6 +74,7 @@ public class BoardController {
 			return new ModelAndView("redirect:/board/boardMain.do");
 		}
 		Map<String, Object> list = service.list(singer_id, page);
+		service.updateCountSearch(new SearchData(singer_id, 0, new java.sql.Date(System.currentTimeMillis())));
 		return new ModelAndView("/board_list.do", list);
 	}
 	
@@ -85,7 +96,7 @@ public class BoardController {
 	
 	//boardRemove
 	@RequestMapping("/boardRemove")
-	public ModelAndView boardRemove(String id, int no, int page){
+	public ModelAndView boardRemove(String id, int no, int page) throws ParseException{
 	
 		service.removeByNo(no);
 		return boardList(id, page);

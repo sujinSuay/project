@@ -21,6 +21,11 @@
 		SELECT singer_name
 		FROM singer
 		WHERE singer_id={#singer_id}
-	</select> 
+	</select>
+	<select id="selectSingerByFavorite" resultType="singer">
+		SELECT *
+		FROM singer
+		ORDER BY singer_favorite DESC 
+	</select>
 
 </mapper> 
