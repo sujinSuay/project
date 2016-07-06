@@ -124,9 +124,10 @@ td{
 			<td width="200">
 				<c:forEach items="${requestScope.singer.mGroup }" var="singer" varStatus="cnt">
 					<a href="/Star_Planner/board/boardList.do?id=${singer.singer_name }&page=1">${singer.singer_name }</a>
-					<c:if test="${cnt.count%2==0 }">
+					<%-- <c:if test="${cnt.count%2==0 }">
 						<br>
-					</c:if>
+					</c:if> --%>
+					<br>
 				</c:forEach>
 			</td>
 			<td width="200">

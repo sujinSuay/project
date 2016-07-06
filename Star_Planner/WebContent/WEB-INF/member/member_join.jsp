@@ -350,7 +350,7 @@
 				</tr>
 			</table>
 			<table>
-				<tr id="favoriteList">
+				<tr id="favoriteList" height="50px">
 				</tr>
 			</table>
 		</div>

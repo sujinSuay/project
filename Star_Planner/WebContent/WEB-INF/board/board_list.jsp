@@ -17,9 +17,7 @@ table {
     min-width: 800px;
     width: 100%;
     margin-bottom: 20px;
-    
 }
-
 </style>
 </head>
 <body>
@@ -54,53 +52,40 @@ table {
 				</c:forEach>
 			</tbody>
 		</table>
-		<div align="left" class="btn"><a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1">전체보기</a></div>
-		<c:if test="${sessionScope.loginId != null }">
-			<div align="right" class="btn"><a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }">글쓰기</a></div>
-		</c:if>
+		<div style="width: 100%">
+			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1" style="float: left;">전체보기</a>
+			<c:if test="${sessionScope.loginId != null }">
+				<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }" style="float: right;">글쓰기</a>
+			</c:if>
+		</div>
 	</div>
-
 </div>
 
-
-<p>
-<!-- 글쓰기 -->
-
-
-
-
 <%--페이징 처리 --%>
-<p>
+<br>
 <%--◀이전 페이지 그룹 처리 --%>
 <div align="center">
 	<c:choose>
 		<c:when test="${requestScope.paging.previousPageGroup }">
-			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">
-			◀
-			</a>
+			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">◀</a>
 		</c:when>
 		<c:otherwise>◀</c:otherwise>
 	</c:choose>
 	<%--페이지 처리 --%>
 	<c:forEach begin="${requestScope.paging.beginPage }" end="${requestScope.paging.endPage }" var="page">
+	&nbsp;
 		<c:choose>
-			<c:when test="${page == requestScope.paging.page }">
-			 [${page }]
-			</c:when>
+			<c:when test="${page == requestScope.paging.page }">[${page }]</c:when>
 			<c:otherwise>
-				<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${page }">
-					${page }
-				</a>
+				<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${page }">${page }</a>
 			</c:otherwise>
 		</c:choose>
-	&nbsp;&nbsp;
+	&nbsp;
 	</c:forEach>
 	<%--다음 페이지 그룹 처리 ▶--%>
 	<c:choose>
 		<c:when test="${requestScope.paging.nextPageGroup }">
-			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.endPage + 1}">
-			▶
-			</a>
+			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.endPage + 1}">▶</a>
 		</c:when>
 		<c:otherwise>▶</c:otherwise>
 	</c:choose>
