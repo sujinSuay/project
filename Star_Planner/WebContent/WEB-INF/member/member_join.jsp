@@ -130,8 +130,7 @@
 		});
 		$("#favoriteList").on("click","td",function(){
 			var id=this.getAttribute("id");
-			document.getElementById(id).remove();
-			alert(11);
+			$(this).remove();
 			$.ajax({
 				"url":"/Star_Planner/member/minusSingerFavorite.do",
 				"type":"post",
@@ -342,7 +341,7 @@
 				</tr>
 			</table>
 			<table>
-				<tr id="favoriteList">
+				<tr id="favoriteList" height="50px">
 				</tr>
 			</table>
 		</div>

@@ -66,7 +66,7 @@
 		});
 		$("#favoriteList").on("click","td",function(){
 			var id=this.getAttribute("id");
-			document.getElementById(id).remove();
+			$(this).remove();
 			$.ajax({
 				"url":"/Star_Planner/member/minusSingerFavorite.do",
 				"type":"post",
