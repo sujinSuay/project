@@ -24,7 +24,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 	@Override
 	public Map<String, Object> getCategoryList(int group) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("singerList", cdao.selectSingerByGroup(group));
+		if(group == 0 || group == 1){
+			map.put("singerList", cdao.selectAllSinger());
+		}else{
+			map.put("singerList", cdao.selectSingerByGroup(group));
+		}
 		map.put("eventList", cdao.selectByCodeCateory("event_type"));
 		return map;
 	}

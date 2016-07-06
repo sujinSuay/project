@@ -73,11 +73,7 @@ CREATE TABLE board (
 	board_likes NUMBER(10) NOT NULL, /* 추천 */
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	board_writer_type VARCHAR2(50), /* 게시자타입 */
-<<<<<<< HEAD
-	board_link varchar2(2000) 
-=======
 	board_link varchar2(2000)
->>>>>>> branch 'master' of https://github.com/sujinSuay/project.git
 );
 
 create sequence board_no_seq nocache;

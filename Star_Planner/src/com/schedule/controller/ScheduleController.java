@@ -52,14 +52,14 @@ public class ScheduleController {
 	@RequestMapping("/searchSinger")
 	@ResponseBody
 	public List<Singer> searchSinger(String keyword){
-		List<Singer> list = service.searchSinger(keyword); 
+		List<Singer> list = service.searchSinger(keyword);
 		return list;
 	}
 	
 	@RequestMapping("/searchGroup")
 	@ResponseBody
 	public List<Group> searchGroup(String keyword){
-		List<Group> list = service.searchGroup(keyword); 
+		List<Group> list = service.searchGroup(keyword);
 		return list;
 	}
 	
