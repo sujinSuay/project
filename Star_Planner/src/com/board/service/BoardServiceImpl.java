@@ -77,11 +77,9 @@ public class BoardServiceImpl implements BoardService{
 		map.put("board", board);
 		String[] file_names = board.getBoard_link().split(",");
 		for(int i=0;i<file_names.length;i++){
-			System.out.println("upfile"+i+" : " +file_names[i]);
 			if(file_names[i].equals("noData")) map.put("upfile"+(i+1), "noData");
 			else map.put("upfile"+(i+1),file_names[i]);
 		}
-		System.out.println("file names: " + file_names);
 		
 		/*List<TypeList> typeList = tdao.selectByCodeCateory(Constants.NOTICE_BOARD_PREFIX);
 		map.put("typeList", typeList);*/

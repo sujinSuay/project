@@ -92,16 +92,13 @@ public class BoardController {
 		board_link +=","+saveFile(upfile2,saveDir,upfile2_lo);
 		board_link +=","+saveFile(upfile3,saveDir,upfile3_lo);
 		
-		System.out.println("board_link : " + board_link);
 		Board board = new Board(no, board_title, board_content, board_link);
-		System.out.println(board);
 		service.modifyBoard(board);
 		return new ModelAndView("redirect:/board/boardView.do?id="+URLEncoder.encode(id,"UTF-8")+"&no="+no+"&page="+page);
 	}
 	//file check
 	public String saveFile(MultipartFile upfile, String saveDir, String link) throws IllegalStateException, IOException{
 		String board_link;
-		System.out.println(link);
 		if(upfile!=null && !upfile.isEmpty()){
 			String fileName="B"+String.valueOf(System.currentTimeMillis());
 			board_link = fileName;
@@ -115,7 +112,6 @@ public class BoardController {
 	@RequestMapping("/boardModifyForm")
 	public ModelAndView boardModifyForm(int no){
 		Map<String, Object> board = service.getModifyBoard(no);
-		System.out.println(board);
 		return new ModelAndView("/board_modify.do", board);
 	}
 	
@@ -146,7 +142,6 @@ public class BoardController {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		String[] file_names = board.getBoard_link().split(",");
-		System.out.println(file_names);
 		map.put("board", board);
 		map.put("file_names", file_names);
 		map.put("list_comment", list_comment);
@@ -170,13 +165,11 @@ public class BoardController {
 		int singer_id = service.StringToIntSingerId(id);
 		String m_id = (String)session.getAttribute("loginId");
 		if(m_id==null){
-			System.out.println("자동 로그아웃됨");
 			return new ModelAndView("redirect:/board/boardList.do?id="+URLEncoder.encode(id,"UTF-8")+"&page=1");
 		}
 		// 파일 업로드 처리
 	
 		String saveDir = req.getServletContext().getRealPath("/uploadFile"); //파일저장 디렉토리
-		System.out.println(saveDir);
 		String board_link = "";
 		if(upfile != null){ //null인 경우 upfile 이름으로 넘어온 요청파라미터가 없는 경우
 			for(Object f: upfile){
@@ -192,7 +185,6 @@ public class BoardController {
 			}
 		}
 		if(board_link.equals("")) board_link="noData,noData,noData,";
-		System.out.println(board_link);
 		String group_name = service.selectGroupNameById(m_id);
 		Board board = new Board(0, board_title, new Date(System.currentTimeMillis()), m_id, 0, board_content, 0, singer_id, group_name, board_link);
 		service.writeBoard(board);

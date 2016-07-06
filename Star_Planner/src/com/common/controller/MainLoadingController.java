@@ -25,9 +25,7 @@ public class MainLoadingController {
 		
 		HashMap<String, Object> map = new HashMap<>();
 		
-		System.out.println("## MainLoadingController + LoadingMain");
 		List<LinkList> list = mainService.getMainLink();
-		System.out.println(list);
 		map.put("list", list);
 
 		return new ModelAndView("/common/main.do", map);

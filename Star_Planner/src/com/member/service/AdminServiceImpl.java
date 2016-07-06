@@ -15,164 +15,122 @@ import com.member.vo.ManagerList;
 import com.member.vo.Member;
 import com.member.vo.SingerList;
 
-
 @Service("adminService")
 public class AdminServiceImpl {
 
 	@Autowired
 	private AdminDaoImpl adminDao;
-	
-	
-	
+
 	@Autowired
 	private MemberDaoImpl memberDao;
-	
-	
-	public List<Member> getAdminList(){
-		
+
+	public List<Member> getAdminList() {
+
 		return adminDao.selectAdmin();
 	}
-	
-	public Member selectById(String id){
-		
-		return memberDao.selectMemberById(id);
-		
-	}
-	
-	
-	public int insertAdmin(String id){
 
-		System.out.println("##AdminServiceImpl insetAdmin(" + id + ")");
-		
-		//디비의 member의 group_id 정보를 수정
+	public Member selectById(String id) {
+
+		return memberDao.selectMemberById(id);
+
+	}
+
+	public int insertAdmin(String id) {
+		// 디비의 member의 group_id 정보를 수정
 		return adminDao.insertAdmin(id);
 	}
-	
-	public List<Member> deleteAdmin(String m_id){
-		
-		System.out.println("##AdminServiceImpl deleteAdmin(" + m_id + ")");
-		
+
+	public List<Member> deleteAdmin(String m_id) {
 		adminDao.deleteAdmin(m_id);
-		
 		return adminDao.selectAdmin();
-		
+
 	}
-	
-	//매니저로 신청한 목록을 조회
-	public List<Member> selectManager(){
-		
-		System.out.println("##AdminServiceImpl selectManager()");
+
+	// 매니저로 신청한 목록을 조회
+	public List<Member> selectManager() {
 		return adminDao.selectManager();
 	}
-	
-	//매니저로 승낙
-	public int insertManager(String id, String group_name){
 
-		System.out.println("##AdminServiceImpl insertManagers(" + id + ", " + group_name +" )");
-		
+	// 매니저로 승낙
+	public int insertManager(String id, String group_name) {
 		int group_id = adminDao.selectGroupIdByName(group_name);
-		
-		//디비의 member의 group_id 정보를 수정
-		
+
+		// 디비의 member의 group_id 정보를 수정
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("m_id", id);
 		map.put("group_id", group_id);
-		
+
 		return adminDao.insertManager(map);
 	}
-	
-	//매니저로 승낙 거절
-		public int denyManager(String m_id){
 
-			System.out.println("##AdminServiceImpl denyManager()");
-			return adminDao.denyManager(m_id);
-		}
-	
-		//매니저(이미 매니저가 된) 리스트 조회
-	public List<ManagerList> selectManagerList(String id){
-		System.out.println("##AdminServiceImpl selectManagerList()");
+	// 매니저로 승낙 거절
+	public int denyManager(String m_id) {
+		return adminDao.denyManager(m_id);
+	}
+
+	// 매니저(이미 매니저가 된) 리스트 조회
+	public List<ManagerList> selectManagerList(String id) {
 		return adminDao.selectManagerList(id);
 	}
-	
-	
-	//가수등록 - 가수 분류 selector
-	public List<String> selectSingerType(){
-		
-		System.out.println("##AdminServiceImpl selectSingerType()");
+
+	// 가수등록 - 가수 분류 selector
+	public List<String> selectSingerType() {
 		return adminDao.selectSingerType();
 	}
-	
-	//가수등록 - 가수 회사 selecotr
-	public List<String> selectSingerCompany(){
-		
-		System.out.println("##AdminServiceImpl selectSingerCompany()");
+
+	// 가수등록 - 가수 회사 selecotr
+	public List<String> selectSingerCompany() {
 		return adminDao.selectSingerCompany();
 	}
-	
-	//가수 등록
-	public int insertSinger(String singer_name, String singer_type, String singer_company, String singer_link, String singer_tag){
-		
-		System.out.println("##AdminServiceImpl insertSinger()");
-		//가수의 소속사 id 
+
+	// 가수 등록
+	public int insertSinger(String singer_name, String singer_type, String singer_company, String singer_link,
+			String singer_tag) {
+		// 가수의 소속사 id
 		int group_id = adminDao.selectGroupIdByName(singer_company);
-		
-		//가수의 id 값 조회
+
+		// 가수의 id 값 조회
 		int singer_id = adminDao.selectSingerId();
-		
+
 		Singer singer = new Singer(singer_id, singer_name, group_id, singer_type, singer_link, 0, singer_tag);
-		
+
 		return adminDao.insertSinger(singer);
-	
 	}
-	
-	//가수 목록 조회
-	public List<SingerList> selectSingerList(String id){
-		System.out.println("##AdminServiceImpl selectSingerList()");
+
+	// 가수 목록 조회
+	public List<SingerList> selectSingerList(String id) {
 		return adminDao.selectSingerList(id);
 	}
 
-	//회사 등록
+	// 회사 등록
 	public int insertCompany(String group_name, String group_address, String group_phone, String group_link) {
-		
-		System.out.println("##AdminServiceImpl insertCompany()");
-		
-		//회사 등록
+		// 회사 등록
 		Group group = new Group(0, group_name, group_address, group_phone, group_link);
 		return adminDao.insertCompany(group);
-		
-	}
-	
-	public List<Group> selectGroupAll(){
-		System.out.println("##AdminServiceImpl selectGroupAll()");
-		return adminDao.selectGroupAll();
-	}
-	
-	//링크 등록
-	public int insertMainLink(int count, String input, String input_explain){
-		System.out.println("##AdminServiceImpl insertMainLink()");
-		
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("count" , count);
-		map.put("input", input);
-		map.put("input_explain", input_explain);
-	System.out.println("%%%%%" + map);
-		return adminDao.insertMainLink(map);
-		
 	}
 
-	//링크 삭제
+	public List<Group> selectGroupAll() {
+		return adminDao.selectGroupAll();
+	}
+
+	// 링크 등록
+	public int insertMainLink(int count, String input, String input_explain) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("count", count);
+		map.put("input", input);
+		map.put("input_explain", input_explain);
+		return adminDao.insertMainLink(map);
+	}
+
+	// 링크 삭제
 	public int deleteMainLink(int count) {
-		System.out.println("##AdminServiceImpl deleteMainLink()");
 		return adminDao.deleteMainLink(count);
 	}
-	
-	//링크조회
-	public List<LinkList> selectMainLink(){
-		System.out.println("##AdminServiceImpl selectMainLink()");
+
+	// 링크조회
+	public List<LinkList> selectMainLink() {
 		return adminDao.selectMainLink();
 	}
-	
-	
-	
-	
+
 }

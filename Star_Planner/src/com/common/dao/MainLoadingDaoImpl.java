@@ -17,7 +17,6 @@ public class MainLoadingDaoImpl implements MainLoadingDao {
 	@Override
 	public List<LinkList> selectMainLink() {
 		
-		System.out.println("##MainLoadingDaoImpl + selectMainLink() ");
 		return session.selectList("common.selectMainLink");
 	}
 

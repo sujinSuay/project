@@ -75,7 +75,6 @@ public class ScheduleController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByGroup(int group_id){
 		List<Schedule> list = service.selectScheduleByGroup(group_id);
-		System.out.println(list);
 		return list;
 	}
 	
@@ -99,14 +98,11 @@ public class ScheduleController {
 	
 	@RequestMapping("/scheduleModifyForm")
 	public ModelAndView scheduleModifyForm(HttpSession session, int schedule_id){
-		System.out.println("schedule modify");
 		if(session.getAttribute("groupId")==null){
 			return new ModelAndView("redirect:/member_login.do");
 		}
 		int group = (int)session.getAttribute("groupId");
-		System.out.println(group);
 		Schedule preSchedule = service.selectScheduleById(schedule_id);
-		System.out.println(preSchedule);
 		String[] adr = preSchedule.getSchedule_address().split(",");
 		Map<String, Object> list = service.getCategoryList(group);
 		list.put("preSchedule", preSchedule);

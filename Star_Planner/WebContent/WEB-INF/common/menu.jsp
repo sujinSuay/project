@@ -17,13 +17,13 @@ a:hover {text-decoration: none; color: blue;}
 
 <a href="/Star_Planner/main/home.do">main</a>  &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="/Star_Planner/schedule/scheduleMain.do">schedule</a> &nbsp; &nbsp; &nbsp; &nbsp;
-<c:if test="${sessionScope.loginId != null && sessionScope.groupId != 2}">
+<c:if test="${sessionScope.loginId != null && sessionScope.groupId != 2 && sessionScope.groupId != 3}">
 	<a href="/Star_Planner/schedule/scheduleRegisterForm.do">schedule 등록</a> &nbsp; &nbsp; &nbsp; &nbsp;
 </c:if>
 
 <a href="/Star_Planner/board/boardMain.do">board</a> &nbsp; &nbsp; &nbsp; &nbsp;
 
-<c:if test="${sessionScope.loginId=='master' }">
+<c:if test="${sessionScope.groupId==0 || sessionScope.groupId==1 }">
 <a href="/Star_Planner/admin/adminMain.do">관리자설정</a>&nbsp; &nbsp; 
 </c:if>
 

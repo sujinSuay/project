@@ -554,7 +554,9 @@ table {
 
 <h2>관리자 권한 부여</h2> <br>
 
-<input type="text" id="admin_id">&nbsp;&nbsp;<input type="button" value="검색" id="search"/>
+<c:if test="${sessionScope.groupId == 0 }">
+	<input type="text" id="admin_id">&nbsp;&nbsp;<input type="button" value="검색" id="search"/>
+</c:if>
 <br>
 
 <div id="result_search" >
@@ -566,16 +568,18 @@ table {
 	<td>아이디</td> 
 	<td>이름</td>
 	<td>전화번호</td>
-	<td></td>
+	<td style="display: none;"></td>
 </tr>
 
 <tbody  id="result_admin">
 <c:forEach var="admin" items="${requestScope.list_admin }">
 		<tr>
-		<td class="m_id">${admin.m_id}</td>
-		<td>${admin.name}</td>
-		<td>${admin.phone}</td>
-		<td><input type="button" class="delete" value="삭제"/></td>
+			<td class="m_id">${admin.m_id}</td>
+			<td>${admin.name}</td>
+			<td>${admin.phone}</td>
+			<c:if test="${sessionScope.groupId == 0 }">
+				<td><input type="button" class="delete" value="삭제" /></td>
+			</c:if>
 		</tr>
 </c:forEach>
 
