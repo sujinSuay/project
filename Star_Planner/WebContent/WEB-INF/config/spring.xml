@@ -107,7 +107,10 @@
 		</property>
 	</bean>
 
-
+	<!-- 에러페이지 잡기 -->
+	<bean name="GlobalExceptionHandler"
+		class="com.common.util.GlobalExceptionHandler"/>
+		
 	<bean name="vr1"
 		class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		p:order="1" />

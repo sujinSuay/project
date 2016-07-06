@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.board.vo.Board;
+import com.common.vo.Singer;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
 import com.schedule.vo.Schedule;
@@ -20,5 +21,8 @@ public interface memberDao {
 	List<MyPage> selectCommentListByMemberId(HashMap<String, String> map);
 	List<Schedule> selectScheduleByMemberId(HashMap<String, String> map);
 	List<Schedule> selectScheduleByGroup(HashMap<String, String> map);
+	List<Singer> selectSingerIdandName(String keyword);
+	void plusSingerFavorite(String singer_id);
+	void minusSingerFavorite(String id);
 
 }

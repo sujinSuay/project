@@ -1,7 +1,5 @@
 package com.member.vo;
 
-
-
 public class Member {
 	
 	/*@NotEmpty(message="아이디를 입력해주세요")*/
@@ -16,6 +14,7 @@ public class Member {
 	private String phone; /**회원 전화번호 **/
 	private String favorite;  /**회원이 선호하는 그룹의 이름. 선호그릅은 다중 선택 가능. ','로 구분 **/
 	private String tem_group;
+	private String[] favoriteList;
 	
 	
 	public Member(){
@@ -38,8 +37,18 @@ public class Member {
 		this.favorite = favorite;
 		this.tem_group = tem_group;
 	}
-
-
+	
+	public String[] getFavoriteList(){
+		return favoriteList;
+	}
+	
+	public void setFavoriteList(String favorite){
+		if(favorite!=null)
+			this.favoriteList = favorite.split(",");
+	}
+	public void setFavoriteList(String[] favoriteList) {
+		this.favoriteList = favoriteList;
+	}
 	public String getM_id() {
 		return m_id;
 	}
@@ -240,6 +249,9 @@ public class Member {
 				+ ", gender=" + gender + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
 				+ phone + ", favorite=" + favorite + ", tem_group=" + tem_group + "]";
 	}
+
+
+	
 	
 	
 

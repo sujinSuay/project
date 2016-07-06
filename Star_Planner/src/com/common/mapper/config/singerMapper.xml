@@ -1,31 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="singer">
-	
+
 	<select id="searchSinger" parameterType="string" resultType="string">
-		SELECT singer_name 
-		FROM singer 
+		SELECT singer_name
+		FROM singer
 		WHERE UPPER(singer_tag) LIKE '%'||UPPER(#{keyword})||'%'
 	</select>
-	<select id="searchSingerAllData" parameterType="string" resultType="singer">
-		SELECT * 
-		FROM singer 
+	<select id="searchSingerAllData" parameterType="string"
+		resultType="singer">
+		SELECT *
+		FROM singer
 		WHERE UPPER(singer_tag) LIKE '%'||UPPER(#{keyword})||'%'
 	</select>
-	<select id="StringToIntSingerId" parameterType="string" resultType="_int">
-		SELECT singer_id 
-		FROM singer 
+	<select id="StringToIntSingerId" parameterType="string"
+		resultType="_int">
+		SELECT singer_id
+		FROM singer
 		WHERE singer_name = #{singer_name}
 	</select>
-	<select id="selectSingerNameById" parameterType="string" resultType="string">
+	<select id="selectSingerNameById" parameterType="string"
+		resultType="string">
 		SELECT singer_name
 		FROM singer
 		WHERE singer_id={#singer_id}
 	</select>
 	<select id="selectSingerByFavorite" resultType="singer">
 		SELECT *
-		FROM singer
-		ORDER BY singer_favorite DESC 
+		FROM
+		singer
+		ORDER BY singer_favorite DESC
 	</select>
-
+	<select id="selectSingerIdandName" parameterType="string"
+		resultType="singer">
+		SELECT singer_name, singer_id
+		FROM singer
+		WHERE UPPER(singer_tag) LIKE '%'||UPPER(#{keyword})||'%'
+	</select>
+	<select id="selectSingerFavortieCount" parameterType="string"
+		resultType="_int">
+		SELECT singer_favorite
+		FROM singer
+		WHERE singer_id =
+		#{singer_id}
+	</select>
+	<select id="selectSingerFavortieCountbyName" parameterType="string"
+		resultType="_int">
+		SELECT singer_favorite
+		FROM singer
+		WHERE singer_name =
+		#{singer_id}
+	</select>
+	<update id="plusSingerFavorite" parameterType="string">
+		UPDATE SINGER
+		SET
+		singer_favorite = singer_favorite + 1
+		WHERE singer_id=#{singer_id}
+	</update>
+	<update id="updateSingerFavorite" parameterType="map">
+		UPDATE SINGER
+		SET singer_favorite = #{singer_favorite}
+		WHERE singer_id=#{singer_id}
+	</update>
+	<select id="selectSingerIdByName" parameterType="string" resultType="string">
+		SELECT singer_id
+		FROM singer
+		WHERE singer_name=#{id}
+	</select>
 </mapper> 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.board.vo.Board;
+import com.common.vo.Singer;
 import com.member.dao.MemberDaoImpl;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
@@ -73,5 +74,20 @@ public class MemberServiceImpl implements MemberService{
 	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
 		return memberDao.selectScheduleByGroup(map);
+	}
+	@Override
+	public List<Singer> selectSingerIdandName(String keyword) {
+		// TODO Auto-generated method stub
+		return memberDao.selectSingerIdandName(keyword);
+	}
+	@Override
+	public void plusSingerFavorite(String singer_id) {
+		// TODO Auto-generated method stub
+		memberDao.plusSingerFavorite(singer_id);
+	}
+	@Override
+	public void minusSingerFavorite(String singer_id) {
+		// TODO Auto-generated method stub
+		memberDao.minusSingerFavorite(singer_id);
 	}
 }

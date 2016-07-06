@@ -4,48 +4,52 @@
 
 
 	<sql id="select-basic">
-		SELECT 	m_id, social_no, password, group_id, gender,
-				name, email, address, phone, favorite, tem_group
-		FROM 	member
+		SELECT m_id, social_no, password, group_id, gender,
+		name, email, address, phone, favorite, tem_group
+		FROM member
 	</sql>
-	
+
 	<resultMap id="member-resultmap" type="member">
-		<id column="m_id" property="m_id"/>
-		<result column="social_no" property="social_no"/>
-		<result column="password" property="password"/>
-		<result column="group_id" property="group_id"/>
-		<result column="gender" property="gender"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
-		<result column="address" property="address"/>
-		<result column="phone" property="phone"/>
-		<result column="favorite" property="favorite"/>
-		<result column="tem_group" property="tem_group"/>
+		<id column="m_id" property="m_id" />
+		<result column="social_no" property="social_no" />
+		<result column="password" property="password" />
+		<result column="group_id" property="group_id" />
+		<result column="gender" property="gender" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="address" property="address" />
+		<result column="phone" property="phone" />
+		<result column="favorite" property="favorite" />
+		<result column="tem_group" property="tem_group" />
 	</resultMap>
-	
+
 	<insert id="insertMember" parameterType="member">
-		INSERT INTO member values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group})
+		INSERT INTO member
+		values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group})
 	</insert>
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
-		<include refid="select-basic"/>
-		WHERE 	m_id=#{value}
+		<include refid="select-basic" />
+		WHERE m_id=#{value}
 	</select>
-	<select id="selectMemberByIdAndPassword" parameterType="map" resultMap="member-resultmap">
-		<include refid="select-basic"/>
+	<select id="selectMemberByIdAndPassword" parameterType="map"
+		resultMap="member-resultmap">
+		<include refid="select-basic" />
 		WHERE m_id=#{m_id} and password=#{password}
 	</select>
 	<update id="updateMemberById" parameterType="map">
 		UPDATE member
-		SET	password = #{password},
-			email = #{email},
-			phone = #{phone}
+		SET
+		password = #{password},
+		email = #{email},
+		phone = #{phone},
+		favorite = #{favorite}
 		WHERE m_id = #{m_id}
 	</update>
 	<select id="selectFavorite" parameterType="string" resultType="string">
-		SELECT favorite 
-		FROM member 
+		SELECT favorite
+		FROM member
 		WHERE m_id = #{m_id}
 	</select>
-	
+
 
 </mapper>

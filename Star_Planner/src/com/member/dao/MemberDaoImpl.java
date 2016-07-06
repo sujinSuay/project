@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.board.vo.Board;
+import com.common.vo.Singer;
 import com.member.vo.Member;
 import com.member.vo.MyPage;
 import com.schedule.vo.Schedule;
@@ -89,5 +90,42 @@ public class MemberDaoImpl implements memberDao {
 	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
 		return session.selectList("schedule.selectScheduleByGroup2", map);
+	}
+	@Override
+	public List<Singer> selectSingerIdandName(String keyword) {
+		// TODO Auto-generated method stub
+		return session.selectList("singer.selectSingerIdandName",keyword);
+	}
+	@Override
+	public void plusSingerFavorite(String singer_id) {
+		// TODO Auto-generated method stub
+		session.update("singer.plusSingerFavorite",singer_id);
+	}
+	@Override
+	public void minusSingerFavorite(String id) {
+		// TODO Auto-generated method stub
+		int count;
+		String singer_id;
+		if(isNumber(id))
+			singer_id=id;
+		else singer_id = session.selectOne("singer.selectSingerIdByName",id);
+		
+		count = session.selectOne("singer.selectSingerFavortieCount",singer_id);
+		if(count>=1) count--;
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("singer_id", singer_id);
+		map.put("singer_favorite", count);
+		System.out.println(map);
+		session.update("singer.updateSingerFavorite",map);
+		System.out.println(singer_id + "/" + count);
+		
+	}
+	private boolean isNumber(String singer_id) {
+		try{
+			Integer.parseInt(singer_id);
+			return true;
+		} catch (NumberFormatException e){
+			return false;
+		}
 	}
 }
