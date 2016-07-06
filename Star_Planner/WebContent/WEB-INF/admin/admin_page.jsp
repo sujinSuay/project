@@ -6,7 +6,6 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	
 
 	
 	//검색버튼 이벤트
@@ -66,7 +65,6 @@ $(document).ready(function(){
 				for(var i=0; i<list.length; i++){
 					$('#result_admin').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
 							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="삭제"/></td></tr>');
-					
 				}  
 				
 			}, "error" : function(xhr, status, errorMsg){
@@ -574,7 +572,7 @@ table {
 <tbody  id="result_admin">
 <c:forEach var="admin" items="${requestScope.list_admin }">
 		<tr>
-		<td class="m_id">${admin.m_id} </td>
+		<td class="m_id">${admin.m_id}</td>
 		<td>${admin.name}</td>
 		<td>${admin.phone}</td>
 		<td><input type="button" class="delete" value="삭제"/></td>

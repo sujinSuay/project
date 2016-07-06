@@ -29,6 +29,11 @@ INSERT INTO member VALUES ('admin2', '000000000007', 'master',  1, '여', 'admin
 INSERT INTO member VALUES ('admin3', '000000000008', 'master',  1, '여', 'admin3', 'admin@kosta.com', null , null, null ,'temgroup'); 
 
 
+INSERT INTO member VALUES ('adminn1', '000003', 'master',  1, '여', 'admin1', 'admin@kosta.com', null , null, null ,'temgroup'); 
+INSERT INTO member VALUES ('adminn2', '0009002', 'master',  1, '여', 'admin2', 'admin@kosta.com', null , null, null ,'temgroup'); 
+INSERT INTO member VALUES ('adminn3', '000001', 'master',  1, '여', 'admin3', 'admin@kosta.com', null , null, null ,'temgroup'); 
+commit
+
 --manager
 INSERT INTO member VALUES ('manager1', '000000000013', '0000',  11, 'male', 'JYP메니져이름', 'jyp@jyp.jyp', 'JYP주소', '전화번호', '선호그룹'  ,'temgroup' );
 INSERT INTO member VALUES ('manager2', '000000000009', '0000',  12, 'male', 'SM메니져', 'jyp@kosta', 'JYP주소', '전화번호', '선호그룹'   ,'temgroup');
