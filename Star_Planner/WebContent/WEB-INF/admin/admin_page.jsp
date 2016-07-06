@@ -599,7 +599,7 @@ table {
 				<td>전화번호</td>
 				<td>요청회사</td>
 				<td>소속사</td>
-				<td></td>
+				<td style="display: none;"></td>
 			</tr>  
 	
 		

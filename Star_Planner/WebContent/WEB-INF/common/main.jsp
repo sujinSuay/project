@@ -17,7 +17,9 @@
 	<div align="center">
 		<c:forEach var="link" items="${requestScope.list }" varStatus="status">
 			<c:if test="${status.index == 0 || status.index == 1 || status.index == 2}">
-				<iframe width="420" height="250" src="${link.link_address }" scrolling=no></iframe>
+				<c:if test="${link.link_address != null && link.link_address !='' }">
+					<iframe width="420" height="250" src="${link.link_address }" scrolling=no></iframe>
+				</c:if>
 			</c:if>
 		</c:forEach>
 		<br>
@@ -29,9 +31,11 @@
 					varStatus="status">
 					<c:if test="${status.index == 3 || status.index == 4 || status.index == 5 || status.index == 6}">
 						<td>
-							<a href="https://search.naver.com/search.naver?where=nexearch&query=${link.file_name }" target=_blank>
-								<img class="content" width="320px" height="370px" src="${link.link_address }">
-							</a>
+							<c:if test="${link.file_name != '' && link.file_name != null}">
+								<a href="https://search.naver.com/search.naver?where=nexearch&query=${link.file_name }" target=_blank>
+									<img class="content" width="320px" height="370px" src="${link.link_address }">
+								</a>
+							</c:if>
 						</td>
 					</c:if>
 				</c:forEach>
