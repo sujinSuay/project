@@ -98,7 +98,7 @@ where link_id=#{count}
 
 <update id="deleteMainLink" parameterType="_int">
 update link_list
-set link_address=null
+set link_address=null, file_name=null
 where link_id=#{count}
 </update>
 

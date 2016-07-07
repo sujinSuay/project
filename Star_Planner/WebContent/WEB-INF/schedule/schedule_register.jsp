@@ -66,70 +66,80 @@ $(document).keydown(function(e){
 	}
 });
 </script>
+<style type="text/css">
+td{
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+</style>
 </head>
 <body>
-<h2>스케줄 등록</h2>
-<form action="/Star_Planner/schedule/scheduleModify.do" method="post">
-<input type="hidden" id="group_id" name="group_id" value="${sessionScope.groupId }">
-<input type="hidden" id="m_id" name="m_id" value="${sessionScope.loginId }">
-	<table>
-		<tr>
-			<td>날짜</td>
-			<td>
-				<input type="text" class="some_class" value="" id="some_class_1" name="schedule_start" required="required" readonly="readonly"/>&nbsp; ~&nbsp;
-				<input type="text" class="some_class" value="" id="some_class_2" name="schedule_end" required="required" readonly="readonly"/>
-			</td>
-		</tr>
-		<tr>
-			<td>가수</td>
-			<td>
-				<select name="singer_id">
-					<c:forEach items="${requestScope.singerList }" var="singer">
-						<option value="${singer.singer_id }">${singer.singer_name }</option>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>일정 타입</td>
-			<td>
-				<select name="type_name">
-					<c:forEach items="${requestScope.eventList }" var="type">
-						<option>${type }</option>
-					</c:forEach>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>일정 이름</td>
-			<td><input type="text" id="schedule_name" name="schedule_name" required="required"></td>
-		</tr>
-		<tr>
-			<td>일정 장소</td>
-			<td colspan="2">
-				<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required"> 
-				<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required"> 
-				<input type="text" id="address2" name="schedule_address" placeholder="상세주소">
-			</td>
-		</tr>
-		<tr>
-			<td>일정 내용</td>
-			<td><textarea id="schedule_contents" name="schedule_contents" rows="3" cols="50"></textarea></td>
-		</tr>
-		<tr>
-			<td align="center" colspan="2">
-				<input type="submit" value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="reset" value="초기화">
-			</td>
-		</tr>
-	</table>
-</form>
+<div style="width: 100%;" align="center">
+	<h2>스케줄 등록</h2>
+	<form action="/Star_Planner/schedule/scheduleRegister.do" method="post">
+	<input type="hidden" id="group_id" name="group_id" value="${sessionScope.groupId }">
+	<input type="hidden" id="m_id" name="m_id" value="${sessionScope.loginId }">
+		<table>
+			<tr>
+				<td>날짜</td>
+				<td>
+					<input type="text" class="some_class" value="" id="some_class_1" name="schedule_start" required="required" readonly="readonly"/>&nbsp; ~&nbsp;
+					<input type="text" class="some_class" value="" id="some_class_2" name="schedule_end" required="required" readonly="readonly"/>
+				</td>
+			</tr>
+			<tr>
+				<td>가수</td>
+				<td>
+					<select name="singer_id">
+						<c:forEach items="${requestScope.singerList }" var="singer">
+							<option value="${singer.singer_id }">${singer.singer_name }</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>일정 타입</td>
+				<td>
+					<select name="type_name">
+						<c:forEach items="${requestScope.eventList }" var="type">
+							<option>${type }</option>
+						</c:forEach>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>일정 이름</td>
+				<td><input type="text" id="schedule_name" name="schedule_name" required="required"></td>
+			</tr>
+			<tr>
+				<td>일정 장소</td>
+				<td colspan="2">
+					<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required"> 
+					<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required"> 
+					<input type="text" id="address2" name="schedule_address" placeholder="상세주소">
+				</td>
+			</tr>
+			<tr>
+				<td>일정 내용</td>
+				<td><textarea id="schedule_contents" name="schedule_contents" rows="3" cols="50"></textarea></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" value="등록">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="reset" value="초기화">
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
 
 </body>
 <script>

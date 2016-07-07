@@ -59,7 +59,6 @@
 				flag=false;
 			}else{$("#email").text("");}
 			/* alert(!flag + " / " + !window.ckflag); */
-			alert(flag);
 			if(!flag){
 				return false;
 			}
@@ -109,7 +108,8 @@
 </script>
 </head>
 <body>
-	<h2>회원정보변경</h2>
+<div style="margin: 0px auto; width: 550px;">
+<h2>회원정보변경</h2>
 	<form id="form" method="post" action="/Star_Planner/member/modify.do">
 		<input type='hidden' name='m_id' value="${requestScope.member.m_id }"
 			id="m_id">
@@ -164,7 +164,7 @@
 			</tr>
 			<tr>
 				<td>연락번호</td>
-				<td><input type="text" name="phone" id="phone"
+				<td><input type="number" name="phone" id="phone"
 					value="${requestScope.member.phone}"></td>
 				<td><span id="phone_er"></span>
 				<td>
@@ -211,5 +211,7 @@
 			</tr>
 		</table>
 	</form>
+</div>
+	
 </body>
 </html>

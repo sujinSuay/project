@@ -35,9 +35,10 @@ public class ScheduleController {
 	}
 	
 	@RequestMapping("/scheduleRegister")
-	public ModelAndView scheduleRegister(Schedule schedule){
+	public ModelAndView scheduleRegister(Schedule schedule, String[] schedule_address){
 		schedule.setSchedule_start(schedule.getSchedule_start().replace(" ", ""));
 		schedule.setSchedule_end(schedule.getSchedule_end().replace(" ", ""));
+		schedule.setSchedule_address(schedule_address[0]+"."+schedule_address[1]+"."+schedule_address[2]);
 		service.insertSchedule(schedule);
 		return new ModelAndView("redirect:/schedule/scheduleRegisterForm.do");
 	}
@@ -103,7 +104,7 @@ public class ScheduleController {
 		}
 		int group = (int)session.getAttribute("groupId");
 		Schedule preSchedule = service.selectScheduleById(schedule_id);
-		String[] adr = preSchedule.getSchedule_address().split(",");
+		String[] adr = preSchedule.getSchedule_address().split("\\.");
 		Map<String, Object> list = service.getCategoryList(group);
 		list.put("preSchedule", preSchedule);
 		list.put("temAdr",adr);

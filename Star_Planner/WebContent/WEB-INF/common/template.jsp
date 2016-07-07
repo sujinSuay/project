@@ -6,32 +6,24 @@
 <meta charset="UTF-8">
 <title>template</title>
 <style type="text/css">
-header{
+.menu{
 	background-color:skyblue;
 	text-align:center;
 	padding: 40px;
 }
-
-section{
-	padding: 15px;
+.body{
+	padding-top: 15px;
 	min-height:400px;
 }
-.body{
-	width: 100%;
-}
-.innerBody{
+body{
 	width: 80%;
-	min-width: 800px;
-	text-align: center;
+	margin: 0px auto;
 }
 .gallery{
 	color: #5B79C8;
 }
 .galleryName{
 	color: #5D5D5D;
-}
-.btn{
-	width: 50%;
 }
 .gallery{
 	color: #5B79C8;
@@ -44,11 +36,11 @@ section{
 </head>
 <body>
 
-<header>
+<header class="menu">
 		<tiles:insertAttribute name="menu"/> <!-- name 속성에 put-attribute태그의 name 속성값을 호출 -->
 </header>		 
 
-<section>
+<section class="body">
 		<tiles:insertAttribute name="body"/> 
 </section>	
 

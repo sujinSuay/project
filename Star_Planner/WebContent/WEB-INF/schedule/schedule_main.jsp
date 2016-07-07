@@ -21,6 +21,7 @@
 	var tmpUrl = "/Star_Planner/schedule/selectSchedule.do";
 
 	$(document).ready(function() {
+
 		getAllEvent();
 		
 		$("#searchBtn").on("click",function(){
@@ -104,9 +105,10 @@
 	    	draggable: false,
 	    	minWidth: 780,
 	    	buttons:{
-                "확인":function(){
+                "장소확인":function(){
                     $(this).dialog("close");
-                },"취소":function(){
+                    getMap();
+                },"닫기":function(){
                     $(this).dialog("close");
                 }
             }
@@ -114,6 +116,15 @@
 	    });
 		
 	});
+
+	function getMap(){
+		var address = $("#address").text().split('.');
+		if(address[2] == null || address[2].trim() == ""){
+			window.open('http://map.daum.net/link/search/'+address[1], "지도", "fullscreen" );
+		}else{
+			window.open('http://map.daum.net/link/search/'+address[2], "지도", "fullscreen" );
+		}
+	}
 	
 	function getSingerEvent(singerId){
 		$.ajax({
@@ -240,7 +251,8 @@
 			},
 			lang : 'ko',
 			timezone: 'local',
-			/* selectable: true,
+			//selectable: true,
+			/* 
 			selectHelper: true,
 			select: function(start, end, jsEvent, view) {
 				alert(jsEvent.events);
@@ -259,8 +271,6 @@
 			}, */
 			eventRender : function(event, element) {
 				element.bind('click', function() { // 일정보기,수정
-					//alert(event.id +","+ event.title+"\n"+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
-					//ShowEventPopup(event.title);
 					getData(event);
 				});
 			},
@@ -276,14 +286,11 @@
 			data: "schedule_id="+event.id,
 			dataType : 'json',
 			success : function(data) {
-				/* alert("일정: "+event.title+"\n시간: "+event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm")
-						+"\n장소: "+data.schedule_address+"\n내용: "+(data.schedule_contents==null?'':data.schedule_contents)); */
 				$("#title").html(event.title);
 				$("#date").html(event.start.format("YYYY-MM-DD a hh:mm")+" ~ "+event.end.format("YYYY-MM-DD a hh:mm"));
 				$("#address").html(data.schedule_address);
 				$("#contents").html((data.schedule_contents==null?'':data.schedule_contents));
 				$("#detail").dialog("open");
-				
 			},
 			error : function(request, textStatus, errorThrown) {
 				alert('error: ' + textStatus);
@@ -293,9 +300,6 @@
 	
 </script>
 <style type="text/css">
-#search {
-	text-align: center;
-}
 tr{
 	vertical-align: top;
 	padding-bottom: 10px;
@@ -303,7 +307,7 @@ tr{
 </style>
 </head>
 <body>
-	<div id="search">
+	<div align="center">
 		<select id="category">
 			<c:forEach items="${requestScope.categoryList }" var="category">
 				<option>${category }</option>
@@ -315,8 +319,8 @@ tr{
 	<p>
 	<div id="searchResult">검색 결과:&nbsp;&nbsp;</div>
 	<p>
-	<div id='calendar'></div>
-	
+	<div id='calendar' style="padding-bottom: 50px;"></div>
+
 	<div id="detail" title="상세정보">
 		<table>
 			<tr>

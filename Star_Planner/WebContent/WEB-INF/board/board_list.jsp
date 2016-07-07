@@ -8,22 +8,11 @@
 <meta charset="UTF-8">
 <title>board_list</title>
 <style type="text/css">
-/* table 스타일 처리  */
-table, td, th {    
-    border: 1px solid gray;
-}
-table {
-    border-collapse: collapse;
-    min-width: 800px;
-    width: 100%;
-    margin-bottom: 20px;
-}
 </style>
 </head>
 <body>
-<div class="body" align="center">
-	<div class="innerBody">
-		<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
+	<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
+	<div style="min-height: 480px;">
 		<table>
 			<thead>
 				<tr>
@@ -52,19 +41,19 @@ table {
 				</c:forEach>
 			</tbody>
 		</table>
-		<div style="width: 100%">
-			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1" style="float: left;">전체보기</a>
+	</div>
+		
+		<div style="width: 100%; padding-top: 20px; padding-bottom: 30px;">
+			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1" style="float: left; padding-left: 30px;">전체보기</a>
 			<c:if test="${sessionScope.loginId != null }">
-				<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }" style="float: right;">글쓰기</a>
+				<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }" style="float: right; padding-right: 30px;">글쓰기</a>
 			</c:if>
 		</div>
-	</div>
-</div>
 
 <%--페이징 처리 --%>
 <br>
 <%--◀이전 페이지 그룹 처리 --%>
-<div align="center">
+<div align="center" style="padding-bottom: 40px;">
 	<c:choose>
 		<c:when test="${requestScope.paging.previousPageGroup }">
 			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">◀</a>

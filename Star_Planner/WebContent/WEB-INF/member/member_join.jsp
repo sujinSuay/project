@@ -290,7 +290,7 @@
 			</tr>
 			<tr>
 				<td>연락번호</td>
-				<td><input type="text" name="phone" id="phone"></td>
+				<td><input type="number" name="phone" id="phone"></td>
 				<td><span id="phone_er"></span>
 				<td>
 			</tr>
@@ -316,7 +316,7 @@
 			</tr>
 			<tr>
 				<td>주민번호</td>
-				<td><input type="text" id="social_no" name="social_no"></td>
+				<td><input type="number" id="social_no" name="social_no"></td>
 				<td><span id="social_no_er"></span>
 				<td>
 			</tr>

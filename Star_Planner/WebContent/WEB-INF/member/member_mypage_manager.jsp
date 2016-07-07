@@ -111,18 +111,18 @@ function deleteSchedule(schedule_id){
 	<option id="byId" selected="selected" value="id">${sessionScope.loginId }</option>
 	<option id="byGroup" value="group">소속사전체</option>
 </select>
-<div style=" height: 400px; width:1050px; overflow-x: hidden; overflow-y: scroll;">
-	<table>
+<div style=" height: 300px; width:100%; overflow-x: hidden; overflow-y: scroll;">
+	<table style="width: 100%;">
 		<thead>
 			<tr>
-				<th width="300">날짜</th>
-				<th width="100">가수</th>
-				<th width="150">일정이름</th>
-				<th width="200">일정장소</th>
-				<th width="200">일정내용</th>
-				<th width="150">매니저</th>
-				<th width="100">수정</th>
-				<th width="100">삭제</th>
+				<th width="15%">날짜</th>
+				<th width="10%">가수</th>
+				<th width="10%">일정이름</th>
+				<th width="25%">일정장소</th>
+				<th width="20%">일정내용</th>
+				<th>매니저</th>
+				<th>수정</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody align="center" id="listTable">
