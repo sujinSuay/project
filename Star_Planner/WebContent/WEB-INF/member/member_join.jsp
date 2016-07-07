@@ -16,6 +16,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<style type="text/css">
+#id_er{
+font-size:12px;
+font-color:green;
+}
+</style>
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
@@ -63,7 +69,6 @@
 			}
 		});
 		$("#form").on("submit",function(){
-			
 			var flag=true;
 			
 			if (!$("#m_id").val()) {
@@ -136,6 +141,9 @@
 			if(!flag || !window.ckflag){
 				return false;
 			}
+			if($(":input:radio[name=group_id]:checked").val()==3){
+				alert("매니저로 가입이 되셨습니다. 승인전까지는 일반회원으로 사용하실수 있습니다.");
+			}else alert("회원가입을 환영합니다.");
 		});
 		$("#favoriteList").on("click","td",function(){
 			var id=this.getAttribute("id");
@@ -254,112 +262,114 @@
 </script>
 </head>
 <body>
-	<h2>회원가입</h2>
-	<form id="form" method="post" action="/Star_Planner/member/join.do">
-		<table>
-			<tr>
-				<td colspan="2"><label><input type="radio"
-						id="group_id1" name="group_id" value='3'>매니져</label> <label><input
-						type="radio" id="group_id2" name="group_id" value="2"
-						checked="checked">일반회원</label></td>
-				<td><span id="group_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" id="m_id" name="m_id"
-					value="${requestScope.id }"></td>
-				<td><span id="id_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" id="name" name="name"
-					value="${requestScope.name }"></td>
-				<td><span id="name_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="password" id="password"></td>
-				<td><span id="password_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>비밀번호확인</td>
-				<td><input type="password" name="passwordCK" id="passwordCK"></td>
-				<td><span id="passwordCK_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input type="email" name="email" id="email"></td>
-				<td><span id="email_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>연락번호</td>
-				<td><input type="text" name="phone" id="phone"></td>
-				<td><span id="phone_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td>성별</td>
-				<td><label><input type="radio" id="gender1"
-						name="gender" value='남'>남자</label> <label><input
-						type="radio" id="gender2" name="gender" value="여">여자</label></td>
-				<td><span id="gender_er"></span>
-				<td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="text" name="address" id="postcode"
-					placeholder="우편번호"> <input type="button"
-					onclick="execDaumPostcode()" value="우편번호 찾기"></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="text" id="address" name="address"
-					placeholder="주소"> <input type="text" id="address2"
-					name="address" placeholder="상세주소"></td>
-				<td><span id="address_er"></span></td>
-			</tr>
-			<tr>
-				<td>주민번호</td>
-				<td><input type="text" id="social_no" name="social_no"></td>
-				<td><span id="social_no_er"></span>
-				<td>
-			</tr>
-		</table>
-		<div id="manager">
-			<select name="tem_group" id="tem_group">
-				<option value="소속사">소속사</option>
-				<c:forEach items="${requestScope.groupList }" var="groupName">
-					<option value="${groupName }">${groupName }</option>
-				</c:forEach>
-				<option value="기타">직접입력</option>
-			</select> <input type="text" name="tem_group2" id="tem_group2"><span
-				id="tem_group_er"></span>
-		</div>
-
-		<div id="favorite_tr">
+	<div class="joinForm">
+		<h2>회원가입</h2>
+		<form id="form" method="post" action="/Star_Planner/member/join.do">
 			<table>
 				<tr>
-					<td><input type="text" size="10" id="keyword"></td>
-					<td><input type="button" id="searchBtn" value="선호가수 검색"></td>
-					<td><span id="favoriteResult"></span></td>
+					<td colspan="2"><label><input type="radio"
+							id="group_id1" name="group_id" value='3'>매니져</label> <label><input
+							type="radio" id="group_id2" name="group_id" value="2"
+							checked="checked">일반회원</label></td>
+					<td><span id="group_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" id="m_id" name="m_id"
+						value="${requestScope.id }"></td>
+					<td><span id="id_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" id="name" name="name"
+						value="${requestScope.name }"></td>
+					<td><span id="name_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password" name="password" id="password"></td>
+					<td><span id="password_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>비밀번호확인</td>
+					<td><input type="password" name="passwordCK" id="passwordCK"></td>
+					<td><span id="passwordCK_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="email" name="email" id="email"></td>
+					<td><span id="email_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>연락번호</td>
+					<td><input type="text" name="phone" id="phone"></td>
+					<td><span id="phone_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td>성별</td>
+					<td><label><input type="radio" id="gender1"
+							name="gender" value='남'>남자</label> <label><input
+							type="radio" id="gender2" name="gender" value="여">여자</label></td>
+					<td><span id="gender_er"></span>
+					<td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" name="address" id="postcode"
+						placeholder="우편번호"> <input type="button"
+						onclick="execDaumPostcode()" value="우편번호 찾기"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="address" name="address"
+						placeholder="주소"> <input type="text" id="address2"
+						name="address" placeholder="상세주소"></td>
+					<td><span id="address_er"></span></td>
+				</tr>
+				<tr>
+					<td>주민번호</td>
+					<td><input type="text" id="social_no" name="social_no"></td>
+					<td><span id="social_no_er"></span>
+					<td>
 				</tr>
 			</table>
+			<div id="manager">
+				<select name="tem_group" id="tem_group">
+					<option value="소속사">소속사</option>
+					<c:forEach items="${requestScope.groupList }" var="groupName">
+						<option value="${groupName }">${groupName }</option>
+					</c:forEach>
+					<option value="기타">직접입력</option>
+				</select> <input type="text" name="tem_group2" id="tem_group2"><span
+					id="tem_group_er"></span>
+			</div>
+	
+			<div id="favorite_tr">
+				<table>
+					<tr>
+						<td><input type="text" size="10" id="keyword"></td>
+						<td><input type="button" id="searchBtn" value="선호가수 검색"></td>
+						<td><span id="favoriteResult"></span></td>
+					</tr>
+				</table>
+				<table>
+					<tr id="favoriteList" height="50px">
+					</tr>
+				</table>
+			</div>
 			<table>
-				<tr id="favoriteList" height="50px">
+				<tr>
+					<td colspan="2"><input type="reset" name="초기화"><input
+						type="submit" id="checkForm" value="가입"></td>
 				</tr>
 			</table>
-		</div>
-		<table>
-			<tr>
-				<td colspan="2"><input type="reset" name="초기화"><input
-					type="submit" id="checkForm" value="가입"></td>
-			</tr>
-		</table>
-	</form>
+		</form>
+	</div>
 </body>
 </html>

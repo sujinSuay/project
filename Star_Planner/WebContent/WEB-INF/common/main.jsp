@@ -8,9 +8,7 @@
 <meta charset="UTF-8">
 <title>main</title>
 <style type="text/css">
-.mainDiv{
-	width: 100%;
-}
+
 </style>
 </head>
 <body>

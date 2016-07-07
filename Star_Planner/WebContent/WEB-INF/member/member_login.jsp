@@ -3,6 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+ <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> --> 
+ <link rel="stylesheet" href="/Star_Planner/style/darkloginform/style.css"> 
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>로그인</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,25 +29,24 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<h2>로그인</h2>
-<form id="form" action="/Star_Planner/member/login.do" method="post">
-<table>
-	<tr>
-		<td>아이디</td>
-		<td><input type="text" id="m_id" name="m_id" value="${requestScope.m_id }"></td>
-		<td><span id="id_er"></span></td>
-	</tr>
-	<tr>
-		<td>패스워드</td>
-		<td><input type="password" id="password" name="password"></td>
-		<td><span id="password_er"></span></td>
-	</tr>
-	<tr>
-		<td><input type="button" id="join" value="회원가입" onclick="location.href='/Star_Planner/member/beforeJoin.do'"></td>
-		<td><input type="submit" value="로그인"></td>
-		<td></td>
-	</tr>
-</table>
-</form>
+<div class="loginForm">
+	<form method="post" action="/Star_Planner/member/login.do" class="login">
+    <p>
+      <label for="login">Login Id</label>
+      <input type="text" name="m_id" id="m_id" value="${requestScope.m_id }">
+    </p>
+
+    <p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+    </p>
+
+    <p class="login-submit">
+      <button type="submit" class="login-button">Login</button>
+    </p>
+
+    <p class="forgot-password"><a href="/Star_Planner/member/beforeJoin.do">Join Us</a></p>
+  </form>
+</div>
 </body>
 </html>
