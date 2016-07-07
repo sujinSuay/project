@@ -319,7 +319,7 @@ tr{
 	<p>
 	<div id="searchResult">검색 결과:&nbsp;&nbsp;</div>
 	<p>
-	<div id='calendar' style="padding-bottom: 50px;"></div>
+	<div id='calendar'></div>
 
 	<div id="detail" title="상세정보">
 		<table>

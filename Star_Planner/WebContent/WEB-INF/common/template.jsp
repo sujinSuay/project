@@ -13,6 +13,7 @@
 }
 .body{
 	padding-top: 15px;
+	padding-bottom: 50px;
 	min-height:400px;
 }
 body{

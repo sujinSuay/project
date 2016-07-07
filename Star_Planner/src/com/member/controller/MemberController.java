@@ -51,7 +51,6 @@ public class MemberController {
 	@RequestMapping("beforeJoin")
 	public ModelAndView beforeJoin(){
 		List<String> list = memberService.selectGroupList();
-		System.out.println(list);
 		return new ModelAndView("member/member_join.tiles","groupList",list);
 	}
 	@RequestMapping("/join")
@@ -65,8 +64,7 @@ public class MemberController {
 		//이메일 보내주기 위한 로직 호출
 		 Email email = new Email();
          
-	        System.out.println("send mail 로 호출 호출 호출 호출");
-	        String reciver = "xxoo246@gmail.com"; //받을사람의 이메일
+	        String reciver = "kdg360360@gmail.com"; //받을사람의 이메일
 	        String subject = "[StarPlanner][매니저 승인 요청]";
 	        String content = "아이디 [ " + member.getM_id() + "]님이  [" + member.getTem_group() + "] 소속사의 매니저로 승인 요청 하였습니다";
 	        
@@ -94,7 +92,7 @@ public class MemberController {
 		}
 		session.setAttribute("loginId", mem.getM_id());
 		session.setAttribute("groupId", mem.getGroup_id());
-		return new ModelAndView("/main.do");
+		return new ModelAndView("/main/home.do");
 	}
 	@RequestMapping("/logout")
 	public ModelAndView login(HttpSession session){
@@ -108,7 +106,6 @@ public class MemberController {
 			return new ModelAndView("/main.do","errors","로그인을 해주세요.");
 		} 
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
-		System.out.println(mem.getFavorite());
 		return new ModelAndView("member/member_mypage.tiles","member",mem);
 	}
 	@RequestMapping("/modifyForm")
@@ -179,7 +176,6 @@ public class MemberController {
 		map.put("schedule_start", schedule_start);
 		map.put("m_id", m_id);
 		List<Schedule> list = memberService.selectScheduleByMemberId(map);
-		System.out.println(list);
 		return list;
 	}
 	@RequestMapping("/searchScheduleByGroup")

@@ -158,10 +158,10 @@ public class BoardController {
 	public ModelAndView boardWriterForm(){
 		return new ModelAndView("/board_register.do");
 	}
-		
+	
 	//boardWriter
 	@RequestMapping("/boardWriter")
-	public ModelAndView boardWriter(@RequestParam List upfile,String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException{
+	public ModelAndView boardWriter(@RequestParam List<MultipartFile> upfile,String id, String board_title, String board_content, HttpSession session, HttpServletRequest req) throws IllegalStateException, IOException{
 		int singer_id = service.StringToIntSingerId(id);
 		String m_id = (String)session.getAttribute("loginId");
 		if(m_id==null){
@@ -172,13 +172,12 @@ public class BoardController {
 		String saveDir = req.getServletContext().getRealPath("/uploadFile"); //파일저장 디렉토리
 		String board_link = "";
 		if(upfile != null){ //null인 경우 upfile 이름으로 넘어온 요청파라미터가 없는 경우
-			for(Object f: upfile){
-				MultipartFile file = (MultipartFile)f;
-				if(!file.isEmpty()){
-					String fileName="B"+String.valueOf(System.currentTimeMillis());
+			for(MultipartFile f: upfile){
+				if(!f.isEmpty()){
+					String fileName="B"+String.valueOf(System.currentTimeMillis())+f.getOriginalFilename();
 					board_link +=(fileName) + ",";
 					File dest = new File(saveDir,fileName);
-					file.transferTo(dest);
+					f.transferTo(dest);
 				}else{
 					board_link +="noData,";
 				}

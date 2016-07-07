@@ -53,7 +53,7 @@
 <%--페이징 처리 --%>
 <br>
 <%--◀이전 페이지 그룹 처리 --%>
-<div align="center" style="padding-bottom: 40px;">
+<div align="center">
 	<c:choose>
 		<c:when test="${requestScope.paging.previousPageGroup }">
 			<a href="/Star_Planner/board/boardList.do?id=${param.id}&page=${requestScope.paging.beginPage - 1}">◀</a>
