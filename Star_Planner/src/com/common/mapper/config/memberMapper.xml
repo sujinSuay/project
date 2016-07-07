@@ -42,6 +42,8 @@
 		password = #{password},
 		email = #{email},
 		phone = #{phone},
+		gender = #{gender},
+		address = #{address},
 		favorite = #{favorite}
 		WHERE m_id = #{m_id}
 	</update>

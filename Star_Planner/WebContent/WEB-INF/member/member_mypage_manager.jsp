@@ -34,7 +34,9 @@ function callGroup(){
 							"<td>"+schedule[i].schedule_address+"</td>"+
 							"<td>"+schedule[i].schedule_contents+"</td>"+
 							"<td>"+schedule[i].m_id+"</td>"+
-							"<td align='center'><a href='/Star_Planner/schedule/modifySchedule.do?schedule_id="+schedule[i].schedule_id+"'>수정</a></td>"+
+							/* "<td align='center'><a href='/Star_Planner/schedule/modifySchedule.do?schedule_id="+schedule[i].schedule_id+"'>수정</a></td>"+
+							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>"; */
+							"<td align='center'><input type='button' onclick='modifyBtn("+schedule[i].schedule_id+")' value='수정'></td>"+
 							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>";
 		
 					$("#listTable").append(thtml); 

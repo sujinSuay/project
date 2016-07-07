@@ -45,7 +45,7 @@ CREATE TABLE groups (
 );
 
 --매니저는 11번부터 group_id에 등록
-CREATE SEQUENCE  group_id_seq START WITH  11 INCREMENT BY 1  NOCACHE;
+CREATE SEQUENCE  group_id_seq START WITH  15 INCREMENT BY 1  NOCACHE;
 
 /* singer */
 CREATE TABLE singer (

@@ -36,7 +36,7 @@ $(document).ready(function(){
 				<td class="td">회원 이름</td>
 				<td class="info">${requestScope.member.name }</td>
 				<td class="td">성별</td>
-				<td class="info">${requestScope.member.gender=='male'?'남':'여' }</td>
+				<td class="info">${requestScope.member.gender}</td>
 			</tr>
 			<tr>
 				<td class="td">주소</td>

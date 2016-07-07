@@ -120,10 +120,10 @@ public class ScheduleController {
 	
 	
 	@RequestMapping("/scheduleModify")
-	public ModelAndView scheduleModify(Schedule schedule){
+	public ModelAndView scheduleModify(Schedule schedule, String[] schedule_address){
 		schedule.setSchedule_start(schedule.getSchedule_start().replace(" ", ""));
 		schedule.setSchedule_end(schedule.getSchedule_end().replace(" ", ""));
-		
+		schedule.setSchedule_address(schedule_address[0]+"."+schedule_address[1]+"."+schedule_address[2]);
 		service.updateScheduleById(schedule);
 		return new ModelAndView("member/member_mypage.tiles");
 	}

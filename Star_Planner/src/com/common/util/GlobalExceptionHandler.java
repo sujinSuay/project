@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public String GlobalExceptionHandler(HttpServletRequest request, Exception e){
 		request.setAttribute("exception", e);
-		System.out.println("글로벌");
+		System.out.println(e.getMessage());
 		request.setAttribute("error", "에러가발생하였습니다.");
 		return "/WEB-INF/common/global_error.jsp";
 	}

@@ -10,6 +10,15 @@
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
+		$("#tem_group").on("change",function(){
+			if($(this).val()=="기타"){ 
+				$("#tem_group2").show();
+			}
+			else{
+				$("#tem_group2").hide();
+			}
+		});
+		
 		$("#manager").hide();
 		$("#searchBtn").on("click",function(){
 			$.ajax({
@@ -115,9 +124,7 @@
 			}else{$("#email").text("");}
 			
 			/* alert($("#tem_group").find("option:selected").val() + "/" + $("#tem_group2").val() ); */
-			if($("#tem_group").find("option:selected").val()=="소속사"){ 
-				$("#tem_group_er").text("회사를 선택해 주세요");
-			}else if($("#tem_group").find("option:selected").val()=='기타' && !$("#tem_group2").val()){
+			if($("#tem_group").find("option:selected").val()=='기타' && !$("#tem_group2").val()){
 				$("#tem_group_er").text("회사를 입력해 주세요");
 				$("#tem_group2").focus();
 				flag=false;
@@ -178,7 +185,8 @@
 			"dataType":"text", 
 			"success":function(txt){
 				if(txt=='true'){
-					$("#id_er").text("중복된 아이디입니다.");
+					/* $("#id_er").text("중복된 아이디입니다."); */
+					$("#id_er").html("<span style='color: red;'>중복된 아이디 입니다.</span>");
 					$("#m_id").focus();
 					window.ckflag=false;
 				}else{
@@ -253,8 +261,8 @@
 						id="group_id1" name="group_id" value='3'>매니져</label> <label><input
 						type="radio" id="group_id2" name="group_id" value="2"
 						checked="checked">일반회원</label></td>
-				<td><span id="group_er"></span>
-				<td>
+				<td><span id="group_er"></span></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>아이디</td>
@@ -297,40 +305,44 @@
 			<tr>
 				<td>성별</td>
 				<td><label><input type="radio" id="gender1"
-						name="gender" value='남'>남자</label> <label><input
+						name="gender" value='남' checked="checked">남자</label> <label><input
 						type="radio" id="gender2" name="gender" value="여">여자</label></td>
-				<td><span id="gender_er"></span>
-				<td>
+				<td><span id="gender_er"></span></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" name="address" id="postcode"
-					placeholder="우편번호"> <input type="button"
-					onclick="execDaumPostcode()" value="우편번호 찾기"></td>
+				<td colspan="2">
+					<input type="text" name="member_address" id="postcode" placeholder="우편번호" onclick="execDaumPostcode()" readonly="readonly">
+					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+				</td>
 				<td></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="text" id="address" name="address"
-					placeholder="주소"> <input type="text" id="address2"
-					name="address" placeholder="상세주소"></td>
+				<td colspan="2">
+					<input type="text" id="address" name="member_address" placeholder="주소" onclick="execDaumPostcode()" readonly="readonly">
+					<input type="text" id="address2" name="member_address" placeholder="상세주소">
+				</td>
 				<td><span id="address_er"></span></td>
 			</tr>
 			<tr>
 				<td>주민번호</td>
 				<td><input type="number" id="social_no" name="social_no"></td>
-				<td><span id="social_no_er"></span>
-				<td>
+				<td><span id="social_no_er"></span></td>
+				<td></td>
+			</tr>
+			<tr id="manager">
+				<td>소속사</td>
+				<td colspan="2">
+					<select name="tem_group" id="tem_group">
+						<c:forEach items="${requestScope.groupList }" var="groupName">
+							<option value="${groupName }">${groupName }</option>
+						</c:forEach>
+						<option value="기타">직접입력</option>
+					</select>
+					<input type="text" name="tem_group2" id="tem_group2" style="display: none;">
+				</td>
+				<td><span id="tem_group_er"></span></td>
 			</tr>
 		</table>
-		<div id="manager">
-			<select name="tem_group" id="tem_group">
-				<option value="소속사">소속사</option>
-				<c:forEach items="${requestScope.groupList }" var="groupName">
-					<option value="${groupName }">${groupName }</option>
-				</c:forEach>
-				<option value="기타">직접입력</option>
-			</select> <input type="text" name="tem_group2" id="tem_group2"><span
-				id="tem_group_er"></span>
-		</div>
 
 		<div id="favorite_tr">
 			<table>

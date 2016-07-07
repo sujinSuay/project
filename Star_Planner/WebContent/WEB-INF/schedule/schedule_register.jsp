@@ -115,14 +115,14 @@ td{
 			<tr>
 				<td>일정 장소</td>
 				<td colspan="2">
-					<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required"> 
+					<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
 					<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required"> 
+					<input type="text" id="address" name="schedule_address"	placeholder="주소" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
 					<input type="text" id="address2" name="schedule_address" placeholder="상세주소">
 				</td>
 			</tr>

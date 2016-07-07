@@ -1,17 +1,14 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.BoardService;
 import com.board.service.CommentService;
-import com.board.vo.Board;
 import com.common.vo.Email;
 import com.common.vo.Singer;
 import com.member.service.AdminServiceImpl;
@@ -54,28 +50,27 @@ public class MemberController {
 		return new ModelAndView("member/member_join.tiles","groupList",list);
 	}
 	@RequestMapping("/join")
-	public ModelAndView joinMember(@ModelAttribute Member member, String tem_group2) throws Exception{
+	public ModelAndView joinMember(@ModelAttribute Member member, String[] member_address, String tem_group2) throws Exception{
 		if(member.getTem_group().equals("기타")){
 			member.setTem_group(tem_group2);
 		}
+		member.setAddress(member_address[0]+"."+member_address[1]+"."+member_address[2]);
 		member.setFavoriteList(member.getFavorite());
 		memberService.insertMember(member);
 		
 		//이메일 보내주기 위한 로직 호출
-		 Email email = new Email();
-         
+		if(member.getGroup_id() == 3){
+			Email email = new Email();
 	        String reciver = "kdg360360@gmail.com"; //받을사람의 이메일
 	        String subject = "[StarPlanner][매니저 승인 요청]";
 	        String content = "아이디 [ " + member.getM_id() + "]님이  [" + member.getTem_group() + "] 소속사의 매니저로 승인 요청 하였습니다";
-	        
 	        email.setReciver(reciver);
 	        email.setSubject(subject);
 	        email.setContent(content);
-	         
 	        emailSender.SendEmail(email);
-	 
+		}
 		
-		return new ModelAndView("redirect:/main.do");
+		return new ModelAndView("redirect:/main/home.do");
 	}
 	@RequestMapping("/checkId")
 	@ResponseBody
@@ -97,7 +92,7 @@ public class MemberController {
 	@RequestMapping("/logout")
 	public ModelAndView login(HttpSession session){
 		session.invalidate();
-		return new ModelAndView("/main.do");
+		return new ModelAndView("/main/home.do");
 	}
 	
 	@RequestMapping("/mypage")
@@ -115,20 +110,25 @@ public class MemberController {
 		} 
 	
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
+		String[] addr = mem.getAddress().split("\\.");
 		if(mem.getFavorite()!=null) {
 			mem.setFavoriteList(mem.getFavorite());
 		}
-		
-		return new ModelAndView("member/member_modify.tiles","member",mem);
+		Map<String, Object> list = new HashMap<>();
+		list.put("member", mem);
+		list.put("temAdr",addr);
+		return new ModelAndView("member/member_modify.tiles", list);
 		
 	}
 	@RequestMapping("/modify")
-	public ModelAndView modify(String m_id, String password, String email, String phone, String favorite) throws IOException{
+	public ModelAndView modify(String m_id, String password, String email, String phone, String gender, String[] member_address, String favorite) throws IOException{
 		HashMap<String,String> map = new HashMap<String,String>();
 		map.put("password", password);
 		map.put("email", email);
 		map.put("phone", phone);
 		map.put("m_id", m_id);
+		map.put("address", member_address[0]+"."+member_address[1]+"."+member_address[2]);
+		map.put("gender", gender);
 		map.put("favorite", favorite);
 		memberService.updateMemberById(map);
 		return new ModelAndView("redirect:/member/mypage.do");

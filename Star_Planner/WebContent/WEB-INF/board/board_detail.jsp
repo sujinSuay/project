@@ -66,7 +66,7 @@ $(document).ready(function(){
 				<br><br>
 				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">글쓴이</span>${requestScope.board.m_id }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
 				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">조회수</span>${requestScope.board.board_hits }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
-				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">좋아요</span>${requestScope.board.board_likes }</div>
+				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">좋아요</span><span id="likes">${requestScope.board.board_likes }</span></div>
 				<br>
 			</div>
 		</header>

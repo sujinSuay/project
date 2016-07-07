@@ -38,11 +38,11 @@
 				"data":"keyword="+$("#keyword").val(),
 				"dataType":"json",
 				"success":function(data){
-					$("#searchResult").html("검색 결과:&nbsp;&nbsp;");
+					$("#searchResult").html("");
 					if($("#category").val() == "가수"){
 						if (data.length != 0) {
 							$.each(data, function(key, val) {
-								$("#searchResult").append("<a href='' onClick='getSingerEvent("+val.singer_id+");return false' >"+val.singer_name+"</a>&nbsp;&nbsp;&nbsp;");
+								$("#searchResult").append("<a href='' style='text-decoration: underline;' onClick='getSingerEvent("+val.singer_id+");return false' >"+val.singer_name+"</a>&nbsp;&nbsp;&nbsp;");
 							});	
 						}else{
 							$("#searchResult").append("조건에 일치하는 가수가 없습니다.");
@@ -50,7 +50,7 @@
 					}else if($("#category").val() == "회사"){
 						if (data.length != 0) {
 							$.each(data, function(key, val) {
-								$("#searchResult").append("<a href='' onClick='getGroupEvent("+val.group_id+");return false' >"+val.group_name+"</a>&nbsp;&nbsp;&nbsp;");
+								$("#searchResult").append("<a href='' style='text-decoration: underline;' onClick='getGroupEvent("+val.group_id+");return false' >"+val.group_name+"</a>&nbsp;&nbsp;&nbsp;");
 							});	
 						}else{
 							$("#searchResult").append("조건에 일치하는 회사가 없습니다.");
@@ -119,11 +119,12 @@
 
 	function getMap(){
 		var address = $("#address").text().split('.');
-		if(address[2] == null || address[2].trim() == ""){
+		window.open('http://map.daum.net/link/search/'+address[1], "지도", "fullscreen" );
+		/* if(address[2] == null || address[2].trim() == ""){
 			window.open('http://map.daum.net/link/search/'+address[1], "지도", "fullscreen" );
 		}else{
 			window.open('http://map.daum.net/link/search/'+address[2], "지도", "fullscreen" );
-		}
+		} */
 	}
 	
 	function getSingerEvent(singerId){
@@ -317,9 +318,10 @@ tr{
 		<input type="button" id="searchBtn" value="검색">
 	</div>
 	<p>
-	<div id="searchResult">검색 결과:&nbsp;&nbsp;</div>
+	<div style="float: left; padding-left: 200px;"><span>검색 결과:&nbsp;&nbsp;</span></div>
+	<div id="searchResult" style="width: 1000px; height: 20px; font-weight: bold;"></div>
 	<p>
-	<div id='calendar'></div>
+	<div id='calendar' style="min-width: 800px;"></div>
 
 	<div id="detail" title="상세정보">
 		<table>
