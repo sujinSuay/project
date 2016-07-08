@@ -253,6 +253,7 @@
 </script>
 </head>
 <body>
+<div style="margin: 0px auto; width: 650px; padding-left: 400px;">
 	<h2>회원가입</h2>
 	<form id="form" method="post" action="/Star_Planner/member/join.do">
 		<table>
@@ -364,5 +365,6 @@
 			</tr>
 		</table>
 	</form>
+</div>
 </body>
 </html>

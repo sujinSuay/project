@@ -38,12 +38,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<form action="/Star_Planner/board/boardWriter.do" method="post" id="form" enctype="multipart/form-data" style="background-color: black;">
+<form action="/Star_Planner/board/boardWriter.do" method="post" id="form" enctype="multipart/form-data">
 <input type="hidden" name="id" value="${param.id }">
-<table>
+<table style="width: 100%;">
 	<tr>
 		<td>
-			<input type="text" name="board_title" size="100" placeholder="제목" value="${param.board_title }" required="required">
+			<input type="text" name="board_title" style="width: 50%;" placeholder="제목" value="${param.board_title }" required="required">
 		</td>
 	</tr>
 	<tr>
@@ -59,8 +59,7 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	<tr>
-		<td align="center">
-			<!-- <input type="submit" value="저장">&nbsp; -->
+		<td align="center" style="padding-top: 25px;">
 			<input type="image" src="/Star_Planner/img/btn_save.gif">&nbsp;
 			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1"><img src="/Star_Planner/img/btn_cancle.gif"/></a>
 		</td>
