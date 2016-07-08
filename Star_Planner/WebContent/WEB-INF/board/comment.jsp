@@ -29,14 +29,14 @@ function printList(comment, m_id, groupId){
 		
 		if(m_id==comment[i].m_id){  //로그인 한 고객이 게시한 댓글 인 경우
 			
-				$('#reply_line').append(text + '<button class="reply_comment">답글</button><button class="modify_comment">수정</button><button class="delete_comment">삭제</button></td></tr>');
+				$('#reply_line').append(text + '<button class="reply_comment" style="width: 78px; height: 30px; background: url("/Star_Planner/img/btn_d_re.png") center;"></button><button class="modify_comment">수정</button><button class="delete_comment" style="width: 78px; height: 30px; background: url("/Star_Planner/img/btn_d_del.gif") center;"></button></td></tr>');
 		
 		}else{ //로그인 한 사람이 게시한 댓글이 아닌 경우
 			
 				if(groupId ==1 || groupId==0){ //관리자가 로그인 한 경우
-					text = text +  '<button class="delete_comment">삭제</button>';
+					text = text +  '<button class="delete_comment" style="width: 78px; height: 30px; background: url("/Star_Planner/img/btn_d_del.gif") center;"></button>';
 			}
-			$('#reply_line').append(text + '<button class="reply_comment">답글</button></td></tr>');
+			$('#reply_line').append(text + '<button class="reply_comment" style="width: 78px; height: 30px; background: url("/Star_Planner/img/btn_d_re.png") center;"></button></td></tr>');
 		
 		} 
 	}
@@ -281,19 +281,19 @@ function printList(comment, m_id, groupId){
 
 					<c:choose>
 						<c:when test="${sessionScope.loginId == comment.m_id}">
-							<button class="reply_comment">답글</button>
+							<button class="reply_comment" style="width: 78px; height: 30px; background: url('/Star_Planner/img/btn_d_re.png') center;"></button>
 							<button class="modify_comment" >수정</button>
-							<button class="delete_comment" >삭제</button>
+							<button class="delete_comment" style="width: 78px; height: 30px; background: url('/Star_Planner/img/btn_d_del.gif') center;"></button>
 						</c:when>
 								<c:otherwise>
 									
 										<c:if test="${sessionScope.groupId ==0 || sessionScope.groupId ==1 }">
-											<button class="delete_comment">삭제</button>
+											<button class="delete_comment" style="width: 78px; height: 30px; background: url('/Star_Planner/img/btn_d_del.gif') center;"></button>
 										</c:if>
 									
 
 									<c:if test="${sessionScope.loginId!=null}">
-										<button class="reply_comment">답글</button>
+										<button class="reply_comment" style="width: 78px; height: 30px; background: url('/Star_Planner/img/btn_d_re.png') center;"></button>
 									</c:if>
 								</c:otherwise>
 							</c:choose>

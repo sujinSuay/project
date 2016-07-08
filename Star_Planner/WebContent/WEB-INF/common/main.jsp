@@ -7,14 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
-<style type="text/css">
-.mainDiv{
-	width: 100%;
-}
-</style>
 </head>
 <body>
-	<div align="center" >
+	<div align="center">
 		<c:forEach var="link" items="${requestScope.list }" varStatus="status">
 			<c:if test="${status.index == 0 || status.index == 1 || status.index == 2}">
 				<c:if test="${link.link_address != null && link.link_address !='' }">
