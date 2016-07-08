@@ -42,7 +42,7 @@
 					if($("#category").val() == "가수"){
 						if (data.length != 0) {
 							$.each(data, function(key, val) {
-								$("#searchResult").append("<a href='' style='text-decoration: underline;' onClick='getSingerEvent("+val.singer_id+");return false' >"+val.singer_name+"</a>&nbsp;&nbsp;&nbsp;");
+								$("#searchResult").append("<a href='' onClick='getSingerEvent("+val.singer_id+");return false' >"+val.singer_name+"</a>&nbsp;&nbsp;&nbsp;");
 							});	
 						}else{
 							$("#searchResult").append("조건에 일치하는 가수가 없습니다.");
@@ -50,7 +50,7 @@
 					}else if($("#category").val() == "회사"){
 						if (data.length != 0) {
 							$.each(data, function(key, val) {
-								$("#searchResult").append("<a href='' style='text-decoration: underline;' onClick='getGroupEvent("+val.group_id+");return false' >"+val.group_name+"</a>&nbsp;&nbsp;&nbsp;");
+								$("#searchResult").append("<a href='' onClick='getGroupEvent("+val.group_id+");return false' >"+val.group_name+"</a>&nbsp;&nbsp;&nbsp;");
 							});	
 						}else{
 							$("#searchResult").append("조건에 일치하는 회사가 없습니다.");

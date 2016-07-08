@@ -5,11 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>board_register</title>
-<style type="text/css">
-select{
-	width: 70px;
-}
-</style>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#form").on("submit",function(){
@@ -43,24 +38,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<%-- <c:if test="${not empty requestScope.errorList }">
-	<ul id="error">
-		<c:forEach items="${requestScope.errorList }" var="error">
-			<li>${error }</li>
-		</c:forEach>
-	</ul>
-</c:if> --%>
-<form action="/Star_Planner/board/boardWriter.do" method="post" id="form" enctype="multipart/form-data">
+<form action="/Star_Planner/board/boardWriter.do" method="post" id="form" enctype="multipart/form-data" style="background-color: black;">
 <input type="hidden" name="id" value="${param.id }">
 <table>
 	<tr>
 		<td>
-			<%-- <select name="prefix">
-				<c:forEach items="${requestScope.codeList }" var="code">
-					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
-				</c:forEach>
-			</select> --%>
-			<input type="text" name="board_title" size="70" placeholder="제목" value="${param.board_title }" required="required">
+			<input type="text" name="board_title" size="100" placeholder="제목" value="${param.board_title }" required="required">
 		</td>
 	</tr>
 	<tr>
@@ -72,14 +55,14 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td>
-			<textarea rows="20" cols="100" name="board_content" required="required">${param.board_content }</textarea>
+			<textarea rows="30" name="board_content" required="required" style="width: 100%;">${param.board_content }</textarea>
 		</td>
 	</tr>
 	<tr>
 		<td align="center">
-			<input type="submit" value="저장">&nbsp;
-			<input type="reset" value="초기화">&nbsp;
-			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1">취소</a>
+			<!-- <input type="submit" value="저장">&nbsp; -->
+			<input type="image" src="/Star_Planner/img/btn_save.gif">&nbsp;
+			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1"><img src="/Star_Planner/img/btn_cancle.gif"/></a>
 		</td>
 	</tr>	
 </table>

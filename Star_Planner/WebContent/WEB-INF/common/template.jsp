@@ -7,16 +7,29 @@
 <meta charset="UTF-8">
 <title>template</title>
 <style type="text/css">
-
- 
+/* .menu{
+	background-color:skyblue;
+	text-align:center;
+	padding: 40px;
+} */
 .body{
 	width: 100%;
 }
 .innerBody{
 	width: 80%;
-	min-width: 800px;
-	text-align: center;
+	margin: 0px auto;
+	min-width: 1280px;
+	font-family:"맑은 고딕",'malgun gothic',dotum,gulim;
+	/* background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+	background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
+	color: rgba(0, 0, 0, 0.6);
+	font-family: "Roboto", sans-serif;
+	font-size: 14px;
+	line-height: 1.6em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale; */
 }
+/* body {font-size:12px;font-family:"맑은 고딕",'malgun gothic',dotum,gulim;} */
 .gallery{
 	color: #5B79C8;
 }

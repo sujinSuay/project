@@ -196,7 +196,7 @@ WHERE *
 		
 select m_id, active
 from member
-where m_id='id-0003'
+where m_id='id-0005'
 SELECT m_id
 FROM member
 WHERE social_no = '123123123'

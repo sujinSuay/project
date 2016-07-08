@@ -44,9 +44,9 @@
 	</div>
 		
 		<div style="width: 100%; padding-top: 20px; padding-bottom: 30px;">
-			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1" style="float: left; padding-left: 30px;">전체보기</a>
+			<a href="/Star_Planner/board/boardList.do?id=${param.id }&page=1" style="float: left; padding-left: 30px;"><img src="/Star_Planner/img/btn_list_all_on.png"/></a>
 			<c:if test="${sessionScope.loginId != null }">
-				<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }" style="float: right; padding-right: 30px;">글쓰기</a>
+				<a href="/Star_Planner/board/boardWriterForm.do?id=${param.id }" style="float: right; padding-right: 30px;"><img src="/Star_Planner/img/btn_write.gif"/></a>
 			</c:if>
 		</div>
 

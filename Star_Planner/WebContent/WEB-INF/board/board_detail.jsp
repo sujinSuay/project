@@ -19,7 +19,7 @@ $(document).ready(function(){
 			"data": {"no":"${param.no}","likes":$("#likes").text()},
 			"dataType":"json",
 			"success":function(obj){
-				$("#likes").html(obj)
+				$(".likes").html(obj)
 			},
 			"error":function(xhr, status, errorMsg){
 				alert("오류 발생 - "+status+","+errorMsg);
@@ -66,7 +66,7 @@ $(document).ready(function(){
 				<br><br>
 				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">글쓴이</span>${requestScope.board.m_id }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
 				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">조회수</span>${requestScope.board.board_hits }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
-				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">좋아요</span><span id="likes">${requestScope.board.board_likes }</span></div>
+				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">좋아요</span><span id="likes" class="likes">${requestScope.board.board_likes }</span></div>
 				<br>
 			</div>
 		</header>
@@ -82,12 +82,16 @@ $(document).ready(function(){
 		</article>
 		<div align="right">
 			<c:if test="${(sessionScope.loginId == requestScope.board.m_id) || (sessionScope.groupId == 0) || (sessionScope.groupId == 1)}">
-				<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">수정</a>&nbsp;&nbsp;&nbsp;
-				<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">삭제</a>&nbsp;&nbsp;&nbsp;	
+				<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}"><img src="/Star_Planner/img/btn_d_correct.gif"/></a>&nbsp;&nbsp;&nbsp;
+				<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}"><img src="/Star_Planner/img/btn_d_del.gif"/></a>&nbsp;&nbsp;&nbsp;	
 			</c:if>
 		</div>
 		<div align="center" style="padding-bottom: 15px;">
-			<input type="button" id="likeBtn" value="좋아요">
+			<button id="likeBtn" style="background: url('/Star_Planner/img/facebook_like_button_big.jpg') center; width: 100px; height: 44px; background-repeat: no-repeat; text-align: right;">
+				<span class="likes" style="padding-right: 18px;">${requestScope.board.board_likes }</span>
+			</button>
+			<!-- <input type="image" id="likeBtn" style="background-image: url('/Star_Planner/img/facebook_like_button_big.jpg'); width: 100px; height: 44px; background-repeat: no-repeat;"> -->
+			
 		</div>
 	</section>
 	<!--  댓글 부분 -->
