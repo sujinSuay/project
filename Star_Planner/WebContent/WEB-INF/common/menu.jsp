@@ -1,9 +1,29 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
+<link rel="stylesheet" href="/Star_Planner/style/dropdownmenu/style.css" media="screen">
 <style type="text/css">
+.menu header{
+ 	background-color:#b6b6b6; 
+	text-align:center;
+	padding: 40px;
+}
 
+.menu section{
+	padding: 15px;
+	min-height:400px;
+}
+/* html, body { margin: 0; padding: 0; } */
+ul.menu { margin: 50px auto 0 auto; width:900px;}
+/* .loginForm{
+margin-left:43%;
+margin-top:5%;
+}  */
+.joinForm{
+margin-left:43%;
+margin-top:5%;
+} 
 .menuBtn{
 width:300px;
 }
@@ -16,6 +36,7 @@ a:hover {text-decoration: none; color: blue;}
 
 <ul class="menu">
 	<li class="menuBtn"><a href="/Star_Planner/main/home.do">Main</a></li>
+	<li class="menuBtn"><a href="/Star_Planner/board_main.do">게시판</a></li>
 	<li class="menuBtn"><a href="#">Schedule</a>
 		<ul>
 			<li><a href="/Star_Planner/schedule/scheduleMain.do" class="documents">Schedule</a></li>

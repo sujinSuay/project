@@ -2,6 +2,7 @@ alter table member add tem_group varchar2(200)  --member에 메니져 소속사 
 alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓글인 경우 부모의 ID */
 alter table comments add comment_check NUMBER(2) NOT NULL ;
 alter table board add board_link varchar2(2000);
+alter table member add active varchar2(100) NOT NULL
 --여기부터     6/30 정현 추가
 alter table schedule add m_id varchar2(200) not null; --스캐쥴에 m_id컬럼 추가
 alter table schedule add constraint fk_schedule_m_id foreign key(m_id) references member(m_id);
@@ -32,7 +33,8 @@ CREATE TABLE member (
 	address VARCHAR2(500), /* 주소 */
 	phone VARCHAR2(15), /* 전화번호 */
 	favorite VARCHAR2(1000), /* 선호그룹 */
-	tem_group varchar2(200)
+	tem_group varchar2(200),
+	active VARCHAR2(100)
 );
 
 /* groups */
@@ -45,7 +47,7 @@ CREATE TABLE groups (
 );
 
 --매니저는 11번부터 group_id에 등록
-CREATE SEQUENCE  group_id_seq START WITH  11 INCREMENT BY 1  NOCACHE;
+CREATE SEQUENCE  group_id_seq START WITH  15 INCREMENT BY 1  NOCACHE;
 
 /* singer */
 CREATE TABLE singer (

@@ -1,17 +1,14 @@
 package com.member.controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMessage.RecipientType;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.service.BoardService;
 import com.board.service.CommentService;
-import com.board.vo.Board;
 import com.common.vo.Email;
 import com.common.vo.Singer;
 import com.member.service.AdminServiceImpl;
@@ -51,38 +47,52 @@ public class MemberController {
 	@RequestMapping("beforeJoin")
 	public ModelAndView beforeJoin(){
 		List<String> list = memberService.selectGroupList();
-		System.out.println(list);
 		return new ModelAndView("member/member_join.tiles","groupList",list);
 	}
 	@RequestMapping("/join")
-	public ModelAndView joinMember(@ModelAttribute Member member, String tem_group2) throws Exception{
+	public ModelAndView joinMember(@ModelAttribute Member member, String[] member_address, String tem_group2) throws Exception{
+		String[] temSocial = member.getSocial_no().split(",");
+		member.setSocial_no(temSocial[0]+"-"+temSocial[1]);
 		if(member.getTem_group().equals("기타")){
 			member.setTem_group(tem_group2);
 		}
+		member.setAddress(member_address[0]+"."+member_address[1]+"."+member_address[2]);
 		member.setFavoriteList(member.getFavorite());
 		memberService.insertMember(member);
 		
 		//이메일 보내주기 위한 로직 호출
-		 Email email = new Email();
-         
-	        System.out.println("send mail 로 호출 호출 호출 호출");
-	        String reciver = "xxoo246@gmail.com"; //받을사람의 이메일
+		if(member.getGroup_id() == 3){
+			Email email = new Email();
+	        String reciver = "kdg360360@gmail.com"; //받을사람의 이메일
 	        String subject = "[StarPlanner][매니저 승인 요청]";
 	        String content = "아이디 [ " + member.getM_id() + "]님이  [" + member.getTem_group() + "] 소속사의 매니저로 승인 요청 하였습니다";
-	        
 	        email.setReciver(reciver);
 	        email.setSubject(subject);
 	        email.setContent(content);
-	         
 	        emailSender.SendEmail(email);
-	 
+		}
 		
-		return new ModelAndView("redirect:/main.do");
+		return new ModelAndView("redirect:/main/home.do");
 	}
 	@RequestMapping("/checkId")
 	@ResponseBody
 	public String checkId(String m_id) throws IOException{
 		Member mem = memberService.getMemberById(m_id);
+		if(mem==null) return "false"; else return "true"; 
+	}
+	@RequestMapping("/checkSocial_no")
+	@ResponseBody
+	public String checkSocial_no(String social_nos) throws IOException{
+		String[] tem = social_nos.split(",");
+		try{
+			System.out.println(tem[0] + ","  +  tem[1]);
+			int test = Integer.parseInt(tem[0]);
+			test = Integer.parseInt(tem[1]);
+		}catch(NumberFormatException e){
+			return "numberFormat";
+		}
+		String social_no = tem[0] + "-" + tem[1];
+		Member mem = memberService.getMemberBySocial_no(social_no);
 		if(mem==null) return "false"; else return "true"; 
 	}
 	@RequestMapping("/login")
@@ -91,15 +101,19 @@ public class MemberController {
 		Member mem = memberService.loginMember(m_id, password);
 		if(mem==null){
 			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
+		}else if(mem.getActive().equals("true")){
+			session.setAttribute("loginId", mem.getM_id());
+			session.setAttribute("groupId", mem.getGroup_id());
+			return new ModelAndView("/main/home.do");
+		} else {
+			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
 		}
-		session.setAttribute("loginId", mem.getM_id());
-		session.setAttribute("groupId", mem.getGroup_id());
-		return new ModelAndView("/main.do");
+		
 	}
 	@RequestMapping("/logout")
 	public ModelAndView login(HttpSession session){
 		session.invalidate();
-		return new ModelAndView("/main.do");
+		return new ModelAndView("/main/home.do");
 	}
 	
 	@RequestMapping("/mypage")
@@ -108,7 +122,6 @@ public class MemberController {
 			return new ModelAndView("/main.do","errors","로그인을 해주세요.");
 		} 
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
-		System.out.println(mem.getFavorite());
 		return new ModelAndView("member/member_mypage.tiles","member",mem);
 	}
 	@RequestMapping("/modifyForm")
@@ -118,20 +131,25 @@ public class MemberController {
 		} 
 	
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
+		String[] addr = mem.getAddress().split("\\.");
 		if(mem.getFavorite()!=null) {
 			mem.setFavoriteList(mem.getFavorite());
 		}
-		
-		return new ModelAndView("member/member_modify.tiles","member",mem);
+		Map<String, Object> list = new HashMap<>();
+		list.put("member", mem);
+		list.put("temAdr",addr);
+		return new ModelAndView("member/member_modify.tiles", list);
 		
 	}
 	@RequestMapping("/modify")
-	public ModelAndView modify(String m_id, String password, String email, String phone, String favorite) throws IOException{
+	public ModelAndView modify(String m_id, String password, String email, String phone, String gender, String[] member_address, String favorite) throws IOException{
 		HashMap<String,String> map = new HashMap<String,String>();
 		map.put("password", password);
 		map.put("email", email);
 		map.put("phone", phone);
 		map.put("m_id", m_id);
+		map.put("address", member_address[0]+"."+member_address[1]+"."+member_address[2]);
+		map.put("gender", gender);
 		map.put("favorite", favorite);
 		memberService.updateMemberById(map);
 		return new ModelAndView("redirect:/member/mypage.do");
@@ -172,14 +190,12 @@ public class MemberController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByMemberId(String m_id){
 		Date d = new Date();
-		
 		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
 				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
 		HashMap<String, String> map = new HashMap<String,String>();
 		map.put("schedule_start", schedule_start);
 		map.put("m_id", m_id);
 		List<Schedule> list = memberService.selectScheduleByMemberId(map);
-		System.out.println(list);
 		return list;
 	}
 	@RequestMapping("/searchScheduleByGroup")
@@ -212,5 +228,24 @@ public class MemberController {
 	public String minusSingerFavorite(String singer_id){
 		memberService.minusSingerFavorite(singer_id);
 		return singer_id;
+	}
+	@RequestMapping("/inactiveMemberForm")
+	public ModelAndView inactiveMemberForm(){
+		System.out.println("inactiveMemberForm");
+		return new ModelAndView("member/inactiveMemberForm.tiles");
+	}
+	@RequestMapping("/inactiveMember")
+	@ResponseBody
+	public String checkPasswordAndId(String m_id, String password){
+		System.out.println("inactiveMember()" + m_id + " / " + password);
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("m_id", m_id);
+		map.put("password", password);
+		Member mem = memberService.checkPasswordAndId(map);
+		if(mem==null)
+			return "false";
+		else 
+			memberService.inactiveMemberById(mem);
+			return "true";
 	}
 }

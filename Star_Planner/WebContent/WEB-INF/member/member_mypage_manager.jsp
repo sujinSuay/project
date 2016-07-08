@@ -34,14 +34,13 @@ function callGroup(){
 							"<td>"+schedule[i].schedule_address+"</td>"+
 							"<td>"+schedule[i].schedule_contents+"</td>"+
 							"<td>"+schedule[i].m_id+"</td>"+
-							"<td align='center'><a href='/Star_Planner/schedule/modifySchedule.do?schedule_id="+schedule[i].schedule_id+"'>수정</a></td>"+
+							/* "<td align='center'><a href='/Star_Planner/schedule/modifySchedule.do?schedule_id="+schedule[i].schedule_id+"'>수정</a></td>"+
+							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>"; */
+							"<td align='center'><input type='button' onclick='modifyBtn("+schedule[i].schedule_id+")' value='수정' disabled='${sessionScope.groupId>=10}?disable:'></td>"+
 							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>";
-		
 					$("#listTable").append(thtml); 
 				}
-				
 			}
-			
 		},
 		"error":function(xhr, status, errorMsg){
 			alert("오류 발생 - "+status+","+errorMsg);
@@ -89,6 +88,7 @@ function modifyBtn(schedule_id){
 	location.replace("/Star_Planner/schedule/scheduleModifyForm.do?schedule_id="+schedule_id);
 }
 function deleteSchedule(schedule_id){
+	
 	$.ajax({
 		"url":"/Star_Planner/schedule/deleteSchedule.do",
 		"type":"post",
@@ -111,18 +111,18 @@ function deleteSchedule(schedule_id){
 	<option id="byId" selected="selected" value="id">${sessionScope.loginId }</option>
 	<option id="byGroup" value="group">소속사전체</option>
 </select>
-<div style=" height: 400px; width:1050px; overflow-x: hidden; overflow-y: scroll;">
-	<table>
+<div id="modifyScheduleDiv" style=" height: 300px; width:100%; overflow-x: hidden; overflow-y: scroll;">
+	<table style="width: 100%;">
 		<thead>
 			<tr>
-				<th width="300">날짜</th>
-				<th width="100">가수</th>
-				<th width="150">일정이름</th>
-				<th width="200">일정장소</th>
-				<th width="200">일정내용</th>
-				<th width="150">매니저</th>
-				<th width="100">수정</th>
-				<th width="100">삭제</th>
+				<th width="15%">날짜</th>
+				<th width="10%">가수</th>
+				<th width="10%">일정이름</th>
+				<th width="25%">일정장소</th>
+				<th width="20%">일정내용</th>
+				<th>매니저</th>
+				<th>수정</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody align="center" id="listTable">

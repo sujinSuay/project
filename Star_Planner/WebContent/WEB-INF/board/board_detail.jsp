@@ -47,50 +47,27 @@ $(document).ready(function(){
 #title{
 	text-align: left;
 	float: left;
-	color: #8C8C8C;
-}
-#title_info{
-	text-align: left;
-	float: left;
-	font-weight: bold;
+	
 }
 .info{
 	text-align: left;
 	float: left;
 }
-#date{
-	text-align: right;
-}
-#separator{
-	text-align: left;
-	float: left;
-	color: #8C8C8C;
-}
-#content_input{
-	width: 100%;
-	text-align: left;
-	margin-right: 20px;
-}
-.comment_title{
-	text-align: left;
-}
-
 </style>
 </head>
 
 <body>
-<div class="body" align="center">
-	<div class="innerBody">
 	<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
 	<section id="board_section">
 		<header id="board_header">
-			<div><dl><dt id="title">제목</dt><dd id="title_info">${requestScope.board.board_title }</dd><dd id="date"><fmt:formatDate value="${requestScope.board.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/></dd></dl></div>
-			<div>
-				<dl>
-					<dt id="title">글쓴이</dt><dd class="info">${requestScope.board.m_id }</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt>
-					<dt id="title">조회수</dt><dd class="info">${ requestScope.board.board_hits}</dd><dt id="separator">&nbsp;&nbsp;|&nbsp;&nbsp;</dt>
-					<dt id="title">좋아요</dt><dd id="likes" class="info">${ requestScope.board.board_likes}</dd>
-				</dl>
+			<div style="background-color: #F6F6F6; padding: 20px;">
+				<span style="float: left; padding-right: 30px; color: #8C8C8C;">제목</span><span style="font-weight: bold;">${requestScope.board.board_title }</span>
+				<span style="float: right; color: #747474;"><fmt:formatDate value="${requestScope.board.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+				<br><br>
+				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">글쓴이</span>${requestScope.board.m_id }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
+				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">조회수</span>${requestScope.board.board_hits }<span style="padding-left: 15px; padding-right: 15px; color: #8C8C8C;">|</span></div>
+				<div style="float: left;"><span style="padding-right: 15px; color: #8C8C8C;">좋아요</span><span id="likes">${requestScope.board.board_likes }</span></div>
+				<br>
 			</div>
 		</header>
 		<article id="content">
@@ -109,9 +86,8 @@ $(document).ready(function(){
 				<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}">삭제</a>&nbsp;&nbsp;&nbsp;	
 			</c:if>
 		</div>
-		<div align="center">
+		<div align="center" style="padding-bottom: 15px;">
 			<input type="button" id="likeBtn" value="좋아요">
-
 		</div>
 	</section>
 	<!--  댓글 부분 -->
@@ -120,8 +96,6 @@ $(document).ready(function(){
 		<jsp:param name="board_no" value="${requestScope.board.board_no}"/>
 		<jsp:param name="list_comment" value="${requestScope.list_comment}"/>
 	</jsp:include>
-	</div>
-</div>
 
 <p>
 

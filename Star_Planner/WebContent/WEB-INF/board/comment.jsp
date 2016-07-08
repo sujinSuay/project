@@ -70,7 +70,12 @@ function printList(comment, m_id, groupId){
             			alert("오류발생  " + status + errorMsg);
             		},
             		"beforeSend" : function(){
-            		
+            			if(!$("#content_input").val()){
+    						alert("내용을 입력하세요");
+    						$("#content_input").focus();
+    						return false;
+    					};
+            			
             		}
 			
 					
@@ -120,7 +125,7 @@ function printList(comment, m_id, groupId){
 				var comment_id = txt3.val();
 				
 				var context_area = $(parent).parent().parent().find('.content');
-				var add_text = "<textarea class='modify' rows='3' cols='20'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
+				var add_text = "<textarea class='modify' rows='3' cols='20' style='width: 100%;'>"+ context_area.text()+"</textarea><button class='modify_register'>등록</button>";
 				context_area.html(add_text);
 		
 			}); //end of delete
@@ -173,7 +178,7 @@ function printList(comment, m_id, groupId){
 				
 		
 				var m_id = '${sessionScope.loginId}';
-				var reply_form = '<tr><td><input type="hidden" id="reply_id" value="'+comment_id +'"</input><span> 답글/'+m_id+'</span></td><td><textarea id="reply_input"  rows="5" cols="40" >['+ parent_m_id+ ']    </textarea></td>'+
+				var reply_form = '<tr><td><input type="hidden" id="reply_id" value="'+comment_id +'"</input><span> 답글/'+m_id+'</span></td><td style="padding-right: 5px;"><textarea id="reply_input"  rows="5" cols="40" style="width: 100%;" >['+ parent_m_id+ ']    </textarea></td>'+
 										'<td></td><td><button id="reply_register">답글등록</button><button id="reply_cancel">취소</button></td></tr>';
 							
 										
@@ -211,7 +216,11 @@ function printList(comment, m_id, groupId){
             			alert("오류발생  " + status + errorMsg);
             		},
             		"beforeSend" : function(){
-            		
+            			if(!$("#reply_input").val()){
+    						alert("내용을 입력하세요");
+    						$("#reply_input").focus();
+    						return false;
+    					};
             		}
 				}) //end of ajax 
 				
@@ -246,14 +255,8 @@ function printList(comment, m_id, groupId){
             <div class="comment_list" id="comment_list" >
 
 <!--  댓글 목록 테이블 -->
-			<table  class= "comment_table"  id="comment_table" 	border="1">
+			<table class= "comment_table"  id="comment_table" 	border="1" style="min-width: 800px; width: 100%; ">
 	
-			<colgroup> 	<!-- <col>태그의 수만큼 가로 칸 (열) 이 생성 -->
-						<col width="150" />
-						<col width="550" />
-						<col width="150" />
-						<col width="150" />
-			</colgroup>
 			<tr><td><span>등록 아이디</span></td> 
 			<td><span>댓글 내용</span></td>
 			<td>등록 날짜</td>
@@ -302,10 +305,12 @@ function printList(comment, m_id, groupId){
 			</tbody>
 				<!--  댓글 등록 form -->
 			<c:if test="${sessionScope.loginId != null }">
-				<tr><td><span>${sessionScope.loginId}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
-				<td><textarea id="content_input"  rows="5" cols="40" ></textarea></td>
-				<td></td>
-				<td><button id="register">댓글등록</button></td></tr>
+				<tr>
+					<td><span>${sessionScope.loginId}</span></td> <!-- request에 있는 로그인된 회원 아이디를 출력해서 보여주도록 --> 
+					<td style="padding-right: 5px;"><textarea id="content_input"  rows="5" cols="40" style="width: 100%;"></textarea></td>
+					<td></td>
+					<td><button id="register">댓글등록</button></td>
+				</tr>
 			</c:if>
 			
 </table>

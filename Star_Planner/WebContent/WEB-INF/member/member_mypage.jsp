@@ -6,6 +6,15 @@
 <title>마이페이지</title>
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<style type="text/css">
+.td{
+	font-weight: bold;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	width: 12%;
+}
+</style>
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -27,14 +36,16 @@ $(document).ready(function(){
 				<td class="td">회원 이름</td>
 				<td class="info">${requestScope.member.name }</td>
 				<td class="td">성별</td>
-				<td class="info">${requestScope.member.gender }</td>
+				<td class="info">${requestScope.member.gender}</td>
 			</tr>
 			<tr>
 				<td class="td">주소</td>
 				<td class="info">${requestScope.member.address }</td>
-				<td class="td"></td>
-				<td class="info"><input type="button" id="modify" value="정보변경"
+				<td class="td"><input type="button" id="modify" value="정보변경"
 					onclick="location.href='modifyForm.do'"></td>
+				<td class="info">
+					<input type="button" id="inactiveMemberForm" value="회원탈퇴" 
+						onclick="location.href='inactiveMemberForm.do'"></td>
 			</tr>
 			<tr>
 				<td class="td">생년월일</td>
@@ -44,11 +55,11 @@ $(document).ready(function(){
 			</tr>
 		</table>
 	</div>
-	<c:if test="${sessionScope.groupId>10}">
+	<c:if test="${sessionScope.groupId>10 || sessionScope.groupId == 0 || sessionScope.groupId == 1}">
 		<h2>스케쥴</h2>
 		<jsp:include page="/WEB-INF/member/member_mypage_manager.jsp" />
-		<h2>내가쓴 게시글</h2>
 	</c:if>
+	<h2>내가쓴 게시글</h2>
 	<jsp:include page="/WEB-INF/member/member_mypage_board_list.jsp" />
 	<h2>내가쓴 댓글</h2>
 	<jsp:include page="/WEB-INF/member/member_mypage_comment_list.jsp" />

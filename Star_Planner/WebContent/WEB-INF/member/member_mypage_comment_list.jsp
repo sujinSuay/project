@@ -19,7 +19,7 @@ $(document).ready(function(){
 			}else{
 				for(var i=0;i<comment.length;i++){
 					thtml="<tr><td>" + comment[i].comment_id+"</td>"+
-					 		"<td align='center'><a href='/Star_Planner/board/boardView.do?id="+comment[i].singer_name+"&no="+comment[i].board_no+"&page=1'>"+comment[i].comment_content+"</a></td>"+
+					 		"<td align='left'><a href='/Star_Planner/board/boardView.do?id="+comment[i].singer_name+"&no="+comment[i].board_no+"&page=1'>"+comment[i].comment_content+"</a></td>"+
 					 		"<td>"+comment[i].singer_name+"</td>"+
 							"<td>"+comment[i].comment_date+"</td>"+
 							"<td><button id='deleteComment' value='삭제' onclick='deleteComment("+comment[i].comment_id+")'>삭제</button></td></tr>";
@@ -57,14 +57,14 @@ function deleteComment(comment_id){
 </script>
 </head>
 <body>
-<div style=" height: 200px; width:950px; overflow-x: hidden; overflow-y: scroll;">
-	<table>
+<div style=" height: 200px; width:100%; overflow-x: hidden; overflow-y: scroll;">
+	<table style="width: 100%">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th width="300">내용</th>
-				<th width="150">게시판</th>
-				<th width="200">날짜</th>
+				<th width="10%">번호</th>
+				<th width="55%">내용</th>
+				<th width="10%">게시판</th>
+				<th width="15%">날짜</th>
 				<th>삭제</th>
 			</tr>
 		</thead>

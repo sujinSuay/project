@@ -12,11 +12,11 @@
 </style>
 </head>
 <body>
-	<div align="center">
+	<div align="center" >
 		<c:forEach var="link" items="${requestScope.list }" varStatus="status">
 			<c:if test="${status.index == 0 || status.index == 1 || status.index == 2}">
 				<c:if test="${link.link_address != null && link.link_address !='' }">
-					<iframe width="420" height="250" src="${link.link_address }" scrolling=no></iframe>
+					<iframe width="395" height="260" src="${link.link_address }" scrolling=no allowfullscreen></iframe>
 				</c:if>
 			</c:if>
 		</c:forEach>
@@ -31,7 +31,7 @@
 						<td>
 							<c:if test="${link.file_name != '' && link.file_name != null}">
 								<a href="https://search.naver.com/search.naver?where=nexearch&query=${link.file_name }" target=_blank>
-									<img class="content" width="320px" height="370px" src="${link.link_address }">
+									<img class="content" width="350px" height="490px" src="${link.link_address }">
 								</a>
 							</c:if>
 						</td>

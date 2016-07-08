@@ -84,12 +84,17 @@ public class MemberDaoImpl implements memberDao {
 	}
 	@Override
 	public List<Schedule> selectScheduleByMemberId(HashMap<String, String> map){
-		return session.selectList("schedule.selectScheduleByMemberId", map);
+		int groupId=session.selectOne("member.selectGroupId",map.get("m_id"));
+		if( groupId >= 10){
+			return session.selectList("schedule.selectScheduleByMemberId", map);
+		} return session.selectList("schedule.selectScheduleByAdminId", map);
 	}
 	@Override
 	public List<Schedule> selectScheduleByGroup(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
-		return session.selectList("schedule.selectScheduleByGroup2", map);
+		if(Integer.parseInt(map.get("group_id")) >= 10){
+			return session.selectList("schedule.selectScheduleByGroup2", map);
+		} else return session.selectList("schedule.selectAllScheduleByAdminId", map.get("schedule_start"));
 	}
 	@Override
 	public List<Singer> selectSingerIdandName(String keyword) {
@@ -127,5 +132,19 @@ public class MemberDaoImpl implements memberDao {
 		} catch (NumberFormatException e){
 			return false;
 		}
+	}
+	@Override
+	public Member getMemberBySocial_no(String social_no) {
+		return session.selectOne("member.selectMemberBySocial_no",social_no);
+	}
+	@Override
+	public Member checkPasswordAndId(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return session.selectOne("member.checkPasswordAndId",map);
+	}
+	@Override
+	public int inactiveMemberById(Member mem) {
+		// TODO Auto-generated method stub
+		return session.update("member.inactiveMemberById",mem);
 	}
 }

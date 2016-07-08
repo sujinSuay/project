@@ -15,6 +15,7 @@ public class Member {
 	private String favorite;  /**회원이 선호하는 그룹의 이름. 선호그릅은 다중 선택 가능. ','로 구분 **/
 	private String tem_group;
 	private String[] favoriteList;
+	private String active;
 	
 	
 	public Member(){
@@ -248,6 +249,16 @@ public class Member {
 		return "Member [m_id=" + m_id + ", social_no=" + social_no + ", password=" + password + ", group_id=" + group_id
 				+ ", gender=" + gender + ", name=" + name + ", email=" + email + ", address=" + address + ", phone="
 				+ phone + ", favorite=" + favorite + ", tem_group=" + tem_group + "]";
+	}
+
+
+	public String getActive() {
+		return active;
+	}
+
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 

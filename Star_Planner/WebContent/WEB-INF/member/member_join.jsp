@@ -25,6 +25,15 @@ font-color:green;
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
+		$("#tem_group").on("change",function(){
+			if($(this).val()=="기타"){ 
+				$("#tem_group2").show();
+			}
+			else{
+				$("#tem_group2").hide();
+			}
+		});
+		
 		$("#manager").hide();
 		$("#searchBtn").on("click",function(){
 			$.ajax({
@@ -58,6 +67,9 @@ font-color:green;
 			if($("#m_id").val().length>5){
 				window.ckflag=checkId();
 			}
+		});
+		$("#social_no2").on("blur",function(){
+			window.ckflag=checkSocial_no();
 		});
 		$(":input:radio[name=group_id]").on("click",function(){
 			if($(":input:radio[name=group_id]:checked").val()==3){
@@ -110,9 +122,15 @@ font-color:green;
 				flag=false;
 			}else{$("#address_er").text("");}
 			
-			if(!$("#social_no").val()){
+			if(!$("#social_no1").val()){
 				$("#social_no_er").text("주민번호를 입력해주세요");
-				$("#social_no").focus();
+				$("#social_no1").focus();
+				flag=false;
+			}else{$("#social_no_er").text("");}
+			
+			if(!$("#social_no2").val()){
+				$("#social_no_er").text("주민번호를 입력해주세요");
+				$("#social_no2").focus();
 				flag=false;
 			}else{$("#social_no_er").text("");}
 			
@@ -129,9 +147,7 @@ font-color:green;
 			}else{$("#email").text("");}
 			
 			/* alert($("#tem_group").find("option:selected").val() + "/" + $("#tem_group2").val() ); */
-			if($("#tem_group").find("option:selected").val()=="소속사"){ 
-				$("#tem_group_er").text("회사를 선택해 주세요");
-			}else if($("#tem_group").find("option:selected").val()=='기타' && !$("#tem_group2").val()){
+			if($("#tem_group").find("option:selected").val()=='기타' && !$("#tem_group2").val()){
 				$("#tem_group_er").text("회사를 입력해 주세요");
 				$("#tem_group2").focus();
 				flag=false;
@@ -187,6 +203,37 @@ font-color:green;
 			alert("이미 선택하셨습니다");
 		}
 	};
+	function checkSocial_no(){
+		$.ajax({
+			"url":"/Star_Planner/member/checkSocial_no.do",
+			"type":"POST",
+			"data":"social_nos="+$("#social_no1").val()+"," + $("#social_no2").val(),
+			"dataType":"text", 
+			"success":function(txt){
+				if(txt=='numberFormat'){
+					$("#social_no_er").html("<span style='color: red;'>잘못된 주민번호 입니다.</span>");
+					$("#social_no").focus();
+					window.ckflag=false;
+				}else if(txt=='true'){
+					$("#social_no_er").html("<span style='color: red;'>이미 가입한 회원입니다.</span>");
+					$("#social_no1").focus();
+					window.ckflag=false;
+				}else{
+					$("#social_no_er").text("가입가능한 주민번호입니다.");
+					window.ckflag=true;
+				}
+			},
+			"error":function(xhr,status,errorMsg){
+				alert("오류발생" + status+ ", " + errorMsg);
+			},
+			"beforeSend":function(){
+				if($("#social_no1").val().length<6 || $("#social_no2").val().length<6){
+					$("#social_no_er").html("<span style='color: red;'>잘못된 주민번호 입니다.</span>");
+					return false;
+				}
+			}
+		});
+	}
 	function checkId(){
 		$.ajax({
 			"url":"/Star_Planner/member/checkId.do",
@@ -195,7 +242,8 @@ font-color:green;
 			"dataType":"text", 
 			"success":function(txt){
 				if(txt=='true'){
-					$("#id_er").text("중복된 아이디입니다.");
+					/* $("#id_er").text("중복된 아이디입니다."); */
+					$("#id_er").html("<span style='color: red;'>중복된 아이디 입니다.</span>");
 					$("#m_id").focus();
 					window.ckflag=false;
 				}else{
@@ -271,8 +319,8 @@ font-color:green;
 							id="group_id1" name="group_id" value='3'>매니져</label> <label><input
 							type="radio" id="group_id2" name="group_id" value="2"
 							checked="checked">일반회원</label></td>
-					<td><span id="group_er"></span>
-					<td>
+					<td><span id="group_er"></span></td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>아이디</td>
@@ -308,48 +356,51 @@ font-color:green;
 				</tr>
 				<tr>
 					<td>연락번호</td>
-					<td><input type="text" name="phone" id="phone"></td>
+					<td><input type="number" name="phone" id="phone"></td>
 					<td><span id="phone_er"></span>
 					<td>
 				</tr>
 				<tr>
 					<td>성별</td>
 					<td><label><input type="radio" id="gender1"
-							name="gender" value='남'>남자</label> <label><input
+							name="gender" value='남' checked="checked">남자</label> <label><input
 							type="radio" id="gender2" name="gender" value="여">여자</label></td>
-					<td><span id="gender_er"></span>
-					<td>
+					<td><span id="gender_er"></span></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="text" name="address" id="postcode"
-						placeholder="우편번호"> <input type="button"
-						onclick="execDaumPostcode()" value="우편번호 찾기"></td>
+					<td colspan="2">
+						<input type="text" name="member_address" id="postcode" placeholder="우편번호" onclick="execDaumPostcode()" readonly="readonly">
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="text" id="address" name="address"
-						placeholder="주소"> <input type="text" id="address2"
-						name="address" placeholder="상세주소"></td>
+					<td colspan="2">
+						<input type="text" id="address" name="member_address" placeholder="주소" onclick="execDaumPostcode()" readonly="readonly">
+						<input type="text" id="address2" name="member_address" placeholder="상세주소">
+					</td>
 					<td><span id="address_er"></span></td>
 				</tr>
 				<tr>
 					<td>주민번호</td>
-					<td><input type="text" id="social_no" name="social_no"></td>
-					<td><span id="social_no_er"></span>
-					<td>
+					<td><input type="text" id="social_no1" name="social_no" maxlength="6" size="6">-<input type="password" id="social_no2" name="social_no" maxlength="7" size="7"></td>
+					<td><span id="social_no_er"></span></td>
+					<td></td>
+				</tr>
+				<tr id="manager">
+					<td>소속사</td>
+					<td colspan="2">
+						<select name="tem_group" id="tem_group">
+							<c:forEach items="${requestScope.groupList }" var="groupName">
+								<option value="${groupName }">${groupName }</option>
+							</c:forEach>
+							<option value="기타">직접입력</option>
+						</select>
+						<input type="text" name="tem_group2" id="tem_group2" style="display: none;">
+					</td>
+					<td><span id="tem_group_er"></span></td>
 				</tr>
 			</table>
-			<div id="manager">
-				<select name="tem_group" id="tem_group">
-					<option value="소속사">소속사</option>
-					<c:forEach items="${requestScope.groupList }" var="groupName">
-						<option value="${groupName }">${groupName }</option>
-					</c:forEach>
-					<option value="기타">직접입력</option>
-				</select> <input type="text" name="tem_group2" id="tem_group2"><span
-					id="tem_group_er"></span>
-			</div>
-	
 			<div id="favorite_tr">
 				<table>
 					<tr>

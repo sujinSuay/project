@@ -5,7 +5,7 @@
 
 	<sql id="select-basic">
 		SELECT m_id, social_no, password, group_id, gender,
-		name, email, address, phone, favorite, tem_group
+		name, email, address, phone, favorite, tem_group, active
 		FROM member
 	</sql>
 
@@ -21,11 +21,12 @@
 		<result column="phone" property="phone" />
 		<result column="favorite" property="favorite" />
 		<result column="tem_group" property="tem_group" />
+		<result column="active" property="active"/>
 	</resultMap>
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member
-		values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group})
+		values(#{m_id},#{social_no},#{password},#{group_id},#{gender},#{name},#{email},#{address},#{phone},#{favorite},#{tem_group},'true')
 	</insert>
 	<select id="selectMemberById" parameterType="string" resultMap="member-resultmap">
 		<include refid="select-basic" />
@@ -42,6 +43,8 @@
 		password = #{password},
 		email = #{email},
 		phone = #{phone},
+		gender = #{gender},
+		address = #{address},
 		favorite = #{favorite}
 		WHERE m_id = #{m_id}
 	</update>
@@ -50,6 +53,23 @@
 		FROM member
 		WHERE m_id = #{m_id}
 	</select>
-
-
+	<select id="selectGroupId" parameterType="string" resultType="_int">
+		SELECT group_id
+		FROM member
+		WHERE m_id=#{m_id}
+	</select>
+	<select id="selectMemberBySocial_no" parameterType="string" resultType="member">
+		<include refid="select-basic" />
+		WHERE social_no = #{social_no}
+	</select>
+	<select id="checkPasswordAndId" parameterType="map" resultType="member">
+		SELECT * 
+		FROM member
+		WHERE m_id=#{m_id} and password = #{password}
+	</select>
+	<update id="inactiveMemberById" parameterType="member">
+		UPDATE member
+		SET active = 'false'
+		WHERe m_id=#{m_id}
+	</update>
 </mapper>
