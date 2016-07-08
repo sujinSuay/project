@@ -51,6 +51,8 @@ public class MemberController {
 	}
 	@RequestMapping("/join")
 	public ModelAndView joinMember(@ModelAttribute Member member, String[] member_address, String tem_group2) throws Exception{
+		String[] temSocial = member.getSocial_no().split(",");
+		member.setSocial_no(temSocial[0]+"-"+temSocial[1]);
 		if(member.getTem_group().equals("기타")){
 			member.setTem_group(tem_group2);
 		}
@@ -78,16 +80,35 @@ public class MemberController {
 		Member mem = memberService.getMemberById(m_id);
 		if(mem==null) return "false"; else return "true"; 
 	}
+	@RequestMapping("/checkSocial_no")
+	@ResponseBody
+	public String checkSocial_no(String social_nos) throws IOException{
+		String[] tem = social_nos.split(",");
+		try{
+			System.out.println(tem[0] + ","  +  tem[1]);
+			int test = Integer.parseInt(tem[0]);
+			test = Integer.parseInt(tem[1]);
+		}catch(NumberFormatException e){
+			return "numberFormat";
+		}
+		String social_no = tem[0] + "-" + tem[1];
+		Member mem = memberService.getMemberBySocial_no(social_no);
+		if(mem==null) return "false"; else return "true"; 
+	}
 	@RequestMapping("/login")
 	@ResponseBody
 	public ModelAndView login(String m_id, String password, HttpSession session) throws IOException{
 		Member mem = memberService.loginMember(m_id, password);
 		if(mem==null){
 			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
+		}else if(mem.getActive().equals("true")){
+			session.setAttribute("loginId", mem.getM_id());
+			session.setAttribute("groupId", mem.getGroup_id());
+			return new ModelAndView("/main/home.do");
+		} else {
+			return new ModelAndView("redirect:/member_login.do","m_id",m_id);
 		}
-		session.setAttribute("loginId", mem.getM_id());
-		session.setAttribute("groupId", mem.getGroup_id());
-		return new ModelAndView("/main/home.do");
+		
 	}
 	@RequestMapping("/logout")
 	public ModelAndView login(HttpSession session){
@@ -169,7 +190,6 @@ public class MemberController {
 	@ResponseBody
 	public List<Schedule> selectScheduleByMemberId(String m_id){
 		Date d = new Date();
-		
 		String schedule_start = (d.getYear()+1900) + "-" + String.format("%02d", (d.getMonth()+1)) + "-" + String.format("%02d", d.getDate())+
 				"T" + String.format("%02d", d.getHours()) + ":" + String.format("%02d", d.getMinutes());
 		HashMap<String, String> map = new HashMap<String,String>();
@@ -208,5 +228,24 @@ public class MemberController {
 	public String minusSingerFavorite(String singer_id){
 		memberService.minusSingerFavorite(singer_id);
 		return singer_id;
+	}
+	@RequestMapping("/inactiveMemberForm")
+	public ModelAndView inactiveMemberForm(){
+		System.out.println("inactiveMemberForm");
+		return new ModelAndView("member/inactiveMemberForm.tiles");
+	}
+	@RequestMapping("/inactiveMember")
+	@ResponseBody
+	public String checkPasswordAndId(String m_id, String password){
+		System.out.println("inactiveMember()" + m_id + " / " + password);
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("m_id", m_id);
+		map.put("password", password);
+		Member mem = memberService.checkPasswordAndId(map);
+		if(mem==null)
+			return "false";
+		else 
+			memberService.inactiveMemberById(mem);
+			return "true";
 	}
 }

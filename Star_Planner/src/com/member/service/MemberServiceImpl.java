@@ -90,4 +90,19 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		memberDao.minusSingerFavorite(singer_id);
 	}
+	@Override
+	public Member getMemberBySocial_no(String social_no) {
+		// TODO Auto-generated method stub
+		return memberDao.getMemberBySocial_no(social_no);
+	}
+	@Override
+	public Member checkPasswordAndId(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberDao.checkPasswordAndId(map);
+	}
+	@Override
+	public int inactiveMemberById(Member mem) {
+		// TODO Auto-generated method stub
+		return memberDao.inactiveMemberById(mem);
+	}
 }

@@ -176,3 +176,27 @@ alter table schedule add constraint fk_schedule_type foreign key(type_name) refe
 alter table search_data add constraint fk_search_data foreign key(singer_id) references singer(singer_id);
 alter table board add constraint fk_board foreign key(singer_id) references singer(singer_id);
 alter table board add constraint fk_board_member foreign key(m_id) references member(m_id);
+
+
+delete from member where m_id='id-0031'
+
+select* from schedule where m_id='admin1'
+SELECT *
+FROM schedule s, singer sn, groups g
+WHERE s.m_id = 'admin1' and s.singer_id = sn.singer_id and sn.group_id=g.group_id and s.schedule_start > '2016-07-08' 
+ORDER BY s.schedule_start DESC
+SELECT *
+		FROM schedule s, singer sn, groups g
+		WHERE s.singer_id = sn.singer_id and sn.group_id=g.group_id and s.schedule_start > '2016-07-08'
+		ORDER BY s.schedule_start DESC
+
+UPDATE member 
+SET active='true'
+WHERE *
+		
+select m_id, active
+from member
+where m_id='id-0005'
+SELECT m_id
+FROM member
+WHERE social_no = '123123123'

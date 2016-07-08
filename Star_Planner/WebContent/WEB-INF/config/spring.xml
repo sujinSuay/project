@@ -77,6 +77,9 @@
 		view-name="member/member_login.tiles" />
 	<mvc:view-controller path="member_logout.do"
 	view-name="member/logout.do" />
+	<mvc:view-controller path="inactiveMemberForm.do"
+	view-name="member/inactiveMemberForm.tiles" />
+	
 	
 	<!-- schedule -->
 	<mvc:view-controller path="schedule_register.do"
@@ -88,8 +91,6 @@
 		view-name="schedule/schedule_main.tiles" />
 	<mvc:view-controller path="board_main.do"
 		view-name="board/board_main.tiles" />
-	<mvc:view-controller path="mypage.do"
-		view-name="member/member_mypage.tiles" />
 		
 		<!--  admin에 해당하는 부분  -->
 		<mvc:view-controller path="admin/admin_main.do" view-name="admin/admin_page.tiles" />

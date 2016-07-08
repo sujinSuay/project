@@ -59,4 +59,17 @@
 		SET schedule_start = #{schedule_start},schedule_end=#{schedule_end},singer_id=#{singer_id},group_id=#{group_id},schedule_name=#{schedule_name},type_name=#{type_name},schedule_address=#{schedule_address},schedule_contents=#{schedule_contents},m_id=#{m_id}
 		WHERE schedule_id = #{schedule_id}
 	</update>
+	<select id="selectScheduleByAdminId" parameterType="map" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule s, singer sn, groups g
+		WHERE s.m_id = #{m_id} and s.singer_id = sn.singer_id and sn.group_id=g.group_id and s.schedule_start > #{schedule_start}
+		ORDER BY s.schedule_start DESC
+	</select>
+	<select id="selectAllScheduleByAdminId" parameterType="string" resultMap="schedule-singer-group-resultmap">
+		SELECT *
+		FROM schedule s, singer sn, groups g
+		WHERE s.singer_id = sn.singer_id and sn.group_id=g.group_id and s.schedule_start > #{schedule_start}
+		ORDER BY s.schedule_start DESC
+	</select>
+		
 </mapper>

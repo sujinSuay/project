@@ -36,14 +36,11 @@ function callGroup(){
 							"<td>"+schedule[i].m_id+"</td>"+
 							/* "<td align='center'><a href='/Star_Planner/schedule/modifySchedule.do?schedule_id="+schedule[i].schedule_id+"'>수정</a></td>"+
 							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>"; */
-							"<td align='center'><input type='button' onclick='modifyBtn("+schedule[i].schedule_id+")' value='수정'></td>"+
+							"<td align='center'><input type='button' onclick='modifyBtn("+schedule[i].schedule_id+")' value='수정' disabled='${sessionScope.groupId>=10}?disable:'></td>"+
 							"<td><button id='deleteSchedule' value='삭제' onclick='deleteSchedule("+schedule[i].schedule_id+")'>삭제</button></td></tr>";
-		
 					$("#listTable").append(thtml); 
 				}
-				
 			}
-			
 		},
 		"error":function(xhr, status, errorMsg){
 			alert("오류 발생 - "+status+","+errorMsg);
@@ -91,6 +88,7 @@ function modifyBtn(schedule_id){
 	location.replace("/Star_Planner/schedule/scheduleModifyForm.do?schedule_id="+schedule_id);
 }
 function deleteSchedule(schedule_id){
+	
 	$.ajax({
 		"url":"/Star_Planner/schedule/deleteSchedule.do",
 		"type":"post",
@@ -113,7 +111,7 @@ function deleteSchedule(schedule_id){
 	<option id="byId" selected="selected" value="id">${sessionScope.loginId }</option>
 	<option id="byGroup" value="group">소속사전체</option>
 </select>
-<div style=" height: 300px; width:100%; overflow-x: hidden; overflow-y: scroll;">
+<div id="modifyScheduleDiv" style=" height: 300px; width:100%; overflow-x: hidden; overflow-y: scroll;">
 	<table style="width: 100%;">
 		<thead>
 			<tr>

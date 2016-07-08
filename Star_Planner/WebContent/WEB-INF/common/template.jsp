@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +13,9 @@
 	padding: 40px;
 } */
 .body{
-	padding-top: 15px;
-	padding-bottom: 50px;
-	min-height:400px;
+	width: 100%;
 }
-body{
+.innerBody{
 	width: 80%;
 	margin: 0px auto;
 	min-width: 1280px;
@@ -37,13 +36,16 @@ body{
 .galleryName{
 	color: #5D5D5D;
 }
+.btn{
+	width: 50%;
+}
 .gallery{
 	color: #5B79C8;
 }
 .galleryName{
 	color: #5D5D5D;
 }
-</style>
+</style> 
 
 </head>
 <body>
@@ -52,7 +54,7 @@ body{
 		<tiles:insertAttribute name="menu"/> <!-- name 속성에 put-attribute태그의 name 속성값을 호출 -->
 </header>		 
 
-<section class="body">
+<section>
 		<tiles:insertAttribute name="body"/> 
 </section>	
 

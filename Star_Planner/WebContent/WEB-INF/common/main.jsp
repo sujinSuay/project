@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>main</title>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 	<div align="center" style="min-width: 1280px;">

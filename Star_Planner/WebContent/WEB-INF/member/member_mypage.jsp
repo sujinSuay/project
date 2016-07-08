@@ -41,9 +41,11 @@ $(document).ready(function(){
 			<tr>
 				<td class="td">주소</td>
 				<td class="info">${requestScope.member.address }</td>
-				<td class="td"></td>
-				<td class="info"><input type="button" id="modify" value="정보변경"
+				<td class="td"><input type="button" id="modify" value="정보변경"
 					onclick="location.href='modifyForm.do'"></td>
+				<td class="info">
+					<input type="button" id="inactiveMemberForm" value="회원탈퇴" 
+						onclick="location.href='inactiveMemberForm.do'"></td>
 			</tr>
 			<tr>
 				<td class="td">생년월일</td>

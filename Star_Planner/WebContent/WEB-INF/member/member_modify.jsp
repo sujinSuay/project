@@ -84,7 +84,7 @@
 	});
 	function addFavorite(singer_name,singer_id){
 		
-		if(document.getElementById(singer_id) == null){
+		if(document.getElementById(singer_id) == null && document.getElementById(singer_name) == null){
 			$.ajax({
 				"url":"/Star_Planner/member/plusSingerFavorite.do",
 				"type":"post",
