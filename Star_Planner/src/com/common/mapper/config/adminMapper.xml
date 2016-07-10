@@ -130,5 +130,9 @@ select group_id, group_name, group_address,group_phone,group_link
 from groups
 where group_id > 10
 </select>
-
+<update id="inactiveManager" parameterType="string">
+UPDATE member
+SET group_id = 2
+WHERE m_id=#{m_id}
+</update>
 </mapper>

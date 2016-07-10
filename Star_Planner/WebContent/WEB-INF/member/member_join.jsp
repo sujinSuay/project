@@ -7,12 +7,6 @@
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<style type="text/css">
-#id_er{
-font-size:12px;
-font-color:green;
-}
-</style>
 <script>
    var ckflag=false;
    $(document).ready(function() {
@@ -306,6 +300,13 @@ font-color:green;
       }
    });
 </script>
+<style type="text/css">
+#joinForm input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+	margin:0;
+}
+
+</style>
 </head>
 <body>
    <div class="joinForm" style="margin: 0px auto; width: 50%; padding-left: 25%;">
@@ -368,7 +369,7 @@ font-color:green;
             <tr>
                <td colspan="2">
                   <input type="text" name="member_address" id="postcode" placeholder="우편번호" onclick="execDaumPostcode()" readonly="readonly">
-                  <button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
+                  <button type="button" onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
                </td>
                <td></td>
             </tr>

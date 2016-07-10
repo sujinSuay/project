@@ -16,6 +16,8 @@ public interface CommentService {
 
 
 	List<Comment> selectComment(int board_no);
+
+	int deleteCommentByBoard(int board_no);
 	
 		
 		

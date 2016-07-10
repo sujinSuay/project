@@ -9,6 +9,12 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#managerRequest").on("change",function(){
+			if(this.checked) alert("매니저등록을 요청하셨습니다.");
+		});
+		$("#managerRequestCancle").on("change",function(){
+			if(this.checked) alert("매니저등록요청을 취소하셨습니다");
+		});
 		$("#searchBtn").on("click",function(){
 			$.ajax({
 				"url":"/Star_Planner/member/searchSinger.do",
@@ -151,6 +157,13 @@
 					}
 				}).open();
 	}
+	$(document).keydown(function(e){
+		if(e.target.nodeName == "INPUT"){
+			if(e.keyCode == 13){
+				return false;
+			}
+		}
+	});
 </script>
 </head>
 <body>
@@ -162,19 +175,29 @@
 		<table>
 			<tr>
 				<td>회원등급</td>
-				<td><c:choose>
+				<td>
+					<c:choose>
 						<c:when test="${requestScope.member.group_id==2 }">
 							일반회원
 						</c:when>
-						<c:when test="${requestScope.member.group_id>=3 }">
+						<c:when test="${requestScope.member.group_id>=10 }">
 							매니저
 						</c:when>
-						<c:when test="${requestScope.member.group_id==-1 }">
+						<c:when test="${requestScope.member.group_id==3 }">
 							매니저 승인 대기중
 						</c:when>
-					</c:choose></td>
-				<td><span id="group_er"></span>
+					</c:choose>
+				</td>
 				<td>
+					<c:choose>
+						<c:when test="${requestScope.member.group_id ==3 }">
+							<input type="checkbox" name="managerRequest" value="2" id="managerRequestCancle"><label for="managerRequestCancle">매니저 신청 취소</label>
+						</c:when>
+						<c:when test="${requestScope.member.group_id==2 }">
+							<input type="checkbox" name="managerRequest" value="3" id="managerRequest"><label for="managerRequest">매니저 신청</label>
+						</c:when>
+					</c:choose>
+				</td>
 			</tr>
 			<tr>
 				<td>아이디</td>
@@ -235,7 +258,7 @@
 				<td>주소</td>
 				<td colspan="2">
 					<input type="text" id="postcode" name="member_address" value="${requestScope.temAdr[0] }" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
-					<button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
+					<button type="button" onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
 				</td>
 			</tr>
 			<tr>

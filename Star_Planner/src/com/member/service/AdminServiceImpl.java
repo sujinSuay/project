@@ -133,4 +133,9 @@ public class AdminServiceImpl {
 		return adminDao.selectMainLink();
 	}
 
+	public int inactiveManager(String m_id) {
+		// TODO Auto-generated method stub
+		return adminDao.inactiveManager(m_id);
+	}
+
 }

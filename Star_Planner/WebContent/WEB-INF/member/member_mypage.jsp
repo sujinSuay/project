@@ -90,7 +90,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td class="td">생년월일</td>
-				<td class="info">${requestScope.member.social_no }</td>
+				<td class="info">${requestScope.member.social_no.split('-')[0] }</td>
 				<td></td>
 				<td></td>
 			</tr>

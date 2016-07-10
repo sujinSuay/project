@@ -474,8 +474,41 @@ $.ajax({
 	})
 	
 	
-	
 });
+function inactiveManager(m_id){
+	if(confirm(m_id+"님의 매니저자격을 박탈하시겠습니까?")){
+		$.ajax({
+			type: "post",
+			data : "m_id=" + m_id,
+			url : "/Star_Planner/admin/inactiveManager.do",
+			dataType : "text",
+			"success" : function(txt){
+				window.location.reload()
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			} 
+		}); //end of ajax
+	}
+}
+function inactiveManager(m_id){
+	if(confirm(m_id+"님의 매니저자격을 박탈하시겠습니까?")){
+		$.ajax({
+			type: "post",
+			data : "m_id=" + m_id,
+			url : "/Star_Planner/admin/inactiveManager.do",
+			dataType : "text",
+			"success" : function(txt){
+				window.location.reload()
+			}, "error" : function(xhr, status, errorMsg){
+				alert("오류발생  " + status + errorMsg);
+			},
+			"beforeSend" : function(){
+			} 
+		}); //end of ajax
+	}
+}
 </script>
 
 <head>
@@ -656,6 +689,7 @@ table {
 				<td>이름</td>
 				<td>전화번호</td>
 				<td>소속사</td>
+				<td>권한</td>
 			</tr>  	
 			<tbody  id="result_managerList" >
 		
@@ -665,6 +699,7 @@ table {
 					<td>${manager.name}</td>
 					<td>${manager.phone}</td>
 					<td>${manager.group_name }	</td>
+					<td><button onclick="inactiveManager('${manager.m_id}')">박탈</button>
 				</tr>
 			</c:forEach>
 		
@@ -724,8 +759,8 @@ table {
 							</select>	
 		<input type="button" id="selectSingerList" value="조회" class="btn"/>
 							
-<div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
-<table >
+	<div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
+	<table >
 			<tr>
 				<td>가수분류</td> 
 				<td>가수이름</td>
@@ -754,57 +789,53 @@ table {
 	</div> <!--  end of 가수등록 -->
 	
 	<div class="layout-down-center">
-	<h2>회사등록</h2>
-	<table>
-	<tr>
-		<td>회사이름</td>
-		<td><input type="text" id="com_input"/></td>
-	</tr>
-	<tr>
-		<td>회사주소</td>
-		<td><input type="text" id="name_input"/></td>
-	</tr>
-	<tr>
-		<td>회사전화번호</td>
-		<td><input type="text" id="phone_input"/></td>
-	</tr>
-	<tr>
-		<td>회사링크</td>
-		<td><input type="text" id="address_input"/></td>
-	</tr>
-	
-	</table>
-	
-	<input type="button" id="register_com_btn" value="등록" class="btn"/> 
-	<div id="result_company_register"></div>
-	
-	<!--  회사 목록 조회 -->
-	<h3>회사 목록 조회</h3>
-	<div style=" height: 200px; overflow-x: hidden; overflow-y: scroll;">
-	<table >
-			<tr>
-				<td>회사이름</td> 
-				<td>회사주소</td>
-				<td>회사 전화번호</td>
-				<td>회사링크</td>
-			</tr>  	
-		
-			<tbody  id="result_SingerList" >
-		
-			<c:forEach var="group" items="${requestScope.list_groupListAll }">
+		<h2>회사등록</h2>
+			<table>
 				<tr>
-					<td >${group.group_name}</td>
-					<td>${group.group_address}</td>
-					<td>${group.group_phone}</td>
-					<td>${group.group_link}	</td>
+					<td>회사이름</td>
+					<td><input type="text" id="com_input"/></td>
 				</tr>
-			</c:forEach>
+				<tr>
+					<td>회사주소</td>
+					<td><input type="text" id="name_input"/></td>
+				</tr>
+				<tr>
+					<td>회사전화번호</td>
+					<td><input type="text" id="phone_input"/></td>
+				</tr>
+				<tr>
+					<td>회사링크</td>
+					<td><input type="text" id="address_input"/></td>
+			</tr>
 		
-			</tbody>
-		</table>
+			</table>
+	
+		<input type="button" id="register_com_btn" value="등록" class="btn"/> 
+		<div id="result_company_register"></div>
+		
+			<!--  회사 목록 조회 -->
+			<h3>회사 목록 조회</h3>
+			<div style=" height: 200px; overflow-x: hidden; overflow-y: scroll;">
+			<table >
+					<tr>
+						<td>회사이름</td> 
+						<td>회사주소</td>
+						<td>회사 전화번호</td>
+						<td>회사링크</td>
+					</tr>  	
+				
+					<tbody  id="result_SingerList" >
+						<c:forEach var="group" items="${requestScope.list_groupListAll }">
+							<tr>
+								<td >${group.group_name}</td>
+								<td>${group.group_address}</td>
+								<td>${group.group_phone}</td>
+								<td>${group.group_link}	</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+			</table>
 		</div>
-	
-	
 	</div>
 
 

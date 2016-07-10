@@ -85,7 +85,6 @@ public class MemberController {
 	public String checkSocial_no(String social_nos) throws IOException{
 		String[] tem = social_nos.split(",");
 		try{
-			System.out.println(tem[0] + ","  +  tem[1]);
 			int test = Integer.parseInt(tem[0]);
 			test = Integer.parseInt(tem[1]);
 		}catch(NumberFormatException e){
@@ -145,8 +144,11 @@ public class MemberController {
 		
 	}
 	@RequestMapping("/modify")
-	public ModelAndView modify(String m_id, String password, String email, String phone, String gender, String[] member_address, String favorite) throws IOException{
-		HashMap<String,String> map = new HashMap<String,String>();
+	public ModelAndView modify(String m_id, String password, String email, String phone, String gender, String[] member_address, String favorite, String managerRequest) throws IOException{
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		System.out.println(managerRequest);
+		if(managerRequest!=null) map.put("group_id", managerRequest);
+		else map.put("group_id", null);
 		map.put("password", password);
 		map.put("email", email);
 		map.put("phone", phone);
@@ -185,6 +187,7 @@ public class MemberController {
 	}
 	@RequestMapping("/deleteMyBoard")
 	public ModelAndView deleteMyBoard(int board_no){
+		commentService.deleteCommentByBoard(board_no);
 		boardService.removeByNo(board_no);
 		return new ModelAndView("member/member_mypage.tiles");
 	}
@@ -234,13 +237,11 @@ public class MemberController {
 	}
 	@RequestMapping("/inactiveMemberForm")
 	public ModelAndView inactiveMemberForm(){
-		System.out.println("inactiveMemberForm");
 		return new ModelAndView("member/inactiveMemberForm.tiles");
 	}
 	@RequestMapping("/inactiveMember")
 	@ResponseBody
 	public String checkPasswordAndId(String m_id, String password){
-		System.out.println("inactiveMember()" + m_id + " / " + password);
 		HashMap<String, String> map = new HashMap<String,String>();
 		map.put("m_id", m_id);
 		map.put("password", password);

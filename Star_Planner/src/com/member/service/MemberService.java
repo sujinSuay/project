@@ -14,7 +14,7 @@ public interface MemberService {
 	Member getMemberById(String m_id) throws IOException;
 	int insertMember(Member member) throws IOException;
 	Member loginMember(String m_id, String password) throws IOException;
-	int updateMemberById(HashMap<String, String> map);
+	int updateMemberById(HashMap<String, Object> map);
 	List<String> selectGroupList();
 	List<MyPage> selectBoardListByMemberId(HashMap<String, String> map);
 	List<MyPage> selectCommentListByMemberId(HashMap<String, String> map);

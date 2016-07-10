@@ -167,5 +167,12 @@ public class AdminController {
 	public int deleteMainLink(int count) {
 		return adminService.deleteMainLink(count);
 	}
+	//매니저 삭제(일반회원으로 변경)
+	@RequestMapping("/inactiveManager")
+	@ResponseBody
+	public String inactiveManager(String m_id){
+		adminService.inactiveManager(m_id);
+		return null;
+	}
 
 }

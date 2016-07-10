@@ -119,11 +119,12 @@ public class BoardController {
 	//boardRemove
 	@RequestMapping("/boardRemove")
 	public ModelAndView boardRemove(String id, int no, int page) throws ParseException{
-	
+		
+		service_comment.deleteCommentByBoard(no);
 		service.removeByNo(no);
 		
 		//해당하는 게시글의 댓글 삭제
-		service_comment.deleteCommentByBoard(no);
+		
 		
 		return boardList(id, page);
 	}

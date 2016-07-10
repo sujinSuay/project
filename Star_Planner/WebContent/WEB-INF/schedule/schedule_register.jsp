@@ -65,6 +65,15 @@ $(document).keydown(function(e){
 		}
 	}
 });
+$(document).ready(function(){
+	$("#scheduleRegisterForm").on("submit",function(){
+		if(confirm("스케줄을 등록하시겠습니까?")){
+			alert("등록되었습니다");
+		} else{
+			return false;
+		}
+	});
+});
 </script>
 <style type="text/css">
 td{
@@ -77,7 +86,7 @@ td{
 <body>
 <div style="width: 100%;" align="center">
 	<h2>스케줄 등록</h2>
-	<form action="/Star_Planner/schedule/scheduleRegister.do" method="post">
+	<form action="/Star_Planner/schedule/scheduleRegister.do" method="post" id="scheduleRegisterForm">
 	<input type="hidden" id="group_id" name="group_id" value="${sessionScope.groupId }">
 	<input type="hidden" id="m_id" name="m_id" value="${sessionScope.loginId }">
 		<table>
@@ -116,7 +125,7 @@ td{
 				<td>일정 장소</td>
 				<td colspan="2">
 					<input type="text" id="postcode" name="schedule_address" placeholder="우편번호" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
-					<button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; vertical-align: bottom;"></button>
+					<button type="button" onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; vertical-align: bottom;"></button>
 				</td>
 			</tr>
 			<tr>
