@@ -69,7 +69,7 @@ public class CommentServiceImpl implements CommentService{
 	public int modifyComment(HashMap<String, Object> map){
 		return dao.modifyComment(map);
 	}
-	
+	@Override
 	public int deleteCommentByBoard(int board_no){
 		return dao.deleteCommentByBoard(board_no);
 	}

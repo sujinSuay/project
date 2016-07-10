@@ -14,7 +14,7 @@ public interface memberDao {
 	int insertMember(Member member);
 	Member selectMemberById(String m_id);
 	Member selectMemberByIdAndPassword(String m_id, String password);
-	int updateMemberById(HashMap<String, String> map);
+	int updateMemberById(HashMap<String, Object> map);
 	String selectFavorite(String m_id);
 	List<String> selectGroupList();
 	List<MyPage> selectBoardListByMemberId(HashMap<String, String> map);

@@ -88,21 +88,22 @@ function modifyBtn(schedule_id){
 	location.replace("/Star_Planner/schedule/scheduleModifyForm.do?schedule_id="+schedule_id);
 }
 function deleteSchedule(schedule_id){
-	
-	$.ajax({
-		"url":"/Star_Planner/schedule/deleteSchedule.do",
-		"type":"post",
-		"data":"schedule_id="+schedule_id,
-		"dataType":"text",
-		"success":function(){
-			window.location.reload();
-		},
-		"error":function(xhr, status, errorMsg){
-			alert("오류 발생 - "+status+","+errorMsg);
-		},
-		"beforeSend":function(){
-		}
-	});
+	if(confirm("스케줄을 삭제하시겠습니까?")){
+		$.ajax({
+			"url":"/Star_Planner/schedule/deleteSchedule.do",
+			"type":"post",
+			"data":"schedule_id="+schedule_id,
+			"dataType":"text",
+			"success":function(){
+				window.location.reload();
+			},
+			"error":function(xhr, status, errorMsg){
+				alert("오류 발생 - "+status+","+errorMsg);
+			},
+			"beforeSend":function(){
+			}
+		});
+	}
 }
 </script>
 </head>

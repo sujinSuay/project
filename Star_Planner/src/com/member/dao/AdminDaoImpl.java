@@ -131,4 +131,9 @@ public class AdminDaoImpl implements AdminDao {
 		return session.selectList("admin.selectMainLink");
 	}
 
+	public int inactiveManager(String m_id) {
+		// TODO Auto-generated method stub
+		return session.update("admin.inactiveManager",m_id);
+	}
+
 }

@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService{
 	 * @see com.member.service.mms2#updateMemberById(java.util.HashMap)
 	 */
 	@Override
-	public int updateMemberById(HashMap<String, String> map){
+	public int updateMemberById(HashMap<String, Object> map){
 		return memberDao.updateMemberById(map);
 		
 	}

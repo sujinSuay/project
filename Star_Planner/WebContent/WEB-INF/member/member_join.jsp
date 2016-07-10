@@ -5,23 +5,9 @@
 <meta charset="UTF-8">
 <title>member_join</title>
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<style type="text/css">
-#id_er{
-font-size:12px;
-font-color:green;
-}
-</style>
 <script>
 	var ckflag=false;
 	$(document).ready(function() {
@@ -307,7 +293,21 @@ font-color:green;
 					}
 				}).open();
 	}
+	$(document).keydown(function(e){
+		if(e.target.nodeName == "INPUT"){
+			if(e.keyCode == 13){
+				return false;
+			}
+		}
+	});
 </script>
+<style type="text/css">
+#joinForm input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-inner-spin-button{
+	-webkit-appearance: none;
+	margin:0;
+}
+
+</style>
 </head>
 <body>
 	<div class="joinForm">
@@ -356,7 +356,7 @@ font-color:green;
 				</tr>
 				<tr>
 					<td>연락번호</td>
-					<td><input type="number" name="phone" id="phone"></td>
+					<td><input type="tel" name="phone" id="phone" maxlength="11" size="15"></td>
 					<td><span id="phone_er"></span>
 					<td>
 				</tr>

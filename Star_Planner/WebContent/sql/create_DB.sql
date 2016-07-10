@@ -3,13 +3,17 @@ alter table comments add comment_family_id NUMBER(10) NOT NULL; /* 댓글의 댓
 alter table comments add comment_check NUMBER(2) NOT NULL ;
 alter table board add board_link varchar2(2000);
 alter table member add active varchar2(100)
-UPDATE member SET active='true' WHERE *
+UPDATE member SET active='true'
+
+
+
+
 
 --여기부터     6/30 정현 추가
 alter table schedule add m_id varchar2(200) not null; --스캐쥴에 m_id컬럼 추가
 alter table schedule add constraint fk_schedule_m_id foreign key(m_id) references member(m_id);
 --여기까지
-drop sequence comment_id_seq
+drop sequence comment_id_seq;
 drop sequence singer_no_seq;
 drop sequence group_id_seq;
 drop sequence board_no_seq;
@@ -78,6 +82,7 @@ CREATE TABLE board (
 	singer_id NUMBER(4) NOT NULL, /* 가수 */
 	board_writer_type VARCHAR2(50), /* 게시자타입 */
 	board_link varchar2(2000)
+	
 );
 
 create sequence board_no_seq nocache;

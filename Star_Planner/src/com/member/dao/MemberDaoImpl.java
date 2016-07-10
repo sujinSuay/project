@@ -52,7 +52,7 @@ public class MemberDaoImpl implements memberDao {
 	 * @see com.member.dao.memberDao2#updateMemberById(java.util.HashMap)
 	 */
 	@Override
-	public int updateMemberById(HashMap<String, String> map){
+	public int updateMemberById(HashMap<String, Object> map){
 		return session.update("member.updateMemberById", map);
 	}
 	/* (non-Javadoc)

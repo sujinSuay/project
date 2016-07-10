@@ -38,21 +38,22 @@ $(document).ready(function(){
 	
 });
 function deleteComment(comment_id){
-	alert(comment_id);
-	$.ajax({
-		"url":"/Star_Planner/member/deleteMyComment.do",
-		"type":"post",
-		"data":"comment_id="+comment_id,
-		"dataType":"text",
-		"success":function(){
-			window.location.reload();
-		},
-		"error":function(xhr, status, errorMsg){
-			alert("오류 발생 - "+status+","+errorMsg);
-		},
-		"beforeSend":function(){
-		}
-	});
+	if(confirm("게시글을 삭제하시겠습니까?")){
+		$.ajax({
+			"url":"/Star_Planner/member/deleteMyComment.do",
+			"type":"post",
+			"data":"comment_id="+comment_id,
+			"dataType":"text",
+			"success":function(){
+				window.location.reload();
+			},
+			"error":function(xhr, status, errorMsg){
+				alert("오류 발생 - "+status+","+errorMsg);
+			},
+			"beforeSend":function(){
+			}
+		});
+	}
 } 
 </script>
 </head>

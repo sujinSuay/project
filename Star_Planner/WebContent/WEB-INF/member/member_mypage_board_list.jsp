@@ -18,7 +18,7 @@ $(document).ready(function(){
 			if(board.isEmpty){
 				$("#boardTable").append("<tr><td colspan='6'>게시글이 없습니다.</td></tr>");
 			}else{
-				var thtml="111";
+				var thtml="";
 				for(var i=0;i<board.length;i++){
 					thtml="<tr><td>" + board[i].board_no+"</td>"+
 					 		"<td align='left'><a href='/Star_Planner/board/boardView.do?id="+board[i].singer_name+"&no="+board[i].board_no+"&page=1'>"+board[i].board_title+"</a></td>"+
@@ -27,7 +27,6 @@ $(document).ready(function(){
 							"<td>"+board[i].board_hits+"</td>"+
 							"<td>"+board[i].board_likes+"</td>"+
 							"<td><button id='deleteBoard' value='삭제' onclick='deleteBoard("+board[i].board_no+")'>삭제</button></td></tr>";
-		
 					$("#boardTable").append(thtml); 
 				}
 				
@@ -42,21 +41,22 @@ $(document).ready(function(){
 	});
 });
 function deleteBoard(board_no){
-	alert(board_no);
-	$.ajax({
-		"url":"/Star_Planner/member/deleteMyBoard.do",
-		"type":"post",
-		"data":"board_no="+board_no,
-		"dataType":"text",
-		"success":function(){
-			window.location.reload();
-		},
-		"error":function(xhr, status, errorMsg){
-			alert("오류 발생 - "+status+","+errorMsg);
-		},
-		"beforeSend":function(){
-		}
-	});
+	if(confirm("게시글을 삭제하시겠습니까?")){
+		$.ajax({
+			"url":"/Star_Planner/member/deleteMyBoard.do",
+			"type":"post",
+			"data":"board_no="+board_no,
+			"dataType":"text",
+			"success":function(){
+				window.location.reload();
+			},
+			"error":function(xhr, status, errorMsg){
+				alert("오류 발생 - "+status+","+errorMsg);
+			},
+			"beforeSend":function(){
+			}
+		});
+	}
 }
 </script>
 </head>
