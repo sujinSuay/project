@@ -5,16 +5,7 @@
 <meta charset="UTF-8">
 <title>member_join</title>
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 #id_er{
@@ -47,7 +38,7 @@ font-color:green;
                   $("#favorite").append("조건에 일치하는 가수가 없습니다.");
                }else{
                   for (var i = 0; i < singer.length; i++) {
-                     $("#favoriteResult").append("<input type='button' value='"+singer[i].singer_name+"' onclick='addFavorite(&quot;"+singer[i].singer_name+"&quot;,"+singer[i].singer_id+")'> &nbsp;&nbsp;");
+                     $("#favoriteResult").append("<input type='button' style='background-color: #F6F6F6; border-radius: 5px; height: 30px; font-weight: bold; color: #505050' value='"+singer[i].singer_name+"' onclick='addFavorite(&quot;"+singer[i].singer_name+"&quot;,"+singer[i].singer_id+")'> &nbsp;&nbsp;");
                   }
                }
             },
@@ -317,7 +308,7 @@ font-color:green;
 </script>
 </head>
 <body>
-   <div class="joinForm">
+   <div class="joinForm" style="margin: 0px auto; width: 50%; padding-left: 25%;">
       <h2>회원가입</h2>
       <form id="form" method="post" action="/Star_Planner/member/join.do">
          <table>
@@ -377,7 +368,7 @@ font-color:green;
             <tr>
                <td colspan="2">
                   <input type="text" name="member_address" id="postcode" placeholder="우편번호" onclick="execDaumPostcode()" readonly="readonly">
-                  <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기">
+                  <button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
                </td>
                <td></td>
             </tr>
@@ -408,23 +399,25 @@ font-color:green;
                <td><span id="tem_group_er"></span></td>
             </tr>
          </table>
-         <div id="favorite_tr">
-            <table>
+         <div id="favorite_tr" style="padding-bottom: 30px;">
+            <table style="min-height: 70px;">
                <tr>
                   <td><input type="text" size="10" id="keyword"></td>
-                  <td><input type="button" id="searchBtn" value="선호가수 검색"></td>
+                  <td><input type="button" id="searchBtn" value="선호가수 검색" style="background-color: #F6F6F6; border-radius: 5px; width: 110px; height: 30px; font-weight: bold; color: #505050"></td>
                   <td><span id="favoriteResult"></span></td>
                </tr>
             </table>
             <table>
-               <tr id="favoriteList" height="50px">
+               <tr id="favoriteList" style="min-height: 40px;">
                </tr>
             </table>
          </div>
          <table>
-            <tr>
-               <td colspan="2"><input type="reset" name="초기화"><input
-                  type="submit" id="checkForm" value="가입"></td>
+			<tr>
+				<td colspan="2">
+					<button type="submit" id="checkForm" style="background: url('/Star_Planner/img/btn_register.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; margin-right: 80px;"></button>
+					<button type="reset" id="checkForm" style="background: url('/Star_Planner/img/btn_reset.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
+				</td>
             </tr>
          </table>
       </form>

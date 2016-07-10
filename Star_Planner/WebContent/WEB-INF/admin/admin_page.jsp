@@ -28,7 +28,7 @@ $(document).ready(function(){
 				}
 				else{
 			
-					$('#result_search').html('<span id="input_name">' + member.m_id+'</span>' + '<input type="button" class="register_admin" value="등록"/>');
+					$('#result_search').html('<span id="input_name">' + member.m_id+'</span>' + '<input type="button" class="register_admin btn" value="등록"/>');
 				}
 				
 			}, "error" : function(xhr, status, errorMsg){
@@ -64,7 +64,7 @@ $(document).ready(function(){
 				
 				for(var i=0; i<list.length; i++){
 					$('#result_admin').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
-							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="삭제"/></td></tr>');
+							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete btn" value="삭제" /></td></tr>');
 				}  
 				
 			}, "error" : function(xhr, status, errorMsg){
@@ -107,7 +107,7 @@ $(document).ready(function(){
 			
 				for(var i=0; i<list.length; i++){
 					$('#result_admin').append('<tr><td class="m_id">'+ list[i].m_id + '</td><td>' 
-							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete" value="삭제"/></td></tr>');
+							+ list[i].name + '</td><td>' + list[i].phone+'</td><td><input type="button" class="delete btn" value="삭제"/></td></tr>');
 				}  
 				
 				
@@ -374,7 +374,7 @@ $.ajax({
 		var input_explain = $(parent).parent().parent().find('.link_explain').val();
 
 		
-		$(parent).parent().parent().find( '#input_td').html('<b>링     크:</b> <input type="text" class="link_input"/><br><b>검색태그:</b>  <input type="text" class="link_explain" /><br><input type="button" class="link_register_btn" value="등록"/>');
+		$(parent).parent().parent().find( '#input_td').html('<b>링     크:</b> <input type="text" class="link_input btn"/><br><b>검색태그:</b>  <input type="text" class="link_explain" /><br><input type="button" class="link_register_btn" value="등록"/>');
 		
 	$.ajax({
 			type: "post",
@@ -481,7 +481,14 @@ $.ajax({
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-
+input.btn{
+	background-color: #F6F6F6;
+	border-radius: 5px;
+	width: 78px;
+	height: 30px;
+	font-weight: bold;
+	color: #505050
+}
 /*  id에 값을 적용 시킬때는 #으로 하고 class에 style을 적용 시킬떄는 .을 사용 */
  .layout-left {
         width: 46%;
@@ -555,7 +562,7 @@ table {
 <h2>관리자 권한 부여</h2> <br>
 
 <c:if test="${sessionScope.groupId == 0 }">
-	<input type="text" id="admin_id">&nbsp;&nbsp;<input type="button" value="검색" id="search"/>
+	<input type="text" id="admin_id">&nbsp;&nbsp;<input type="button" value="검색" id="search" class="btn"/>
 </c:if>
 <br>
 
@@ -578,7 +585,7 @@ table {
 			<td>${admin.name}</td>
 			<td>${admin.phone}</td>
 			<c:if test="${sessionScope.groupId == 0 }">
-				<td><input type="button" class="delete" value="삭제" /></td>
+				<td><input type="button" class="delete btn" value="삭제"/></td>
 			</c:if>
 		</tr>
 </c:forEach>
@@ -620,8 +627,8 @@ table {
 								</c:forEach>
 							</select>		
 					</td>
-					<td><input type="button" class="register_manager" value="등록"/>
-							<input type="button" class="deny_manager" value="거절"/></td>
+					<td><input type="button" class="register_manager" value="등록" class="btn"/>
+							<input type="button" class="deny_manager" value="거절" class="btn"/></td>
 				</tr>
 			</c:forEach>
 			
@@ -640,7 +647,7 @@ table {
 								</option>
 								</c:forEach>
 							</select>	
-		<input type="button" id="selectManagerList" value="조회"/>
+		<input type="button" id="selectManagerList" value="조회" class="btn"/>
 							
 <div style=" height: 100px; overflow-x: hidden; overflow-y: scroll;">
 <table >
@@ -702,7 +709,7 @@ table {
 
 	</table>
 	
-	<input type="button" id="register_singer_btn" value="등록"/> 
+	<input type="button" id="register_singer_btn" value="등록" class="btn"/> 
 	<div id="result_singer_register"></div>
 	
 	<!--  가수 목록 조회 -->
@@ -715,7 +722,7 @@ table {
 								</option>
 								</c:forEach>
 							</select>	
-		<input type="button" id="selectSingerList" value="조회"/>
+		<input type="button" id="selectSingerList" value="조회" class="btn"/>
 							
 <div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
 <table >
@@ -768,7 +775,7 @@ table {
 	
 	</table>
 	
-	<input type="button" id="register_com_btn" value="등록"/> 
+	<input type="button" id="register_com_btn" value="등록" class="btn"/> 
 	<div id="result_company_register"></div>
 	
 	<!--  회사 목록 조회 -->
@@ -823,14 +830,14 @@ table {
 									<c:when test="${link.link_address eq '' || link.link_address eq null}">
 										링&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;크: <input type="text" class="link_input" /> <br>
 										검색태그: <input type="text" class="link_explain" /><br>
-										<input type="button" class="link_register_btn" value="등록" />
+										<input type="button" class="link_register_btn btn" value="등록" />
 									</c:when>
 
 									<c:otherwise>
 										 <b>링&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;크:</b> <span class="link_input">${link.link_address }</span><br>
 										<b>검색태그: </b><span class="link_explain">${link.file_name }</span><br>
-										<input type="button" class="link_modify_btn" value="수정" />
-										<input type="button" class="link_delete_btn" value="삭제" />
+										<input type="button" class="link_modify_btn btn" value="수정" />
+										<input type="button" class="link_delete_btn btn" value="삭제" />
 									</c:otherwise>
 								</c:choose></td>
 

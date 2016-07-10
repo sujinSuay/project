@@ -22,7 +22,7 @@ $(document).ready(function(){
 					 		"<td align='left'><a href='/Star_Planner/board/boardView.do?id="+comment[i].singer_name+"&no="+comment[i].board_no+"&page=1'>"+comment[i].comment_content+"</a></td>"+
 					 		"<td>"+comment[i].singer_name+"</td>"+
 							"<td>"+comment[i].comment_date+"</td>"+
-							"<td><button id='deleteComment' value='삭제' onclick='deleteComment("+comment[i].comment_id+")'>삭제</button></td></tr>";
+							"<td><button id='deleteComment' onclick='deleteComment("+comment[i].comment_id+")' style='width: 78px; height: 30px; background: url(\"/Star_Planner/img/btn_d_del.gif\") center; background-repeat: no-repeat; border-radius: 5px;'></button></td></tr>";
 					$("#commentTable").append(thtml); 
 				}
 				
@@ -53,12 +53,50 @@ function deleteComment(comment_id){
 		"beforeSend":function(){
 		}
 	});
-} 
+}
+var stripe = function() {
+	/* var tables = document.getElementsByTagName("table"); */
+	var tables = document.getElementsByName("listTable");
+
+	for(var x=0;x!=tables.length;x++){
+		var table = tables[x];
+		if (! table) { return; }
+		
+		var tbodies = table.getElementsByTagName("tbody");
+		
+		for (var h = 0; h < tbodies.length; h++) {
+			var even = true;
+			var trs = tbodies[h].getElementsByTagName("tr");
+			
+			for (var i = 0; i < trs.length; i++) {
+				trs[i].onmouseover=function(){
+					this.className += " ruled"; return false
+				}
+				trs[i].onmouseout=function(){
+					this.className = this.className.replace("ruled", ""); return false
+				}
+				
+			}
+		}
+	}
+}
+
+window.onload = stripe;
 </script>
+<style type="text/css">
+
+tbody tr.ruled td{
+		color: #000;
+		background-color: #C6E3FF; 
+		font-weight: bold;
+		border-color: #3292FC;
+}
+
+</style>
 </head>
 <body>
-<div style=" height: 200px; width:100%; overflow-x: hidden; overflow-y: scroll;">
-	<table style="width: 100%">
+<div style=" height: 200px; width:100%; overflow-x: hidden; overflow-y: scroll; padding-bottom: 30px;">
+	<table style="width: 100%" name="listTable">
 		<thead>
 			<tr>
 				<th width="10%">번호</th>

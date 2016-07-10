@@ -2,21 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-
-
 <head>
 <meta charset="UTF-8">
 <title>main</title>
-<style type="text/css">
-
-</style>
 </head>
 <body>
 	<div align="center" style="min-width: 1280px;">
 		<c:forEach var="link" items="${requestScope.list }" varStatus="status">
 			<c:if test="${status.index == 0 || status.index == 1 || status.index == 2}">
 				<c:if test="${link.link_address != null && link.link_address !='' }">
-					<iframe width="420" height="250" src="${link.link_address }" scrolling=no allowfullscreen frameborder="0" ></iframe>
+					<iframe style="width: 33%" height="300" src="${link.link_address }" scrolling=no allowfullscreen frameborder="0"></iframe>
 				</c:if>
 			</c:if>
 		</c:forEach>

@@ -131,6 +131,9 @@ public class MemberController {
 		} 
 	
 		Member mem = memberService.getMemberById((String)session.getAttribute("loginId"));
+		if(mem.getAddress() == null){
+			mem.setAddress("1.1.1");
+		}
 		String[] addr = mem.getAddress().split("\\.");
 		if(mem.getFavorite()!=null) {
 			mem.setFavoriteList(mem.getFavorite());

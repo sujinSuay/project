@@ -21,7 +21,7 @@
 						$("#favorite").append("조건에 일치하는 가수가 없습니다.");
 					}else{
 						for (var i = 0; i < singer.length; i++) {
-							$("#favoriteResult").append("<input type='button' value='"+singer[i].singer_name+"' onclick='addFavorite(&quot;"+singer[i].singer_name+"&quot;,"+singer[i].singer_id+")'> &nbsp;&nbsp;");
+							$("#favoriteResult").append("<input type='button' style='background-color: #F6F6F6; border-radius: 5px; height: 30px;' value='"+singer[i].singer_name+"' onclick='addFavorite(&quot;"+singer[i].singer_name+"&quot;,"+singer[i].singer_id+")'> &nbsp;&nbsp;");
 						}
 					}
 				},
@@ -154,7 +154,7 @@
 </script>
 </head>
 <body>
-<div style="margin: 0px auto; width: 650px; padding-left: 400px;">
+<div style="margin: 0px auto; width: 50%; padding-left: 25%;">
 <h2>회원정보변경</h2>
 	<form id="form" method="post" action="/Star_Planner/member/modify.do">
 		<input type='hidden' name='m_id' value="${requestScope.member.m_id }"
@@ -235,7 +235,7 @@
 				<td>주소</td>
 				<td colspan="2">
 					<input type="text" id="postcode" name="member_address" value="${requestScope.temAdr[0] }" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
-					<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
+					<button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
 				</td>
 			</tr>
 			<tr>
@@ -247,16 +247,16 @@
 			</tr>
 		</table>
 
-		<div id="favorite_tr">
-			<table>
+		<div id="favorite_tr" style="padding-bottom: 30px;">
+			<table style="min-height: 70px;">
 				<tr>
 					<td><input type="text" size="10" id="keyword"></td>
-					<td><input type="button" id="searchBtn" value="선호가수 검색"></td>
+					<td><input type="button" id="searchBtn" value="선호가수 검색" style="background-color: #F6F6F6; border-radius: 5px; width: 110px; height: 30px; font-weight: bold; color: #505050"></td>
 					<td><span id="favoriteResult"></span></td>
 				</tr>
 			</table>
 			<table>
-				<tr id="favoriteList">
+				<tr id="favoriteList" style="min-height: 40px;">
 					<c:forEach items="${requestScope.member.favoriteList }" var="name">
 						<td id="${name}">${name} <input type='hidden'
 							value='${name }' name='favorite'>
@@ -267,7 +267,10 @@
 		</div>
 		<table>
 			<tr>
-				<td colspan="2"><input type="submit" id="checkForm" value="변경"></td>
+				<td>
+					<button id="checkForm" type="submit" style="background: url('/Star_Planner/img/btn_save.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; margin-right: 50px;"></button>
+					<button type="reset" id="checkForm" style="background: url('/Star_Planner/img/btn_reset.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
+				</td>
 			</tr>
 		</table>
 	</form>

@@ -9,7 +9,7 @@ a:link {text-decoration: none; color: #333333;}
 a:visited {text-decoration: none; color: #333333;}
 a:hover {text-decoration: underline; color: blue;}
 
-ul.menu { margin: 50px auto 0 auto; }
+ul.menu { margin: 50px auto 25px auto;}
 </style>
 
 <ul class="menu">

@@ -7,37 +7,130 @@
 <head>
 <meta charset="UTF-8">
 <title>board_list</title>
+<script type="text/javascript">
+	var stripe = function() {
+		/* var tables = document.getElementsByTagName("table"); */
+		var tables = document.getElementsByName("listTable");
+
+		for(var x=0;x!=tables.length;x++){
+			var table = tables[x];
+			if (! table) { return; }
+			
+			var tbodies = table.getElementsByTagName("tbody");
+			
+			for (var h = 0; h < tbodies.length; h++) {
+				var even = true;
+				var trs = tbodies[h].getElementsByTagName("tr");
+				
+				for (var i = 0; i < trs.length; i++) {
+					trs[i].onmouseover=function(){
+						this.className += " ruled"; return false
+					}
+					trs[i].onmouseout=function(){
+						this.className = this.className.replace("ruled", ""); return false
+					}
+				}
+			}
+		}
+	}
+
+	window.onload = stripe;
+</script>
 <style type="text/css">
+th {
+	font: bold "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: center;
+	padding: 6px 6px 6px 12px;
+	background: #E1EEF7 url(/Star_Planner/img/bg_header.jpg) no-repeat;
+}
+
+td.list {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	background: #fff;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72;
+}
+
+td.alt {
+	background: #EBF7FF;
+	color: #797268;
+}
+
+td.spec {
+	border-left: 1px solid #C1DAD7;
+	border-top: 0;
+	background: #fff url(/Star_Planner/img/bullet1.gif) no-repeat;
+	font: bold "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+}
+
+td.specalt {
+	border-left: 1px solid #C1DAD7;
+	border-top: 0;
+	background: #EBF7FF url(/Star_Planner/img/bullet2.png) no-repeat;
+	font: bold "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #797268;
+}
+tbody tr.ruled td{
+		color: #000;
+		background-color: #C6E3FF; 
+		font-weight: bold;
+		border-color: #3292FC;
+}
 </style>
 </head>
 <body>
 	<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
-	<div style="min-height: 480px;">
-		<table>
+	<div style="min-height: 480px; width: 100%;">
+		<table name="listTable" style="width: 100%;">
 			<thead>
 				<tr>
-					<th>번호</th>
-					<th width="300">제목</th>
-					<th width="150">글쓴이</th>
-					<th width="200">날짜</th>
-					<th>조회</th>
-					<th>추천</th>
+					<th width="10%">번호</th>
+					<th width="52%">제목</th>
+					<th width="13%">글쓴이</th>
+					<th width="15%">날짜</th>
+					<th width="5%">조회</th>
+					<th width="5%">추천</th>
 				</tr>
 			</thead>
 			<tbody align="center">
-				<c:forEach items="${requestScope.list }" var="board">
-					<tr>
-						<td width="10%">${board.board_writer_type}&nbsp;${board.board_no }</td>
-						<td align="left" width="50%">
-							<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
-								${board.board_title }
-							</a>
-						</td>
-						<td width="10%"><%--  --%>${board.m_id }</td>
-						<td width="20%"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
-						<td width="5%">${board.board_hits }</td>
-						<td width="5%">${board.board_likes }</td>
-					</tr>	
+				<c:forEach items="${requestScope.list }" var="board" varStatus="no">
+					<c:choose>
+						<c:when test="${no.count%2 == 0 }">
+							<tr>
+								<td class="specalt list">${board.board_writer_type}&nbsp;${board.board_no }</td>
+								<td align="left" class="alt list">
+									<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+										${board.board_title }
+									</a>
+								</td>
+								<td class="alt list">${board.m_id }</td>
+								<td class="alt list"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
+								<td class="alt list">${board.board_hits }</td>
+								<td class="alt list">${board.board_likes }</td>
+							</tr>	
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td class="spec list">${board.board_writer_type}&nbsp;${board.board_no }</td>
+								<td align="left" class="list">
+									<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+										${board.board_title }
+									</a>
+								</td>
+								<td class="list">${board.m_id }</td>
+								<td class="list"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.board_date }"/></td>
+								<td class="list">${board.board_hits }</td>
+								<td class="list">${board.board_likes }</td>
+							</tr>	
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</tbody>
 		</table>

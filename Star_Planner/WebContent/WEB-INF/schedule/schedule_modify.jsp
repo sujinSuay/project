@@ -120,7 +120,7 @@ td{
 				<td>일정 장소</td>
 				<td colspan="2">
 					<input type="text" id="postcode" name="schedule_address" value="${requestScope.temAdr[0] }" required="required" onclick="execDaumPostcode()" readonly="readonly"> 
-					<input type="button" onclick="execDaumPostcode()" value="주소 찾기">
+					<button onclick="execDaumPostcode()" style="background: url('/Star_Planner/img/btn_address.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; vertical-align: bottom;"></button>
 				</td>
 			</tr>
 			<tr>
@@ -136,8 +136,8 @@ td{
 			</tr>
 			<tr>
 				<td align="center" colspan="2">
-					<input type="submit" value="수정">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="reset" value="초기화">
+					<button type="submit" style="background: url('/Star_Planner/img/btn_save.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px; margin-right: 80px;"></button>
+					<button type="reset" style="background: url('/Star_Planner/img/btn_reset.png') center; width: 78px; height: 30px; background-repeat: no-repeat; border-radius: 5px;"></button>
 				</td>
 			</tr>
 		</table>

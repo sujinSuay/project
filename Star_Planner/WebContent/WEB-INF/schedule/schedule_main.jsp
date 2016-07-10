@@ -305,17 +305,37 @@ tr{
 	vertical-align: top;
 	padding-bottom: 10px;
 }
+#search .blue_window{
+	display:-moz-inline-block;
+	display:-moz-inline-box;
+	display:inline-block;
+	width:358px;
+	height:26px;
+	border:7px solid #4165CF;
+	background-color:#fff
+	}
+#search .input_text{
+	width:323px;
+	height:17px;
+	border:0 none;
+	font-weight:bold;
+	font-size:14px;
+	color:#000;*ime-mode:active;
+	outline:none
+}
 </style>
 </head>
 <body>
-	<div align="center">
-		<select id="category">
-			<c:forEach items="${requestScope.categoryList }" var="category">
-				<option>${category }</option>
-			</c:forEach>
-		</select>
-		<input type="text" id="keyword" size="20">
-		<input type="button" id="searchBtn" value="검색">
+	<div align="center" id="search">
+		<span class="blue_window" style="width: auto;">
+			<select id="category" style="height: 100%;">
+				<c:forEach items="${requestScope.categoryList }" var="category">
+					<option>${category }</option>
+				</c:forEach>
+			</select>
+		</span>
+		<span class="blue_window"><input type="text" id="keyword" size="20" class="input_text"></span>
+		<input type="image" id="searchBtn" src="/Star_Planner/img/btn_d_search.png" style="vertical-align: middle;">
 	</div>
 	<p>
 	<div style="float: left; padding-left: 200px;"><span>검색 결과:&nbsp;&nbsp;</span></div>

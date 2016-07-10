@@ -87,11 +87,9 @@ $(document).ready(function(){
 			</c:if>
 		</div>
 		<div align="center" style="padding-bottom: 15px;">
-			<button id="likeBtn" style="background: url('/Star_Planner/img/facebook_like_button_big.jpg') center; width: 100px; height: 44px; background-repeat: no-repeat; text-align: right;">
+			<button id="likeBtn" style="background: url('/Star_Planner/img/facebook_like_button_big.jpg') center; width: 100px; height: 44px; background-repeat: no-repeat; text-align: right; border-radius: 5px; ">
 				<span class="likes" style="padding-right: 18px;">${requestScope.board.board_likes }</span>
 			</button>
-			<!-- <input type="image" id="likeBtn" style="background-image: url('/Star_Planner/img/facebook_like_button_big.jpg'); width: 100px; height: 44px; background-repeat: no-repeat;"> -->
-			
 		</div>
 	</section>
 	<!--  댓글 부분 -->

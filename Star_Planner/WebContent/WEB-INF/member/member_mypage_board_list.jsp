@@ -26,7 +26,7 @@ $(document).ready(function(){
 							"<td>"+board[i].board_date+"</td>"+
 							"<td>"+board[i].board_hits+"</td>"+
 							"<td>"+board[i].board_likes+"</td>"+
-							"<td><button id='deleteBoard' value='삭제' onclick='deleteBoard("+board[i].board_no+")'>삭제</button></td></tr>";
+							"<td><button id='deleteBoard' onclick='deleteBoard("+board[i].board_no+")' style='width: 78px; height: 30px; background: url(\"/Star_Planner/img/btn_d_del.gif\") center; background-repeat: no-repeat; border-radius: 5px;'></button></td></tr>";
 		
 					$("#boardTable").append(thtml); 
 				}
@@ -61,7 +61,7 @@ function deleteBoard(board_no){
 </script>
 </head>
 <body>
-<div style=" height: 200px; width:100%; overflow-x: hidden; overflow-y: scroll;">
+<div style=" height: 200px; width:100%; overflow-x: hidden; overflow-y: scroll; padding-bottom: 30px;">
 	<table style="width: 100%;">
 		<thead>
 			<tr>

@@ -10,7 +10,7 @@
 
 /* Menu */
 .menu {	
-	height: 100px;
+	height: 105px;
 	width: 100%;
 	min-width: 1280px;
 
@@ -63,7 +63,7 @@
 .menu li:first-child a { border-left: none; }
 .menu li:last-child a{ border-right: none; }
 
-.menu li:hover > a { color: #FFB2F5; }
+.menu li:hover > a { color: #FFC4FF; }
 
 /* Sub Menu */
 

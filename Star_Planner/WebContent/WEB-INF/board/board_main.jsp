@@ -51,14 +51,32 @@ td{
 	padding-bottom: 10px;
 	vertical-align: top;
 }
+#search .blue_window{
+	display:-moz-inline-block;
+	display:-moz-inline-box;
+	display:inline-block;
+	width:358px;
+	height:26px;
+	border:7px solid #4165CF;
+	background-color:#fff
+	}
+#search .input_text{
+	width:323px;
+	height:17px;
+	border:0 none;
+	font-weight:bold;
+	font-size:14px;
+	color:#000;*ime-mode:active;
+	outline:none
+}
 </style>
 </head>
 <body>
 <table>
 	<tr align="center">
-		<td colspan="4">
-			<input type="text" id="keyword" size="20">
-			<input type="button" id="searchBtn" value="검색">
+		<td colspan="4" id="search">
+			<span class="blue_window"><input type="text" id="keyword" size="20" class="input_text"></span>
+			<input type="image" id="searchBtn" src="/Star_Planner/img/btn_d_search.png" style="vertical-align: middle;">
 		</td>
 	</tr>
 	<tr>
@@ -86,25 +104,25 @@ td{
 	<tr align="center">
 		<td align="left" style="padding-left: 80px;">
 			<c:forEach items="${requestScope.list1 }" var="list1" varStatus="no" begin="0" end="9">
-				<a href="/Star_Planner/board/boardList.do?id=${list1.singer.singer_name }&page=1">${no.count}. ${list1.singer.singer_name }</a>
+				<a href="/Star_Planner/board/boardList.do?id=${list1.singer.singer_name }&page=1"><span style="font-weight: bold;">${no.count}.</span> ${list1.singer.singer_name }</a>
 				<br>
 			</c:forEach>
 		</td>
 		<td align="left" style="padding-left: 25px;">
 			<c:forEach items="${requestScope.list2 }" var="list2" varStatus="no" begin="0" end="9">
-				<a href="/Star_Planner/board/boardView.do?id=${list2.singer_name }&no=${list2.board_no }&page=1">${no.count}. (${list2.singer_name })${list2.board_title }</a>
+				<a href="/Star_Planner/board/boardView.do?id=${list2.singer_name }&no=${list2.board_no }&page=1"><span style="font-weight: bold;">${no.count}.</span> (${list2.singer_name })${list2.board_title }</a>
 				<br>
 			</c:forEach>
 		</td>
 		<td align="left" style="padding-left: 25px;">
 			<c:forEach items="${requestScope.list3 }" var="list3" varStatus="no" begin="0" end="9">
-				<a href="/Star_Planner/board/boardView.do?id=${list3.singer_name }&no=${list3.board_no }&page=1">${no.count}. (${list3.singer_name })${list3.board_title }</a>
+				<a href="/Star_Planner/board/boardView.do?id=${list3.singer_name }&no=${list3.board_no }&page=1"><span style="font-weight: bold;">${no.count}.</span> (${list3.singer_name })${list3.board_title }</a>
 				<br>
 			</c:forEach>
 		</td>
 		<td align="left" style="padding-left: 80px;">
 			<c:forEach items="${requestScope.list4 }" var="list3" varStatus="no" begin="0" end="9">
-				<a href="/Star_Planner/board/boardList.do?id=${list3.singer_name }&page=1">${no.count}. ${list3.singer_name }</a>
+				<a href="/Star_Planner/board/boardList.do?id=${list3.singer_name }&page=1"><span style="font-weight: bold;">${no.count}.</span> ${list3.singer_name }</a>
 				<br>
 			</c:forEach>
 		</td>
