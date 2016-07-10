@@ -7,12 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>board_modify</title>
-<style type="text/css">
-select{
-	width: 70px;
-}
-
-</style>
 <script type="text/javascript" src="/Star_Planner/scripts/jquery.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -43,33 +37,21 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<c:if test="${not empty requestScope.errorList }">
-	<ul id="error">
-		<c:forEach items="${requestScope.errorList }" var="error">
-			<li>${error }</li>
-		</c:forEach>
-	</ul>
-</c:if>
 
-<form action="/Star_Planner/board/boardModify.do" method="post" enctype="multipart/form-data">
+<form action="/Star_Planner/board/boardModify.do" method="post" enctype="multipart/form-data" style="width: 100%;">
 <input type="hidden" name="id" value="${param.id }">
 <input type="hidden" name="no" value="${param.no }">
 <input type="hidden" name="page" value="${param.page }">
-<table>
+<table style="width: 100%;">
 	<tr>
 		<td>
-			<%-- <select name="prefix">
-				<c:forEach items="${requestScope.codeList }" var="code">
-					<option ${code.codeName == param.prefix?'selected="selected"':'' }>${code.codeName }</option>
-				</c:forEach>
-			</select> --%>
-			<input type="text" name="board_title" size="70" placeholder="제목" value="${requestScope.board.board_title }">
+			<input type="text" name="board_title" style="width: 50%;" placeholder="제목" value="${requestScope.board.board_title }">
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<div id="upfileList">
-				<div id="file1_field">
+				<div id="file1_field" style="float: left; padding-right: 10px;">
 					<c:choose>
 						<c:when test="${requestScope.upfile1 != 'noData' }">
 							<img width="20%" height="20%" id="fileImg1" src="/Star_Planner/uploadFile/${requestScope.upfile1}">
@@ -81,7 +63,7 @@ $(document).ready(function(){
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div id="file2_field">
+				<div id="file2_field" style="float: left; padding-right: 10px;">
 					<c:choose>
 						<c:when test="${requestScope.upfile2 != 'noData' }">
 							<img width="20%" height="20%" id="fileImg2" src="/Star_Planner/uploadFile/${requestScope.upfile2}">
@@ -93,7 +75,7 @@ $(document).ready(function(){
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div id="file3_field">
+				<div id="file3_field" style="float: left;">
 					<c:choose>
 						<c:when test="${requestScope.upfile3 != 'noData' }">
 							<img width="20%" height="20%" id="fileImg3" src="/Star_Planner/uploadFile/${requestScope.upfile3}">
@@ -111,11 +93,14 @@ $(document).ready(function(){
 	</tr>
 	<tr>
 		<td>
-			<textarea rows="20" cols="100" name="board_content">${requestScope.board.board_content }</textarea>
+			<textarea rows="20" name="board_content" style="width: 100%;">${requestScope.board.board_content }</textarea>
 		</td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="저장"> <input type="reset" value="초기화">
+		<td align="center">
+			<input type="image" src="/Star_Planner/img/btn_save.gif">&nbsp;
+			<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${param.no}&page=${param.page}"><img src="/Star_Planner/img/btn_cancle.gif"/></a>
+		</td>
 	</tr>	
 </table>
 </form>

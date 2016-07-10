@@ -167,7 +167,7 @@
 </script>
 </head>
 <body>
-<div style="margin: 0px auto; width: 650px;">
+<div style="margin: 0px auto; width: 650px; padding-left: 400px;">
 <h2>회원정보변경</h2>
 	<form id="form" method="post" action="/Star_Planner/member/modify.do">
 		<input type='hidden' name='m_id' value="${requestScope.member.m_id }"
