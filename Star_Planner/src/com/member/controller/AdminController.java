@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.common.vo.Group;
 import com.common.vo.LinkList;
 import com.member.service.AdminServiceImpl;
+import com.member.service.MemberService;
 import com.member.vo.ManagerList;
 import com.member.vo.Member;
 import com.member.vo.SingerList;
@@ -22,6 +23,8 @@ public class AdminController {
 
 	@Autowired
 	AdminServiceImpl adminService;
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping("/adminMain")
 	@ResponseBody

@@ -60,7 +60,7 @@ $(document).ready(function(){
 	<h2 align="left"><span class="galleryName">${param.id }</span> <span class="gallery">갤러리</span></h2>
 	<section id="board_section">
 		<header id="board_header">
-			<div style="background-color: #F6F6F6; padding: 20px;">
+			<div style="background-color: #C4DEFF; padding: 20px;">
 				<span style="float: left; padding-right: 30px; color: #8C8C8C;">제목</span><span style="font-weight: bold;">${requestScope.board.board_title }</span>
 				<span style="float: right; color: #747474;"><fmt:formatDate value="${requestScope.board.board_date}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
 				<br><br>

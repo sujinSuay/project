@@ -12,9 +12,9 @@ Body{
 	min-width: 1280px;
 	font-family:"맑은 고딕",'malgun gothic',dotum,gulim;
 	padding-bottom: 50px;
-	/* background: -webkit-linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
-	background: linear-gradient(45deg, rgba(66, 183, 245, 0.8) 0%, rgba(66, 245, 189, 0.4) 100%);
-	color: rgba(0, 0, 0, 0.6);
+	/* background: -webkit-linear-gradient(45deg, rgba(230, 255, 255, 0.96) 0%, rgba(212, 244, 250, 0.2) 100%);
+	background: linear-gradient(45deg, rgba(230, 255, 255, 0.6) 0%, rgba(212, 244, 250, 0.2) 100%);
+	color: rgba(0, 0, 0, 1);
 	font-family: "Roboto", sans-serif;
 	font-size: 14px;
 	line-height: 1.6em;

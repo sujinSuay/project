@@ -138,4 +138,5 @@ public class AdminServiceImpl {
 		return adminDao.inactiveManager(m_id);
 	}
 
+
 }

@@ -13,7 +13,7 @@ ul.menu { margin: 50px auto 25px auto;}
 </style>
 
 <ul class="menu">
-	<div align="center" style="padding: 20px;">스케줄 다이소</div>
+	<div align="center" style="padding: 20px;">Plan Daiso</div>
 	<li><a href="/Star_Planner/main/home.do" style="border-left: none;">메인</a></li>
 	<li><a href="/Star_Planner/schedule/scheduleMain.do">일정</a>
 		<c:if test="${sessionScope.loginId != null && sessionScope.groupId != 2 && sessionScope.groupId != 3}">

@@ -195,7 +195,6 @@ $(document).ready(function(){
 			var singer_link = $('#singer_link').val();
 			var singer_tag = $('#singer_tag').val(); 
 			
-		alert(singer_company);
 		
 	 	$.ajax({
 			type: "post",
@@ -209,6 +208,7 @@ $(document).ready(function(){
 			"success" : function(list){
 			
 					alert('등록되었습니다');
+					window.location.reload();
 			
 				
 			}, "error" : function(xhr, status, errorMsg){
@@ -699,7 +699,7 @@ table {
 					<td>${manager.name}</td>
 					<td>${manager.phone}</td>
 					<td>${manager.group_name }	</td>
-					<td><button onclick="inactiveManager('${manager.m_id}')">박탈</button>
+					<td><input type="button" id="selectManagerList" value="박탈" class="btn" onclick="inactiveManager('${manager.m_id}')"/></td>
 				</tr>
 			</c:forEach>
 		
@@ -775,7 +775,7 @@ table {
 					<td >${singer.type_name}</td>
 					<td>${singer.singer_name}</td>
 					<td>${singer.group_name}</td>
-					<td>${singer.singer_favorite}	</td>
+					<td>${singer.singer_favorite}</td>
 				</tr>
 			</c:forEach>
 		

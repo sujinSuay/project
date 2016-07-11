@@ -1,7 +1,12 @@
 select * from member where m_id='master';
 select * from comments;
 select * from singer;
+select board_no From board where singer_id=56
+select * from COMMENTS where board_no=85
 
+delete from comments where board_no=86
+delete from board where board_no=86
+delete FROM singer where singer_id=56
 INSERT INTO member
 VALUES ('sujin@kosta.com', '933333333333', 'sujin',  0, '여', '김수진', 'sujin@kosta', '주소', '전화번호', '선호그룹' )
 select group_id_seq.nextval from dual
