@@ -107,6 +107,14 @@ tbody tr.ruled td{
 								<td class="specalt list">${board.board_writer_type}&nbsp;${board.board_no }</td>
 								<td align="left" class="alt list">
 									<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+										<c:choose>
+											<c:when test="${board.board_link == 'noData,noData,noData,'}">
+												<img src="/Star_Planner/img/noImgAlt.png"/>
+											</c:when>
+											<c:otherwise>
+												<img src="/Star_Planner/img/Img.png"/>
+											</c:otherwise>
+										</c:choose>
 										${board.board_title }
 									</a>
 								</td>
@@ -121,6 +129,14 @@ tbody tr.ruled td{
 								<td class="spec list">${board.board_writer_type}&nbsp;${board.board_no }</td>
 								<td align="left" class="list">
 									<a href="/Star_Planner/board/boardView.do?id=${param.id}&no=${board.board_no}&page=${paging.page}">
+										<c:choose>
+											<c:when test="${board.board_link == 'noData,noData,noData,'}">
+												<img src="/Star_Planner/img/noImg.png"/>
+											</c:when>
+											<c:otherwise>
+												<img src="/Star_Planner/img/Img.png"/>
+											</c:otherwise>
+										</c:choose>
 										${board.board_title }
 									</a>
 								</td>
