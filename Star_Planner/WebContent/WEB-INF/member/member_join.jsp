@@ -318,45 +318,45 @@
                      id="group_id1" name="group_id" value='3'>매니져</label> <label><input
                      type="radio" id="group_id2" name="group_id" value="2"
                      checked="checked">일반회원</label></td>
-               <td><span id="group_er"></span></td>
+               <td><span id="group_er" style="color: red;"></span></td>
                <td></td>
             </tr>
             <tr>
                <td>아이디</td>
                <td><input type="text" id="m_id" name="m_id"
                   value="${requestScope.id }"></td>
-               <td><span id="id_er"></span>
+               <td><span id="id_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
                <td>이름</td>
                <td><input type="text" id="name" name="name"
                   value="${requestScope.name }"></td>
-               <td><span id="name_er"></span>
+               <td><span id="name_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
                <td>비밀번호</td>
                <td><input type="password" name="password" id="password"></td>
-               <td><span id="password_er"></span>
+               <td><span id="password_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
                <td>비밀번호확인</td>
                <td><input type="password" name="passwordCK" id="passwordCK"></td>
-               <td><span id="passwordCK_er"></span>
+               <td><span id="passwordCK_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
                <td>이메일</td>
                <td><input type="email" name="email" id="email"></td>
-               <td><span id="email_er"></span>
+               <td><span id="email_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
                <td>연락번호</td>
                <td><input type="number" name="phone" id="phone"></td>
-               <td><span id="phone_er"></span>
+               <td><span id="phone_er" style="color: red;"></span>
                <td>
             </tr>
             <tr>
@@ -378,12 +378,12 @@
                   <input type="text" id="address" name="member_address" placeholder="주소" onclick="execDaumPostcode()" readonly="readonly">
                   <input type="text" id="address2" name="member_address" placeholder="상세주소">
                </td>
-               <td><span id="address_er"></span></td>
+               <td><span id="address_er" style="color: red;"></span></td>
             </tr>
             <tr>
                <td>주민번호</td>
                <td><input type="text" id="social_no1" name="social_no" maxlength="6" size="6">-<input type="password" id="social_no2" name="social_no" maxlength="7" size="7"></td>
-               <td><span id="social_no_er"></span></td>
+               <td><span id="social_no_er" style="color: red;"></span></td>
                <td></td>
             </tr>
             <tr id="manager">

@@ -208,34 +208,34 @@
 			<tr>
 				<td>이름</td>
 				<td>${requestScope.member.name}</td>
-				<td><span id="name_er"></span>
+				<td><span id="name_er" style="color: red;"></span>
 				<td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
 				<td><input type="password" name="password" id="password"
 					value="${requestScope.member.password }"></td>
-				<td><span id="password_er"></span>
+				<td><span id="password_er" style="color: red;"></span>
 				<td>
 			</tr>
 			<tr>
 				<td>비밀번호확인</td>
 				<td><input type="password" name="passwordCK" id="passwordCK"></td>
-				<td><span id="passwordCK_er"></span>
+				<td><span id="passwordCK_er" style="color: red;"></span>
 				<td>
 			</tr>
 			<tr>
 				<td>이메일</td>
 				<td><input type="email" name="email" id="email"
 					value="${requestScope.member.email}"></td>
-				<td><span id="email_er"></span>
+				<td><span id="email_er" style="color: red;"></span>
 				<td>
 			</tr>
 			<tr>
 				<td>연락번호</td>
 				<td><input type="number" name="phone" id="phone"
 					value="${requestScope.member.phone}"></td>
-				<td><span id="phone_er"></span>
+				<td><span id="phone_er" style="color: red;"></span>
 				<td>
 			</tr>
 			<tr>
@@ -252,7 +252,7 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td><span id="gender_er"></span></td>
+				<td><span id="gender_er" style="color: red;"></span></td>
 			</tr>
 			<tr>
 				<td>주소</td>
