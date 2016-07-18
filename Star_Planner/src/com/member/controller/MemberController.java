@@ -252,4 +252,60 @@ public class MemberController {
 			memberService.inactiveMemberById(mem);
 			return "true";
 	}
+	@RequestMapping("/findId")
+	@ResponseBody
+	public Object findId(String name, String social_no){
+		System.out.println(name + " / " + social_no);
+		String[] tem = social_no.split(",");
+		try{
+			int test = Integer.parseInt(tem[0]);
+			test = Integer.parseInt(tem[1]);
+			social_no=Integer.parseInt(tem[0]) + "-" +Integer.parseInt(tem[1]); 
+		}catch(NumberFormatException e){
+			return "numberFormat";
+		}
+	
+		List<Member> memList = memberService.selectMemberByName(name);
+		if(memList==null){
+			return "empty";
+		}else{
+			String m_id="noMatch";
+			String password="";
+			String email="";
+			HashMap<String,String> map = new HashMap<String,String>();
+			for(Member i:memList){
+				if(social_no.equals(i.getSocial_no())){
+					m_id = i.getM_id();
+					password = i.getPassword();
+					email = i.getEmail();
+					break;
+				}
+			}
+			map.put("m_id", m_id);
+			map.put("password", password);
+			map.put("email", email);
+			return map;
+		}
+	}
+	@RequestMapping("/findPassword")
+	@ResponseBody
+	public String findPassword(String email, String m_id) throws Exception{
+		System.out.println(email + "/" + m_id);
+		Member mem = memberService.getMemberById(m_id);
+		System.out.println(mem);
+		if(mem!=null){
+			if(mem.getEmail().equals(email)){
+				Email email2 = new Email();
+		        String reciver = email; //받을사람의 이메일
+		        String subject = "[StarPlanner][비밀번호 입니다.]";
+		        String content = m_id+"님의 패스워드는 [" + mem.getPassword() + "] 입니다.";
+		        email2.setReciver(reciver);
+		        email2.setSubject(subject);
+		        email2.setContent(content);
+		        emailSender.SendEmail(email2);
+		        return "success";
+			}
+		}
+		return "noMatch";
+	}
 }

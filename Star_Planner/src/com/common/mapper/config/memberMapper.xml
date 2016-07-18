@@ -75,4 +75,9 @@
 		SET active = 'false'
 		WHERe m_id=#{m_id}
 	</update>
+	            
+	<select id="selectMemberByName" parameterType="string" resultMap="member-resultmap">
+		<include refid="select-basic" />
+		WHERE name=#{name}
+	</select>
 </mapper>

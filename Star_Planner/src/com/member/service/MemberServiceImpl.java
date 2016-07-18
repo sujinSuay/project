@@ -105,4 +105,8 @@ public class MemberServiceImpl implements MemberService{
 		// TODO Auto-generated method stub
 		return memberDao.inactiveMemberById(mem);
 	}
+	@Override
+	public List selectMemberByName(String name) {
+		return memberDao.selectMemberByName(name);
+	}
 }
