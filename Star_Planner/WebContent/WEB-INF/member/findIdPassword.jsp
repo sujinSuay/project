@@ -100,43 +100,44 @@ function findPasswordBtn(){
 </script>
 </head>
 <body>
-	<label><input type="radio" name="IdPasswordRadio" id="IdPasswordRadio1" checked="checked" onclick="changeFindForm('id')">ID찾기</label>
-	<label><input type="radio" name="IdPasswordRadio" id="IdPasswordRadio" onclick="changeFindForm('password')">Password찾기</label>
-		
-	<div id="findIdDiv">
-		<table>
-			<tr>
-				<td>이름</td>
-				<td><input type='text' id='name'></td>
-				<td><span id="name_er" style="color:red;"></span></td>
-			</tr>
-			<tr>
-				<td>주민번호</td>
-				<td><input type='text' id='social_no1' name='social_no' maxlength='6' size='6'>-<input type='password' id='social_no2' name='social_no' maxlength='7' size='7'></td>
-				<td><span id="social_no_er" style="color:red;"></span></td>
-			</tr>
-			<tr>
-				<td></td><td><button onclick="findIdBtn()">ID찾기</button></td>
-			</tr>
-		</table>
-	</div>
-	<div id="findPasswordDiv">
-		<table>
-			<tr>
-				<td>ID</td>
-				<td><input type="text" id="m_id"></td>
-				<td><span id="m_id_er" style="color:red;"></span></td>
-			</tr>
-			<tr>
-				<td>이메일</td>
-				<td><input type="email" id="email"></td>
-				<td><span id="email_er" style="color:red;"></span></td>
-			</tr>
-			<tr>
-				<td></td><td><button onclick="findPasswordBtn()">Password찾기</button></td>
-		</table>
-	</div>
-	<div id="result">
-	</div>
+	<div align="center" style="padding-top: 100px;">
+		<label><input type="radio" name="IdPasswordRadio" id="IdPasswordRadio1" checked="checked" onclick="changeFindForm('id')">ID찾기</label>
+		<label><input type="radio" name="IdPasswordRadio" id="IdPasswordRadio" onclick="changeFindForm('password')">Password찾기</label>
+		<div id="findIdDiv">
+			<table>
+				<tr>
+					<td>이름</td>
+					<td><input type='text' id='name'></td>
+					<td><span id="name_er" style="color:red;"></span></td>
+				</tr>
+				<tr>
+					<td>주민번호</td>
+					<td><input type='text' id='social_no1' name='social_no' maxlength='6' size='6'>-<input type='password' id='social_no2' name='social_no' maxlength='7' size='7'></td>
+					<td><span id="social_no_er" style="color:red;"></span></td>
+				</tr>
+				<tr>
+					<td></td><td><button onclick="findIdBtn()">ID찾기</button></td>
+				</tr>
+			</table>
+		</div>
+		<div id="findPasswordDiv">
+			<table>
+				<tr>
+					<td>ID</td>
+					<td><input type="text" id="m_id"></td>
+					<td><span id="m_id_er" style="color:red;"></span></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="email" id="email"></td>
+					<td><span id="email_er" style="color:red;"></span></td>
+				</tr>
+				<tr>
+					<td></td><td><button onclick="findPasswordBtn()">Password찾기</button></td>
+			</table>
+		</div>
+		<div id="result">
+		</div>
+	</div>	
 </body>
 </html>
