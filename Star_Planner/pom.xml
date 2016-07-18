@@ -146,26 +146,12 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-
-<!--  javax.mail을 spring에서 support 해주는 dependency -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context-support</artifactId>
-    <version>4.2.6.RELEASE</version>
-</dependency>
-
-
+		
+		<!--  javax.mail을 spring에서 support 해주는 dependency -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>4.2.6.RELEASE</version>
+		</dependency>
 	</dependencies>
-
-
-  
-
-
-
-
-
-
-
-
-
 </project>

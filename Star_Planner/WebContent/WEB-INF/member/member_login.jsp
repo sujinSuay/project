@@ -245,10 +245,10 @@ $(document).ready(function(){
 					<label for="password">비밀번호</label>
 					<input type="password" id="password" name="password">
 				</div>
-				<!-- <div class="form-group">
+				<div class="form-group">
 					<label class="form-remember"></label>
-					<a href="#" class="form-recovery">Forgot Password?</a>
-				</div> -->
+					<a href="findIdPassword.do" class="form-recovery">Forgot Id/Password?</a>
+				</div>
 				<div class="form-group">
 					<button type="submit">로그인</button>
 				</div>

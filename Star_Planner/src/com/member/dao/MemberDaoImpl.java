@@ -147,4 +147,8 @@ public class MemberDaoImpl implements memberDao {
 		// TODO Auto-generated method stub
 		return session.update("member.inactiveMemberById",mem);
 	}
+	public List selectMemberByName(String name) {
+		// TODO Auto-generated method stub
+		return session.selectList("member.selectMemberByName",name);
+	}
 }

@@ -26,4 +26,5 @@ public interface MemberService {
 	Member getMemberBySocial_no(String social_no);
 	Member checkPasswordAndId(HashMap<String, String> map);
 	int inactiveMemberById(Member mem);
+	List<Member> selectMemberByName(String name);
 }

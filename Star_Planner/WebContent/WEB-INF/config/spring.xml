@@ -79,6 +79,8 @@
 	view-name="member/logout.do" />
 	<mvc:view-controller path="inactiveMemberForm.do"
 	view-name="member/inactiveMemberForm.tiles" />
+	<mvc:view-controller path="findIdPassword.do"
+	view-name="member/findIdPassword.tiles" />
 	
 	
 	<!-- schedule -->
