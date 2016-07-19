@@ -18,7 +18,7 @@ $(document).ready(function(){
 				$("#commentTable").append("<tr><td colspan='6'>댓글이 없습니다.</td></tr>");
 			}else{
 				for(var i=0;i<comment.length;i++){
-					thtml="<tr><td>" + comment[i].comment_id+"</td>"+
+					thtml="<tr><td>" + comment[i].board_no+"</td>"+
 					 		"<td align='left'><a href='/Star_Planner/board/boardView.do?id="+comment[i].singer_name+"&no="+comment[i].board_no+"&page=1'>"+comment[i].comment_content+"</a></td>"+
 					 		"<td>"+comment[i].singer_name+"</td>"+
 							"<td>"+comment[i].comment_date+"</td>"+

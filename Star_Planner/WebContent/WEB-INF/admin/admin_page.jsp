@@ -762,10 +762,10 @@ table {
 	<div style=" height: 150px; overflow-x: hidden; overflow-y: scroll;">
 	<table >
 			<tr>
-				<td>가수분류</td> 
-				<td>가수이름</td>
-				<td>소속사</td>
-				<td>선호도</td>
+				<td width="20%">분류</td> 
+				<td width="25%">이름</td>
+				<td width="40%">소속사</td>
+				<td width="15%">선호도</td>
 			</tr>  	
 		
 			<tbody  id="result_SingerList" >
@@ -818,10 +818,10 @@ table {
 			<div style=" height: 200px; overflow-x: hidden; overflow-y: scroll;">
 			<table >
 					<tr>
-						<td>회사이름</td> 
-						<td>회사주소</td>
-						<td>회사 전화번호</td>
-						<td>회사링크</td>
+						<td width="15%">이름</td> 
+						<td width="40%">주소</td>
+						<td width="15%">전화번호</td>
+						<td width="30%">링크</td>
 					</tr>  	
 				
 					<tbody  id="result_SingerList" >

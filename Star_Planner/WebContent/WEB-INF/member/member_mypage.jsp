@@ -97,7 +97,7 @@ $(document).ready(function(){
 		</table>
 	</div>
 	<c:if test="${sessionScope.groupId>10 || sessionScope.groupId == 0 || sessionScope.groupId == 1}">
-		<h2>스케쥴</h2>
+		<h2>일정</h2>
 		<jsp:include page="/WEB-INF/member/member_mypage_manager.jsp" />
 	</c:if>
 	<h2>내가쓴 게시글</h2>

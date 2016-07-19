@@ -26,6 +26,22 @@ $(document).ready(function(){
 			},
 		});
 	});
+	
+	$("#modifyBtn").bind("click",function(){
+		if(confirm("수정 하시겠습니까?")){
+			
+		} else{
+			return false;
+		}
+	});
+	
+	$("#removeBtn").bind("click",function(){
+		if(confirm("삭제 하시겠습니까?")){
+			
+		} else{
+			return false;
+		}
+	});
 });
 </script>
 <style type="text/css">
@@ -82,8 +98,8 @@ $(document).ready(function(){
 		</article>
 		<div align="right">
 			<c:if test="${(sessionScope.loginId == requestScope.board.m_id) || (sessionScope.groupId == 0) || (sessionScope.groupId == 1)}">
-				<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}"><img src="/Star_Planner/img/btn_d_correct.gif"/></a>&nbsp;&nbsp;&nbsp;
-				<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}"><img src="/Star_Planner/img/btn_d_del.gif"/></a>&nbsp;&nbsp;&nbsp;	
+				<a href="/Star_Planner/board/boardModifyForm.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}" id="modifyBtn"><img src="/Star_Planner/img/btn_d_correct.gif"/></a>&nbsp;&nbsp;&nbsp;
+				<a href="/Star_Planner/board/boardRemove.do?id=${param.id }&no=${requestScope.board.board_no}&page=${param.page}" id="removeBtn"><img src="/Star_Planner/img/btn_d_del.gif"/></a>&nbsp;&nbsp;&nbsp;	
 			</c:if>
 		</div>
 		<div align="center" style="padding-bottom: 15px;">

@@ -79,7 +79,7 @@ td{
 </head>
 <body>
 <div style="width: 100%;" align="center">
-	<h2>스케줄 수정</h2>
+	<h2>일정 수정</h2>
 	<form action="/Star_Planner/schedule/scheduleModify.do" method="post">
 	<input type="hidden" id="group_id" name="group_id" value="${sessionScope.groupId }">
 	<input type="hidden" id="m_id" name="m_id" value="${sessionScope.loginId }">

@@ -66,7 +66,7 @@ function deleteBoard(board_no){
 	<table style="width: 100%;">
 		<thead>
 			<tr>
-				<th width="10%">번호</th>
+				<th width="7%">번호</th>
 				<th width="50%">제목</th>
 				<th width="10%">게시판</th>
 				<th width="15%">날짜</th>
